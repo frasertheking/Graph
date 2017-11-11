@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		437C90C81FB7B1BF0017A454 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */; };
 		43CA8FD91FB6919900B962D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FD81FB6919900B962D9 /* AppDelegate.swift */; };
 		43CA8FDD1FB6919900B962D9 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FDC1FB6919900B962D9 /* GameViewController.swift */; };
 		43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FDE1FB6919900B962D9 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 		43CA8FD51FB6919900B962D9 /* Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CA8FD81FB6919900B962D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43CA8FDC1FB6919900B962D9 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				43CA8FF91FB762D300B962D9 /* Int+Extensions.swift */,
 				43CA8FF71FB762D300B962D9 /* SCNAction+Extensions.swift */,
 				43CA8FFB1FB762D300B962D9 /* UIColor+Extensions.swift */,
+				437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */,
 				43CA8FE11FB6919900B962D9 /* Assets.xcassets */,
 				43CA8FF01FB6961C00B962D9 /* Graph.scnassets */,
 				43CA8FE31FB6919900B962D9 /* LaunchScreen.storyboard */,
@@ -158,6 +161,7 @@
 				43CA8FFE1FB762D300B962D9 /* SCNAction+Extensions.swift in Sources */,
 				43CA8FDD1FB6919900B962D9 /* GameViewController.swift in Sources */,
 				43CA8FF31FB697B600B962D9 /* ShapeType.swift in Sources */,
+				437C90C81FB7B1BF0017A454 /* SCNVector3+Extensions.swift in Sources */,
 				43CA90001FB762D300B962D9 /* Int+Extensions.swift in Sources */,
 				43CA8FD91FB6919900B962D9 /* AppDelegate.swift in Sources */,
 				43CA90021FB762D300B962D9 /* UIColor+Extensions.swift in Sources */,
