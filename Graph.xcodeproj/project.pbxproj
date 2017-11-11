@@ -8,22 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		43CA8FD91FB6919900B962D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FD81FB6919900B962D9 /* AppDelegate.swift */; };
-		43CA8FDB1FB6919900B962D9 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FDA1FB6919900B962D9 /* art.scnassets */; };
 		43CA8FDD1FB6919900B962D9 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FDC1FB6919900B962D9 /* GameViewController.swift */; };
 		43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FDE1FB6919900B962D9 /* Main.storyboard */; };
 		43CA8FE21FB6919900B962D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FE11FB6919900B962D9 /* Assets.xcassets */; };
 		43CA8FE51FB6919900B962D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FE31FB6919900B962D9 /* LaunchScreen.storyboard */; };
+		43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FF01FB6961C00B962D9 /* Graph.scnassets */; };
+		43CA8FF31FB697B600B962D9 /* ShapeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FF21FB697B600B962D9 /* ShapeType.swift */; };
+		43CA8FFE1FB762D300B962D9 /* SCNAction+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FF71FB762D300B962D9 /* SCNAction+Extensions.swift */; };
+		43CA8FFF1FB762D300B962D9 /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FF81FB762D300B962D9 /* GameHelper.swift */; };
+		43CA90001FB762D300B962D9 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FF91FB762D300B962D9 /* Int+Extensions.swift */; };
+		43CA90021FB762D300B962D9 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FFB1FB762D300B962D9 /* UIColor+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		43CA8FD51FB6919900B962D9 /* Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CA8FD81FB6919900B962D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		43CA8FDA1FB6919900B962D9 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		43CA8FDC1FB6919900B962D9 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		43CA8FDF1FB6919900B962D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		43CA8FE11FB6919900B962D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43CA8FE41FB6919900B962D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43CA8FE61FB6919900B962D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43CA8FF01FB6961C00B962D9 /* Graph.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Graph.scnassets; sourceTree = "<group>"; };
+		43CA8FF21FB697B600B962D9 /* ShapeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeType.swift; sourceTree = "<group>"; };
+		43CA8FF71FB762D300B962D9 /* SCNAction+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNAction+Extensions.swift"; sourceTree = "<group>"; };
+		43CA8FF81FB762D300B962D9 /* GameHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
+		43CA8FF91FB762D300B962D9 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		43CA8FFB1FB762D300B962D9 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,10 +67,15 @@
 			isa = PBXGroup;
 			children = (
 				43CA8FD81FB6919900B962D9 /* AppDelegate.swift */,
-				43CA8FDA1FB6919900B962D9 /* art.scnassets */,
+				43CA8FF21FB697B600B962D9 /* ShapeType.swift */,
 				43CA8FDC1FB6919900B962D9 /* GameViewController.swift */,
 				43CA8FDE1FB6919900B962D9 /* Main.storyboard */,
+				43CA8FF81FB762D300B962D9 /* GameHelper.swift */,
+				43CA8FF91FB762D300B962D9 /* Int+Extensions.swift */,
+				43CA8FF71FB762D300B962D9 /* SCNAction+Extensions.swift */,
+				43CA8FFB1FB762D300B962D9 /* UIColor+Extensions.swift */,
 				43CA8FE11FB6919900B962D9 /* Assets.xcassets */,
+				43CA8FF01FB6961C00B962D9 /* Graph.scnassets */,
 				43CA8FE31FB6919900B962D9 /* LaunchScreen.storyboard */,
 				43CA8FE61FB6919900B962D9 /* Info.plist */,
 			);
@@ -126,9 +141,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43CA8FDB1FB6919900B962D9 /* art.scnassets in Resources */,
 				43CA8FE51FB6919900B962D9 /* LaunchScreen.storyboard in Resources */,
 				43CA8FE21FB6919900B962D9 /* Assets.xcassets in Resources */,
+				43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,8 +155,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43CA8FFE1FB762D300B962D9 /* SCNAction+Extensions.swift in Sources */,
 				43CA8FDD1FB6919900B962D9 /* GameViewController.swift in Sources */,
+				43CA8FF31FB697B600B962D9 /* ShapeType.swift in Sources */,
+				43CA90001FB762D300B962D9 /* Int+Extensions.swift in Sources */,
 				43CA8FD91FB6919900B962D9 /* AppDelegate.swift in Sources */,
+				43CA90021FB762D300B962D9 /* UIColor+Extensions.swift in Sources */,
+				43CA8FFF1FB762D300B962D9 /* GameHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
