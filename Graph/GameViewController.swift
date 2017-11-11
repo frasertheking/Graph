@@ -28,8 +28,33 @@ class GameViewController: UIViewController {
         setupCamera()
         
         // @cleanup: formalize shape setup
-        spawnShape(type: .Box, position: SCNVector3(x: 0.0, y: -2.0, z: 0.0), color: UIColor.limeColor())
-        spawnShape(type: .Torus, position: SCNVector3(x: 0.0, y: 2.0, z: 0.0), color: UIColor.purple)
+        spawnShape(type: .Cylinder, position: SCNVector3(x: -2.0, y: 0.0, z: 2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        spawnShape(type: .Sphere, position: SCNVector3(x: -2.0, y: 2.0, z: 2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        spawnShape(type: .Sphere, position: SCNVector3(x: -2.0, y: -2.0, z: 2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        
+        spawnShape(type: .Cylinder, position: SCNVector3(x: 2.0, y: 0.0, z: 2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        spawnShape(type: .Sphere, position: SCNVector3(x: 2.0, y: 2.0, z: 2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        spawnShape(type: .Sphere, position: SCNVector3(x: 2.0, y: -2.0, z: 2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        
+        spawnShape(type: .Cylinder, position: SCNVector3(x: 0.0, y: -2.0, z: 2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 1, w: Float(Double.pi/2)))
+        spawnShape(type: .Cylinder, position: SCNVector3(x: 0.0, y: 2.0, z: 2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 1, w: Float(Double.pi/2)))
+
+        spawnShape(type: .Cylinder, position: SCNVector3(x: -2.0, y: 0.0, z: -2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        spawnShape(type: .Sphere, position: SCNVector3(x: -2.0, y: 2.0, z: -2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        spawnShape(type: .Sphere, position: SCNVector3(x: -2.0, y: -2.0, z: -2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        
+        spawnShape(type: .Cylinder, position: SCNVector3(x: 2.0, y: 0.0, z: -2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        spawnShape(type: .Sphere, position: SCNVector3(x: 2.0, y: 2.0, z: -2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        spawnShape(type: .Sphere, position: SCNVector3(x: 2.0, y: -2.0, z: -2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        
+        spawnShape(type: .Cylinder, position: SCNVector3(x: 0.0, y: -2.0, z: -2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 1, w: Float(Double.pi/2)))
+        spawnShape(type: .Cylinder, position: SCNVector3(x: 0.0, y: 2.0, z: -2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 1, w: Float(Double.pi/2)))
+        
+        spawnShape(type: .Cylinder, position: SCNVector3(x: 2.0, y: 2.0, z: 0.0), color: UIColor.white, rotation: SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2)))
+        spawnShape(type: .Cylinder, position: SCNVector3(x: 2.0, y: -2.0, z: 0.0), color: UIColor.white, rotation: SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2)))
+        spawnShape(type: .Cylinder, position: SCNVector3(x: -2.0, y: 2.0, z: 0.0), color: UIColor.white, rotation: SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2)))
+        spawnShape(type: .Cylinder, position: SCNVector3(x: -2.0, y: -2.0, z: 0.0), color: UIColor.white, rotation: SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2)))
+
         setupHUD()
         setupSounds()
         
@@ -37,7 +62,11 @@ class GameViewController: UIViewController {
         base.position = CGPoint(x: scnView.frame.size.width/2, y: 50)
         //base.size = CGSize(width: 25, height: 25)
         overlayScene.addChild(base)
+        scnView.overlaySKScene?.isUserInteractionEnabled = true
         scnView.overlaySKScene = overlayScene
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        scnView.addGestureRecognizer(tapGesture)
     }
     
     func setupView() {
@@ -65,7 +94,7 @@ class GameViewController: UIViewController {
     func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 10)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 25)
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
@@ -77,7 +106,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    func spawnShape(type: ShapeType, position: SCNVector3, color: UIColor) {
+    func spawnShape(type: ShapeType, position: SCNVector3, color: UIColor, rotation: SCNVector4) {
         var geometry:SCNGeometry
 
         switch type {
@@ -92,7 +121,7 @@ class GameViewController: UIViewController {
         case .Capsule:
             geometry = SCNCapsule(capRadius: 0.3, height: 2.5)
         case .Cylinder:
-            geometry = SCNCylinder(radius: 0.3, height: 2.5)
+            geometry = SCNCylinder(radius: 0.2, height: 3.1)
         case .Cone:
             geometry = SCNCone(topRadius: 0.25, bottomRadius: 0.5, height: 1.0)
         case .Tube:
@@ -103,6 +132,7 @@ class GameViewController: UIViewController {
         
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.position = position
+        geometryNode.rotation = rotation
         scnScene.rootNode.addChildNode(geometryNode)
     }
     
@@ -112,11 +142,10 @@ class GameViewController: UIViewController {
         //game.playSound(node: scnScene.rootNode, name: "SpawnGood")
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first!
-        let location = touch.location(in: scnView)
+    @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
+        let location = gestureRecognize.location(in: scnView)
         let hitResults = scnView.hitTest(location, options: nil)
-
+        
         if hitResults.count > 0 {
             let result = hitResults.first!
             handleTouchFor(node: result.node)
