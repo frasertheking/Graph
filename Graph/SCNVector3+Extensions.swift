@@ -10,6 +10,7 @@ import Foundation
 import SceneKit
 
 extension SCNVector3 {
+    
     static func subtract(a: SCNVector3, b: SCNVector3) -> SCNVector3 {
         return SCNVector3(x: a.x - b.x, y: a.y - b.y, z: a.z - b.z)
     }

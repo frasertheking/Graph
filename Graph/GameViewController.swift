@@ -27,68 +27,44 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         
-        // @cleanup: formalize shape setup
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: -2.0, y: 0.0, z: 2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//        spawnShape(type: .Sphere, position: SCNVector3(x: -2.0, y: 2.0, z: 2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//        spawnShape(type: .Sphere, position: SCNVector3(x: -2.0, y: -2.0, z: 2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: 2.0, y: 0.0, z: 2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//        spawnShape(type: .Sphere, position: SCNVector3(x: 2.0, y: 2.0, z: 2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//        spawnShape(type: .Sphere, position: SCNVector3(x: 2.0, y: -2.0, z: 2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: 0.0, y: -2.0, z: 2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 1, w: Float(Double.pi/2)))
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: 0.0, y: 2.0, z: 2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 1, w: Float(Double.pi/2)))
-//
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: -2.0, y: 0.0, z: -2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//        spawnShape(type: .Sphere, position: SCNVector3(x: -2.0, y: 2.0, z: -2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//        spawnShape(type: .Sphere, position: SCNVector3(x: -2.0, y: -2.0, z: -2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: 2.0, y: 0.0, z: -2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//        spawnShape(type: .Sphere, position: SCNVector3(x: 2.0, y: 2.0, z: -2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//        spawnShape(type: .Sphere, position: SCNVector3(x: 2.0, y: -2.0, z: -2.0), color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: 0.0, y: -2.0, z: -2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 1, w: Float(Double.pi/2)))
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: 0.0, y: 2.0, z: -2.0), color: UIColor.white, rotation: SCNVector4(x: 0, y: 0, z: 1, w: Float(Double.pi/2)))
-//
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: 2.0, y: 2.0, z: 0.0), color: UIColor.white, rotation: SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2)))
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: 2.0, y: -2.0, z: 0.0), color: UIColor.white, rotation: SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2)))
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: -2.0, y: 2.0, z: 0.0), color: UIColor.white, rotation: SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2)))
-//        spawnShape(type: .Cylinder, position: SCNVector3(x: -2.0, y: -2.0, z: 0.0), color: UIColor.white, rotation: SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2)))
+        let adjacencyList = AdjacencyList<Node>()
+        
+        let test1 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 2.0, z: 2.0), uid: 1))
+        let test2 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 2.0, z: -2.0), uid: 2))
+        let test3 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: 2.0, y: -2.0, z: 2.0), uid: 3))
+        let test4 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: 2.0, y: -2.0, z: -2.0), uid: 4))
+        let test5 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 2.0, z: 2.0), uid: 5))
+        let test6 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 2.0, z: -2.0), uid: 6))
+        let test7 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: -2.0, y: -2.0, z: 2.0), uid: 7))
+        let test8 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: -2.0, y: -2.0, z: -2.0), uid: 8))
 
-        
-        let v1: SCNVector3 = SCNVector3(x: -2.0, y: 2.0, z: 2.0)
-        let v2: SCNVector3 = SCNVector3(x: -2.0, y: 2.0, z: -2.0)
+        adjacencyList.add(.undirected, from: test1, to: test5)
+        adjacencyList.add(.undirected, from: test1, to: test3)
+        adjacencyList.add(.undirected, from: test1, to: test2)
+        adjacencyList.add(.undirected, from: test6, to: test5)
+        adjacencyList.add(.undirected, from: test6, to: test8)
+        adjacencyList.add(.undirected, from: test6, to: test2)
+        adjacencyList.add(.undirected, from: test4, to: test2)
+        adjacencyList.add(.undirected, from: test4, to: test3)
+        adjacencyList.add(.undirected, from: test4, to: test8)
+        adjacencyList.add(.undirected, from: test7, to: test8)
+        adjacencyList.add(.undirected, from: test7, to: test3)
+        adjacencyList.add(.undirected, from: test7, to: test5)
 
-        
-        let twoPointsNode1 = SCNNode()
-        scnScene.rootNode.addChildNode(twoPointsNode1.buildLineInTwoPointsWithRotation(
-            from: v1, to: v2, radius: 0.2, color: .white))
-        
-        
-        
-        
-        
-        
-        
-        
-//        let z: SCNVector3 = SCNVector3(x: 0, y: 1, z: 0)
-//        let p: SCNVector3 = SCNVector3.subtract(a: a, b: b)
-//        let t: SCNVector3 = SCNVector3.cross(a: z, b: p)
-//        let angle: Double = 180 / Double.pi * acos(SCNVector3.dot(a: z, b: p) / p.length())
-//        let rotation = SCNVector4(x: t.x, y: t.y, z: t.z, w: Float(angle))
-        
-        spawnShape(type: .Sphere, position: v1, color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-        spawnShape(type: .Sphere, position: v2, color: UIColor.blue, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-//        spawnShape(type: .Cylinder, position: b, color: UIColor.white, rotation: SCNVector4(x: 0.0, y: 4.0, z: 4.0, w: 90.0))
-//
-//        print(rotation)
+        for (key, value) in adjacencyList.adjacencyDict {
+            spawnShape(type: .Sphere, position: key.data.position, color: UIColor.orange, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+            
+            for edge in value {
+                let node = SCNNode()
+                scnScene.rootNode.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.2, color: .white))
+            }
+        }
         
         setupHUD()
         setupSounds()
         
         let overlayScene = SKScene(size: CGSize(width: scnView.frame.size.width, height: scnView.frame.size.height))
         base.position = CGPoint(x: scnView.frame.size.width/2, y: 50)
-        //base.size = CGSize(width: 25, height: 25)
         overlayScene.addChild(base)
         scnView.overlaySKScene?.isUserInteractionEnabled = true
         scnView.overlaySKScene = overlayScene
@@ -99,7 +75,7 @@ class GameViewController: UIViewController {
     
     func setupView() {
         scnView = self.view as! SCNView
-        //scnView.showsStatistics = true
+        scnView.showsStatistics = true
         scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = true
         
@@ -158,6 +134,10 @@ class GameViewController: UIViewController {
         
         geometry.materials.first?.diffuse.contents = color
         
+        if type == .Sphere {
+            geometry.name = "vertex"
+        }
+        
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.rotation = rotation
         geometryNode.position = position
@@ -165,9 +145,10 @@ class GameViewController: UIViewController {
     }
     
     func handleTouchFor(node: SCNNode) {
-        node.geometry?.materials.first?.diffuse.contents = UIColor.red
-        
-        //game.playSound(node: scnScene.rootNode, name: "SpawnGood")
+        if node.geometry?.name == "vertex" {
+            node.geometry?.materials.first?.diffuse.contents = UIColor.red
+            game.playSound(node: scnScene.rootNode, name: "SpawnGood")
+        }
     }
     
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
@@ -217,87 +198,4 @@ extension GameViewController: SCNSceneRendererDelegate {
     }
 }
 
-extension SCNNode {
-    
-    func normalizeVector(_ iv: SCNVector3) -> SCNVector3 {
-        let length = sqrt(iv.x * iv.x + iv.y * iv.y + iv.z * iv.z)
-        if length == 0 {
-            return SCNVector3(0.0, 0.0, 0.0)
-        }
-        
-        return SCNVector3( iv.x / length, iv.y / length, iv.z / length)
-        
-    }
-    
-    func buildLineInTwoPointsWithRotation(from startPoint: SCNVector3,
-                                          to endPoint: SCNVector3,
-                                          radius: CGFloat,
-                                          color: UIColor) -> SCNNode {
-        let w = SCNVector3(x: endPoint.x-startPoint.x,
-                           y: endPoint.y-startPoint.y,
-                           z: endPoint.z-startPoint.z)
-        let l = CGFloat(sqrt(w.x * w.x + w.y * w.y + w.z * w.z))
-        
-        if l == 0.0 {
-            // two points together.
-            let sphere = SCNSphere(radius: radius)
-            sphere.firstMaterial?.diffuse.contents = color
-            self.geometry = sphere
-            self.position = startPoint
-            return self
-            
-        }
-        
-        let cyl = SCNCylinder(radius: radius, height: l)
-        cyl.firstMaterial?.diffuse.contents = color
-        
-        self.geometry = cyl
-        
-        //original vector of cylinder above 0,0,0
-        let ov = SCNVector3(0, l/2.0,0)
-        //target vector, in new coordination
-        let nv = SCNVector3((endPoint.x - startPoint.x)/2.0, (endPoint.y - startPoint.y)/2.0,
-                            (endPoint.z-startPoint.z)/2.0)
-        
-        // axis between two vector
-        let av = SCNVector3( (ov.x + nv.x)/2.0, (ov.y+nv.y)/2.0, (ov.z+nv.z)/2.0)
-        
-        //normalized axis vector
-        let av_normalized: SCNVector3 = normalizeVector(av)
-        let q0 = Float(0.0) //cos(angel/2), angle is always 180 or M_PI
-        let q1 = Float(av_normalized.x) // x' * sin(angle/2)
-        let q2 = Float(av_normalized.y) // y' * sin(angle/2)
-        let q3 = Float(av_normalized.z) // z' * sin(angle/2)
-        
-        let r_m11 = q0 * q0 + q1 * q1 - q2 * q2 - q3 * q3
-        let r_m12 = 2 * q1 * q2 + 2 * q0 * q3
-        let r_m13 = 2 * q1 * q3 - 2 * q0 * q2
-        let r_m21 = 2 * q1 * q2 - 2 * q0 * q3
-        let r_m22 = q0 * q0 - q1 * q1 + q2 * q2 - q3 * q3
-        let r_m23 = 2 * q2 * q3 + 2 * q0 * q1
-        let r_m31 = 2 * q1 * q3 + 2 * q0 * q2
-        let r_m32 = 2 * q2 * q3 - 2 * q0 * q1
-        let r_m33 = q0 * q0 - q1 * q1 - q2 * q2 + q3 * q3
-        
-        self.transform.m11 = r_m11
-        self.transform.m12 = r_m12
-        self.transform.m13 = r_m13
-        self.transform.m14 = 0.0
-        
-        self.transform.m21 = r_m21
-        self.transform.m22 = r_m22
-        self.transform.m23 = r_m23
-        self.transform.m24 = 0.0
-        
-        self.transform.m31 = r_m31
-        self.transform.m32 = r_m32
-        self.transform.m33 = r_m33
-        self.transform.m34 = 0.0
-        
-        self.transform.m41 = (startPoint.x + endPoint.x) / 2.0
-        self.transform.m42 = (startPoint.y + endPoint.y) / 2.0
-        self.transform.m43 = (startPoint.z + endPoint.z) / 2.0
-        self.transform.m44 = 1.0
-        return self
-    }
-}
+
