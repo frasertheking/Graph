@@ -27,38 +27,7 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         
-        let adjacencyList = AdjacencyList<Node>()
-        
-        let test1 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 2.0, z: 2.0), uid: 1))
-        let test2 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 2.0, z: -2.0), uid: 2))
-        let test3 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: 2.0, y: -2.0, z: 2.0), uid: 3))
-        let test4 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: 2.0, y: -2.0, z: -2.0), uid: 4))
-        let test5 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 2.0, z: 2.0), uid: 5))
-        let test6 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 2.0, z: -2.0), uid: 6))
-        let test7 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: -2.0, y: -2.0, z: 2.0), uid: 7))
-        let test8 = adjacencyList.createVertex(data: Node(position: SCNVector3(x: -2.0, y: -2.0, z: -2.0), uid: 8))
-
-        adjacencyList.add(.undirected, from: test1, to: test5)
-        adjacencyList.add(.undirected, from: test1, to: test3)
-        adjacencyList.add(.undirected, from: test1, to: test2)
-        adjacencyList.add(.undirected, from: test6, to: test5)
-        adjacencyList.add(.undirected, from: test6, to: test8)
-        adjacencyList.add(.undirected, from: test6, to: test2)
-        adjacencyList.add(.undirected, from: test4, to: test2)
-        adjacencyList.add(.undirected, from: test4, to: test3)
-        adjacencyList.add(.undirected, from: test4, to: test8)
-        adjacencyList.add(.undirected, from: test7, to: test8)
-        adjacencyList.add(.undirected, from: test7, to: test3)
-        adjacencyList.add(.undirected, from: test7, to: test5)
-
-        for (key, value) in adjacencyList.adjacencyDict {
-            spawnShape(type: .Sphere, position: key.data.position, color: UIColor.orange, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-            
-            for edge in value {
-                let node = SCNNode()
-                scnScene.rootNode.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.2, color: .white))
-            }
-        }
+        GraphGenerator.createGraph(index: 0, scnScene: scnScene, random: true)
         
         setupHUD()
         setupSounds()
@@ -108,40 +77,6 @@ class GameViewController: UIViewController {
                 node.removeFromParentNode()
             }
         }
-    }
-    
-    func spawnShape(type: ShapeType, position: SCNVector3, color: UIColor, rotation: SCNVector4) {
-        var geometry:SCNGeometry
-
-        switch type {
-        case .Box:
-            geometry = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
-        case .Sphere:
-            geometry = SCNSphere(radius: 0.5)
-        case .Pyramid:
-            geometry = SCNPyramid(width: 1.0, height: 1.0, length: 1.0)
-        case .Torus:
-            geometry = SCNTorus(ringRadius: 0.5, pipeRadius: 0.25)
-        case .Capsule:
-            geometry = SCNCapsule(capRadius: 0.3, height: 2.5)
-        case .Cylinder:
-            geometry = SCNCylinder(radius: 0.2, height: 3.1)
-        case .Cone:
-            geometry = SCNCone(topRadius: 0.25, bottomRadius: 0.5, height: 1.0)
-        case .Tube:
-            geometry = SCNTube(innerRadius: 0.25, outerRadius: 0.5, height: 1.0)
-        }
-        
-        geometry.materials.first?.diffuse.contents = color
-        
-        if type == .Sphere {
-            geometry.name = "vertex"
-        }
-        
-        let geometryNode = SCNNode(geometry: geometry)
-        geometryNode.rotation = rotation
-        geometryNode.position = position
-        scnScene.rootNode.addChildNode(geometryNode)
     }
     
     func handleTouchFor(node: SCNNode) {
