@@ -42,7 +42,7 @@ class GraphGenerator {
         }
         
         for (key, value) in (level.adjacencyList?.adjacencyDict)! {
-            spawnShape(type: .Sphere, position: key.data.position, color: UIColor.orange, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0), scnScene: scnScene)
+            spawnShape(type: .Sphere, position: key.data.position, color: UIColor.black, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0), scnScene: scnScene)
             
             for edge in value {
                 let node = SCNNode()

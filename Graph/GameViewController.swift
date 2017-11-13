@@ -19,6 +19,9 @@ class GameViewController: UIViewController {
     var game = GameHelper.sharedInstance
     let asd = SKSpriteNode(imageNamed:"storm-small")
     let base = SKLabelNode(text: "Hello world")
+    
+    // GLOBAL VARS
+    var paintColor: UIColor = UIColor.red
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +41,35 @@ class GameViewController: UIViewController {
         scnView.overlaySKScene?.isUserInteractionEnabled = true
         scnView.overlaySKScene = overlayScene
         
+        let redButton: UIButton = UIButton(frame: CGRect(x: 50, y: 50, width: 60, height: 20))
+        redButton.backgroundColor = UIColor.red
+        self.view.addSubview(redButton)
+        redButton.addTarget(self, action: #selector(redButtonPress), for: .touchUpInside)
+        
+        let greenButton: UIButton = UIButton(frame: CGRect(x: 150, y: 50, width: 60, height: 20))
+        greenButton.backgroundColor = UIColor.green
+        self.view.addSubview(greenButton)
+        greenButton.addTarget(self, action: #selector(greenButtonPress), for: .touchUpInside)
+        
+        let blueButton: UIButton = UIButton(frame: CGRect(x: 250, y: 50, width: 60, height: 20))
+        blueButton.backgroundColor = UIColor.blue
+        self.view.addSubview(blueButton)
+        blueButton.addTarget(self, action: #selector(blueButtonPress), for: .touchUpInside)
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func redButtonPress() {
+        paintColor = UIColor.red
+    }
+    
+    @objc func greenButtonPress() {
+        paintColor = UIColor.green
+    }
+    
+    @objc func blueButtonPress() {
+        paintColor = UIColor.blue
     }
     
     func setupView() {
@@ -81,7 +111,7 @@ class GameViewController: UIViewController {
     
     func handleTouchFor(node: SCNNode) {
         if node.geometry?.name == "vertex" {
-            node.geometry?.materials.first?.diffuse.contents = UIColor.red
+            node.geometry?.materials.first?.diffuse.contents = paintColor
             game.playSound(node: scnScene.rootNode, name: "SpawnGood")
         }
     }

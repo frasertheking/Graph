@@ -52,14 +52,14 @@ class Levels: NSObject {
     
     func getRandomLevel() -> Level {
         let adjacencyList = AdjacencyList<Node>()
-        let numberOfVertices = randomNumber(inRange: 5...12)
-        let numberOfEdges = randomNumber(inRange: (numberOfVertices + 1)...(numberOfVertices + 8))
+        let numberOfVertices = randomNumber(inRange: 4...8)
+        let numberOfEdges = randomNumber(inRange: (numberOfVertices + 1)...(numberOfVertices + 5))
         var vertices: [Vertex<Node>] = []
         
         var count = 0
         for _ in 0...numberOfVertices {
             let randomX = Float(randomNumber(inRange: -5...5))
-            let randomY = Float(randomNumber(inRange: -5...5))
+            let randomY = Float(randomNumber(inRange: -7...7))
             let randomZ = Float(randomNumber(inRange: -5...5))
             
             let vertex = adjacencyList.createVertex(data: Node(position: SCNVector3(x: randomX, y: randomY, z: randomZ), uid: count))
@@ -68,7 +68,7 @@ class Levels: NSObject {
         }
         
         for index in 0...numberOfEdges {
-            let edgeStart = index % numberOfVertices 
+            let edgeStart = index % (numberOfVertices + 1)
             var edgeEnd = randomNumber(inRange: 0...vertices.count-1)
             while (edgeStart == edgeEnd) {
                 edgeEnd = randomNumber(inRange: 0...vertices.count-1)
