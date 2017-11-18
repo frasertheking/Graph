@@ -13,6 +13,7 @@ class Node: Hashable {
     
     var position: SCNVector3
     var uid: Int
+    var color: UIColor
     
     public var hashValue: Int {
         return uid
@@ -22,16 +23,17 @@ class Node: Hashable {
         return lhs.uid == rhs.uid
     }
     
-    public init(position: SCNVector3, uid: Int) {
+    public init(position: SCNVector3, uid: Int, color: UIColor) {
         self.position = position
         self.uid = uid
+        self.color = color
     }
 }
 
 
 class GraphGenerator {
     
-    static func createGraph(index: Int, scnScene: SCNScene, random: Bool) {
+    static func createGraph(index: Int, scnScene: SCNScene, random: Bool) -> Level {
         
         let levels = Levels.sharedInstance
         
@@ -41,17 +43,22 @@ class GraphGenerator {
             level = levels.getRandomLevel()
         }
         
+        // Solve checker @safety fix unwraps here
+        GraphGenerator.checkIfSolved(graph: level.adjacencyList!)
+        
         for (key, value) in (level.adjacencyList?.adjacencyDict)! {
-            spawnShape(type: .Sphere, position: key.data.position, color: UIColor.black, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0), scnScene: scnScene)
+            spawnShape(type: .Sphere, position: key.data.position, color: key.data.color, id: key.data.uid, rotation: SCNVector4(x: 0, y: 0, z: 0, w: 0), scnScene: scnScene)
             
             for edge in value {
                 let node = SCNNode()
-                scnScene.rootNode.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.2, color: .white))
+                scnScene.rootNode.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.1, color: .white))
             }
         }
+        
+        return level
     }
     
-    static func spawnShape(type: ShapeType, position: SCNVector3, color: UIColor, rotation: SCNVector4, scnScene: SCNScene) {
+    static func spawnShape(type: ShapeType, position: SCNVector3, color: UIColor, id: Int, rotation: SCNVector4, scnScene: SCNScene) {
         var geometry:SCNGeometry
         
         switch type {
@@ -66,7 +73,7 @@ class GraphGenerator {
         case .Capsule:
             geometry = SCNCapsule(capRadius: 0.3, height: 2.5)
         case .Cylinder:
-            geometry = SCNCylinder(radius: 0.2, height: 3.1)
+            geometry = SCNCylinder(radius: 0.1, height: 3.1)
         case .Cone:
             geometry = SCNCone(topRadius: 0.25, bottomRadius: 0.5, height: 1.0)
         case .Tube:
@@ -76,14 +83,35 @@ class GraphGenerator {
         geometry.materials.first?.diffuse.contents = color
         
         if type == .Sphere {
-            geometry.name = "vertex"
-        }
+            geometry.name = "\(id)"
+        } 
         
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.rotation = rotation
         geometryNode.position = position
         scnScene.rootNode.addChildNode(geometryNode)
     }
+    
+    static func checkIfSolved(graph: AdjacencyList<Node>) {
+//        var solved:Bool = true
+//        for (key, value) in (graph.adjacencyDict) {
+//            for edge in value {
+//                if edge.source.data.
+//            }
+//        }
+        print(graph.description)
+    }
+    
+    static func updateGraph(graph: AdjacencyList<Node>, id: String?, color: UIColor) -> AdjacencyList<Node> {
+        for (key, _) in (graph.adjacencyDict) {
+            if "\(key.data.uid)" == id {
+                key.data.color = color
+            }
+        }
+        return graph
+    }
+    
+    
 }
 
 

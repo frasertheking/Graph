@@ -41,6 +41,7 @@ extension SCNNode {
         }
         
         let cyl = SCNCylinder(radius: radius, height: l)
+        cyl.name = "edge"
         cyl.firstMaterial?.diffuse.contents = color
         
         self.geometry = cyl

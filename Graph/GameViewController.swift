@@ -22,7 +22,8 @@ class GameViewController: UIViewController {
     
     // GLOBAL VARS
     var paintColor: UIColor = UIColor.red
-
+    var activeLevel: Level!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +31,7 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         
-        GraphGenerator.createGraph(index: 0, scnScene: scnScene, random: true)
+        activeLevel = GraphGenerator.createGraph(index: 0, scnScene: scnScene, random: true)
         
         setupHUD()
         setupSounds()
@@ -110,9 +111,17 @@ class GameViewController: UIViewController {
     }
     
     func handleTouchFor(node: SCNNode) {
-        if node.geometry?.name == "vertex" {
-            node.geometry?.materials.first?.diffuse.contents = paintColor
+        
+        guard let geometry = node.geometry else {
+            return
+        }
+        
+        if geometry.name != "edge" {
+            geometry.materials.first?.diffuse.contents = paintColor
+            activeLevel.adjacencyList = GraphGenerator.updateGraph(graph: activeLevel.adjacencyList!, id: geometry.name, color: paintColor)
             game.playSound(node: scnScene.rootNode, name: "SpawnGood")
+        } else {
+            // Testing case
         }
     }
     
