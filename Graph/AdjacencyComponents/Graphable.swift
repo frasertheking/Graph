@@ -10,10 +10,14 @@ import Foundation
 import SceneKit
 
 protocol Graphable {
-    associatedtype Element: Hashable // 1
-    var description: CustomStringConvertible { get } // 2
+    associatedtype Element: Hashable
+    var description: CustomStringConvertible { get }
     
-    func createVertex(data: Element) -> Vertex<Element> // 3
-    func add(_ type: EdgeType, from source: Vertex<Element>, to destination: Vertex<Element>) // 4
-    func edges(from source: Vertex<Element>) -> [Edge<Element>]? // 6
+    func createVertex(data: Element) -> Vertex<Element>
+    func add(_ type: EdgeType, from source: Vertex<Element>, to destination: Vertex<Element>)
+    func edges(from source: Vertex<Element>) -> [Edge<Element>]?
+    
+    // Helper functions
+    func checkIfSolved() -> Bool
+    func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node>
 }

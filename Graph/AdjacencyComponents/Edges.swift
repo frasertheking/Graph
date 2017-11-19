@@ -14,7 +14,7 @@ public enum EdgeType {
 }
 
 public struct Edge<T: Hashable> {
-    public var source: Vertex<T> // 1
+    public var source: Vertex<T>
     public var destination: Vertex<T>
 }
 

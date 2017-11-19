@@ -44,6 +44,20 @@ class Levels: NSObject {
         playable.append(start)
     }
     
+    static func createLevel(index: Int) -> Level? {
+        
+        let levels = Levels.sharedInstance
+        var level = levels.getRandomLevel()
+        
+        if index >= 0 && index < levels.playable.count {
+            level =  levels.playable[index]
+        }
+        
+        return level
+    }
+    
+    // Randomization
+    
     func randomNumber<T : SignedInteger>(inRange range: ClosedRange<T> = 1...6) -> T {
         let length = Int64(range.upperBound - range.lowerBound + 1)
         let value = Int64(arc4random()) % length + Int64(range.lowerBound)

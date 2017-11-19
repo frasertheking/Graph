@@ -17,12 +17,16 @@ class GameViewController: UIViewController {
     var scnScene: SCNScene!
     var cameraNode: SCNNode!
     var game = GameHelper.sharedInstance
-    let asd = SKSpriteNode(imageNamed:"storm-small")
-    let base = SKLabelNode(text: "Hello world")
-    
+    let base = SKLabelNode(text: "Not solved")
+
     // GLOBAL VARS
     var paintColor: UIColor = UIColor.red
     var activeLevel: Level!
+    
+    // UI Elements
+    var redButton: UIButton!
+    var greenButton: UIButton!
+    var blueButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +34,7 @@ class GameViewController: UIViewController {
         setupView()
         setupScene()
         setupCamera()
-        
-        activeLevel = GraphGenerator.createGraph(index: 0, scnScene: scnScene, random: true)
-        
-        setupHUD()
+        setupLevel()
         setupSounds()
         
         let overlayScene = SKScene(size: CGSize(width: scnView.frame.size.width, height: scnView.frame.size.height))
@@ -42,18 +43,22 @@ class GameViewController: UIViewController {
         scnView.overlaySKScene?.isUserInteractionEnabled = true
         scnView.overlaySKScene = overlayScene
         
-        let redButton: UIButton = UIButton(frame: CGRect(x: 50, y: 50, width: 60, height: 20))
+        redButton = UIButton(frame: CGRect(x: 50, y: 50, width: 60, height: 20))
         redButton.backgroundColor = UIColor.red
+        redButton.layer.borderColor = UIColor.black.cgColor
+        redButton.layer.borderWidth = 1
         self.view.addSubview(redButton)
         redButton.addTarget(self, action: #selector(redButtonPress), for: .touchUpInside)
         
-        let greenButton: UIButton = UIButton(frame: CGRect(x: 150, y: 50, width: 60, height: 20))
+        greenButton = UIButton(frame: CGRect(x: 150, y: 50, width: 60, height: 20))
         greenButton.backgroundColor = UIColor.green
+        greenButton.layer.borderColor = UIColor.black.cgColor
         self.view.addSubview(greenButton)
         greenButton.addTarget(self, action: #selector(greenButtonPress), for: .touchUpInside)
         
-        let blueButton: UIButton = UIButton(frame: CGRect(x: 250, y: 50, width: 60, height: 20))
+        blueButton = UIButton(frame: CGRect(x: 250, y: 50, width: 60, height: 20))
         blueButton.backgroundColor = UIColor.blue
+        blueButton.layer.borderColor = UIColor.black.cgColor
         self.view.addSubview(blueButton)
         blueButton.addTarget(self, action: #selector(blueButtonPress), for: .touchUpInside)
         
@@ -63,19 +68,47 @@ class GameViewController: UIViewController {
     
     @objc func redButtonPress() {
         paintColor = UIColor.red
+        redButton.layer.borderWidth = 1
+        greenButton.layer.borderWidth = 0
+        blueButton.layer.borderWidth = 0
     }
     
     @objc func greenButtonPress() {
         paintColor = UIColor.green
+        redButton.layer.borderWidth = 0
+        greenButton.layer.borderWidth = 1
+        blueButton.layer.borderWidth = 0
     }
     
     @objc func blueButtonPress() {
         paintColor = UIColor.blue
+        redButton.layer.borderWidth = 0
+        greenButton.layer.borderWidth = 0
+        blueButton.layer.borderWidth = 1
+    }
+    
+    func setupLevel() {
+        activeLevel = Levels.createLevel(index: 0)
+        
+        guard let adjacencyDict = activeLevel.adjacencyList?.adjacencyDict else {
+            return
+        }
+        
+        for (key, value) in adjacencyDict {
+            // Create nodes
+            Shapes.spawnShape(type: .Sphere, position: key.data.position, color: key.data.color, id: key.data.uid, scnScene: scnScene)
+            
+            // Create edges
+            for edge in value {
+                let node = SCNNode()
+                scnScene.rootNode.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.1, color: .white))
+            }
+        }
     }
     
     func setupView() {
         scnView = self.view as! SCNView
-        scnView.showsStatistics = true
+        scnView.showsStatistics = false
         scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = true
         
@@ -88,11 +121,6 @@ class GameViewController: UIViewController {
         scnView.scene = scnScene
         
         scnScene.background.contents = "Graph.scnassets/Textures/Background_Diffuse.png"
-    }
-    
-    func setupHUD() {
-        game.hudNode.position = SCNVector3(x: 0.0, y: 4.0, z: 0.0)
-        scnScene.rootNode.addChildNode(game.hudNode)
     }
     
     func setupCamera() {
@@ -118,11 +146,14 @@ class GameViewController: UIViewController {
         
         if geometry.name != "edge" {
             geometry.materials.first?.diffuse.contents = paintColor
-            activeLevel.adjacencyList = GraphGenerator.updateGraph(graph: activeLevel.adjacencyList!, id: geometry.name, color: paintColor)
+            activeLevel.adjacencyList = activeLevel.adjacencyList!.updateGraphState(id: geometry.name, color: paintColor)
             game.playSound(node: scnScene.rootNode, name: "SpawnGood")
+        }
+        
+        if activeLevel.adjacencyList!.checkIfSolved() {
+            base.text = "Solved"
         } else {
-            print(GraphGenerator.checkIfSolved(graph: activeLevel.adjacencyList!))
-            // Testing case
+            base.text = "Not solved"
         }
     }
     
@@ -137,7 +168,7 @@ class GameViewController: UIViewController {
     }
     
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
     
     override var prefersStatusBarHidden: Bool {

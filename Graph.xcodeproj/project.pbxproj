@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		437C90C81FB7B1BF0017A454 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */; };
-		43860BC51FB7DE830076B0CF /* GraphGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BC41FB7DE830076B0CF /* GraphGenerator.swift */; };
 		43860BC71FB7E17C0076B0CF /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BC61FB7E17C0076B0CF /* Vertex.swift */; };
 		43860BC91FB7E1DA0076B0CF /* Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BC81FB7E1DA0076B0CF /* Edges.swift */; };
 		43860BCB1FB7E2880076B0CF /* Graphable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BCA1FB7E2880076B0CF /* Graphable.swift */; };
@@ -16,13 +15,14 @@
 		43860BCF1FB8ECA70076B0CF /* SCNNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BCE1FB8ECA70076B0CF /* SCNNode+Extensions.swift */; };
 		43860BD31FB8ED1B0076B0CF /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BD21FB8ED1B0076B0CF /* Level.swift */; };
 		43860BD51FB8EDCE0076B0CF /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BD41FB8EDCD0076B0CF /* Levels.swift */; };
+		43A018F31FC10B28005FF276 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A018F21FC10B28005FF276 /* Node.swift */; };
 		43CA8FD91FB6919900B962D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FD81FB6919900B962D9 /* AppDelegate.swift */; };
 		43CA8FDD1FB6919900B962D9 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FDC1FB6919900B962D9 /* GameViewController.swift */; };
 		43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FDE1FB6919900B962D9 /* Main.storyboard */; };
 		43CA8FE21FB6919900B962D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FE11FB6919900B962D9 /* Assets.xcassets */; };
 		43CA8FE51FB6919900B962D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FE31FB6919900B962D9 /* LaunchScreen.storyboard */; };
 		43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FF01FB6961C00B962D9 /* Graph.scnassets */; };
-		43CA8FF31FB697B600B962D9 /* ShapeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FF21FB697B600B962D9 /* ShapeType.swift */; };
+		43CA8FF31FB697B600B962D9 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FF21FB697B600B962D9 /* Shapes.swift */; };
 		43CA8FFE1FB762D300B962D9 /* SCNAction+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FF71FB762D300B962D9 /* SCNAction+Extensions.swift */; };
 		43CA8FFF1FB762D300B962D9 /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FF81FB762D300B962D9 /* GameHelper.swift */; };
 		43CA90001FB762D300B962D9 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FF91FB762D300B962D9 /* Int+Extensions.swift */; };
@@ -31,7 +31,6 @@
 
 /* Begin PBXFileReference section */
 		437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
-		43860BC41FB7DE830076B0CF /* GraphGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphGenerator.swift; sourceTree = "<group>"; };
 		43860BC61FB7E17C0076B0CF /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		43860BC81FB7E1DA0076B0CF /* Edges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edges.swift; sourceTree = "<group>"; };
 		43860BCA1FB7E2880076B0CF /* Graphable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphable.swift; sourceTree = "<group>"; };
@@ -39,6 +38,7 @@
 		43860BCE1FB8ECA70076B0CF /* SCNNode+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+Extensions.swift"; sourceTree = "<group>"; };
 		43860BD21FB8ED1B0076B0CF /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		43860BD41FB8EDCD0076B0CF /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
+		43A018F21FC10B28005FF276 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		43CA8FD51FB6919900B962D9 /* Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CA8FD81FB6919900B962D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43CA8FDC1FB6919900B962D9 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -47,7 +47,7 @@
 		43CA8FE41FB6919900B962D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43CA8FE61FB6919900B962D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43CA8FF01FB6961C00B962D9 /* Graph.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Graph.scnassets; sourceTree = "<group>"; };
-		43CA8FF21FB697B600B962D9 /* ShapeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeType.swift; sourceTree = "<group>"; };
+		43CA8FF21FB697B600B962D9 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		43CA8FF71FB762D300B962D9 /* SCNAction+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNAction+Extensions.swift"; sourceTree = "<group>"; };
 		43CA8FF81FB762D300B962D9 /* GameHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
 		43CA8FF91FB762D300B962D9 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
@@ -84,6 +84,7 @@
 				43860BC81FB7E1DA0076B0CF /* Edges.swift */,
 				43860BCA1FB7E2880076B0CF /* Graphable.swift */,
 				43860BCC1FB7E2C60076B0CF /* AdjacencyList.swift */,
+				43A018F21FC10B28005FF276 /* Node.swift */,
 			);
 			path = AdjacencyComponents;
 			sourceTree = "<group>";
@@ -94,7 +95,7 @@
 				43CA8FF81FB762D300B962D9 /* GameHelper.swift */,
 				43860BD21FB8ED1B0076B0CF /* Level.swift */,
 				43860BD41FB8EDCD0076B0CF /* Levels.swift */,
-				43CA8FF21FB697B600B962D9 /* ShapeType.swift */,
+				43CA8FF21FB697B600B962D9 /* Shapes.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -121,13 +122,12 @@
 				43860BD81FB8F4830076B0CF /* Helpers */,
 				43860BD11FB8ECD20076B0CF /* AdjacencyComponents */,
 				43860BD01FB8ECC50076B0CF /* Extensions */,
-				43CA8FD81FB6919900B962D9 /* AppDelegate.swift */,
 				43CA8FDC1FB6919900B962D9 /* GameViewController.swift */,
-				43860BC41FB7DE830076B0CF /* GraphGenerator.swift */,
 				43CA8FDE1FB6919900B962D9 /* Main.storyboard */,
 				43CA8FE11FB6919900B962D9 /* Assets.xcassets */,
 				43CA8FF01FB6961C00B962D9 /* Graph.scnassets */,
 				43CA8FE31FB6919900B962D9 /* LaunchScreen.storyboard */,
+				43CA8FD81FB6919900B962D9 /* AppDelegate.swift */,
 				43CA8FE61FB6919900B962D9 /* Info.plist */,
 			);
 			path = Graph;
@@ -207,7 +207,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				43860BCB1FB7E2880076B0CF /* Graphable.swift in Sources */,
-				43860BC51FB7DE830076B0CF /* GraphGenerator.swift in Sources */,
 				43860BD51FB8EDCE0076B0CF /* Levels.swift in Sources */,
 				43860BD31FB8ED1B0076B0CF /* Level.swift in Sources */,
 				43CA8FFE1FB762D300B962D9 /* SCNAction+Extensions.swift in Sources */,
@@ -215,7 +214,8 @@
 				43CA8FDD1FB6919900B962D9 /* GameViewController.swift in Sources */,
 				43860BC91FB7E1DA0076B0CF /* Edges.swift in Sources */,
 				43860BC71FB7E17C0076B0CF /* Vertex.swift in Sources */,
-				43CA8FF31FB697B600B962D9 /* ShapeType.swift in Sources */,
+				43CA8FF31FB697B600B962D9 /* Shapes.swift in Sources */,
+				43A018F31FC10B28005FF276 /* Node.swift in Sources */,
 				437C90C81FB7B1BF0017A454 /* SCNVector3+Extensions.swift in Sources */,
 				43CA90001FB762D300B962D9 /* Int+Extensions.swift in Sources */,
 				43CA8FD91FB6919900B962D9 /* AppDelegate.swift in Sources */,

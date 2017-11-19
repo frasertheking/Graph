@@ -53,8 +53,8 @@ extension AdjacencyList: Graphable {
     }
     
     fileprivate func addDirectedEdge(from source: Vertex<Element>, to destination: Vertex<Element>) {
-        let edge = Edge(source: source, destination: destination) // 1
-        adjacencyDict[source]?.append(edge) // 2
+        let edge = Edge(source: source, destination: destination)
+        adjacencyDict[source]?.append(edge) 
     }
     
     fileprivate func addUndirectedEdge(vertices: (Vertex<Element>, Vertex<Element>)) {
@@ -65,5 +65,30 @@ extension AdjacencyList: Graphable {
     
     public func edges(from source: Vertex<Element>) -> [Edge<Element>]? {
         return adjacencyDict[source]
+    }
+    
+    func checkIfSolved() -> Bool {
+        let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
+        var solved:Bool = true
+        for (_, value) in (graph.adjacencyDict) {
+            for edge in value {
+                if edge.source.data.color == edge.destination.data.color ||
+                   edge.source.data.color == .black ||
+                   edge.destination.data.color == .black {
+                    solved = false
+                }
+            }
+        }
+        return solved
+    }
+    
+    func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node> {
+        let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
+        for (key, _) in (graph.adjacencyDict) {
+            if "\(key.data.uid)" == id {
+                key.data.color = color
+            }
+        }
+        return graph
     }
 }
