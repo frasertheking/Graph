@@ -92,14 +92,16 @@ class GraphGenerator {
         scnScene.rootNode.addChildNode(geometryNode)
     }
     
-    static func checkIfSolved(graph: AdjacencyList<Node>) {
-//        var solved:Bool = true
-//        for (key, value) in (graph.adjacencyDict) {
-//            for edge in value {
-//                if edge.source.data.
-//            }
-//        }
-        print(graph.description)
+    static func checkIfSolved(graph: AdjacencyList<Node>) -> Bool {
+        var solved:Bool = true
+        for (_, value) in (graph.adjacencyDict) {
+            for edge in value {
+                if edge.source.data.color == edge.destination.data.color {
+                    solved = false
+                }
+            }
+        }
+        return solved
     }
     
     static func updateGraph(graph: AdjacencyList<Node>, id: String?, color: UIColor) -> AdjacencyList<Node> {

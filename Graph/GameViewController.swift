@@ -121,6 +121,7 @@ class GameViewController: UIViewController {
             activeLevel.adjacencyList = GraphGenerator.updateGraph(graph: activeLevel.adjacencyList!, id: geometry.name, color: paintColor)
             game.playSound(node: scnScene.rootNode, name: "SpawnGood")
         } else {
+            print(GraphGenerator.checkIfSolved(graph: activeLevel.adjacencyList!))
             // Testing case
         }
     }
