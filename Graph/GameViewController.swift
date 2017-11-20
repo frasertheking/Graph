@@ -22,6 +22,7 @@ class GameViewController: UIViewController {
     // GLOBAL VARS
     var paintColor: UIColor = UIColor.red
     var activeLevel: Level!
+    var animating: Bool = false
     
     // UI Elements
     var redButton: UIButton!
@@ -45,21 +46,21 @@ class GameViewController: UIViewController {
         
         redButton = UIButton(frame: CGRect(x: 50, y: 50, width: 60, height: 20))
         redButton.backgroundColor = UIColor.red
-        redButton.layer.borderColor = UIColor.black.cgColor
-        redButton.layer.borderWidth = 1
-        self.view.addSubview(redButton)
+        redButton.layer.borderColor = UIColor.white.cgColor
+        redButton.layer.borderWidth = 2
+        self.scnView.addSubview(redButton)
         redButton.addTarget(self, action: #selector(redButtonPress), for: .touchUpInside)
         
         greenButton = UIButton(frame: CGRect(x: 150, y: 50, width: 60, height: 20))
         greenButton.backgroundColor = UIColor.green
-        greenButton.layer.borderColor = UIColor.black.cgColor
-        self.view.addSubview(greenButton)
+        greenButton.layer.borderColor = UIColor.white.cgColor
+        self.scnView.addSubview(greenButton)
         greenButton.addTarget(self, action: #selector(greenButtonPress), for: .touchUpInside)
         
         blueButton = UIButton(frame: CGRect(x: 250, y: 50, width: 60, height: 20))
         blueButton.backgroundColor = UIColor.blue
-        blueButton.layer.borderColor = UIColor.black.cgColor
-        self.view.addSubview(blueButton)
+        blueButton.layer.borderColor = UIColor.white.cgColor
+        self.scnView.addSubview(blueButton)
         blueButton.addTarget(self, action: #selector(blueButtonPress), for: .touchUpInside)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
@@ -67,24 +68,30 @@ class GameViewController: UIViewController {
     }
     
     @objc func redButtonPress() {
-        paintColor = UIColor.red
-        redButton.layer.borderWidth = 1
-        greenButton.layer.borderWidth = 0
-        blueButton.layer.borderWidth = 0
+        DispatchQueue.main.async {
+            self.paintColor = UIColor.red
+            self.redButton.layer.borderWidth = 2
+            self.greenButton.layer.borderWidth = 0
+            self.blueButton.layer.borderWidth = 0
+        }
     }
     
     @objc func greenButtonPress() {
-        paintColor = UIColor.green
-        redButton.layer.borderWidth = 0
-        greenButton.layer.borderWidth = 1
-        blueButton.layer.borderWidth = 0
+        DispatchQueue.main.async {
+            self.paintColor = UIColor.green
+            self.redButton.layer.borderWidth = 0
+            self.greenButton.layer.borderWidth = 2
+            self.blueButton.layer.borderWidth = 0
+        }
     }
     
     @objc func blueButtonPress() {
-        paintColor = UIColor.blue
-        redButton.layer.borderWidth = 0
-        greenButton.layer.borderWidth = 0
-        blueButton.layer.borderWidth = 1
+        DispatchQueue.main.async {
+            self.paintColor = UIColor.blue
+            self.redButton.layer.borderWidth = 0
+            self.greenButton.layer.borderWidth = 0
+            self.blueButton.layer.borderWidth = 2
+        }
     }
     
     func setupLevel() {
@@ -138,6 +145,13 @@ class GameViewController: UIViewController {
         }
     }
     
+    func createTrail(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem {
+        let trail = SCNParticleSystem(named: "Trail.scnp", inDirectory: nil)!
+        trail.particleColor = color
+        trail.emitterShape = geometry
+        return trail
+    }
+    
     func handleTouchFor(node: SCNNode) {
         
         guard let geometry = node.geometry else {
@@ -145,9 +159,31 @@ class GameViewController: UIViewController {
         }
         
         if geometry.name != "edge" {
+            
+            // Animate scale for node
+            
+            let scaleUpAction = SCNAction.scale(by: 1.25, duration: 0.1)
+            scaleUpAction.timingMode = .easeInEaseOut
+            let scaleDownAction = SCNAction.scale(by: 0.8, duration: 0.1)
+            scaleDownAction.timingMode = .easeInEaseOut
+            
+            if !animating {
+                self.animating = true
+                node.runAction(scaleUpAction) {
+                    node.runAction(scaleDownAction) {
+                        self.animating = false
+                    }
+                }
+            }
+            
             geometry.materials.first?.diffuse.contents = paintColor
+            
+            let trailEmitter = createTrail(color: paintColor, geometry: geometry)
+            node.removeAllParticleSystems()
+            node.addParticleSystem(trailEmitter)
+            
             activeLevel.adjacencyList = activeLevel.adjacencyList!.updateGraphState(id: geometry.name, color: paintColor)
-            game.playSound(node: scnScene.rootNode, name: "SpawnGood")
+            //game.playSound(node: scnScene.rootNode, name: "SpawnGood")
         }
         
         if activeLevel.adjacencyList!.checkIfSolved() {

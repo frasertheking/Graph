@@ -56,6 +56,7 @@ public enum Shapes:Int {
         
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.position = position
+        
         scnScene.rootNode.addChildNode(geometryNode)
     }
 }
