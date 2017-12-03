@@ -73,8 +73,8 @@ extension AdjacencyList: Graphable {
         for (_, value) in (graph.adjacencyDict) {
             for edge in value {
                 if edge.source.data.color == edge.destination.data.color ||
-                   edge.source.data.color == .black ||
-                   edge.destination.data.color == .black {
+                   edge.source.data.color == .white ||
+                   edge.destination.data.color == .white {
                     solved = false
                 }
             }

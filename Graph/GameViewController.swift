@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
 
     var scnView: SCNView!
     var scnScene: SCNScene!
-    var cameraNode: SCNNode!
+    var objectNode: SCNNode!
     var game = GameHelper.sharedInstance
     let base = SKLabelNode(text: "Not solved")
 
@@ -28,6 +28,12 @@ class GameViewController: UIViewController {
     var redButton: UIButton!
     var greenButton: UIButton!
     var blueButton: UIButton!
+    
+    // CAMERA VARS
+    var lastWidthRatio: Float = 0
+    var lastHeightRatio: Float = 0
+    var cameraOrbit: SCNNode!
+    var cameraNode: SCNNode!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +101,8 @@ class GameViewController: UIViewController {
     }
     
     func setupLevel() {
+        objectNode = SCNNode()
+
         activeLevel = Levels.createLevel(index: 0)
         
         guard let adjacencyDict = activeLevel.adjacencyList?.adjacencyDict else {
@@ -103,20 +111,47 @@ class GameViewController: UIViewController {
         
         for (key, value) in adjacencyDict {
             // Create nodes
-            Shapes.spawnShape(type: .Sphere, position: key.data.position, color: key.data.color, id: key.data.uid, scnScene: scnScene)
+            Shapes.spawnShape(type: .Sphere, position: key.data.position, color: key.data.color, id: key.data.uid, node: objectNode)
             
             // Create edges
             for edge in value {
                 let node = SCNNode()
-                scnScene.rootNode.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.1, color: .white))
+                objectNode.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.1, color: .black))
             }
         }
+        
+        scnScene.rootNode.addChildNode(objectNode)
+        
+//        let moveAnimation = SCNAction.move(to: SCNVector3Make(0, 0, 25), duration: 2.0)
+//        moveAnimation.timingMode = .easeInEaseOut
+//        cameraNode.runAction(moveAnimation)
+        
+        rotate(objectNode, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 3) {
+            print("done")
+        }
+        
+    }
+    
+    func rotate(_ node: SCNNode, around axis: SCNVector3, by angle: CGFloat, duration: TimeInterval, completionBlock: (()->())?) {
+        let rotation = SCNMatrix4MakeRotation(Float(angle), axis.x, axis.y, axis.z)
+        let newTransform = SCNMatrix4Mult(node.worldTransform, rotation)
+        
+        // Animate the transaction
+        SCNTransaction.begin()
+        // Set the duration and the completion block
+        SCNTransaction.animationDuration = duration
+        SCNTransaction.completionBlock = completionBlock
+        
+        // Set the new transform
+        node.transform = newTransform
+        
+        SCNTransaction.commit()
     }
     
     func setupView() {
         scnView = self.view as! SCNView
         scnView.showsStatistics = false
-        scnView.allowsCameraControl = true
+        scnView.allowsCameraControl = false
         scnView.autoenablesDefaultLighting = true
         
         scnView.delegate = self
@@ -127,14 +162,45 @@ class GameViewController: UIViewController {
         scnScene = SCNScene()
         scnView.scene = scnScene
         
-        scnScene.background.contents = "Graph.scnassets/Textures/Background_Diffuse.png"
+        scnScene.background.contents = "background_new"
     }
     
     func setupCamera() {
+        
+        let camera = SCNCamera()
+        camera.usesOrthographicProjection = true
+        camera.orthographicScale = 9
+        camera.zNear = 0
+        camera.zFar = 100
         cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 25)
-        scnScene.rootNode.addChildNode(cameraNode)
+        cameraNode.camera = camera
+        cameraOrbit = SCNNode()
+        cameraOrbit.addChildNode(cameraNode)
+        scnScene.rootNode.addChildNode(cameraOrbit)
+        
+        scnView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(sender:))))
+        
+        // rotate it (I've left out some animation code here to show just the rotation)
+//        cameraOrbit.eulerAngles.x -= Float(Double.pi / 4)
+//        cameraOrbit.eulerAngles.y -= Float((Double.pi / 4)*3)
+        
+//        cameraNode = SCNNode()
+//        cameraNode.camera = SCNCamera()
+//        cameraNode.position = SCNVector3(x: 0, y: 0, z: 25)
+//        scnScene.rootNode.addChildNode(cameraNode)
+    }
+    
+    @objc func handlePanGesture(sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: sender.view!)
+        let widthRatio = Float(translation.x) / Float(sender.view!.frame.size.width) + lastWidthRatio
+        let heightRatio = Float(translation.y) / Float(sender.view!.frame.size.height) + lastHeightRatio
+        cameraOrbit.eulerAngles.y = Float(-2 * Double.pi) * widthRatio
+        cameraOrbit.eulerAngles.x = Float(-Double.pi) + Float(-Double.pi) * heightRatio
+        if (sender.state == .ended) {
+            lastWidthRatio = widthRatio.truncatingRemainder(dividingBy: 1)
+            lastHeightRatio = heightRatio.truncatingRemainder(dividingBy: 1)
+        }
     }
     
     func cleanScene() {

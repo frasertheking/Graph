@@ -26,7 +26,7 @@ public enum Shapes:Int {
         return Shapes(rawValue: Int(rand))!
     }
     
-    static func spawnShape(type: Shapes, position: SCNVector3, color: UIColor, id: Int, scnScene: SCNScene) {
+    static func spawnShape(type: Shapes, position: SCNVector3, color: UIColor, id: Int, node: SCNNode) {
         var geometry:SCNGeometry
         
         switch type {
@@ -57,6 +57,6 @@ public enum Shapes:Int {
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.position = position
         
-        scnScene.rootNode.addChildNode(geometryNode)
+        node.addChildNode(geometryNode)
     }
 }
