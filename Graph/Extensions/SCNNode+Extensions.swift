@@ -31,7 +31,6 @@ extension SCNNode {
         let l = CGFloat(sqrt(w.x * w.x + w.y * w.y + w.z * w.z))
         
         if l == 0.0 {
-            // two points together.
             let sphere = SCNSphere(radius: radius)
             sphere.firstMaterial?.diffuse.contents = color
             self.geometry = sphere
@@ -42,25 +41,25 @@ extension SCNNode {
         
         let cyl = SCNCylinder(radius: radius, height: l)
         cyl.name = "edge"
-        cyl.firstMaterial?.diffuse.contents = color
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        gradientLayer.colors = [UIColor.red.cgColor, UIColor.green.cgColor]
+        cyl.firstMaterial?.diffuse.contents = gradientLayer
         
         self.geometry = cyl
         
-        //original vector of cylinder above 0,0,0
         let ov = SCNVector3(0, l/2.0,0)
-        //target vector, in new coordination
         let nv = SCNVector3((endPoint.x - startPoint.x)/2.0, (endPoint.y - startPoint.y)/2.0,
                             (endPoint.z-startPoint.z)/2.0)
         
-        // axis between two vector
         let av = SCNVector3( (ov.x + nv.x)/2.0, (ov.y+nv.y)/2.0, (ov.z+nv.z)/2.0)
         
-        //normalized axis vector
         let av_normalized: SCNVector3 = normalizeVector(av)
-        let q0 = Float(0.0) //cos(angel/2), angle is always 180 or M_PI
-        let q1 = Float(av_normalized.x) // x' * sin(angle/2)
-        let q2 = Float(av_normalized.y) // y' * sin(angle/2)
-        let q3 = Float(av_normalized.z) // z' * sin(angle/2)
+        let q0 = Float(0.0)
+        let q1 = Float(av_normalized.x)
+        let q2 = Float(av_normalized.y)
+        let q3 = Float(av_normalized.z)
         
         let r_m11 = q0 * q0 + q1 * q1 - q2 * q2 - q3 * q3
         let r_m12 = 2 * q1 * q2 + 2 * q0 * q3
@@ -91,6 +90,12 @@ extension SCNNode {
         self.transform.m42 = (startPoint.y + endPoint.y) / 2.0
         self.transform.m43 = (startPoint.z + endPoint.z) / 2.0
         self.transform.m44 = 1.0
+        
+        if self.rotation.x.isNaN && self.rotation.y.isNaN && self.rotation.z.isNaN && self.rotation.w.isNaN {
+            self.rotation = SCNVector4(0, 1, 0, 3.141593)
+            self.scale = SCNVector3(1, 1, 1)
+        }
+        
         return self
     }
 }

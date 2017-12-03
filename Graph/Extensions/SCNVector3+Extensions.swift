@@ -23,6 +23,10 @@ extension SCNVector3 {
         return Double(a.x*b.x + a.y*b.y + a.z*b.z)
     }
     
+    func equal(b: SCNVector3) -> Bool {
+        return self.x == b.x && self.y == b.y && self.z == b.z
+    }
+    
     func length() -> Double {
         return Double(sqrtf(x*x + y*y + z*z))
     }
