@@ -138,6 +138,7 @@ class GameViewController: UIViewController {
         
         rotate(edgeNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 3) {
             print("done")
+            self.scnView.allowsCameraControl = true
         }
         
         rotate(vertexNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 3) {
@@ -165,7 +166,7 @@ class GameViewController: UIViewController {
     func setupView() {
         scnView = self.view as! SCNView
         scnView.showsStatistics = false
-        scnView.allowsCameraControl = true
+        scnView.allowsCameraControl = false
         scnView.autoenablesDefaultLighting = true
         scnView.antialiasingMode = .multisampling4X
         
@@ -209,9 +210,7 @@ class GameViewController: UIViewController {
         }
         
         if geometry.name != "edge" {
-            
-            // Animate scale for node
-            
+                        
             let scaleUpAction = SCNAction.scale(by: 1.25, duration: 0.1)
             scaleUpAction.timingMode = .easeInEaseOut
             let scaleDownAction = SCNAction.scale(by: 0.8, duration: 0.1)
@@ -227,6 +226,7 @@ class GameViewController: UIViewController {
             }
             
             geometry.materials.first?.diffuse.contents = paintColor
+            geometry.materials.first?.emission.contents = UIColor.black
             
             let trailEmitter = createTrail(color: paintColor, geometry: geometry)
             node.removeAllParticleSystems()
@@ -255,7 +255,8 @@ class GameViewController: UIViewController {
                     var pos = 0
                     for edgeNode in edgeArray {
                         if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.goldColor()
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.goldColor()
                         }
                         pos += 1
                     }
@@ -264,6 +265,7 @@ class GameViewController: UIViewController {
                     for edgeNode in edgeArray {
                         if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
                         }
                         pos += 1
                     }
