@@ -15,7 +15,9 @@ class GameViewController: UIViewController {
 
     var scnView: SCNView!
     var scnScene: SCNScene!
-    var objectNode: SCNNode!
+    var edgeNodes: SCNNode!
+    var edgeArray: [Edge<Node>]!
+    var vertexNodes: SCNNode!
     var game = GameHelper.sharedInstance
     let base = SKLabelNode(text: "Not solved")
 
@@ -100,7 +102,8 @@ class GameViewController: UIViewController {
     }
     
     func setupLevel() {
-        objectNode = SCNNode()
+        edgeNodes = SCNNode()
+        vertexNodes = SCNNode()
 
         activeLevel = Levels.createLevel(index: 0)
         
@@ -108,17 +111,17 @@ class GameViewController: UIViewController {
             return
         }
         
-        var edgeArray: [Edge<Node>] = []
-
+        edgeArray = []
+        
         for (key, value) in adjacencyDict {
             // Create nodes
-            Shapes.spawnShape(type: .Sphere, position: key.data.position, color: key.data.color, id: key.data.uid, node: objectNode)
+            Shapes.spawnShape(type: .Sphere, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
             
             // Create edges
             for edge in value {
                 if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
                     let node = SCNNode()
-                    objectNode.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.1, color: .black))
+                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.1, color: .black))
 
                     edgeArray.append(edge)
                 }
@@ -126,13 +129,18 @@ class GameViewController: UIViewController {
             }
         }
         
-        scnScene.rootNode.addChildNode(objectNode)
-        
+        scnScene.rootNode.addChildNode(vertexNodes)
+        scnScene.rootNode.addChildNode(edgeNodes)
+
         let moveAnimation = SCNAction.move(to: SCNVector3Make(0, 0, 25), duration: 2.0)
         moveAnimation.timingMode = .easeInEaseOut
         cameraNode.runAction(moveAnimation)
         
-        rotate(objectNode, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 3) {
+        rotate(edgeNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 3) {
+            print("done")
+        }
+        
+        rotate(vertexNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 3) {
             print("done")
         }
         
@@ -229,10 +237,39 @@ class GameViewController: UIViewController {
             //game.playSound(node: scnScene.rootNode, name: "SpawnGood")
         }
         
+        updateCorrectEdges()
+        
         if activeLevel.adjacencyList!.checkIfSolved() {
             base.text = "Solved"
         } else {
             base.text = "Not solved"
+        }
+    }
+    
+    func updateCorrectEdges() {
+        for (_, value) in (activeLevel.adjacencyList!.adjacencyDict) {
+            for edge in value {
+                if edge.source.data.color != edge.destination.data.color &&
+                    edge.source.data.color != .white &&
+                    edge.destination.data.color != .white {
+                    
+                    var pos = 0
+                    for edgeNode in edgeArray {
+                        if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.red
+                        }
+                        pos += 1
+                    }
+                } else {
+                    var pos = 0
+                    for edgeNode in edgeArray {
+                        if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                        }
+                        pos += 1
+                    }
+                }
+            }
         }
     }
     
