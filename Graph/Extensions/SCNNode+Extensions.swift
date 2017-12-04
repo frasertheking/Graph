@@ -41,10 +41,6 @@ extension SCNNode {
         
         let cyl = SCNCylinder(radius: radius, height: l)
         cyl.name = "edge"
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        gradientLayer.colors = [UIColor.red.cgColor, UIColor.green.cgColor]
         cyl.firstMaterial?.diffuse.contents = UIColor.black
         
         self.geometry = cyl

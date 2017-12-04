@@ -167,6 +167,7 @@ class GameViewController: UIViewController {
         scnView.showsStatistics = false
         scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = true
+        scnView.antialiasingMode = .multisampling4X
         
         scnView.delegate = self
         scnView.isPlaying = true
@@ -185,8 +186,6 @@ class GameViewController: UIViewController {
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 25)
         scnScene.rootNode.addChildNode(cameraNode)
     }
-    
-   
     
     func cleanScene() {
         for node in scnScene.rootNode.childNodes {
@@ -256,7 +255,7 @@ class GameViewController: UIViewController {
                     var pos = 0
                     for edgeNode in edgeArray {
                         if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.red
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.goldColor()
                         }
                         pos += 1
                     }
