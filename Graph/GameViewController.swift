@@ -136,6 +136,8 @@ class GameViewController: UIViewController {
         moveAnimation.timingMode = .easeInEaseOut
         cameraNode.runAction(moveAnimation)
         
+        // @Cleanup: Move together?
+        
         rotate(edgeNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 3) {
             print("done")
             self.scnView.allowsCameraControl = true
