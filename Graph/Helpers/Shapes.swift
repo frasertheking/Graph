@@ -8,6 +8,8 @@
 
 import Foundation
 import SceneKit
+import ModelIO
+import SceneKit.ModelIO
 
 public enum Shapes:Int {
     
@@ -19,6 +21,7 @@ public enum Shapes:Int {
     case Cylinder
     case Cone
     case Tube
+    case Custom
     
     static func random() -> Shapes {
         let maxValue = Tube.rawValue
@@ -46,17 +49,26 @@ public enum Shapes:Int {
             geometry = SCNCone(topRadius: 0.25, bottomRadius: 0.5, height: 1.0)
         case .Tube:
             geometry = SCNTube(innerRadius: 0.25, outerRadius: 0.5, height: 1.0)
+        case .Custom:
+            let bundle = Bundle.main
+            let path = bundle.path(forResource: "icosahedron", ofType: "obj")
+            let url = NSURL(fileURLWithPath: path!)
+            let asset = MDLAsset(url: url as URL)
+            let object = asset.object(at: 0)
+            let node = SCNNode(mdlObject: object)
+            geometry = node.geometry!
         }
         
-        geometry.materials.first?.diffuse.contents = color
-        geometry.materials.first?.emission.contents = UIColor.glowColor()
+        geometry.materials.first?.diffuse.contents = UIColor.white
+        //geometry.materials.first?.emission.contents = UIColor.glowColor()
         
-        if type == .Sphere {
+        if type == .Custom {
             geometry.name = "\(id)"
         }
         
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.position = position
+        geometryNode.scale = SCNVector3(0.6, 0.6, 0.6)
         
         node.addChildNode(geometryNode)
     }

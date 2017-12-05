@@ -16,6 +16,8 @@
 		43860BD31FB8ED1B0076B0CF /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BD21FB8ED1B0076B0CF /* Level.swift */; };
 		43860BD51FB8EDCE0076B0CF /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BD41FB8EDCD0076B0CF /* Levels.swift */; };
 		43A018F31FC10B28005FF276 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A018F21FC10B28005FF276 /* Node.swift */; };
+		43B012761FD62BA500F017A6 /* icosahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 43B012751FD62BA500F017A6 /* icosahedron.obj */; };
+		43B012781FD62DBD00F017A6 /* dodecahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 43B012771FD62DBD00F017A6 /* dodecahedron.obj */; };
 		43B7FC071FC271D20032CA8F /* Trail.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 43B7FC051FC271D20032CA8F /* Trail.scnp */; };
 		43CA8FD91FB6919900B962D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FD81FB6919900B962D9 /* AppDelegate.swift */; };
 		43CA8FDD1FB6919900B962D9 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FDC1FB6919900B962D9 /* GameViewController.swift */; };
@@ -40,6 +42,8 @@
 		43860BD21FB8ED1B0076B0CF /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		43860BD41FB8EDCD0076B0CF /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		43A018F21FC10B28005FF276 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		43B012751FD62BA500F017A6 /* icosahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icosahedron.obj; sourceTree = "<group>"; };
+		43B012771FD62DBD00F017A6 /* dodecahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dodecahedron.obj; sourceTree = "<group>"; };
 		43B7FC051FC271D20032CA8F /* Trail.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Trail.scnp; sourceTree = "<group>"; };
 		43CA8FD51FB6919900B962D9 /* Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CA8FD81FB6919900B962D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +106,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		43B012791FD62DBF00F017A6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				43B012771FD62DBD00F017A6 /* dodecahedron.obj */,
+				43B012751FD62BA500F017A6 /* icosahedron.obj */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		43CA8FCC1FB6919900B962D9 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +134,7 @@
 		43CA8FD71FB6919900B962D9 /* Graph */ = {
 			isa = PBXGroup;
 			children = (
+				43B012791FD62DBF00F017A6 /* Models */,
 				43860BD81FB8F4830076B0CF /* Helpers */,
 				43860BD11FB8ECD20076B0CF /* AdjacencyComponents */,
 				43860BD01FB8ECC50076B0CF /* Extensions */,
@@ -196,7 +210,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				43CA8FE51FB6919900B962D9 /* LaunchScreen.storyboard in Resources */,
+				43B012761FD62BA500F017A6 /* icosahedron.obj in Resources */,
 				43CA8FE21FB6919900B962D9 /* Assets.xcassets in Resources */,
+				43B012781FD62DBD00F017A6 /* dodecahedron.obj in Resources */,
 				43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */,
 				43B7FC071FC271D20032CA8F /* Trail.scnp in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,

@@ -82,6 +82,6 @@ extension UIColor {
     }
     
     public static func glowColor() -> UIColor {
-        return UIColor(red: 1.0, green: 215/255, blue: 0.0, alpha: 0.1)
+        return UIColor(red: 1.0, green: 215/255, blue: 0.0, alpha: 1.0)
     }
 }

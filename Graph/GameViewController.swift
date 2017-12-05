@@ -115,7 +115,7 @@ class GameViewController: UIViewController {
         
         for (key, value) in adjacencyDict {
             // Create nodes
-            Shapes.spawnShape(type: .Sphere, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
+            Shapes.spawnShape(type: .Custom, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
             
             // Create edges
             for edge in value {
@@ -180,7 +180,7 @@ class GameViewController: UIViewController {
         scnScene = SCNScene()
         scnView.scene = scnScene
         
-        scnScene.background.contents = "background_new"
+        scnScene.background.contents = "background"
     }
     
     func setupCamera() {
