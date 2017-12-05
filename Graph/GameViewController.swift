@@ -138,13 +138,25 @@ class GameViewController: UIViewController {
         
         // @Cleanup: Move together?
         
-        rotate(edgeNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 3) {
+        rotate(edgeNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 2) {
             print("done")
             self.scnView.allowsCameraControl = true
         }
         
-        rotate(vertexNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 3) {
+        rotate(vertexNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 2) {
             print("done")
+        }
+
+        scale(vertexNodes, size: 2, duration: 0.5) {
+            self.scale(self.vertexNodes, size: 0.5, duration: 0.5) {
+                print("done")
+            }
+        }
+        
+        scale(edgeNodes, size: 2, duration: 0.5) {
+            self.scale(self.edgeNodes, size: 0.5, duration: 0.5) {
+                print("done")
+            }
         }
         
     }
@@ -152,12 +164,33 @@ class GameViewController: UIViewController {
     func rotate(_ node: SCNNode, around axis: SCNVector3, by angle: CGFloat, duration: TimeInterval, completionBlock: (()->())?) {
         let rotation = SCNMatrix4MakeRotation(Float(angle), axis.x, axis.y, axis.z)
         let newTransform = SCNMatrix4Mult(node.worldTransform, rotation)
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        // Animate the transaction
+        SCNTransaction.begin()
+        
+        // Set the duration and the completion block
+        SCNTransaction.animationDuration = duration
+        SCNTransaction.completionBlock = completionBlock
+        SCNTransaction.animationTimingFunction = easeInOut
+
+        // Set the new transform
+        node.transform = newTransform
+        
+        SCNTransaction.commit()
+    }
+    
+    func scale(_ node: SCNNode, size: Float, duration: TimeInterval, completionBlock: (()->())?) {
+        let scale = SCNMatrix4MakeScale(size, size, size)
+        let newTransform = SCNMatrix4Mult(node.worldTransform, scale)
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         
         // Animate the transaction
         SCNTransaction.begin()
         // Set the duration and the completion block
         SCNTransaction.animationDuration = duration
         SCNTransaction.completionBlock = completionBlock
+        SCNTransaction.animationTimingFunction = easeInOut
         
         // Set the new transform
         node.transform = newTransform
@@ -167,7 +200,7 @@ class GameViewController: UIViewController {
     
     func setupView() {
         scnView = self.view as! SCNView
-        scnView.showsStatistics = false
+        scnView.showsStatistics = true
         scnView.allowsCameraControl = false
         scnView.autoenablesDefaultLighting = true
         scnView.antialiasingMode = .multisampling4X
@@ -249,6 +282,18 @@ class GameViewController: UIViewController {
         
         if activeLevel.adjacencyList!.checkIfSolved() {
             base.text = "Solved"
+            
+            scale(vertexNodes, size: 1.5, duration: 0.5) {
+                self.scale(self.vertexNodes, size: 0.75, duration: 0.5) {
+                    print("done")
+                }
+            }
+            
+            scale(edgeNodes, size: 1.5, duration: 0.5) {
+                self.scale(self.edgeNodes, size: 0.75, duration: 0.5) {
+                    print("done")
+                }
+            }
         } else {
             base.text = "Not solved"
         }
