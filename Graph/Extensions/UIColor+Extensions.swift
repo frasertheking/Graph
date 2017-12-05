@@ -42,7 +42,10 @@ let UIColorList:[UIColor] = [
     UIColor.purple,
     UIColor.tealColor(),
     UIColor.goldColor(),
-    UIColor.glowColor()
+    UIColor.glowColor(),
+    UIColor.customRed(),
+    UIColor.customGreen(),
+    UIColor.customBlue(),
 ]
 
 extension UIColor {
@@ -82,6 +85,18 @@ extension UIColor {
     }
     
     public static func glowColor() -> UIColor {
-        return UIColor(red: 1.0, green: 215/255, blue: 0.0, alpha: 1.0)
+        return UIColor(red: 1.0, green: 215/255, blue: 0.0, alpha: 0.75)
+    }
+    
+    public static func customRed() -> UIColor {
+        return UIColor(red: 1.0, green: 59/255, blue: 48/255, alpha: 1.0)
+    }
+    
+    public static func customGreen() -> UIColor {
+        return UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+    }
+    
+    public static func customBlue() -> UIColor {
+        return UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1.0)
     }
 }

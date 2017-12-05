@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 435BACC91FD7584400DFAF6B /* Trail.scnp */; };
+		435BACCD1FD758C500DFAF6B /* smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = 435BACCB1FD758C500DFAF6B /* smoke.png */; };
+		435BACCE1FD758C500DFAF6B /* Smoke.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 435BACCC1FD758C500DFAF6B /* Smoke.scnp */; };
 		437C90C81FB7B1BF0017A454 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */; };
 		43860BC71FB7E17C0076B0CF /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BC61FB7E17C0076B0CF /* Vertex.swift */; };
 		43860BC91FB7E1DA0076B0CF /* Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BC81FB7E1DA0076B0CF /* Edges.swift */; };
@@ -18,7 +21,6 @@
 		43A018F31FC10B28005FF276 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A018F21FC10B28005FF276 /* Node.swift */; };
 		43B012761FD62BA500F017A6 /* icosahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 43B012751FD62BA500F017A6 /* icosahedron.obj */; };
 		43B012781FD62DBD00F017A6 /* dodecahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 43B012771FD62DBD00F017A6 /* dodecahedron.obj */; };
-		43B7FC071FC271D20032CA8F /* Trail.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 43B7FC051FC271D20032CA8F /* Trail.scnp */; };
 		43CA8FD91FB6919900B962D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FD81FB6919900B962D9 /* AppDelegate.swift */; };
 		43CA8FDD1FB6919900B962D9 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CA8FDC1FB6919900B962D9 /* GameViewController.swift */; };
 		43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43CA8FDE1FB6919900B962D9 /* Main.storyboard */; };
@@ -33,6 +35,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		435BACC91FD7584400DFAF6B /* Trail.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Trail.scnp; sourceTree = "<group>"; };
+		435BACCB1FD758C500DFAF6B /* smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke.png; sourceTree = "<group>"; };
+		435BACCC1FD758C500DFAF6B /* Smoke.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Smoke.scnp; sourceTree = "<group>"; };
 		437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 		43860BC61FB7E17C0076B0CF /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		43860BC81FB7E1DA0076B0CF /* Edges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edges.swift; sourceTree = "<group>"; };
@@ -44,7 +49,6 @@
 		43A018F21FC10B28005FF276 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		43B012751FD62BA500F017A6 /* icosahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icosahedron.obj; sourceTree = "<group>"; };
 		43B012771FD62DBD00F017A6 /* dodecahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dodecahedron.obj; sourceTree = "<group>"; };
-		43B7FC051FC271D20032CA8F /* Trail.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Trail.scnp; sourceTree = "<group>"; };
 		43CA8FD51FB6919900B962D9 /* Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CA8FD81FB6919900B962D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43CA8FDC1FB6919900B962D9 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +119,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		43B0127A1FD7580B00F017A6 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				435BACC91FD7584400DFAF6B /* Trail.scnp */,
+				435BACCB1FD758C500DFAF6B /* smoke.png */,
+				435BACCC1FD758C500DFAF6B /* Smoke.scnp */,
+			);
+			path = Particles;
+			sourceTree = "<group>";
+		};
 		43CA8FCC1FB6919900B962D9 = {
 			isa = PBXGroup;
 			children = (
@@ -134,12 +148,12 @@
 		43CA8FD71FB6919900B962D9 /* Graph */ = {
 			isa = PBXGroup;
 			children = (
+				43B0127A1FD7580B00F017A6 /* Particles */,
 				43B012791FD62DBF00F017A6 /* Models */,
 				43860BD81FB8F4830076B0CF /* Helpers */,
 				43860BD11FB8ECD20076B0CF /* AdjacencyComponents */,
 				43860BD01FB8ECC50076B0CF /* Extensions */,
 				43CA8FDC1FB6919900B962D9 /* GameViewController.swift */,
-				43B7FC051FC271D20032CA8F /* Trail.scnp */,
 				43CA8FDE1FB6919900B962D9 /* Main.storyboard */,
 				43CA8FE11FB6919900B962D9 /* Assets.xcassets */,
 				43CA8FF01FB6961C00B962D9 /* Graph.scnassets */,
@@ -209,12 +223,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */,
 				43CA8FE51FB6919900B962D9 /* LaunchScreen.storyboard in Resources */,
 				43B012761FD62BA500F017A6 /* icosahedron.obj in Resources */,
+				435BACCD1FD758C500DFAF6B /* smoke.png in Resources */,
 				43CA8FE21FB6919900B962D9 /* Assets.xcassets in Resources */,
 				43B012781FD62DBD00F017A6 /* dodecahedron.obj in Resources */,
 				43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */,
-				43B7FC071FC271D20032CA8F /* Trail.scnp in Resources */,
+				435BACCE1FD758C500DFAF6B /* Smoke.scnp in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

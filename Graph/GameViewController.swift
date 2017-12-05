@@ -22,7 +22,7 @@ class GameViewController: UIViewController {
     let base = SKLabelNode(text: "Not solved")
 
     // GLOBAL VARS
-    var paintColor: UIColor = UIColor.red
+    var paintColor: UIColor = UIColor.customRed()
     var activeLevel: Level!
     var animating: Bool = false
     
@@ -52,20 +52,20 @@ class GameViewController: UIViewController {
         scnView.overlaySKScene = overlayScene
         
         redButton = UIButton(frame: CGRect(x: 50, y: 50, width: 60, height: 20))
-        redButton.backgroundColor = UIColor.red
+        redButton.backgroundColor = UIColor.customRed()
         redButton.layer.borderColor = UIColor.white.cgColor
         redButton.layer.borderWidth = 2
         self.scnView.addSubview(redButton)
         redButton.addTarget(self, action: #selector(redButtonPress), for: .touchUpInside)
         
         greenButton = UIButton(frame: CGRect(x: 150, y: 50, width: 60, height: 20))
-        greenButton.backgroundColor = UIColor.green
+        greenButton.backgroundColor = UIColor.customGreen()
         greenButton.layer.borderColor = UIColor.white.cgColor
         self.scnView.addSubview(greenButton)
         greenButton.addTarget(self, action: #selector(greenButtonPress), for: .touchUpInside)
         
         blueButton = UIButton(frame: CGRect(x: 250, y: 50, width: 60, height: 20))
-        blueButton.backgroundColor = UIColor.blue
+        blueButton.backgroundColor = UIColor.customBlue()
         blueButton.layer.borderColor = UIColor.white.cgColor
         self.scnView.addSubview(blueButton)
         blueButton.addTarget(self, action: #selector(blueButtonPress), for: .touchUpInside)
@@ -76,7 +76,7 @@ class GameViewController: UIViewController {
     
     @objc func redButtonPress() {
         DispatchQueue.main.async {
-            self.paintColor = UIColor.red
+            self.paintColor = UIColor.customRed()
             self.redButton.layer.borderWidth = 2
             self.greenButton.layer.borderWidth = 0
             self.blueButton.layer.borderWidth = 0
@@ -85,7 +85,7 @@ class GameViewController: UIViewController {
     
     @objc func greenButtonPress() {
         DispatchQueue.main.async {
-            self.paintColor = UIColor.green
+            self.paintColor = UIColor.customGreen()
             self.redButton.layer.borderWidth = 0
             self.greenButton.layer.borderWidth = 2
             self.blueButton.layer.borderWidth = 0
@@ -94,7 +94,7 @@ class GameViewController: UIViewController {
     
     @objc func blueButtonPress() {
         DispatchQueue.main.async {
-            self.paintColor = UIColor.blue
+            self.paintColor = UIColor.customBlue()
             self.redButton.layer.borderWidth = 0
             self.greenButton.layer.borderWidth = 0
             self.blueButton.layer.borderWidth = 2
@@ -204,6 +204,13 @@ class GameViewController: UIViewController {
         trail.emitterShape = geometry
         return trail
     }
+
+    func createSmoke(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem {
+        let smoke = SCNParticleSystem(named: "Smoke.scnp", inDirectory: nil)!
+        smoke.particleColor = color
+        smoke.emitterShape = geometry
+        return smoke
+    }
     
     func handleTouchFor(node: SCNNode) {
         
@@ -258,7 +265,9 @@ class GameViewController: UIViewController {
                     for edgeNode in edgeArray {
                         if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.goldColor()
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                            let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeNodes.childNodes[pos].geometry!)
+                            edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
                         }
                         pos += 1
                     }
@@ -268,6 +277,7 @@ class GameViewController: UIViewController {
                         if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
+                            edgeNodes.childNodes[pos].removeAllParticleSystems()
                         }
                         pos += 1
                     }
