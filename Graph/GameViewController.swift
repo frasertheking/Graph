@@ -44,6 +44,8 @@ class GameViewController: UIViewController {
         setupCamera()
         setupLevel()
         setupSounds()
+        rotateGraphObject()
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(scaleGraphObject), userInfo: nil, repeats: false)
         
         let overlayScene = SKScene(size: CGSize(width: scnView.frame.size.width, height: scnView.frame.size.height))
         base.position = CGPoint(x: scnView.frame.size.width/2, y: 50)
@@ -104,6 +106,9 @@ class GameViewController: UIViewController {
     func setupLevel() {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
+        
+        vertexNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi/2)), 0, 1, 0)
+        edgeNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi/2)), 0, 1, 0)
 
         activeLevel = Levels.createLevel(index: 0)
         
@@ -135,67 +140,52 @@ class GameViewController: UIViewController {
         let moveAnimation = SCNAction.move(to: SCNVector3Make(0, 0, 25), duration: 2.0)
         moveAnimation.timingMode = .easeInEaseOut
         cameraNode.runAction(moveAnimation)
+    }
+    
+    func rotateGraphObject() {
+        CATransaction.begin()
+        let spin = CABasicAnimation(keyPath: "rotation")
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        spin.fromValue = NSValue(scnVector4: SCNVector4(x: 0, y: 1, z: 0, w: 0))
+        spin.toValue = NSValue(scnVector4: SCNVector4(x: 0, y: 1, z: 0, w: Float(CGFloat(Double.pi*2))))
+        spin.duration = 2
+        spin.repeatCount = 1
+        spin.timingFunction = easeInOut
+        vertexNodes.addAnimation(spin, forKey: "spin around")
+        edgeNodes.addAnimation(spin, forKey: "spin around")
         
-        // @Cleanup: Move together?
-        
-        rotate(edgeNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 2) {
-            print("done")
+        // Callback function
+        CATransaction.setCompletionBlock {
             self.scnView.allowsCameraControl = true
+            self.swellGraphObject()
         }
-        
-        rotate(vertexNodes, around: SCNVector3(x: 0, y: 1, z: 0), by: CGFloat(3*Double.pi), duration: 2) {
-            print("done")
-        }
-
-        scale(vertexNodes, size: 2, duration: 0.5) {
-            self.scale(self.vertexNodes, size: 0.5, duration: 0.5) {
-                print("done")
-            }
-        }
-        
-        scale(edgeNodes, size: 2, duration: 0.5) {
-            self.scale(self.edgeNodes, size: 0.5, duration: 0.5) {
-                print("done")
-            }
-        }
-        
+        CATransaction.commit()
     }
     
-    func rotate(_ node: SCNNode, around axis: SCNVector3, by angle: CGFloat, duration: TimeInterval, completionBlock: (()->())?) {
-        let rotation = SCNMatrix4MakeRotation(Float(angle), axis.x, axis.y, axis.z)
-        let newTransform = SCNMatrix4Mult(node.worldTransform, rotation)
+    @objc func scaleGraphObject() {
+        let scale = CABasicAnimation(keyPath: "scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        
-        // Animate the transaction
-        SCNTransaction.begin()
-        
-        // Set the duration and the completion block
-        SCNTransaction.animationDuration = duration
-        SCNTransaction.completionBlock = completionBlock
-        SCNTransaction.animationTimingFunction = easeInOut
-
-        // Set the new transform
-        node.transform = newTransform
-        
-        SCNTransaction.commit()
+        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: 2, y: 2, z: 2, w: 0))
+        scale.duration = 0.5
+        scale.repeatCount = 0
+        scale.autoreverses = true
+        scale.timingFunction = easeInOut
+        vertexNodes.addAnimation(scale, forKey: "scale up")
+        edgeNodes.addAnimation(scale, forKey: "scale up")
     }
     
-    func scale(_ node: SCNNode, size: Float, duration: TimeInterval, completionBlock: (()->())?) {
-        let scale = SCNMatrix4MakeScale(size, size, size)
-        let newTransform = SCNMatrix4Mult(node.worldTransform, scale)
+    @objc func swellGraphObject() {
+        let scale = CABasicAnimation(keyPath: "scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        
-        // Animate the transaction
-        SCNTransaction.begin()
-        // Set the duration and the completion block
-        SCNTransaction.animationDuration = duration
-        SCNTransaction.completionBlock = completionBlock
-        SCNTransaction.animationTimingFunction = easeInOut
-        
-        // Set the new transform
-        node.transform = newTransform
-        
-        SCNTransaction.commit()
+        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: 1.05, y: 1.05, z: 1.05, w: 0))
+        scale.duration = 2
+        scale.repeatCount = .infinity
+        scale.autoreverses = true
+        scale.timingFunction = easeInOut
+        vertexNodes.addAnimation(scale, forKey: "swell")
+        edgeNodes.addAnimation(scale, forKey: "swell")
     }
     
     func setupView() {
@@ -283,17 +273,9 @@ class GameViewController: UIViewController {
         if activeLevel.adjacencyList!.checkIfSolved() {
             base.text = "Solved"
             
-            scale(vertexNodes, size: 1.5, duration: 0.5) {
-                self.scale(self.vertexNodes, size: 0.75, duration: 0.5) {
-                    print("done")
-                }
-            }
-            
-            scale(edgeNodes, size: 1.5, duration: 0.5) {
-                self.scale(self.edgeNodes, size: 0.75, duration: 0.5) {
-                    print("done")
-                }
-            }
+            // Correct animation
+            self.rotateGraphObject()
+            Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(self.scaleGraphObject), userInfo: nil, repeats: false)
         } else {
             base.text = "Not solved"
         }
