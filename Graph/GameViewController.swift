@@ -19,7 +19,6 @@ class GameViewController: UIViewController {
     var edgeArray: [Edge<Node>]!
     var vertexNodes: SCNNode!
     var game = GameHelper.sharedInstance
-    let base = SKLabelNode(text: "Not solved")
 
     // GLOBAL VARS
     var paintColor: UIColor = UIColor.customRed()
@@ -44,12 +43,6 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         setupLevel()
-        
-        let overlayScene = SKScene(size: CGSize(width: scnView.frame.size.width, height: scnView.frame.size.height))
-        base.position = CGPoint(x: scnView.frame.size.width/2, y: 50)
-        overlayScene.addChild(base)
-        scnView.overlaySKScene?.isUserInteractionEnabled = true
-        scnView.overlaySKScene = overlayScene
         
         redButton = UIButton(frame: CGRect(x: 50, y: 50, width: 60, height: 20))
         redButton.backgroundColor = UIColor.customRed()
@@ -239,7 +232,6 @@ class GameViewController: UIViewController {
     @objc func cleanScene() {
         self.vertexNodes.removeFromParentNode()
         self.edgeNodes.removeFromParentNode()
-        base.text = "Not solved"
         
         currentLevel += 1
         setupLevel()
@@ -295,12 +287,7 @@ class GameViewController: UIViewController {
         updateCorrectEdges()
         
         if activeLevel.adjacencyList!.checkIfSolved() {
-            base.text = "Solved"
-            
-            // Correct animation
             self.implodeGraph()
-        } else {
-            base.text = "Not solved"
         }
     }
     

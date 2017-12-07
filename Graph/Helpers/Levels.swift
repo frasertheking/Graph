@@ -16,7 +16,6 @@ class Levels: NSObject {
 
     override init() {
         let adjacencyListLevel1 = AdjacencyList<Node>()
-
         let level1_1 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 2.0, z: 2.0), uid: 1, color: .white))
         let level1_2 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 2.0, z: -2.0), uid: 2, color: .white))
         let level1_3 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: 2.0, y: -2.0, z: 2.0), uid: 3, color: .white))
@@ -25,7 +24,6 @@ class Levels: NSObject {
         let level1_6 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 2.0, z: -2.0), uid: 6, color: .white))
         let level1_7 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: -2.0, y: -2.0, z: 2.0), uid: 7, color: .white))
         let level1_8 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: -2.0, y: -2.0, z: -2.0), uid: 8, color: .white))
-        
         adjacencyListLevel1.add(.undirected, from: level1_1, to: level1_5)
         adjacencyListLevel1.add(.undirected, from: level1_1, to: level1_3)
         adjacencyListLevel1.add(.undirected, from: level1_1, to: level1_2)
@@ -38,22 +36,48 @@ class Levels: NSObject {
         adjacencyListLevel1.add(.undirected, from: level1_7, to: level1_8)
         adjacencyListLevel1.add(.undirected, from: level1_7, to: level1_3)
         adjacencyListLevel1.add(.undirected, from: level1_7, to: level1_5)
-        
         let level1 = Level(name: "level1", adjacencyList: adjacencyListLevel1)
-        
-        playable.append(level1)
         
         // Level 2
         let adjacencyListLevel2 = AdjacencyList<Node>()
-        
-        let level2_1 = adjacencyListLevel2.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 0.0, z: 0.0), uid: 1, color: .white))
-        let level2_2 = adjacencyListLevel2.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 0.0, z: 0.0), uid: 2, color: .white))
-        
+        let level2_1 = adjacencyListLevel2.createVertex(data: Node(position: SCNVector3(x: 0.0, y: 0.0, z: -2.0), uid: 1, color: .white))
+        let level2_2 = adjacencyListLevel2.createVertex(data: Node(position: SCNVector3(x: 0.0, y: 0.0, z: 2.0), uid: 2, color: .white))
         adjacencyListLevel2.add(.undirected, from: level2_1, to: level2_2)
-        
         let level2 = Level(name: "level2", adjacencyList: adjacencyListLevel2)
         
+        // Level 3
+        let adjacencyListLevel3 = AdjacencyList<Node>()
+        let level3_1 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 0.0, y: 4.0, z: 0.0), uid: 1, color: .white))
+        let level3_2 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 0.0, y: 2.0, z: 0.0), uid: 2, color: .white))
+        let level3_3 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 1.0, z: 0.0), uid: 3, color: .white))
+        let level3_4 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: -4.0, y: 1.5, z: 0.0), uid: 4, color: .white))
+        let level3_5 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 1.0, z: 0.0), uid: 5, color: .white))
+        let level3_6 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 4.0, y: 1.5, z: 0.0), uid: 6, color: .white))
+        let level3_7 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: -1.0, y: -2.0, z: 0.0), uid: 7, color: .white))
+        let level3_8 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: -2.25, y: -4.0, z: 0.0), uid: 8, color: .white))
+        let level3_9 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 1.0, y: -2.0, z: 0.0), uid: 9, color: .white))
+        let level3_10 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 2.25, y: -4.0, z: 0.0), uid: 10, color: .white))
+
+        adjacencyListLevel3.add(.undirected, from: level3_1, to: level3_2)
+        adjacencyListLevel3.add(.undirected, from: level3_1, to: level3_4)
+        adjacencyListLevel3.add(.undirected, from: level3_1, to: level3_6)
+        adjacencyListLevel3.add(.undirected, from: level3_2, to: level3_7)
+        adjacencyListLevel3.add(.undirected, from: level3_2, to: level3_9)
+        adjacencyListLevel3.add(.undirected, from: level3_3, to: level3_4)
+        adjacencyListLevel3.add(.undirected, from: level3_3, to: level3_5)
+        adjacencyListLevel3.add(.undirected, from: level3_3, to: level3_9)
+        adjacencyListLevel3.add(.undirected, from: level3_4, to: level3_8)
+        adjacencyListLevel3.add(.undirected, from: level3_5, to: level3_6)
+        adjacencyListLevel3.add(.undirected, from: level3_5, to: level3_7)
+        adjacencyListLevel3.add(.undirected, from: level3_6, to: level3_10)
+        adjacencyListLevel3.add(.undirected, from: level3_7, to: level3_8)
+        adjacencyListLevel3.add(.undirected, from: level3_8, to: level3_10)
+        adjacencyListLevel3.add(.undirected, from: level3_9, to: level3_10)
+        let level3 = Level(name: "level3", adjacencyList: adjacencyListLevel3)
+        
         playable.append(level2)
+        playable.append(level1)
+        playable.append(level3)
     }
     
     static func createLevel(index: Int) -> Level? {
