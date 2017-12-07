@@ -39,9 +39,21 @@ class Levels: NSObject {
         adjacencyListLevel1.add(.undirected, from: level1_7, to: level1_3)
         adjacencyListLevel1.add(.undirected, from: level1_7, to: level1_5)
         
-        let start = Level(name: "start", adjacencyList: adjacencyListLevel1)
+        let level1 = Level(name: "level1", adjacencyList: adjacencyListLevel1)
         
-        playable.append(start)
+        playable.append(level1)
+        
+        // Level 2
+        let adjacencyListLevel2 = AdjacencyList<Node>()
+        
+        let level2_1 = adjacencyListLevel2.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 0.0, z: 0.0), uid: 1, color: .white))
+        let level2_2 = adjacencyListLevel2.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 0.0, z: 0.0), uid: 2, color: .white))
+        
+        adjacencyListLevel2.add(.undirected, from: level2_1, to: level2_2)
+        
+        let level2 = Level(name: "level2", adjacencyList: adjacencyListLevel2)
+        
+        playable.append(level2)
     }
     
     static func createLevel(index: Int) -> Level? {
@@ -76,7 +88,7 @@ class Levels: NSObject {
             let randomY = Float(randomNumber(inRange: -7...7))
             let randomZ = Float(randomNumber(inRange: -5...5))
             
-            let vertex = adjacencyList.createVertex(data: Node(position: SCNVector3(x: randomX, y: randomY, z: randomZ), uid: count, color: .black))
+            let vertex = adjacencyList.createVertex(data: Node(position: SCNVector3(x: randomX, y: randomY, z: randomZ), uid: count, color: .white))
             vertices.append(vertex)
             count += 1
         }

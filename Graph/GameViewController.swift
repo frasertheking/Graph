@@ -25,6 +25,7 @@ class GameViewController: UIViewController {
     var paintColor: UIColor = UIColor.customRed()
     var activeLevel: Level!
     var animating: Bool = false
+    var currentLevel: Int = 0
     
     // UI Elements
     var redButton: UIButton!
@@ -43,9 +44,6 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         setupLevel()
-        setupSounds()
-        rotateGraphObject()
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(scaleGraphObject), userInfo: nil, repeats: false)
         
         let overlayScene = SKScene(size: CGSize(width: scnView.frame.size.width, height: scnView.frame.size.height))
         base.position = CGPoint(x: scnView.frame.size.width/2, y: 50)
@@ -104,13 +102,22 @@ class GameViewController: UIViewController {
     }
     
     func setupLevel() {
+        createObjects()
+        setupSounds()
+        explodeGraph()
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(rotateGraphObject), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(swellGraphObject), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(scaleGraphObject), userInfo: nil, repeats: false)
+    }
+    
+    func createObjects() {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
         
         vertexNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi/2)), 0, 1, 0)
         edgeNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi/2)), 0, 1, 0)
-
-        activeLevel = Levels.createLevel(index: 0)
+        
+        activeLevel = Levels.createLevel(index: currentLevel)
         
         guard let adjacencyDict = activeLevel.adjacencyList?.adjacencyDict else {
             return
@@ -127,7 +134,7 @@ class GameViewController: UIViewController {
                 if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
                     let node = SCNNode()
                     edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.1, color: .black))
-
+                    
                     edgeArray.append(edge)
                 }
                 
@@ -136,14 +143,9 @@ class GameViewController: UIViewController {
         
         scnScene.rootNode.addChildNode(vertexNodes)
         scnScene.rootNode.addChildNode(edgeNodes)
-
-        let moveAnimation = SCNAction.move(to: SCNVector3Make(0, 0, 25), duration: 2.0)
-        moveAnimation.timingMode = .easeInEaseOut
-        cameraNode.runAction(moveAnimation)
     }
     
-    func rotateGraphObject() {
-        CATransaction.begin()
+    @objc func rotateGraphObject() {
         let spin = CABasicAnimation(keyPath: "rotation")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         spin.fromValue = NSValue(scnVector4: SCNVector4(x: 0, y: 1, z: 0, w: 0))
@@ -153,13 +155,6 @@ class GameViewController: UIViewController {
         spin.timingFunction = easeInOut
         vertexNodes.addAnimation(spin, forKey: "spin around")
         edgeNodes.addAnimation(spin, forKey: "spin around")
-        
-        // Callback function
-        CATransaction.setCompletionBlock {
-            self.scnView.allowsCameraControl = true
-            self.swellGraphObject()
-        }
-        CATransaction.commit()
     }
     
     @objc func scaleGraphObject() {
@@ -173,6 +168,34 @@ class GameViewController: UIViewController {
         scale.timingFunction = easeInOut
         vertexNodes.addAnimation(scale, forKey: "scale up")
         edgeNodes.addAnimation(scale, forKey: "scale up")
+    }
+    
+    @objc func explodeGraph() {
+        let scale = CABasicAnimation(keyPath: "scale")
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
+        scale.duration = 0.5
+        scale.repeatCount = 0
+        scale.autoreverses = true
+        scale.timingFunction = easeInOut
+        vertexNodes.addAnimation(scale, forKey: "explode")
+        edgeNodes.addAnimation(scale, forKey: "explode")
+    }
+    
+    @objc func implodeGraph() {
+        let scale = CABasicAnimation(keyPath: "scale")
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        scale.duration = 0.5
+        scale.repeatCount = 0
+        scale.autoreverses = true
+        scale.timingFunction = easeInOut
+        vertexNodes.addAnimation(scale, forKey: "implode")
+        edgeNodes.addAnimation(scale, forKey: "implode")
+        
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(cleanScene), userInfo: nil, repeats: false)
     }
     
     @objc func swellGraphObject() {
@@ -191,7 +214,7 @@ class GameViewController: UIViewController {
     func setupView() {
         scnView = self.view as! SCNView
         scnView.showsStatistics = true
-        scnView.allowsCameraControl = false
+        scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = true
         scnView.antialiasingMode = .multisampling4X
         
@@ -213,12 +236,13 @@ class GameViewController: UIViewController {
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
-    func cleanScene() {
-        for node in scnScene.rootNode.childNodes {
-            if node.presentation.position.y < -2 {
-                node.removeFromParentNode()
-            }
-        }
+    @objc func cleanScene() {
+        self.vertexNodes.removeFromParentNode()
+        self.edgeNodes.removeFromParentNode()
+        base.text = "Not solved"
+        
+        currentLevel += 1
+        setupLevel()
     }
     
     func createTrail(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem {
@@ -274,8 +298,7 @@ class GameViewController: UIViewController {
             base.text = "Solved"
             
             // Correct animation
-            self.rotateGraphObject()
-            Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(self.scaleGraphObject), userInfo: nil, repeats: false)
+            self.implodeGraph()
         } else {
             base.text = "Not solved"
         }
