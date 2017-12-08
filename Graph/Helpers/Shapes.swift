@@ -60,8 +60,7 @@ public enum Shapes:Int {
         }
         
         geometry.materials.first?.diffuse.contents = UIColor.white
-        //geometry.materials.first?.emission.contents = UIColor.glowColor()
-        
+
         if type == .Custom {
             geometry.name = "\(id)"
         }

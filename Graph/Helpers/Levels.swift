@@ -15,69 +15,36 @@ class Levels: NSObject {
     var playable: [Level] = []
 
     override init() {
-        let adjacencyListLevel1 = AdjacencyList<Node>()
-        let level1_1 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 2.0, z: 2.0), uid: 1, color: .white))
-        let level1_2 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 2.0, z: -2.0), uid: 2, color: .white))
-        let level1_3 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: 2.0, y: -2.0, z: 2.0), uid: 3, color: .white))
-        let level1_4 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: 2.0, y: -2.0, z: -2.0), uid: 4, color: .white))
-        let level1_5 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 2.0, z: 2.0), uid: 5, color: .white))
-        let level1_6 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 2.0, z: -2.0), uid: 6, color: .white))
-        let level1_7 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: -2.0, y: -2.0, z: 2.0), uid: 7, color: .white))
-        let level1_8 = adjacencyListLevel1.createVertex(data: Node(position: SCNVector3(x: -2.0, y: -2.0, z: -2.0), uid: 8, color: .white))
-        adjacencyListLevel1.add(.undirected, from: level1_1, to: level1_5)
-        adjacencyListLevel1.add(.undirected, from: level1_1, to: level1_3)
-        adjacencyListLevel1.add(.undirected, from: level1_1, to: level1_2)
-        adjacencyListLevel1.add(.undirected, from: level1_6, to: level1_5)
-        adjacencyListLevel1.add(.undirected, from: level1_6, to: level1_8)
-        adjacencyListLevel1.add(.undirected, from: level1_6, to: level1_2)
-        adjacencyListLevel1.add(.undirected, from: level1_4, to: level1_2)
-        adjacencyListLevel1.add(.undirected, from: level1_4, to: level1_3)
-        adjacencyListLevel1.add(.undirected, from: level1_4, to: level1_8)
-        adjacencyListLevel1.add(.undirected, from: level1_7, to: level1_8)
-        adjacencyListLevel1.add(.undirected, from: level1_7, to: level1_3)
-        adjacencyListLevel1.add(.undirected, from: level1_7, to: level1_5)
-        let level1 = Level(name: "level1", adjacencyList: adjacencyListLevel1)
+        var levels: NSArray?
+        if let path = Bundle.main.path(forResource: "levels", ofType: "plist") {
+            levels = NSArray(contentsOfFile: path)
+        }
         
-        // Level 2
-        let adjacencyListLevel2 = AdjacencyList<Node>()
-        let level2_1 = adjacencyListLevel2.createVertex(data: Node(position: SCNVector3(x: 0.0, y: 0.0, z: -2.0), uid: 1, color: .white))
-        let level2_2 = adjacencyListLevel2.createVertex(data: Node(position: SCNVector3(x: 0.0, y: 0.0, z: 2.0), uid: 2, color: .white))
-        adjacencyListLevel2.add(.undirected, from: level2_1, to: level2_2)
-        let level2 = Level(name: "level2", adjacencyList: adjacencyListLevel2)
+        guard let levelArray = levels else {
+            return
+        }
         
-        // Level 3
-        let adjacencyListLevel3 = AdjacencyList<Node>()
-        let level3_1 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 0.0, y: 4.0, z: 0.0), uid: 1, color: .white))
-        let level3_2 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 0.0, y: 2.0, z: 0.0), uid: 2, color: .white))
-        let level3_3 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: -2.0, y: 1.0, z: 0.0), uid: 3, color: .white))
-        let level3_4 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: -4.0, y: 1.5, z: 0.0), uid: 4, color: .white))
-        let level3_5 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 2.0, y: 1.0, z: 0.0), uid: 5, color: .white))
-        let level3_6 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 4.0, y: 1.5, z: 0.0), uid: 6, color: .white))
-        let level3_7 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: -1.0, y: -2.0, z: 0.0), uid: 7, color: .white))
-        let level3_8 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: -2.25, y: -4.0, z: 0.0), uid: 8, color: .white))
-        let level3_9 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 1.0, y: -2.0, z: 0.0), uid: 9, color: .white))
-        let level3_10 = adjacencyListLevel3.createVertex(data: Node(position: SCNVector3(x: 2.25, y: -4.0, z: 0.0), uid: 10, color: .white))
-
-        adjacencyListLevel3.add(.undirected, from: level3_1, to: level3_2)
-        adjacencyListLevel3.add(.undirected, from: level3_1, to: level3_4)
-        adjacencyListLevel3.add(.undirected, from: level3_1, to: level3_6)
-        adjacencyListLevel3.add(.undirected, from: level3_2, to: level3_7)
-        adjacencyListLevel3.add(.undirected, from: level3_2, to: level3_9)
-        adjacencyListLevel3.add(.undirected, from: level3_3, to: level3_4)
-        adjacencyListLevel3.add(.undirected, from: level3_3, to: level3_5)
-        adjacencyListLevel3.add(.undirected, from: level3_3, to: level3_9)
-        adjacencyListLevel3.add(.undirected, from: level3_4, to: level3_8)
-        adjacencyListLevel3.add(.undirected, from: level3_5, to: level3_6)
-        adjacencyListLevel3.add(.undirected, from: level3_5, to: level3_7)
-        adjacencyListLevel3.add(.undirected, from: level3_6, to: level3_10)
-        adjacencyListLevel3.add(.undirected, from: level3_7, to: level3_8)
-        adjacencyListLevel3.add(.undirected, from: level3_8, to: level3_10)
-        adjacencyListLevel3.add(.undirected, from: level3_9, to: level3_10)
-        let level3 = Level(name: "level3", adjacencyList: adjacencyListLevel3)
-        
-        playable.append(level2)
-        playable.append(level1)
-        playable.append(level3)
+        for level in levelArray {
+            let levelDict: Dictionary = level as! Dictionary<String, Any>
+            let adjacencyList = AdjacencyList<Node>()
+            var vertexBin: [Vertex<Node>] = []
+            
+            for node in levelDict["nodes"] as! NSArray {
+                let nodeDict: Dictionary = node as! Dictionary<String, Any>
+                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: nodeDict["x"] as! Float, y: nodeDict["y"] as! Float, z: nodeDict["z"] as! Float), uid: nodeDict["uid"] as! Int, color: .white))
+                vertexBin.append(newNode)
+            }
+            
+            for node in levelDict["nodes"] as! NSArray {
+                let nodeDict: Dictionary = node as! Dictionary<String, Any>
+                
+                for edge in nodeDict["edges"] as! NSArray {
+                    adjacencyList.add(.undirected, from: vertexBin[(nodeDict["uid"] as! Int)-1], to: vertexBin[(edge as! Int)-1])
+                }
+            }
+            
+            playable.append(Level(name: levelDict["name"] as? String, adjacencyList: adjacencyList))
+        }
     }
     
     static func createLevel(index: Int) -> Level? {
@@ -93,7 +60,6 @@ class Levels: NSObject {
     }
     
     // Randomization
-    
     func randomNumber<T : SignedInteger>(inRange range: ClosedRange<T> = 1...6) -> T {
         let length = Int64(range.upperBound - range.lowerBound + 1)
         let value = Int64(arc4random()) % length + Int64(range.lowerBound)

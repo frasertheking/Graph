@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		434A574F1FDB109400FD172B /* levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 434A574E1FDB109400FD172B /* levels.plist */; };
 		435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 435BACC91FD7584400DFAF6B /* Trail.scnp */; };
 		435BACCD1FD758C500DFAF6B /* smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = 435BACCB1FD758C500DFAF6B /* smoke.png */; };
 		435BACCE1FD758C500DFAF6B /* Smoke.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 435BACCC1FD758C500DFAF6B /* Smoke.scnp */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		434A574E1FDB109400FD172B /* levels.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = levels.plist; sourceTree = "<group>"; };
 		435BACC91FD7584400DFAF6B /* Trail.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Trail.scnp; sourceTree = "<group>"; };
 		435BACCB1FD758C500DFAF6B /* smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke.png; sourceTree = "<group>"; };
 		435BACCC1FD758C500DFAF6B /* Smoke.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Smoke.scnp; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				43860BD21FB8ED1B0076B0CF /* Level.swift */,
 				43860BD41FB8EDCD0076B0CF /* Levels.swift */,
 				43CA8FF21FB697B600B962D9 /* Shapes.swift */,
+				434A574E1FDB109400FD172B /* levels.plist */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				43CA8FE21FB6919900B962D9 /* Assets.xcassets in Resources */,
 				43B012781FD62DBD00F017A6 /* dodecahedron.obj in Resources */,
 				43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */,
+				434A574F1FDB109400FD172B /* levels.plist in Resources */,
 				435BACCE1FD758C500DFAF6B /* Smoke.scnp in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,
 			);
