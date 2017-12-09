@@ -11,7 +11,7 @@ import QuartzCore
 import SceneKit
 import SpriteKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, UIPopoverPresentationControllerDelegate {
 
     // SCENE VARS
     var scnView: SCNView!
@@ -31,6 +31,7 @@ class GameViewController: UIViewController {
     var redButton: UIButton!
     var greenButton: UIButton!
     var blueButton: UIButton!
+    var colorSelectionButton: UIButton!
     
     // CAMERA VARS
     var cameraOrbit: SCNNode!
@@ -53,7 +54,7 @@ class GameViewController: UIViewController {
         }
         
         scnView = sceneView
-        scnView.showsStatistics = true
+        scnView.showsStatistics = false
         scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = true
         scnView.antialiasingMode = .multisampling4X
@@ -84,6 +85,9 @@ class GameViewController: UIViewController {
     }
     
     func setupInteractions() {
+        let width = scnView.frame.size.width
+        let height = scnView.frame.size.height
+        
         redButton = UIButton(frame: CGRect(x: 50, y: 50, width: 60, height: 20))
         redButton.backgroundColor = UIColor.customRed()
         redButton.layer.borderColor = UIColor.white.cgColor
@@ -102,6 +106,13 @@ class GameViewController: UIViewController {
         blueButton.layer.borderColor = UIColor.white.cgColor
         self.scnView.addSubview(blueButton)
         blueButton.addTarget(self, action: #selector(blueButtonPress), for: .touchUpInside)
+        
+        colorSelectionButton = UIButton(frame: CGRect(x: 16 , y: height - 86, width: width - 32, height: 60))
+        colorSelectionButton.backgroundColor = UIColor.customRed()
+        colorSelectionButton.setTitle("Change Color", for: .normal)
+        colorSelectionButton.layer.cornerRadius = 8
+        self.scnView.addSubview(colorSelectionButton)
+        colorSelectionButton.addTarget(self, action: #selector(colorSelectionPress(_:)), for: .touchUpInside)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
@@ -333,6 +344,15 @@ class GameViewController: UIViewController {
     }
     
     // Actions
+    @objc func colorSelectionPress(_ sender: UIButton) {
+        
+    }
+    
+    func updateButtonWithColor(color: UIColor) {
+        colorSelectionButton.backgroundColor = color
+        paintColor = color
+    }
+    
     @objc func redButtonPress() {
         DispatchQueue.main.async {
             self.paintColor = UIColor.customRed()
