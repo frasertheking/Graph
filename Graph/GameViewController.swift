@@ -13,6 +13,7 @@ import SpriteKit
 
 class GameViewController: UIViewController {
 
+    // SCENE VARS
     var scnView: SCNView!
     var scnScene: SCNScene!
     var edgeNodes: SCNNode!
@@ -43,7 +44,46 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         setupLevel()
+        setupInteractions()
+    }
+    
+    func setupView() {
+        guard let sceneView = self.view as? SCNView else {
+            return
+        }
         
+        scnView = sceneView
+        scnView.showsStatistics = true
+        scnView.allowsCameraControl = true
+        scnView.autoenablesDefaultLighting = true
+        scnView.antialiasingMode = .multisampling4X
+        scnView.delegate = self
+        scnView.isPlaying = true
+    }
+    
+    func setupScene() {
+        scnScene = SCNScene()
+        scnView.scene = scnScene
+        scnScene.background.contents = "background"
+    }
+    
+    func setupCamera() {
+        cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 25)
+        scnScene.rootNode.addChildNode(cameraNode)
+    }
+    
+    func setupLevel() {
+        createObjects()
+        setupSounds()
+        explodeGraph()
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(rotateGraphObject), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(swellGraphObject), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(scaleGraphObject), userInfo: nil, repeats: false)
+    }
+    
+    func setupInteractions() {
         redButton = UIButton(frame: CGRect(x: 50, y: 50, width: 60, height: 20))
         redButton.backgroundColor = UIColor.customRed()
         redButton.layer.borderColor = UIColor.white.cgColor
@@ -67,48 +107,12 @@ class GameViewController: UIViewController {
         scnView.addGestureRecognizer(tapGesture)
     }
     
-    @objc func redButtonPress() {
-        DispatchQueue.main.async {
-            self.paintColor = UIColor.customRed()
-            self.redButton.layer.borderWidth = 2
-            self.greenButton.layer.borderWidth = 0
-            self.blueButton.layer.borderWidth = 0
-        }
-    }
-    
-    @objc func greenButtonPress() {
-        DispatchQueue.main.async {
-            self.paintColor = UIColor.customGreen()
-            self.redButton.layer.borderWidth = 0
-            self.greenButton.layer.borderWidth = 2
-            self.blueButton.layer.borderWidth = 0
-        }
-    }
-    
-    @objc func blueButtonPress() {
-        DispatchQueue.main.async {
-            self.paintColor = UIColor.customBlue()
-            self.redButton.layer.borderWidth = 0
-            self.greenButton.layer.borderWidth = 0
-            self.blueButton.layer.borderWidth = 2
-        }
-    }
-    
-    func setupLevel() {
-        createObjects()
-        setupSounds()
-        explodeGraph()
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(rotateGraphObject), userInfo: nil, repeats: false)
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(swellGraphObject), userInfo: nil, repeats: false)
-        Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(scaleGraphObject), userInfo: nil, repeats: false)
-    }
-    
     func createObjects() {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
         
-        vertexNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi/2)), 0, 1, 0)
-        edgeNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi/2)), 0, 1, 0)
+        vertexNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 1, 0)
+        edgeNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 1, 0)
         
         activeLevel = Levels.createLevel(index: currentLevel)
         
@@ -138,6 +142,130 @@ class GameViewController: UIViewController {
         scnScene.rootNode.addChildNode(edgeNodes)
     }
     
+    func createTrail(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem? {
+        guard let particles = SCNParticleSystem(named: "Trail.scnp", inDirectory: nil) else {
+            return nil
+        }
+        
+        let trail = particles
+        trail.particleColor = color
+        trail.emitterShape = geometry
+        return trail
+    }
+
+    func createSmoke(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem? {
+        guard let particles = SCNParticleSystem(named: "Smoke.scnp", inDirectory: nil) else {
+            return nil
+        }
+
+        let smoke = particles
+        smoke.particleColor = color
+        smoke.emitterShape = geometry
+        return smoke
+    }
+    
+    func handleTouchFor(node: SCNNode) {
+        
+        guard let geometry = node.geometry else {
+            return
+        }
+        
+        if geometry.name != "edge" {
+                        
+            let scaleUpAction = SCNAction.scale(by: 1.25, duration: 0.1)
+            scaleUpAction.timingMode = .easeInEaseOut
+            let scaleDownAction = SCNAction.scale(by: 0.8, duration: 0.1)
+            scaleDownAction.timingMode = .easeInEaseOut
+            
+            if !animating {
+                self.animating = true
+                node.runAction(scaleUpAction) {
+                    node.runAction(scaleDownAction) {
+                        self.animating = false
+                    }
+                }
+            }
+            
+            geometry.materials.first?.diffuse.contents = paintColor
+            geometry.materials.first?.emission.contents = UIColor.black
+            
+            if let trailEmitter = createTrail(color: paintColor, geometry: geometry) {
+                node.removeAllParticleSystems()
+                node.addParticleSystem(trailEmitter)
+            }
+            
+            if let _ = activeLevel.adjacencyList {
+                activeLevel.adjacencyList = activeLevel.adjacencyList!.updateGraphState(id: geometry.name, color: paintColor)
+            }
+            
+            //game.playSound(node: scnScene.rootNode, name: "SpawnGood")
+        }
+        
+        updateCorrectEdges()
+        
+        if let _ = activeLevel.adjacencyList {
+            if activeLevel.adjacencyList!.checkIfSolved() {
+                self.implodeGraph()
+            }
+        }
+    }
+    
+    func updateCorrectEdges() {
+        guard let adjacencyList = activeLevel.adjacencyList else {
+            return
+        }
+        
+        for (_, value) in (adjacencyList.adjacencyDict) {
+            for edge in value {
+                if edge.source.data.color != edge.destination.data.color &&
+                    edge.source.data.color != .white &&
+                    edge.destination.data.color != .white {
+                    
+                    var pos = 0
+                    for edgeNode in edgeArray {
+                        if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                            
+                            guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
+                                continue
+                            }
+                            
+                            if let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
+                                edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
+                            }
+                        }
+                        pos += 1
+                    }
+                } else {
+                    var pos = 0
+                    for edgeNode in edgeArray {
+                        if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
+                            edgeNodes.childNodes[pos].removeAllParticleSystems()
+                        }
+                        pos += 1
+                    }
+                }
+            }
+        }
+    }
+    
+    func setupSounds() {
+        game.loadSound(name: "ExplodeGood",
+                       fileNamed: "Graph.scnassets/Sounds/ExplodeGood.wav")
+        game.loadSound(name: "SpawnGood",
+                       fileNamed: "Graph.scnassets/Sounds/SpawnGood.wav")
+        game.loadSound(name: "ExplodeBad",
+                       fileNamed: "Graph.scnassets/Sounds/ExplodeBad.wav")
+        game.loadSound(name: "SpawnBad",
+                       fileNamed: "Graph.scnassets/Sounds/SpawnBad.wav")
+        game.loadSound(name: "GameOver",
+                       fileNamed: "Graph.scnassets/Sounds/GameOver.wav")
+    }
+    
+    // Animations
     @objc func rotateGraphObject() {
         let spin = CABasicAnimation(keyPath: "rotation")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
@@ -204,122 +332,31 @@ class GameViewController: UIViewController {
         edgeNodes.addAnimation(scale, forKey: "swell")
     }
     
-    func setupView() {
-        scnView = self.view as! SCNView
-        scnView.showsStatistics = true
-        scnView.allowsCameraControl = true
-        scnView.autoenablesDefaultLighting = true
-        scnView.antialiasingMode = .multisampling4X
-        
-        scnView.delegate = self
-        scnView.isPlaying = true
-    }
-    
-    func setupScene() {
-        scnScene = SCNScene()
-        scnView.scene = scnScene
-        
-        scnScene.background.contents = "background"
-    }
-    
-    func setupCamera() {
-        cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 25)
-        scnScene.rootNode.addChildNode(cameraNode)
-    }
-    
-    @objc func cleanScene() {
-        self.vertexNodes.removeFromParentNode()
-        self.edgeNodes.removeFromParentNode()
-        
-        currentLevel += 1
-        setupLevel()
-    }
-    
-    func createTrail(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem {
-        let trail = SCNParticleSystem(named: "Trail.scnp", inDirectory: nil)!
-        trail.particleColor = color
-        trail.emitterShape = geometry
-        return trail
-    }
-
-    func createSmoke(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem {
-        let smoke = SCNParticleSystem(named: "Smoke.scnp", inDirectory: nil)!
-        smoke.particleColor = color
-        smoke.emitterShape = geometry
-        return smoke
-    }
-    
-    func handleTouchFor(node: SCNNode) {
-        
-        guard let geometry = node.geometry else {
-            return
-        }
-        
-        if geometry.name != "edge" {
-                        
-            let scaleUpAction = SCNAction.scale(by: 1.25, duration: 0.1)
-            scaleUpAction.timingMode = .easeInEaseOut
-            let scaleDownAction = SCNAction.scale(by: 0.8, duration: 0.1)
-            scaleDownAction.timingMode = .easeInEaseOut
-            
-            if !animating {
-                self.animating = true
-                node.runAction(scaleUpAction) {
-                    node.runAction(scaleDownAction) {
-                        self.animating = false
-                    }
-                }
-            }
-            
-            geometry.materials.first?.diffuse.contents = paintColor
-            geometry.materials.first?.emission.contents = UIColor.black
-            
-            let trailEmitter = createTrail(color: paintColor, geometry: geometry)
-            node.removeAllParticleSystems()
-            node.addParticleSystem(trailEmitter)
-            
-            activeLevel.adjacencyList = activeLevel.adjacencyList!.updateGraphState(id: geometry.name, color: paintColor)
-            //game.playSound(node: scnScene.rootNode, name: "SpawnGood")
-        }
-        
-        updateCorrectEdges()
-        
-        if activeLevel.adjacencyList!.checkIfSolved() {
-            self.implodeGraph()
+    // Actions
+    @objc func redButtonPress() {
+        DispatchQueue.main.async {
+            self.paintColor = UIColor.customRed()
+            self.redButton.layer.borderWidth = 2
+            self.greenButton.layer.borderWidth = 0
+            self.blueButton.layer.borderWidth = 0
         }
     }
     
-    func updateCorrectEdges() {
-        for (_, value) in (activeLevel.adjacencyList!.adjacencyDict) {
-            for edge in value {
-                if edge.source.data.color != edge.destination.data.color &&
-                    edge.source.data.color != .white &&
-                    edge.destination.data.color != .white {
-                    
-                    var pos = 0
-                    for edgeNode in edgeArray {
-                        if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
-                            let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeNodes.childNodes[pos].geometry!)
-                            edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
-                        }
-                        pos += 1
-                    }
-                } else {
-                    var pos = 0
-                    for edgeNode in edgeArray {
-                        if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
-                            edgeNodes.childNodes[pos].removeAllParticleSystems()
-                        }
-                        pos += 1
-                    }
-                }
-            }
+    @objc func greenButtonPress() {
+        DispatchQueue.main.async {
+            self.paintColor = UIColor.customGreen()
+            self.redButton.layer.borderWidth = 0
+            self.greenButton.layer.borderWidth = 2
+            self.blueButton.layer.borderWidth = 0
+        }
+    }
+    
+    @objc func blueButtonPress() {
+        DispatchQueue.main.async {
+            self.paintColor = UIColor.customBlue()
+            self.redButton.layer.borderWidth = 0
+            self.greenButton.layer.borderWidth = 0
+            self.blueButton.layer.borderWidth = 2
         }
     }
     
@@ -333,33 +370,12 @@ class GameViewController: UIViewController {
         }
     }
     
-    override var shouldAutorotate: Bool {
-        return false
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
-    }
-    
-    func setupSounds() {
-        game.loadSound(name: "ExplodeGood",
-                       fileNamed: "Graph.scnassets/Sounds/ExplodeGood.wav")
-        game.loadSound(name: "SpawnGood",
-                       fileNamed: "Graph.scnassets/Sounds/SpawnGood.wav")
-        game.loadSound(name: "ExplodeBad",
-                       fileNamed: "Graph.scnassets/Sounds/ExplodeBad.wav")
-        game.loadSound(name: "SpawnBad",
-                       fileNamed: "Graph.scnassets/Sounds/SpawnBad.wav")
-        game.loadSound(name: "GameOver",
-                       fileNamed: "Graph.scnassets/Sounds/GameOver.wav")
+    @objc func cleanScene() {
+        self.vertexNodes.removeFromParentNode()
+        self.edgeNodes.removeFromParentNode()
+        
+        currentLevel += 1
+        setupLevel()
     }
 }
 

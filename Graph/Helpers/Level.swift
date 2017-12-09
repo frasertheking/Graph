@@ -11,11 +11,12 @@ import SceneKit
 
 class Level: NSObject {
     var name: String?
+    var numberOfColorsProvided: Int?
     var adjacencyList: AdjacencyList<Node>?
     
-    init(name: String?, adjacencyList: AdjacencyList<Node>?) {
+    init(name: String?, numberOfColorsProvided: Int?, adjacencyList: AdjacencyList<Node>?) {
         self.name = name
+        self.numberOfColorsProvided = numberOfColorsProvided
         self.adjacencyList = adjacencyList
     }
-    
 }

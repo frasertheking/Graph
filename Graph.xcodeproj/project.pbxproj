@@ -108,7 +108,6 @@
 				43860BD21FB8ED1B0076B0CF /* Level.swift */,
 				43860BD41FB8EDCD0076B0CF /* Levels.swift */,
 				43CA8FF21FB697B600B962D9 /* Shapes.swift */,
-				434A574E1FDB109400FD172B /* levels.plist */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -116,6 +115,7 @@
 		43B012791FD62DBF00F017A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				434A574E1FDB109400FD172B /* levels.plist */,
 				43B012771FD62DBD00F017A6 /* dodecahedron.obj */,
 				43B012751FD62BA500F017A6 /* icosahedron.obj */,
 			);

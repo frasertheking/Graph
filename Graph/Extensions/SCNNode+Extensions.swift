@@ -21,6 +21,7 @@ extension SCNNode {
         
     }
     
+    // Function which automatically creates "edges" between nodes defined in the level    
     func buildLineInTwoPointsWithRotation(from startPoint: SCNVector3,
                                           to endPoint: SCNVector3,
                                           radius: CGFloat,

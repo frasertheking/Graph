@@ -25,7 +25,7 @@ public enum Shapes:Int {
     
     static func random() -> Shapes {
         let maxValue = Tube.rawValue
-        let rand = arc4random_uniform(UInt32(maxValue+1))
+        let rand = arc4random_uniform(UInt32(maxValue + 1))
         return Shapes(rawValue: Int(rand))!
     }
     
@@ -50,13 +50,24 @@ public enum Shapes:Int {
         case .Tube:
             geometry = SCNTube(innerRadius: 0.25, outerRadius: 0.5, height: 1.0)
         case .Custom:
+            
+            // Load custom object from OBJ geom
             let bundle = Bundle.main
             let path = bundle.path(forResource: "icosahedron", ofType: "obj")
-            let url = NSURL(fileURLWithPath: path!)
+            
+            guard let objPath = path else {
+                return
+            }
+            
+            let url = NSURL(fileURLWithPath: objPath)
             let asset = MDLAsset(url: url as URL)
             let object = asset.object(at: 0)
             let node = SCNNode(mdlObject: object)
-            geometry = node.geometry!
+            
+            guard let nodeGeom = node.geometry else {
+                return
+            }
+            geometry = nodeGeom
         }
         
         geometry.materials.first?.diffuse.contents = UIColor.white

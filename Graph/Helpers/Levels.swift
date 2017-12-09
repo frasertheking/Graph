@@ -12,10 +12,12 @@ import SceneKit
 class Levels: NSObject {
     
     static let sharedInstance = Levels()
-    var playable: [Level] = []
+    var gameLevels: [Level] = []
 
     override init() {
         var levels: NSArray?
+        
+        // Read curated levels from plist
         if let path = Bundle.main.path(forResource: "levels", ofType: "plist") {
             levels = NSArray(contentsOfFile: path)
         }
@@ -25,35 +27,64 @@ class Levels: NSObject {
         }
         
         for level in levelArray {
-            let levelDict: Dictionary = level as! Dictionary<String, Any>
+            
+            // Unpack level
+            guard let levelDict: Dictionary = level as? Dictionary<String, Any> else {
+                continue
+            }
             let adjacencyList = AdjacencyList<Node>()
             var vertexBin: [Vertex<Node>] = []
             
-            for node in levelDict["nodes"] as! NSArray {
-                let nodeDict: Dictionary = node as! Dictionary<String, Any>
-                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: nodeDict["x"] as! Float, y: nodeDict["y"] as! Float, z: nodeDict["z"] as! Float), uid: nodeDict["uid"] as! Int, color: .white))
+            guard let levelArray: NSArray = levelDict["nodes"] as? NSArray else {
+                continue
+            }
+            
+            // Unpack graph nodes
+            for node in levelArray {
+                guard let nodeDict: Dictionary = node as? Dictionary<String, Any> else {
+                    continue
+                }
+                
+                guard let x: Float = nodeDict["x"] as? Float, let y: Float = nodeDict["y"] as? Float, let z: Float = nodeDict["z"] as? Float, let uid: Int = nodeDict["uid"] as? Int else {
+                    continue
+                }
+                
+                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: x, y: y, z: z), uid: uid, color: .white))
                 vertexBin.append(newNode)
             }
             
-            for node in levelDict["nodes"] as! NSArray {
-                let nodeDict: Dictionary = node as! Dictionary<String, Any>
+            // Unpack graph edges
+            for node in levelArray {
+                guard let nodeDict: Dictionary = node as? Dictionary<String, Any> else {
+                    continue
+                }
                 
-                for edge in nodeDict["edges"] as! NSArray {
-                    adjacencyList.add(.undirected, from: vertexBin[(nodeDict["uid"] as! Int)-1], to: vertexBin[(edge as! Int)-1])
+                guard let edgeArray: NSArray = nodeDict["edges"] as? NSArray else {
+                    continue
+                }
+                
+                for edge in edgeArray {
+                    guard let from_pos: Int = nodeDict["uid"] as? Int, let to_pos: Int = edge as? Int else {
+                        continue
+                    }
+                    
+                    adjacencyList.add(.undirected, from: vertexBin[from_pos - 1], to: vertexBin[to_pos - 1])
                 }
             }
             
-            playable.append(Level(name: levelDict["name"] as? String, adjacencyList: adjacencyList))
+            // Add level to playable levels
+            gameLevels.append(Level(name: levelDict["name"] as? String, numberOfColorsProvided: levelDict["num_colors"] as? Int, adjacencyList: adjacencyList))
         }
     }
     
     static func createLevel(index: Int) -> Level? {
-        
         let levels = Levels.sharedInstance
         var level = levels.getRandomLevel()
         
-        if index >= 0 && index < levels.playable.count {
-            level =  levels.playable[index]
+        // Check to see if we have a level for current progress
+        // If yes, provide level else, provide randomly generated level
+        if index >= 0 && index < levels.gameLevels.count {
+            level = levels.gameLevels[index]
         }
         
         return level
@@ -92,6 +123,6 @@ class Levels: NSObject {
             adjacencyList.add(.undirected, from: vertices[edgeStart], to: vertices[edgeEnd])
         }
         
-        return Level(name: "random", adjacencyList: adjacencyList)
+        return Level(name: "random", numberOfColorsProvided: 3, adjacencyList: adjacencyList)
     }
 }

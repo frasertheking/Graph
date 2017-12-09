@@ -3,6 +3,8 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>num_colors</key>
+		<integer>2</integer>
 		<key>name</key>
 		<string>The beginning</string>
 		<key>nodes</key>
@@ -36,6 +38,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>num_colors</key>
+		<integer>3</integer>
 		<key>name</key>
 		<string>Triangle</string>
 		<key>nodes</key>
@@ -84,6 +88,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>num_colors</key>
+		<integer>2</integer>
 		<key>name</key>
 		<string>Cube</string>
 		<key>nodes</key>
@@ -203,6 +209,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>num_colors</key>
+		<integer>3</integer>
 		<key>name</key>
 		<string>Difficult</string>
 		<key>nodes</key>
