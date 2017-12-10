@@ -37,7 +37,6 @@ extension SCNNode {
             self.geometry = sphere
             self.position = startPoint
             return self
-            
         }
         
         let cyl = SCNCylinder(radius: radius, height: l)
@@ -94,6 +93,18 @@ extension SCNNode {
         }
         
         return self
+    }
+    
+    
+    func triangleFrom(vector1: SCNVector3, vector2: SCNVector3, vector3: SCNVector3) -> SCNNode {
+        
+        let indices: [Int32] = [0, 1, 2]
+        
+        let source = SCNGeometrySource(vertices: [vector1, vector2, vector3])
+        
+        let element = SCNGeometryElement(indices: indices, primitiveType: .triangles)
+        
+        return SCNNode(geometry: SCNGeometry(sources: [source], elements: [element]))
     }
 }
 

@@ -46,6 +46,7 @@ class GameViewController: UIViewController, UIPopoverPresentationControllerDeleg
         setupCamera()
         setupLevel()
         setupInteractions()
+        
     }
     
     func setupView() {
@@ -79,6 +80,7 @@ class GameViewController: UIViewController, UIPopoverPresentationControllerDeleg
         createObjects()
         setupSounds()
         explodeGraph()
+        
         Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(rotateGraphObject), userInfo: nil, repeats: false)
         Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(swellGraphObject), userInfo: nil, repeats: false)
         Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(scaleGraphObject), userInfo: nil, repeats: false)
