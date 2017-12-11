@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,23 +21,71 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYt-dz-Sce">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </sceneKitView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6M4-UJ-dZ2" customClass="UIButton">
+                                <rect key="frame" x="59.5" y="593" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="331-4b-xMP"/>
+                                    <constraint firstAttribute="height" constant="50" id="8mS-qo-jMs"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uyw-xf-vIm" customClass="UIButton">
+                                <rect key="frame" x="162.5" y="593" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="04i-yc-eq0"/>
+                                    <constraint firstAttribute="width" constant="50" id="X0v-ka-Voe"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFU-8j-Djo" customClass="UIButton">
+                                <rect key="frame" x="265.5" y="593" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HR9-Py-KfZ"/>
+                                    <constraint firstAttribute="width" constant="50" id="iAX-mI-tyW"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="Idl-6u-hdf"/>
+                            <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="dFU-8j-Djo" secondAttribute="bottom" constant="24" id="OzM-F6-n2S"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="vYt-dz-Sce" secondAttribute="trailing" id="Qd0-67-PSc"/>
+                            <constraint firstItem="dFU-8j-Djo" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" multiplier="1.55" id="cIT-We-G9f"/>
+                            <constraint firstItem="6M4-UJ-dZ2" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" multiplier="0.45" id="cOI-4I-s86"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="cc3-z6-EuS"/>
+                            <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="6M4-UJ-dZ2" secondAttribute="bottom" constant="24" id="iYP-Lz-aaK"/>
+                            <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="Uyw-xf-vIm" secondAttribute="bottom" constant="24" id="nd8-g1-LmC"/>
+                            <constraint firstItem="Uyw-xf-vIm" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="sDo-Bj-XE7"/>
                             <constraint firstAttribute="bottom" secondItem="vYt-dz-Sce" secondAttribute="bottom" id="yNr-9M-bfp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="D3R-0S-508"/>
                     </view>
                     <connections>
+                        <outlet property="blueButton" destination="dFU-8j-Djo" id="nxh-UG-9mY"/>
+                        <outlet property="greenButton" destination="Uyw-xf-vIm" id="rZU-7g-BeU"/>
+                        <outlet property="redButton" destination="6M4-UJ-dZ2" id="iOr-VW-DMI"/>
                         <outlet property="scnView" destination="vYt-dz-Sce" id="fgv-wB-KRi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFC-0A-SIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1348" y="-54"/>
+            <point key="canvasLocation" x="-1348" y="-54.422788605697157"/>
         </scene>
     </scenes>
 </document>

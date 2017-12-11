@@ -29,9 +29,9 @@ class GameViewController: UIViewController {
     var currentLevel: Int = 0
     
     // UI Elements
-    var redButton: UIButton!
-    var greenButton: UIButton!
-    var blueButton: UIButton!
+    @IBOutlet var redButton: UIButton!
+    @IBOutlet var greenButton: UIButton!
+    @IBOutlet var blueButton: UIButton!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -87,24 +87,22 @@ class GameViewController: UIViewController {
     }
     
     func setupInteractions() {
-        redButton = UIButton(frame: CGRect(x: 50, y: 50, width: 60, height: 20))
+        
         redButton.backgroundColor = UIColor.customRed()
-        redButton.layer.borderColor = UIColor.white.cgColor
-        redButton.layer.borderWidth = 2
-        self.view.addSubview(redButton)
         redButton.addTarget(self, action: #selector(redButtonPress), for: .touchUpInside)
         
-        greenButton = UIButton(frame: CGRect(x: 150, y: 50, width: 60, height: 20))
         greenButton.backgroundColor = UIColor.customGreen()
-        greenButton.layer.borderColor = UIColor.white.cgColor
-        self.view.addSubview(greenButton)
         greenButton.addTarget(self, action: #selector(greenButtonPress), for: .touchUpInside)
-        
-        blueButton = UIButton(frame: CGRect(x: 250, y: 50, width: 60, height: 20))
+
         blueButton.backgroundColor = UIColor.customBlue()
-        blueButton.layer.borderColor = UIColor.white.cgColor
-        self.view.addSubview(blueButton)
         blueButton.addTarget(self, action: #selector(blueButtonPress), for: .touchUpInside)
+        
+        redButton.layer.borderColor = UIColor.white.cgColor
+        greenButton.layer.borderColor = UIColor.white.cgColor
+        blueButton.layer.borderColor = UIColor.white.cgColor
+        
+        addPulse(to: redButton)
+        redButton.layer.borderWidth = 2
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
@@ -336,18 +334,27 @@ class GameViewController: UIViewController {
     }
     
     // Actions
-    @objc func colorSelectionPress(_ sender: UIButton) {
-        
-    }
-    
     func updateButtonWithColor(color: UIColor) {
         colorSelectionButton.backgroundColor = color
         paintColor = color
     }
     
+    func addPulse(to: UIView) {
+        let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.duration = 0.75
+        pulseAnimation.toValue = NSNumber(value: 1.1)
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        pulseAnimation.autoreverses = true
+        pulseAnimation.repeatCount = .greatestFiniteMagnitude
+        to.layer.add(pulseAnimation, forKey: nil)
+    }
+    
     @objc func redButtonPress() {
         DispatchQueue.main.async {
             self.paintColor = UIColor.customRed()
+            self.addPulse(to: self.redButton)
+            self.blueButton.layer.removeAllAnimations()
+            self.greenButton.layer.removeAllAnimations()
             self.redButton.layer.borderWidth = 2
             self.greenButton.layer.borderWidth = 0
             self.blueButton.layer.borderWidth = 0
@@ -357,6 +364,9 @@ class GameViewController: UIViewController {
     @objc func greenButtonPress() {
         DispatchQueue.main.async {
             self.paintColor = UIColor.customGreen()
+            self.addPulse(to: self.greenButton)
+            self.blueButton.layer.removeAllAnimations()
+            self.redButton.layer.removeAllAnimations()
             self.redButton.layer.borderWidth = 0
             self.greenButton.layer.borderWidth = 2
             self.blueButton.layer.borderWidth = 0
@@ -366,6 +376,9 @@ class GameViewController: UIViewController {
     @objc func blueButtonPress() {
         DispatchQueue.main.async {
             self.paintColor = UIColor.customBlue()
+            self.addPulse(to: self.blueButton)
+            self.redButton.layer.removeAllAnimations()
+            self.greenButton.layer.removeAllAnimations()
             self.redButton.layer.borderWidth = 0
             self.greenButton.layer.borderWidth = 0
             self.blueButton.layer.borderWidth = 2
