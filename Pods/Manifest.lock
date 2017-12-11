@@ -1,15 +1,3 @@
-PODS:
-  - IGColorPicker (0.2.1):
-    - M13Checkbox (~> 2.2.0)
-  - M13Checkbox (2.2.6)
-
-DEPENDENCIES:
-  - IGColorPicker
-
-SPEC CHECKSUMS:
-  IGColorPicker: a6ed1bf42cccf9e260e24d33faec5263310b4cef
-  M13Checkbox: 9989b7e275f18493bd33b960dc68374c47d0027b
-
-PODFILE CHECKSUM: 820eb39c36531688263f4eada3a3fe7257ffa5ed
+PODFILE CHECKSUM: 3bbdf2ec7c8b6ef26ee26f3e2a3b93d6692edb14
 
 COCOAPODS: 1.2.1

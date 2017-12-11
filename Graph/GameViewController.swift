@@ -11,15 +11,16 @@ import QuartzCore
 import SceneKit
 import SpriteKit
 
-class GameViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class GameViewController: UIViewController {
 
     // SCENE VARS
-    var scnView: SCNView!
+    @IBOutlet var scnView: SCNView!
     var scnScene: SCNScene!
     var edgeNodes: SCNNode!
     var edgeArray: [Edge<Node>]!
     var vertexNodes: SCNNode!
     var game = GameHelper.sharedInstance
+    var colorSelectNodes: SCNNode!
 
     // GLOBAL VARS
     var paintColor: UIColor = UIColor.customRed()
@@ -45,12 +46,11 @@ class GameViewController: UIViewController, UIPopoverPresentationControllerDeleg
         setupScene()
         setupCamera()
         setupLevel()
-        setupInteractions()
-        
+        setupInteractions()        
     }
     
     func setupView() {
-        guard let sceneView = self.view as? SCNView else {
+        guard let sceneView = self.scnView else {
             return
         }
         
@@ -87,34 +87,24 @@ class GameViewController: UIViewController, UIPopoverPresentationControllerDeleg
     }
     
     func setupInteractions() {
-        let width = scnView.frame.size.width
-        let height = scnView.frame.size.height
-        
         redButton = UIButton(frame: CGRect(x: 50, y: 50, width: 60, height: 20))
         redButton.backgroundColor = UIColor.customRed()
         redButton.layer.borderColor = UIColor.white.cgColor
         redButton.layer.borderWidth = 2
-        self.scnView.addSubview(redButton)
+        self.view.addSubview(redButton)
         redButton.addTarget(self, action: #selector(redButtonPress), for: .touchUpInside)
         
         greenButton = UIButton(frame: CGRect(x: 150, y: 50, width: 60, height: 20))
         greenButton.backgroundColor = UIColor.customGreen()
         greenButton.layer.borderColor = UIColor.white.cgColor
-        self.scnView.addSubview(greenButton)
+        self.view.addSubview(greenButton)
         greenButton.addTarget(self, action: #selector(greenButtonPress), for: .touchUpInside)
         
         blueButton = UIButton(frame: CGRect(x: 250, y: 50, width: 60, height: 20))
         blueButton.backgroundColor = UIColor.customBlue()
         blueButton.layer.borderColor = UIColor.white.cgColor
-        self.scnView.addSubview(blueButton)
+        self.view.addSubview(blueButton)
         blueButton.addTarget(self, action: #selector(blueButtonPress), for: .touchUpInside)
-        
-        colorSelectionButton = UIButton(frame: CGRect(x: 16 , y: height - 86, width: width - 32, height: 60))
-        colorSelectionButton.backgroundColor = UIColor.customRed()
-        colorSelectionButton.setTitle("Change Color", for: .normal)
-        colorSelectionButton.layer.cornerRadius = 8
-        self.scnView.addSubview(colorSelectionButton)
-        colorSelectionButton.addTarget(self, action: #selector(colorSelectionPress(_:)), for: .touchUpInside)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
@@ -407,5 +397,3 @@ extension GameViewController: SCNSceneRendererDelegate {
         //game.updateHUD()
     }
 }
-
-
