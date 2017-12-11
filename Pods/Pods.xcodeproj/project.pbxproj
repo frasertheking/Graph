@@ -7,47 +7,71 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E4BB640953868EDC3562801041AF44B /* Pods-Graph-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 939392D0D5BC6E17BD64140B86B880C2 /* Pods-Graph-dummy.m */; };
-		A25BB07579F97BC7ACB2ADD646E751D9 /* Pods-Graph-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 58DC74FCC0000EC9B30EBD0E6D6725C4 /* Pods-Graph-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B4F1F32D914BED31187B735AF878CBF3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		63EBAA3507972C74B7EA39C71A9855E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		702596C6D87D5E1C875744EF0C2C9FEC /* Pods-Graph-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 939392D0D5BC6E17BD64140B86B880C2 /* Pods-Graph-dummy.m */; };
+		72DC14E956F45F642E3207BDA5E5E478 /* PastelGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EBC655D45F8500590724375FC56F15 /* PastelGradient.swift */; };
+		C3876E92B5D48CFC1C10A10AE2B3E812 /* PastelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9323B12B49B11D84C897027EF38DEA /* PastelView.swift */; };
+		E03F419287F929DF0C7FCE665F0E96EA /* Pastel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 51DD6178169115AAA784DA3B80B4E7E3 /* Pastel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E4268869183317C5E39F79399AB6EFFB /* Pastel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B9582883A63FB959B0D5EE8A215E2D /* Pastel-dummy.m */; };
+		F34058F853A79D179057ABDA862C9652 /* Pods-Graph-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 58DC74FCC0000EC9B30EBD0E6D6725C4 /* Pods-Graph-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFD7EC2E785ED7B99BA0071E5C16F575 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5AD616A8ED0592DE68455E702C4C9AB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E1D092BF86FB8C0ABE055E421219B71;
+			remoteInfo = Pastel;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		051E84F1318C3257AB3EF577D248A27E /* Pastel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pastel.framework; path = Pastel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		081A53C2DAC2FE0D13796229F0AAA93C /* Pods-Graph-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Graph-frameworks.sh"; sourceTree = "<group>"; };
+		0EA6F3BD4894030789C8442107ACFCC1 /* Pastel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pastel-prefix.pch"; sourceTree = "<group>"; };
+		16B9582883A63FB959B0D5EE8A215E2D /* Pastel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pastel-dummy.m"; sourceTree = "<group>"; };
+		309A98C7AF8441BBD4C18C6A43066C75 /* Pastel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pastel.xcconfig; sourceTree = "<group>"; };
 		41ED1F1DCE232A4BBB6D4F50798669C2 /* Pods-Graph.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Graph.modulemap"; sourceTree = "<group>"; };
+		435F51BA4A1B7C7855A407737A86E110 /* Pods_Graph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Graph.framework; path = "Pods-Graph.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		51DD6178169115AAA784DA3B80B4E7E3 /* Pastel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pastel-umbrella.h"; sourceTree = "<group>"; };
 		52B38BAE7F89E3D4F5B731DB3813304E /* Pods-Graph-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Graph-acknowledgements.plist"; sourceTree = "<group>"; };
 		58DC74FCC0000EC9B30EBD0E6D6725C4 /* Pods-Graph-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Graph-umbrella.h"; sourceTree = "<group>"; };
 		6371F59141F0787A48FF98B2686EC218 /* Pods-Graph-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Graph-resources.sh"; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		74B3F575D27F5F51DA2B1BA040ED9DB5 /* Pastel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Pastel.modulemap; sourceTree = "<group>"; };
+		7D9323B12B49B11D84C897027EF38DEA /* PastelView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PastelView.swift; path = Pastel/Classes/PastelView.swift; sourceTree = "<group>"; };
+		91EBC655D45F8500590724375FC56F15 /* PastelGradient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PastelGradient.swift; path = Pastel/Classes/PastelGradient.swift; sourceTree = "<group>"; };
 		939392D0D5BC6E17BD64140B86B880C2 /* Pods-Graph-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Graph-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A8169D50CA8DDCC5BD01A6C7E3E15A10 /* Pods-Graph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Graph.release.xcconfig"; sourceTree = "<group>"; };
 		AC1CA94B92CA052E336A2BEC54889171 /* Pods-Graph.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Graph.debug.xcconfig"; sourceTree = "<group>"; };
+		AE25D0B0D1E38A5DD736E08E2ACAC2C9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C766D93F1DCB3B9979168FBAA0FA7F0F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4C146116A76A7E0317E2E8157133720 /* Pods-Graph-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Graph-acknowledgements.markdown"; sourceTree = "<group>"; };
-		EF125AA4332857F4C73AFA8A9B3C19D7 /* Pods_Graph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Graph.framework; path = "Pods-Graph.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B69A32740B6C4FB72A6665D29F1BCE52 /* Frameworks */ = {
+		4D36386DC72141105A706333CEDBB2F9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4F1F32D914BED31187B735AF878CBF3 /* Foundation.framework in Frameworks */,
+				63EBAA3507972C74B7EA39C71A9855E4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D71AFFA7FAAF292D8ED71AFCCC2990C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFD7EC2E785ED7B99BA0071E5C16F575 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C648B40F80CF4817FA2856A0D3385C3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EF125AA4332857F4C73AFA8A9B3C19D7 /* Pods_Graph.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7D9124306962DF667999643F15E1EC6E /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,9 +85,52 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				0C648B40F80CF4817FA2856A0D3385C3 /* Products */,
+				937D81996BF33AEBD55DE24FB866E3A3 /* Pods */,
+				A0E70C365B384C63C9054C65552152BD /* Products */,
 				7D9124306962DF667999643F15E1EC6E /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		937D81996BF33AEBD55DE24FB866E3A3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BB77C33CD4946EFF6E246063B07B8B53 /* Pastel */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A0E70C365B384C63C9054C65552152BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				051E84F1318C3257AB3EF577D248A27E /* Pastel.framework */,
+				435F51BA4A1B7C7855A407737A86E110 /* Pods_Graph.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7C8AE23D830666692D01E92E6C1177A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				AE25D0B0D1E38A5DD736E08E2ACAC2C9 /* Info.plist */,
+				74B3F575D27F5F51DA2B1BA040ED9DB5 /* Pastel.modulemap */,
+				309A98C7AF8441BBD4C18C6A43066C75 /* Pastel.xcconfig */,
+				16B9582883A63FB959B0D5EE8A215E2D /* Pastel-dummy.m */,
+				0EA6F3BD4894030789C8442107ACFCC1 /* Pastel-prefix.pch */,
+				51DD6178169115AAA784DA3B80B4E7E3 /* Pastel-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pastel";
+			sourceTree = "<group>";
+		};
+		BB77C33CD4946EFF6E246063B07B8B53 /* Pastel */ = {
+			isa = PBXGroup;
+			children = (
+				91EBC655D45F8500590724375FC56F15 /* PastelGradient.swift */,
+				7D9323B12B49B11D84C897027EF38DEA /* PastelView.swift */,
+				A7C8AE23D830666692D01E92E6C1177A /* Support Files */,
+			);
+			name = Pastel;
+			path = Pastel;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -103,32 +170,58 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		8395DACA7C767BD70F95F189CBCDC1B6 /* Headers */ = {
+		4A60B5084C7CB5B3D0A5465B55459558 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A25BB07579F97BC7ACB2ADD646E751D9 /* Pods-Graph-umbrella.h in Headers */,
+				E03F419287F929DF0C7FCE665F0E96EA /* Pastel-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB675DD5DF4D87457CD3F0C30D34A52D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F34058F853A79D179057ABDA862C9652 /* Pods-Graph-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		23FEDBD14418E6408BAD5FDB39472AE5 /* Pods-Graph */ = {
+		8E1D092BF86FB8C0ABE055E421219B71 /* Pastel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BF06263E29FD397A9A6F44FE71B1B04A /* Build configuration list for PBXNativeTarget "Pods-Graph" */;
+			buildConfigurationList = 9C6593740037C02E9291E1477CEB6528 /* Build configuration list for PBXNativeTarget "Pastel" */;
 			buildPhases = (
-				AD103C954F7FCBB390320D38CAA9013B /* Sources */,
-				B69A32740B6C4FB72A6665D29F1BCE52 /* Frameworks */,
-				8395DACA7C767BD70F95F189CBCDC1B6 /* Headers */,
+				9175DF6E5C72BC0972090DB37B76A5F9 /* Sources */,
+				D71AFFA7FAAF292D8ED71AFCCC2990C4 /* Frameworks */,
+				4A60B5084C7CB5B3D0A5465B55459558 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			name = Pastel;
+			productName = Pastel;
+			productReference = 051E84F1318C3257AB3EF577D248A27E /* Pastel.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B240AB7FB02313D6DC7B94E03622D6BF /* Pods-Graph */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C253755877BC177FBE93753D49269D49 /* Build configuration list for PBXNativeTarget "Pods-Graph" */;
+			buildPhases = (
+				47BA2C6B91A9984570B4621B5F905F0F /* Sources */,
+				4D36386DC72141105A706333CEDBB2F9 /* Frameworks */,
+				BB675DD5DF4D87457CD3F0C30D34A52D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A543240370A0E75ECB61A4D9358F574 /* PBXTargetDependency */,
+			);
 			name = "Pods-Graph";
 			productName = "Pods-Graph";
-			productReference = EF125AA4332857F4C73AFA8A9B3C19D7 /* Pods_Graph.framework */;
+			productReference = 435F51BA4A1B7C7855A407737A86E110 /* Pods_Graph.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -148,63 +241,47 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 0C648B40F80CF4817FA2856A0D3385C3 /* Products */;
+			productRefGroup = A0E70C365B384C63C9054C65552152BD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				23FEDBD14418E6408BAD5FDB39472AE5 /* Pods-Graph */,
+				8E1D092BF86FB8C0ABE055E421219B71 /* Pastel */,
+				B240AB7FB02313D6DC7B94E03622D6BF /* Pods-Graph */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		AD103C954F7FCBB390320D38CAA9013B /* Sources */ = {
+		47BA2C6B91A9984570B4621B5F905F0F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E4BB640953868EDC3562801041AF44B /* Pods-Graph-dummy.m in Sources */,
+				702596C6D87D5E1C875744EF0C2C9FEC /* Pods-Graph-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9175DF6E5C72BC0972090DB37B76A5F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4268869183317C5E39F79399AB6EFFB /* Pastel-dummy.m in Sources */,
+				72DC14E956F45F642E3207BDA5E5E478 /* PastelGradient.swift in Sources */,
+				C3876E92B5D48CFC1C10A10AE2B3E812 /* PastelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin XCBuildConfiguration section */
-		171A0D6047CA534E17BFDAF10B27D5DB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC1CA94B92CA052E336A2BEC54889171 /* Pods-Graph.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Graph/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Graph/Pods-Graph.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Graph;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
+/* Begin PBXTargetDependency section */
+		0A543240370A0E75ECB61A4D9358F574 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Pastel;
+			target = 8E1D092BF86FB8C0ABE055E421219B71 /* Pastel */;
+			targetProxy = 5AD616A8ED0592DE68455E702C4C9AB4 /* PBXContainerItemProxy */;
 		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
 		1A41B15D3AA834993ADDD808FA9D8764 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -248,6 +325,41 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		3EEC4B3F5979AA3DC31A71D5BB154E86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 309A98C7AF8441BBD4C18C6A43066C75 /* Pastel.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pastel/Pastel-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pastel/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pastel/Pastel.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = Pastel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		7D144F724433A09597E3476A57631255 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -297,7 +409,80 @@
 			};
 			name = Debug;
 		};
-		B71126E084C06356F9F230243A6CBD11 /* Release */ = {
+		83AED6B8D3E76A4E5F8F11E7B303F447 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 309A98C7AF8441BBD4C18C6A43066C75 /* Pastel.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pastel/Pastel-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pastel/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pastel/Pastel.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Pastel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		99C59012691AC6D9A654D183DF24FCDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC1CA94B92CA052E336A2BEC54889171 /* Pods-Graph.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Graph/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Graph/Pods-Graph.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Graph;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AC2C0F5835C9B4E8329506BFBF50815F /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A8169D50CA8DDCC5BD01A6C7E3E15A10 /* Pods-Graph.release.xcconfig */;
 			buildSettings = {
@@ -327,6 +512,8 @@
 				PRODUCT_NAME = Pods_Graph;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -345,11 +532,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BF06263E29FD397A9A6F44FE71B1B04A /* Build configuration list for PBXNativeTarget "Pods-Graph" */ = {
+		9C6593740037C02E9291E1477CEB6528 /* Build configuration list for PBXNativeTarget "Pastel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				171A0D6047CA534E17BFDAF10B27D5DB /* Debug */,
-				B71126E084C06356F9F230243A6CBD11 /* Release */,
+				3EEC4B3F5979AA3DC31A71D5BB154E86 /* Debug */,
+				83AED6B8D3E76A4E5F8F11E7B303F447 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C253755877BC177FBE93753D49269D49 /* Build configuration list for PBXNativeTarget "Pods-Graph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99C59012691AC6D9A654D183DF24FCDC /* Debug */,
+				AC2C0F5835C9B4E8329506BFBF50815F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

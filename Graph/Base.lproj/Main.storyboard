@@ -60,15 +60,24 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfu-dL-2CN">
+                                <rect key="frame" x="150.5" y="36" width="75.5" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="lfu-dL-2CN" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="16" id="Gc0-g7-caM"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="Idl-6u-hdf"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="dFU-8j-Djo" secondAttribute="bottom" constant="24" id="OzM-F6-n2S"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="vYt-dz-Sce" secondAttribute="trailing" id="Qd0-67-PSc"/>
+                            <constraint firstItem="lfu-dL-2CN" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="Veb-fx-hdu"/>
                             <constraint firstItem="dFU-8j-Djo" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" multiplier="1.55" id="cIT-We-G9f"/>
                             <constraint firstItem="6M4-UJ-dZ2" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" multiplier="0.45" id="cOI-4I-s86"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="cc3-z6-EuS"/>
+                            <constraint firstItem="lfu-dL-2CN" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="dN5-wy-nCp"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="6M4-UJ-dZ2" secondAttribute="bottom" constant="24" id="iYP-Lz-aaK"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="Uyw-xf-vIm" secondAttribute="bottom" constant="24" id="nd8-g1-LmC"/>
                             <constraint firstItem="Uyw-xf-vIm" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="sDo-Bj-XE7"/>
@@ -79,6 +88,7 @@
                     <connections>
                         <outlet property="blueButton" destination="dFU-8j-Djo" id="nxh-UG-9mY"/>
                         <outlet property="greenButton" destination="Uyw-xf-vIm" id="rZU-7g-BeU"/>
+                        <outlet property="levelTitle" destination="lfu-dL-2CN" id="o7h-jj-rn7"/>
                         <outlet property="redButton" destination="6M4-UJ-dZ2" id="iOr-VW-DMI"/>
                         <outlet property="scnView" destination="vYt-dz-Sce" id="fgv-wB-KRi"/>
                     </connections>

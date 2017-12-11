@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		16A81C9217142F81161F4A98 /* Pods_Graph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C84D32F8969AA271E3E3E3 /* Pods_Graph.framework */; };
+		433512C41FDE23EB0078DB5F /* smoke2.png in Resources */ = {isa = PBXBuildFile; fileRef = 433512C31FDE23EB0078DB5F /* smoke2.png */; };
+		433512C61FDE26070078DB5F /* Glow.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 433512C51FDE26060078DB5F /* Glow.scnp */; };
 		434A574F1FDB109400FD172B /* levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 434A574E1FDB109400FD172B /* levels.plist */; };
 		435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 435BACC91FD7584400DFAF6B /* Trail.scnp */; };
 		435BACCD1FD758C500DFAF6B /* smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = 435BACCB1FD758C500DFAF6B /* smoke.png */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		156BEFBF47AC34201AC31AC9 /* Pods-Graph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Graph.release.xcconfig"; path = "Pods/Target Support Files/Pods-Graph/Pods-Graph.release.xcconfig"; sourceTree = "<group>"; };
+		433512C31FDE23EB0078DB5F /* smoke2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke2.png; sourceTree = "<group>"; };
+		433512C51FDE26060078DB5F /* Glow.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Glow.scnp; sourceTree = "<group>"; };
 		434A574E1FDB109400FD172B /* levels.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = levels.plist; sourceTree = "<group>"; };
 		435BACC91FD7584400DFAF6B /* Trail.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Trail.scnp; sourceTree = "<group>"; };
 		435BACCB1FD758C500DFAF6B /* smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke.png; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				435BACC91FD7584400DFAF6B /* Trail.scnp */,
+				433512C51FDE26060078DB5F /* Glow.scnp */,
+				433512C31FDE23EB0078DB5F /* smoke2.png */,
 				435BACCB1FD758C500DFAF6B /* smoke.png */,
 				435BACCC1FD758C500DFAF6B /* Smoke.scnp */,
 			);
@@ -257,9 +263,11 @@
 				43CA8FE51FB6919900B962D9 /* LaunchScreen.storyboard in Resources */,
 				43B012761FD62BA500F017A6 /* icosahedron.obj in Resources */,
 				435BACCD1FD758C500DFAF6B /* smoke.png in Resources */,
+				433512C61FDE26070078DB5F /* Glow.scnp in Resources */,
 				43CA8FE21FB6919900B962D9 /* Assets.xcassets in Resources */,
 				43B012781FD62DBD00F017A6 /* dodecahedron.obj in Resources */,
 				43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */,
+				433512C41FDE23EB0078DB5F /* smoke2.png in Resources */,
 				434A574F1FDB109400FD172B /* levels.plist in Resources */,
 				435BACCE1FD758C500DFAF6B /* Smoke.scnp in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,

@@ -10,6 +10,7 @@ import UIKit
 import QuartzCore
 import SceneKit
 import SpriteKit
+import Pastel
 
 class GameViewController: UIViewController {
 
@@ -32,6 +33,7 @@ class GameViewController: UIViewController {
     @IBOutlet var redButton: UIButton!
     @IBOutlet var greenButton: UIButton!
     @IBOutlet var blueButton: UIButton!
+    @IBOutlet var levelTitle: UILabel!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -53,7 +55,7 @@ class GameViewController: UIViewController {
         guard let sceneView = self.scnView else {
             return
         }
-        
+
         scnView = sceneView
         scnView.showsStatistics = false
         scnView.allowsCameraControl = true
@@ -66,7 +68,8 @@ class GameViewController: UIViewController {
     func setupScene() {
         scnScene = SCNScene()
         scnView.scene = scnScene
-        scnScene.background.contents = "background"
+        scnView.backgroundColor = UIColor.clear
+        scnScene.background.contents = UIColor.clear
     }
     
     func setupCamera() {
@@ -87,7 +90,6 @@ class GameViewController: UIViewController {
     }
     
     func setupInteractions() {
-        
         redButton.backgroundColor = UIColor.customRed()
         redButton.addTarget(self, action: #selector(redButtonPress), for: .touchUpInside)
         
@@ -106,6 +108,30 @@ class GameViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
+        
+        
+        
+        let pastelView = PastelView(frame: view.bounds)
+        
+        // Custom Direction
+        pastelView.startPastelPoint = .bottomLeft
+        pastelView.endPastelPoint = .topRight
+        
+        // Custom Duration
+        pastelView.animationDuration = 3.0
+        
+        // Custom Color
+        pastelView.setColors([UIColor(red: 156/255, green: 39/255, blue: 176/255, alpha: 1.0),
+                              UIColor(red: 255/255, green: 64/255, blue: 129/255, alpha: 1.0),
+                              UIColor(red: 123/255, green: 31/255, blue: 162/255, alpha: 1.0),
+                              UIColor(red: 32/255, green: 76/255, blue: 255/255, alpha: 1.0),
+                              UIColor(red: 32/255, green: 158/255, blue: 255/255, alpha: 1.0),
+                              UIColor(red: 90/255, green: 120/255, blue: 127/255, alpha: 1.0),
+                              UIColor(red: 58/255, green: 255/255, blue: 217/255, alpha: 1.0)])
+        
+        pastelView.startAnimation()
+        view.insertSubview(pastelView, at: 0)
+        
     }
     
     func createObjects() {
@@ -116,6 +142,8 @@ class GameViewController: UIViewController {
         edgeNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 1, 0)
         
         activeLevel = Levels.createLevel(index: currentLevel)
+        
+        levelTitle.text = activeLevel.name
         
         guard let adjacencyDict = activeLevel.adjacencyList?.adjacencyDict else {
             return
@@ -155,7 +183,7 @@ class GameViewController: UIViewController {
     }
 
     func createSmoke(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem? {
-        guard let particles = SCNParticleSystem(named: "Smoke.scnp", inDirectory: nil) else {
+        guard let particles = SCNParticleSystem(named: "Glow.scnp", inDirectory: nil) else {
             return nil
         }
 
