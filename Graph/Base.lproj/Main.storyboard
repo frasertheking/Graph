@@ -69,6 +69,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7q1-cd-kdY">
+                                <rect key="frame" x="24" y="587" width="327" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="l8U-f7-oOu"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DU6-yt-wda">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="XP4-Wq-oKw" customClass="ColorButtonCollectionViewCell" customModule="Graph" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -78,8 +101,10 @@
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="Idl-6u-hdf"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="dFU-8j-Djo" secondAttribute="bottom" constant="24" id="OzM-F6-n2S"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="vYt-dz-Sce" secondAttribute="trailing" id="Qd0-67-PSc"/>
+                            <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="7q1-cd-kdY" secondAttribute="trailing" constant="24" id="QvP-X8-6ob"/>
                             <constraint firstItem="lfu-dL-2CN" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="Veb-fx-hdu"/>
                             <constraint firstItem="dFU-8j-Djo" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" multiplier="1.55" id="cIT-We-G9f"/>
+                            <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="7q1-cd-kdY" secondAttribute="bottom" constant="20" id="cN3-Vm-Fsb"/>
                             <constraint firstItem="6M4-UJ-dZ2" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" multiplier="0.45" id="cOI-4I-s86"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="cc3-z6-EuS"/>
                             <constraint firstItem="lfu-dL-2CN" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="dN5-wy-nCp"/>
@@ -88,6 +113,7 @@
                             <constraint firstItem="UDE-42-eyU" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="ogh-Fo-ERn"/>
                             <constraint firstItem="UDE-42-eyU" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="qaV-lE-gc0"/>
                             <constraint firstItem="Uyw-xf-vIm" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="sDo-Bj-XE7"/>
+                            <constraint firstItem="7q1-cd-kdY" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" constant="24" id="tS8-jy-iU6"/>
                             <constraint firstAttribute="bottom" secondItem="vYt-dz-Sce" secondAttribute="bottom" id="yNr-9M-bfp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="D3R-0S-508"/>
@@ -96,6 +122,7 @@
                         <outlet property="blueButton" destination="dFU-8j-Djo" id="nxh-UG-9mY"/>
                         <outlet property="greenButton" destination="Uyw-xf-vIm" id="rZU-7g-BeU"/>
                         <outlet property="levelTitle" destination="lfu-dL-2CN" id="o7h-jj-rn7"/>
+                        <outlet property="paintColorCollectionView" destination="7q1-cd-kdY" id="MAu-lS-IE3"/>
                         <outlet property="redButton" destination="6M4-UJ-dZ2" id="iOr-VW-DMI"/>
                         <outlet property="scnView" destination="vYt-dz-Sce" id="fgv-wB-KRi"/>
                         <outlet property="skView" destination="UDE-42-eyU" id="98S-F5-Xv0"/>

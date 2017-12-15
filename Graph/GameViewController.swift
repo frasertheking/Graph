@@ -11,6 +11,7 @@ import QuartzCore
 import SceneKit
 import SpriteKit
 import Pastel
+import M13Checkbox
 
 class GameViewController: UIViewController {
 
@@ -28,9 +29,12 @@ class GameViewController: UIViewController {
     var activeLevel: Level!
     var animating: Bool = false
     var currentLevel: Int = 0
+    var colors: [UIColor]!
+    var selectedColorIndex: Int = 0
     
     // UI Elements
     @IBOutlet var skView: SKView!
+    @IBOutlet var paintColorCollectionView: UICollectionView!
     @IBOutlet var redButton: UIButton!
     @IBOutlet var greenButton: UIButton!
     @IBOutlet var blueButton: UIButton!
@@ -49,7 +53,9 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         setupLevel()
-        setupInteractions()        
+        setupInteractions()
+        
+        colors = [.red, .green, .blue, .purple, .orange]
     }
     
     func setupView() {
@@ -91,6 +97,12 @@ class GameViewController: UIViewController {
     }
     
     func setupInteractions() {
+        
+        paintColorCollectionView.register(UINib(nibName: "ColorButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+        paintColorCollectionView.delegate = self
+        paintColorCollectionView.dataSource = self
+        paintColorCollectionView.backgroundColor = UIColor.clear
+        
         redButton.backgroundColor = UIColor.customRed()
         redButton.addTarget(self, action: #selector(redButtonPress), for: .touchUpInside)
         
@@ -138,6 +150,7 @@ class GameViewController: UIViewController {
         let backgroundParticle = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as! SKEmitterNode
         backgroundParticle.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height/2)
         backgroundParticle.targetNode = skScene.scene
+        backgroundParticle.particlePositionRange = CGVector(dx: self.view.frame.size.width, dy: self.view.frame.size.height)
         skScene.scene?.addChild(backgroundParticle)
         skView.presentScene(skScene)
         skView.backgroundColor = UIColor.clear
@@ -146,6 +159,7 @@ class GameViewController: UIViewController {
     func createObjects() {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
+        colors = []
         
         vertexNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 1, 0)
         edgeNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 1, 0)
@@ -153,7 +167,7 @@ class GameViewController: UIViewController {
         activeLevel = Levels.createLevel(index: currentLevel)
         
         levelTitle.text = activeLevel.name
-        
+
         guard let adjacencyDict = activeLevel.adjacencyList?.adjacencyDict else {
             return
         }
@@ -445,5 +459,38 @@ extension GameViewController: SCNSceneRendererDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         //spawnShape()
         //game.updateHUD()
+    }
+}
+
+extension GameViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath) as! ColorButtonCollectionViewCell
+        cell.backgroundColor = colors[indexPath.row]
+        cell.layer.cornerRadius = cell.frame.size.width / 2
+        
+        if selectedColorIndex == indexPath.row {
+            cell.checkbox.checkState = .checked
+        } else {
+            cell.checkbox.checkState = .unchecked
+        }
+        cell.checkbox.stateChangeAnimation = .expand(.fill)
+        cell.checkbox.hideBox = true
+        
+        return cell
+    }
+}
+
+extension GameViewController: UICollectionViewDelegate {
+    // MARK: - UICollectionViewDelegate protocol
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedColorIndex = indexPath.row
+        paintColorCollectionView.reloadData()
     }
 }
