@@ -18,7 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYt-dz-Sce">
+                            <skView contentMode="scaleToFill" sceneName="scene" translatesAutoresizingMaskIntoConstraints="NO" id="UDE-42-eyU">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </skView>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="scene" translatesAutoresizingMaskIntoConstraints="NO" id="vYt-dz-Sce">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </sceneKitView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6M4-UJ-dZ2" customClass="UIButton">
@@ -69,6 +72,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="UDE-42-eyU" secondAttribute="bottom" id="9DA-Of-8tY"/>
+                            <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="UDE-42-eyU" secondAttribute="trailing" id="GKE-8f-Way"/>
                             <constraint firstItem="lfu-dL-2CN" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="16" id="Gc0-g7-caM"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="Idl-6u-hdf"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="dFU-8j-Djo" secondAttribute="bottom" constant="24" id="OzM-F6-n2S"/>
@@ -80,6 +85,8 @@
                             <constraint firstItem="lfu-dL-2CN" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="dN5-wy-nCp"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="6M4-UJ-dZ2" secondAttribute="bottom" constant="24" id="iYP-Lz-aaK"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="Uyw-xf-vIm" secondAttribute="bottom" constant="24" id="nd8-g1-LmC"/>
+                            <constraint firstItem="UDE-42-eyU" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="ogh-Fo-ERn"/>
+                            <constraint firstItem="UDE-42-eyU" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="qaV-lE-gc0"/>
                             <constraint firstItem="Uyw-xf-vIm" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="sDo-Bj-XE7"/>
                             <constraint firstAttribute="bottom" secondItem="vYt-dz-Sce" secondAttribute="bottom" id="yNr-9M-bfp"/>
                         </constraints>
@@ -91,6 +98,7 @@
                         <outlet property="levelTitle" destination="lfu-dL-2CN" id="o7h-jj-rn7"/>
                         <outlet property="redButton" destination="6M4-UJ-dZ2" id="iOr-VW-DMI"/>
                         <outlet property="scnView" destination="vYt-dz-Sce" id="fgv-wB-KRi"/>
+                        <outlet property="skView" destination="UDE-42-eyU" id="98S-F5-Xv0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFC-0A-SIw" userLabel="First Responder" sceneMemberID="firstResponder"/>

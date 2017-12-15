@@ -30,6 +30,7 @@ class GameViewController: UIViewController {
     var currentLevel: Int = 0
     
     // UI Elements
+    @IBOutlet var skView: SKView!
     @IBOutlet var redButton: UIButton!
     @IBOutlet var greenButton: UIButton!
     @IBOutlet var blueButton: UIButton!
@@ -108,9 +109,7 @@ class GameViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
-        
-        
-        
+    
         let pastelView = PastelView(frame: view.bounds)
         
         // Custom Direction
@@ -130,8 +129,19 @@ class GameViewController: UIViewController {
                               UIColor(red: 58/255, green: 255/255, blue: 217/255, alpha: 1.0)])
         
         pastelView.startAnimation()
-        view.insertSubview(pastelView, at: 0)
         
+        view.insertSubview(pastelView, at: 0)
+
+        // Add background particles
+        let skScene = SKScene(size: CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height))
+        skScene.backgroundColor = UIColor.clear
+        let path = Bundle.main.path(forResource: "Background", ofType: "sks")
+        let backgroundParticle = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as! SKEmitterNode
+        backgroundParticle.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height/2)
+        backgroundParticle.targetNode = skScene.scene
+        skScene.scene?.addChild(backgroundParticle)
+        skView.presentScene(skScene)
+        skView.backgroundColor = UIColor.clear
     }
     
     func createObjects() {
