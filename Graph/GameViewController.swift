@@ -101,11 +101,13 @@ class GameViewController: UIViewController {
         blueButton.addTarget(self, action: #selector(blueButtonPress), for: .touchUpInside)
         
         redButton.layer.borderColor = UIColor.white.cgColor
-        greenButton.layer.borderColor = UIColor.white.cgColor
-        blueButton.layer.borderColor = UIColor.white.cgColor
+        greenButton.layer.borderColor = UIColor.customDarkGreen().cgColor
+        blueButton.layer.borderColor = UIColor.customDarkBlue().cgColor
         
         addPulse(to: redButton)
         redButton.layer.borderWidth = 2
+        greenButton.layer.borderWidth = 2
+        blueButton.layer.borderWidth = 2
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
@@ -113,8 +115,8 @@ class GameViewController: UIViewController {
         let pastelView = PastelView(frame: view.bounds)
         
         // Custom Direction
-        pastelView.startPastelPoint = .bottomLeft
-        pastelView.endPastelPoint = .topRight
+        pastelView.startPastelPoint = .bottom
+        pastelView.endPastelPoint = .top
         
         // Custom Duration
         pastelView.animationDuration = 3.0
@@ -362,7 +364,7 @@ class GameViewController: UIViewController {
         let scale = CABasicAnimation(keyPath: "scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         scale.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
-        scale.toValue = NSValue(scnVector4: SCNVector4(x: 1.05, y: 1.05, z: 1.05, w: 0))
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: 1.08, y: 1.08, z: 1.08, w: 0))
         scale.duration = 2
         scale.repeatCount = .infinity
         scale.autoreverses = true
@@ -393,9 +395,9 @@ class GameViewController: UIViewController {
             self.addPulse(to: self.redButton)
             self.blueButton.layer.removeAllAnimations()
             self.greenButton.layer.removeAllAnimations()
-            self.redButton.layer.borderWidth = 2
-            self.greenButton.layer.borderWidth = 0
-            self.blueButton.layer.borderWidth = 0
+            self.redButton.layer.borderColor = UIColor.white.cgColor
+            self.greenButton.layer.borderColor = UIColor.customDarkGreen().cgColor
+            self.blueButton.layer.borderColor = UIColor.customDarkBlue().cgColor
         }
     }
     
@@ -405,9 +407,9 @@ class GameViewController: UIViewController {
             self.addPulse(to: self.greenButton)
             self.blueButton.layer.removeAllAnimations()
             self.redButton.layer.removeAllAnimations()
-            self.redButton.layer.borderWidth = 0
-            self.greenButton.layer.borderWidth = 2
-            self.blueButton.layer.borderWidth = 0
+            self.redButton.layer.borderColor = UIColor.customDarkRed().cgColor
+            self.greenButton.layer.borderColor = UIColor.white.cgColor
+            self.blueButton.layer.borderColor = UIColor.customDarkBlue().cgColor
         }
     }
     
@@ -417,9 +419,9 @@ class GameViewController: UIViewController {
             self.addPulse(to: self.blueButton)
             self.redButton.layer.removeAllAnimations()
             self.greenButton.layer.removeAllAnimations()
-            self.redButton.layer.borderWidth = 0
-            self.greenButton.layer.borderWidth = 0
-            self.blueButton.layer.borderWidth = 2
+            self.redButton.layer.borderColor = UIColor.customDarkRed().cgColor
+            self.greenButton.layer.borderColor = UIColor.customDarkGreen().cgColor
+            self.blueButton.layer.borderColor = UIColor.white.cgColor
         }
     }
     

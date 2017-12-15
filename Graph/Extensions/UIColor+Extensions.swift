@@ -46,6 +46,9 @@ let UIColorList:[UIColor] = [
     UIColor.customRed(),
     UIColor.customGreen(),
     UIColor.customBlue(),
+    UIColor.customDarkRed(),
+    UIColor.customDarkGreen(),
+    UIColor.customDarkBlue(),
     UIColor.defaultVertexColor()
 ]
 
@@ -99,6 +102,18 @@ extension UIColor {
     
     public static func customBlue() -> UIColor {
         return UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1.0)
+    }
+    
+    public static func customDarkRed() -> UIColor {
+        return UIColor(red: 0.93, green: 45/255, blue: 35/255, alpha: 1.0)
+    }
+    
+    public static func customDarkGreen() -> UIColor {
+        return UIColor(red: 55/255, green: 200/255, blue: 75/255, alpha: 1.0)
+    }
+    
+    public static func customDarkBlue() -> UIColor {
+        return UIColor(red: 0.0, green: 100/255, blue: 0.95, alpha: 1.0)
     }
     
     public static func defaultVertexColor() -> UIColor {
