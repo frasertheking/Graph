@@ -29,15 +29,13 @@ class GameViewController: UIViewController {
     var activeLevel: Level!
     var animating: Bool = false
     var currentLevel: Int = 0
-    var colors: [UIColor]!
+    var colors: [UIColor] = [.customRed(), .customGreen(), .customBlue(), .customPurple(), .customOrange()]
     var selectedColorIndex: Int = 0
     
     // UI Elements
     @IBOutlet var skView: SKView!
     @IBOutlet var paintColorCollectionView: UICollectionView!
-    @IBOutlet var redButton: UIButton!
-    @IBOutlet var greenButton: UIButton!
-    @IBOutlet var blueButton: UIButton!
+    @IBOutlet var collectionViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var levelTitle: UILabel!
     var colorSelectionButton: UIButton!
     
@@ -54,8 +52,6 @@ class GameViewController: UIViewController {
         setupCamera()
         setupLevel()
         setupInteractions()
-        
-        colors = [.red, .green, .blue, .purple, .orange]
     }
     
     func setupView() {
@@ -94,6 +90,7 @@ class GameViewController: UIViewController {
         Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(rotateGraphObject), userInfo: nil, repeats: false)
         Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(swellGraphObject), userInfo: nil, repeats: false)
         Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(scaleGraphObject), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(animateInCollectionView), userInfo: nil, repeats: false)
     }
     
     func setupInteractions() {
@@ -101,25 +98,9 @@ class GameViewController: UIViewController {
         paintColorCollectionView.register(UINib(nibName: "ColorButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         paintColorCollectionView.delegate = self
         paintColorCollectionView.dataSource = self
+        paintColorCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
         paintColorCollectionView.backgroundColor = UIColor.clear
-        
-        redButton.backgroundColor = UIColor.customRed()
-        redButton.addTarget(self, action: #selector(redButtonPress), for: .touchUpInside)
-        
-        greenButton.backgroundColor = UIColor.customGreen()
-        greenButton.addTarget(self, action: #selector(greenButtonPress), for: .touchUpInside)
-
-        blueButton.backgroundColor = UIColor.customBlue()
-        blueButton.addTarget(self, action: #selector(blueButtonPress), for: .touchUpInside)
-        
-        redButton.layer.borderColor = UIColor.white.cgColor
-        greenButton.layer.borderColor = UIColor.customDarkGreen().cgColor
-        blueButton.layer.borderColor = UIColor.customDarkBlue().cgColor
-        
-        addPulse(to: redButton)
-        redButton.layer.borderWidth = 2
-        greenButton.layer.borderWidth = 2
-        blueButton.layer.borderWidth = 2
+        paintColorCollectionView.layer.masksToBounds = false
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
@@ -159,7 +140,6 @@ class GameViewController: UIViewController {
     func createObjects() {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
-        colors = []
         
         vertexNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 1, 0)
         edgeNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 1, 0)
@@ -384,6 +364,28 @@ class GameViewController: UIViewController {
         edgeNodes.addAnimation(scale, forKey: "swell")
     }
     
+    @objc func animateInCollectionView() {
+        collectionViewBottomConstraint.constant = 16
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    @objc func refreshColorsInCollectionView() {
+        collectionViewBottomConstraint.constant = -100
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        }) { (finished) in
+            self.paintColorCollectionView.reloadData()
+            self.selectedColorIndex = 0
+            self.collectionViewBottomConstraint.constant = 16
+            
+            UIView.animate(withDuration: 0.3, delay: 0.2, options: .curveEaseInOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
+    
     // Actions
     func updateButtonWithColor(color: UIColor) {
         colorSelectionButton.backgroundColor = color
@@ -398,42 +400,6 @@ class GameViewController: UIViewController {
         pulseAnimation.autoreverses = true
         pulseAnimation.repeatCount = .greatestFiniteMagnitude
         to.layer.add(pulseAnimation, forKey: nil)
-    }
-    
-    @objc func redButtonPress() {
-        DispatchQueue.main.async {
-            self.paintColor = UIColor.customRed()
-            self.addPulse(to: self.redButton)
-            self.blueButton.layer.removeAllAnimations()
-            self.greenButton.layer.removeAllAnimations()
-            self.redButton.layer.borderColor = UIColor.white.cgColor
-            self.greenButton.layer.borderColor = UIColor.customDarkGreen().cgColor
-            self.blueButton.layer.borderColor = UIColor.customDarkBlue().cgColor
-        }
-    }
-    
-    @objc func greenButtonPress() {
-        DispatchQueue.main.async {
-            self.paintColor = UIColor.customGreen()
-            self.addPulse(to: self.greenButton)
-            self.blueButton.layer.removeAllAnimations()
-            self.redButton.layer.removeAllAnimations()
-            self.redButton.layer.borderColor = UIColor.customDarkRed().cgColor
-            self.greenButton.layer.borderColor = UIColor.white.cgColor
-            self.blueButton.layer.borderColor = UIColor.customDarkBlue().cgColor
-        }
-    }
-    
-    @objc func blueButtonPress() {
-        DispatchQueue.main.async {
-            self.paintColor = UIColor.customBlue()
-            self.addPulse(to: self.blueButton)
-            self.redButton.layer.removeAllAnimations()
-            self.greenButton.layer.removeAllAnimations()
-            self.redButton.layer.borderColor = UIColor.customDarkRed().cgColor
-            self.greenButton.layer.borderColor = UIColor.customDarkGreen().cgColor
-            self.blueButton.layer.borderColor = UIColor.white.cgColor
-        }
     }
     
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
@@ -451,6 +417,7 @@ class GameViewController: UIViewController {
         self.edgeNodes.removeFromParentNode()
         
         currentLevel += 1
+        refreshColorsInCollectionView()
         setupLevel()
     }
 }
@@ -465,7 +432,14 @@ extension GameViewController: SCNSceneRendererDelegate {
 extension GameViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        if let colorCount = activeLevel.numberOfColorsProvided  {
+            return colorCount
+        }
+        return 3
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: 60, height: 60)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -473,24 +447,42 @@ extension GameViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath) as! ColorButtonCollectionViewCell
         cell.backgroundColor = colors[indexPath.row]
         cell.layer.cornerRadius = cell.frame.size.width / 2
-        
-        if selectedColorIndex == indexPath.row {
-            cell.checkbox.checkState = .checked
-        } else {
-            cell.checkbox.checkState = .unchecked
-        }
+        cell.layer.borderWidth = 2
         cell.checkbox.stateChangeAnimation = .expand(.fill)
+
+        if selectedColorIndex == indexPath.row {
+            cell.checkbox.setCheckState(.checked, animated: true)
+            cell.layer.borderColor = UIColor.customWhite().cgColor
+            addPulse(to: cell)
+        } else {
+            cell.checkbox.setCheckState(.unchecked, animated: true)
+            cell.layer.borderColor = colors[indexPath.row].darker()?.cgColor
+            cell.layer.removeAllAnimations()
+        }
         cell.checkbox.hideBox = true
         
         return cell
     }
 }
 
-extension GameViewController: UICollectionViewDelegate {
-    // MARK: - UICollectionViewDelegate protocol
+extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        let totalCellWidth = 60 * collectionView.numberOfItems(inSection: 0)
+        let totalSpacingWidth = 10 * (collectionView.numberOfItems(inSection: 0) - 1)
+        
+        let leftInset = (collectionView.layer.frame.size.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
+        let rightInset = leftInset
+        
+        return UIEdgeInsetsMake(0, leftInset, 0, rightInset)
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell: ColorButtonCollectionViewCell = collectionView.cellForItem(at: indexPath) as! ColorButtonCollectionViewCell
         selectedColorIndex = indexPath.row
+        paintColor = cell.backgroundColor!
         paintColorCollectionView.reloadData()
     }
 }

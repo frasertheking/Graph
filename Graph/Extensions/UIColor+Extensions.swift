@@ -46,9 +46,9 @@ let UIColorList:[UIColor] = [
     UIColor.customRed(),
     UIColor.customGreen(),
     UIColor.customBlue(),
-    UIColor.customDarkRed(),
-    UIColor.customDarkGreen(),
-    UIColor.customDarkBlue(),
+    UIColor.customPurple(),
+    UIColor.customOrange(),
+    UIColor.customWhite(),
     UIColor.defaultVertexColor()
 ]
 
@@ -58,6 +58,22 @@ extension UIColor {
         let maxValue = UIColorList.count
         let rand = Int(arc4random_uniform(UInt32(maxValue)))
         return UIColorList[rand]
+    }
+    
+    func darker(by percentage:CGFloat=5.0) -> UIColor? {
+        return self.adjust(by: -1 * abs(percentage) )
+    }
+    
+    func adjust(by percentage:CGFloat=5.0) -> UIColor? {
+        var r:CGFloat=0, g:CGFloat=0, b:CGFloat=0, a:CGFloat=0;
+        if(self.getRed(&r, green: &g, blue: &b, alpha: &a)){
+            return UIColor(red: min(r + percentage/100, 1.0),
+                           green: min(g + percentage/100, 1.0),
+                           blue: min(b + percentage/100, 1.0),
+                           alpha: a)
+        }else{
+            return nil
+        }
     }
     
     public static func limeColor() -> UIColor {
@@ -104,16 +120,16 @@ extension UIColor {
         return UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1.0)
     }
     
-    public static func customDarkRed() -> UIColor {
-        return UIColor(red: 0.93, green: 45/255, blue: 35/255, alpha: 1.0)
+    public static func customPurple() -> UIColor {
+        return UIColor(red: 142/255, green: 68/255, blue: 173/255, alpha: 1.0)
     }
     
-    public static func customDarkGreen() -> UIColor {
-        return UIColor(red: 55/255, green: 200/255, blue: 75/255, alpha: 1.0)
+    public static func customOrange() -> UIColor {
+        return UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1.0)
     }
     
-    public static func customDarkBlue() -> UIColor {
-        return UIColor(red: 0.0, green: 100/255, blue: 0.95, alpha: 1.0)
+    public static func customWhite() -> UIColor {
+        return UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
     }
     
     public static func defaultVertexColor() -> UIColor {
