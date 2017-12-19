@@ -54,6 +54,14 @@ class GameViewController: UIViewController {
         setupInteractions()
     }
     
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     func setupView() {
         guard let sceneView = self.scnView else {
             return
