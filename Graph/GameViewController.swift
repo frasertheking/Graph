@@ -386,6 +386,7 @@ class GameViewController: UIViewController {
         }) { (finished) in
             self.paintColorCollectionView.reloadData()
             self.selectedColorIndex = 0
+            self.paintColor = self.colors[0]
             self.collectionViewBottomConstraint.constant = 16
             
             UIView.animate(withDuration: 0.3, delay: 0.2, options: .curveEaseInOut, animations: {
