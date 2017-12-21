@@ -29,8 +29,44 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCJ-Dq-VgM">
+                                <rect key="frame" x="62" y="82.5" width="50" height="30"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="lKn-El-tSB"/>
+                                </constraints>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="debugXPress" destination="EcQ-vt-J7h" eventType="touchUpInside" id="uTp-AJ-4YG"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82e-M2-jU7">
+                                <rect key="frame" x="162" y="82.5" width="50" height="30"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="feb-15-q16"/>
+                                </constraints>
+                                <state key="normal" title="Y">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="debugYPress" destination="EcQ-vt-J7h" eventType="touchUpInside" id="lDJ-zl-Y4m"/>
+                                </connections>
+                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7q1-cd-kdY">
-                                <rect key="frame" x="24" y="702" width="327" height="65"/>
+                                <rect key="frame" x="24" y="717" width="327" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="l8U-f7-oOu"/>
                                 </constraints>
@@ -53,9 +89,44 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1x-2a-Zqn">
+                                <rect key="frame" x="62" y="128.5" width="252" height="30"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Spawn Node">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="spawnDebugNode" destination="EcQ-vt-J7h" eventType="touchUpInside" id="em0-8E-heO"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UE-dl-Ejm">
+                                <rect key="frame" x="262" y="82.5" width="50" height="30"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="wuu-PC-A8C"/>
+                                </constraints>
+                                <state key="normal" title="Z">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="debugZPress" destination="EcQ-vt-J7h" eventType="touchUpInside" id="6sV-DX-oA2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="82e-M2-jU7" firstAttribute="leading" secondItem="zCJ-Dq-VgM" secondAttribute="trailing" constant="50" id="3Hd-An-950"/>
+                            <constraint firstItem="k1x-2a-Zqn" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="7aU-sb-aP1"/>
                             <constraint firstAttribute="bottom" secondItem="UDE-42-eyU" secondAttribute="bottom" id="9DA-Of-8tY"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="UDE-42-eyU" secondAttribute="trailing" id="GKE-8f-Way"/>
                             <constraint firstItem="lfu-dL-2CN" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="16" id="Gc0-g7-caM"/>
@@ -63,12 +134,19 @@
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="vYt-dz-Sce" secondAttribute="trailing" id="Qd0-67-PSc"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="7q1-cd-kdY" secondAttribute="trailing" constant="24" id="QvP-X8-6ob"/>
                             <constraint firstItem="lfu-dL-2CN" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="Veb-fx-hdu"/>
-                            <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="7q1-cd-kdY" secondAttribute="bottom" constant="-100" id="cN3-Vm-Fsb"/>
+                            <constraint firstItem="k1x-2a-Zqn" firstAttribute="leading" secondItem="zCJ-Dq-VgM" secondAttribute="leading" id="Y9i-hj-BpI"/>
+                            <constraint firstItem="2UE-dl-Ejm" firstAttribute="leading" secondItem="82e-M2-jU7" secondAttribute="trailing" constant="50" id="bX5-sQ-TPb"/>
+                            <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="7q1-cd-kdY" secondAttribute="bottom" constant="-115" id="cN3-Vm-Fsb"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="cc3-z6-EuS"/>
                             <constraint firstItem="lfu-dL-2CN" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="dN5-wy-nCp"/>
+                            <constraint firstItem="82e-M2-jU7" firstAttribute="centerY" secondItem="zCJ-Dq-VgM" secondAttribute="centerY" id="fui-eo-GVS"/>
+                            <constraint firstItem="k1x-2a-Zqn" firstAttribute="top" secondItem="82e-M2-jU7" secondAttribute="bottom" constant="16" id="gOH-ks-xrU"/>
+                            <constraint firstItem="82e-M2-jU7" firstAttribute="top" secondItem="lfu-dL-2CN" secondAttribute="bottom" constant="8" id="i6t-fI-lkm"/>
                             <constraint firstItem="UDE-42-eyU" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="ogh-Fo-ERn"/>
+                            <constraint firstItem="2UE-dl-Ejm" firstAttribute="centerY" secondItem="82e-M2-jU7" secondAttribute="centerY" id="qOA-9u-Hhh"/>
                             <constraint firstItem="UDE-42-eyU" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="qaV-lE-gc0"/>
                             <constraint firstItem="7q1-cd-kdY" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" constant="24" id="tS8-jy-iU6"/>
+                            <constraint firstItem="82e-M2-jU7" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="ugw-tP-SuJ"/>
                             <constraint firstAttribute="bottom" secondItem="vYt-dz-Sce" secondAttribute="bottom" id="yNr-9M-bfp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="D3R-0S-508"/>
@@ -79,6 +157,10 @@
                         <outlet property="paintColorCollectionView" destination="7q1-cd-kdY" id="MAu-lS-IE3"/>
                         <outlet property="scnView" destination="vYt-dz-Sce" id="fgv-wB-KRi"/>
                         <outlet property="skView" destination="UDE-42-eyU" id="98S-F5-Xv0"/>
+                        <outlet property="spawnButton" destination="k1x-2a-Zqn" id="at1-Dw-dxp"/>
+                        <outlet property="xAxisButton" destination="zCJ-Dq-VgM" id="wwU-x1-NBf"/>
+                        <outlet property="yAxisButton" destination="82e-M2-jU7" id="25x-LR-GI4"/>
+                        <outlet property="zAxisButton" destination="2UE-dl-Ejm" id="Aaa-ig-a4X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFC-0A-SIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
