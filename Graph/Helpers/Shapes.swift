@@ -51,23 +51,28 @@ public enum Shapes:Int {
             geometry = SCNTube(innerRadius: 0.25, outerRadius: 0.5, height: 1.0)
         case .Custom:
             
-            // Load custom object from OBJ geom
-            let bundle = Bundle.main
-            let path = bundle.path(forResource: "icosahedron", ofType: "obj")
+            let geoScene = SCNScene(named: "graph.dae")
+            geometry = (geoScene?.rootNode.childNode(withName: "Sphere_002", recursively: true)?.geometry!)!
             
-            guard let objPath = path else {
-                return
-            }
-            
-            let url = NSURL(fileURLWithPath: objPath)
-            let asset = MDLAsset(url: url as URL)
-            let object = asset.object(at: 0)
-            let node = SCNNode(mdlObject: object)
-            
-            guard let nodeGeom = node.geometry else {
-                return
-            }
-            geometry = nodeGeom
+//            let moveANimation = CAAnimation.animationWithSceneNamed("graph.dae")
+//            node.addAnimation(moveANimation!, forKey: "move")
+//            // Load custom object from OBJ geom
+//            let bundle = Bundle.main
+//            let path = bundle.path(forResource: "graph", ofType: "dae")
+//
+//            guard let objPath = path else {
+//                return
+//            }
+//
+//            let url = NSURL(fileURLWithPath: objPath)
+//            let asset = MDLAsset(url: url as URL)
+//            let object = asset.object(at: 0)
+//            let node = SCNNode(mdlObject: object)
+//
+//            guard let nodeGeom = node.geometry else {
+//                return
+//            }
+//            geometry = nodeGeom
         }
         
         geometry.materials.first?.diffuse.contents = UIColor.white
