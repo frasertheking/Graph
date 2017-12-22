@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		16A81C9217142F81161F4A98 /* Pods_Graph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C84D32F8969AA271E3E3E3 /* Pods_Graph.framework */; };
 		432617531FEC6B3C0031EA1E /* graph.obj in Resources */ = {isa = PBXBuildFile; fileRef = 432617521FEC6B3C0031EA1E /* graph.obj */; };
-		4326175B1FED63A80031EA1E /* graph.dae in Resources */ = {isa = PBXBuildFile; fileRef = 4326175A1FED63A80031EA1E /* graph.dae */; };
+		4326175D1FED680B0031EA1E /* test.obj in Resources */ = {isa = PBXBuildFile; fileRef = 4326175C1FED680B0031EA1E /* test.obj */; };
+		432617651FED71A70031EA1E /* node.dae in Resources */ = {isa = PBXBuildFile; fileRef = 432617641FED71A70031EA1E /* node.dae */; };
 		433512C41FDE23EB0078DB5F /* smoke2.png in Resources */ = {isa = PBXBuildFile; fileRef = 433512C31FDE23EB0078DB5F /* smoke2.png */; };
 		433512C61FDE26070078DB5F /* Glow.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 433512C51FDE26060078DB5F /* Glow.scnp */; };
 		434A574F1FDB109400FD172B /* levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 434A574E1FDB109400FD172B /* levels.plist */; };
@@ -47,7 +48,8 @@
 /* Begin PBXFileReference section */
 		156BEFBF47AC34201AC31AC9 /* Pods-Graph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Graph.release.xcconfig"; path = "Pods/Target Support Files/Pods-Graph/Pods-Graph.release.xcconfig"; sourceTree = "<group>"; };
 		432617521FEC6B3C0031EA1E /* graph.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph.obj; sourceTree = "<group>"; };
-		4326175A1FED63A80031EA1E /* graph.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = graph.dae; sourceTree = "<group>"; };
+		4326175C1FED680B0031EA1E /* test.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.obj; sourceTree = "<group>"; };
+		432617641FED71A70031EA1E /* node.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = node.dae; sourceTree = "<group>"; };
 		433512C31FDE23EB0078DB5F /* smoke2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke2.png; sourceTree = "<group>"; };
 		433512C51FDE26060078DB5F /* Glow.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Glow.scnp; sourceTree = "<group>"; };
 		434A574E1FDB109400FD172B /* levels.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = levels.plist; sourceTree = "<group>"; };
@@ -145,7 +147,8 @@
 		43B012791FD62DBF00F017A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4326175A1FED63A80031EA1E /* graph.dae */,
+				432617641FED71A70031EA1E /* node.dae */,
+				4326175C1FED680B0031EA1E /* test.obj */,
 				434A574E1FDB109400FD172B /* levels.plist */,
 				43B012771FD62DBD00F017A6 /* dodecahedron.obj */,
 				432617521FEC6B3C0031EA1E /* graph.obj */,
@@ -291,15 +294,16 @@
 				435BACCD1FD758C500DFAF6B /* smoke.png in Resources */,
 				432617531FEC6B3C0031EA1E /* graph.obj in Resources */,
 				43C581821FE356AF00D344B0 /* Assets.xcassets in Resources */,
-				4326175B1FED63A80031EA1E /* graph.dae in Resources */,
 				433512C61FDE26070078DB5F /* Glow.scnp in Resources */,
 				43CA8FE21FB6919900B962D9 /* Assets.xcassets in Resources */,
 				43B012781FD62DBD00F017A6 /* dodecahedron.obj in Resources */,
 				43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */,
 				43C581851FE4481B00D344B0 /* ColorButtonCollectionViewCell.xib in Resources */,
 				433512C41FDE23EB0078DB5F /* smoke2.png in Resources */,
+				432617651FED71A70031EA1E /* node.dae in Resources */,
 				434A574F1FDB109400FD172B /* levels.plist in Resources */,
 				435BACCE1FD758C500DFAF6B /* Smoke.scnp in Resources */,
+				4326175D1FED680B0031EA1E /* test.obj in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,
 				43C581811FE356AF00D344B0 /* Background.sks in Resources */,
 			);
