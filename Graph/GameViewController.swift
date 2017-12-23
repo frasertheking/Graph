@@ -31,7 +31,7 @@ class GameViewController: UIViewController {
     var currentLevel: Int = 0
     var colors: [UIColor] = [.customRed(), .customGreen(), .customBlue(), .customPurple(), .customOrange()]
     var selectedColorIndex: Int = 0
-    
+
     // DEBUG
     var debug = false
     @IBOutlet var xAxisButton: UIButton!
@@ -103,12 +103,14 @@ class GameViewController: UIViewController {
     func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 25)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 20)
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
-    func setupLevel() {
+    @objc func setupLevel() {
         activeLevel = Levels.createLevel(index: currentLevel)
+        scnView.pointOfView?.position = SCNVector3(x: 0, y: 0, z: 20)
+        scnView.pointOfView?.rotation = SCNVector4(x: 0, y: 0, z: 0, w: 0)
         
         createObjects()
         setupSounds()
@@ -158,13 +160,17 @@ class GameViewController: UIViewController {
         pastelView.endPastelPoint = .top
         
         // Custom Duration
-        pastelView.animationDuration = 3.0
+        pastelView.animationDuration = 10.0
         
         // Custom Color        
         pastelView.setColors([UIColor(red: 247/255, green: 202/255, blue: 24/255, alpha: 1.0),
                                 UIColor(red: 255/255, green: 182/255, blue: 30/255, alpha: 1.0),
-                                UIColor(red: 241/255, green: 196/255, blue: 15/255, alpha: 1.0),
-                                UIColor(red: 245/255, green: 215/255, blue: 110/255, alpha: 1.0)])
+                                UIColor(red: 247/255, green: 109/255, blue: 130/255, alpha: 1.0),
+                                UIColor(red: 217/255, green: 68/255, blue: 82/255, alpha: 1.0),
+                                UIColor(red: 98/255, green: 221/255, blue: 189/255, alpha: 1.0),
+                                UIColor(red: 53/255, green: 187/255, blue: 155/255, alpha: 1.0),
+                                UIColor(red: 115/255, green: 177/255, blue: 244/255, alpha: 1.0),
+                                UIColor(red: 75/255, green: 137/255, blue: 218/255, alpha: 1.0)])
         
         pastelView.startAnimation()
         
@@ -186,9 +192,6 @@ class GameViewController: UIViewController {
     func createObjects() {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
-        
-        vertexNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 1, 0)
-        edgeNodes.pivot = SCNMatrix4MakeRotation(Float(CGFloat(Double.pi / 2)), 0, 1, 0)
         
         levelTitle.text = activeLevel?.name
 
@@ -421,7 +424,7 @@ class GameViewController: UIViewController {
     
     @objc func refreshColorsInCollectionView() {
         collectionViewBottomConstraint.constant = -115
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3, delay: 1.35, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         }) { (finished) in
             self.paintColorCollectionView.reloadData()
@@ -544,7 +547,7 @@ class GameViewController: UIViewController {
         
         currentLevel += 1
         refreshColorsInCollectionView()
-        setupLevel()
+        Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(setupLevel), userInfo: nil, repeats: false)
     }
 }
 
@@ -610,20 +613,5 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
         selectedColorIndex = indexPath.row
         paintColor = cell.backgroundColor!
         paintColorCollectionView.reloadData()
-    }
-}
-
-extension CAAnimation {
-    class func animationWithSceneNamed(_ name: String) -> CAAnimation? {
-        var animation: CAAnimation?
-        if let scene = SCNScene(named: name) {
-            scene.rootNode.enumerateChildNodes({ (child, stop) in
-                if child.animationKeys.count > 0 {
-                    animation = child.animation(forKey: child.animationKeys.first!)
-                    stop.initialize(to: true)
-                }
-            })
-        }
-        return animation
     }
 }
