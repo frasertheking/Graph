@@ -9,6 +9,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="T4a-b9-md4">
+            <objects>
+                <viewController id="AJL-5a-clW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nRP-QZ-Uog">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="wqx-j5-Gm3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BZ7-4z-SWn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2426" y="-54"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="UDS-PD-cZ1">
             <objects>
@@ -122,9 +137,18 @@
                                     <action selector="debugZPress" destination="EcQ-vt-J7h" eventType="touchUpInside" id="6sV-DX-oA2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YV0-b9-OMJ">
+                                <rect key="frame" x="24" y="36" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="MIx-0j-o4C"/>
+                                    <constraint firstAttribute="width" constant="35" id="lhF-SH-nQS"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="back"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="YV0-b9-OMJ" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="16" id="02D-ad-AUq"/>
                             <constraint firstItem="82e-M2-jU7" firstAttribute="leading" secondItem="zCJ-Dq-VgM" secondAttribute="trailing" constant="50" id="3Hd-An-950"/>
                             <constraint firstItem="k1x-2a-Zqn" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="7aU-sb-aP1"/>
                             <constraint firstAttribute="bottom" secondItem="UDE-42-eyU" secondAttribute="bottom" id="9DA-Of-8tY"/>
@@ -145,6 +169,7 @@
                             <constraint firstItem="UDE-42-eyU" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="ogh-Fo-ERn"/>
                             <constraint firstItem="2UE-dl-Ejm" firstAttribute="centerY" secondItem="82e-M2-jU7" secondAttribute="centerY" id="qOA-9u-Hhh"/>
                             <constraint firstItem="UDE-42-eyU" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="qaV-lE-gc0"/>
+                            <constraint firstItem="YV0-b9-OMJ" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" constant="24" id="r7g-3H-s2X"/>
                             <constraint firstItem="7q1-cd-kdY" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" constant="24" id="tS8-jy-iU6"/>
                             <constraint firstItem="82e-M2-jU7" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="ugw-tP-SuJ"/>
                             <constraint firstAttribute="bottom" secondItem="vYt-dz-Sce" secondAttribute="bottom" id="yNr-9M-bfp"/>
@@ -168,4 +193,7 @@
             <point key="canvasLocation" x="-1348" y="-54.422788605697157"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="back" width="100" height="100"/>
+    </resources>
 </document>

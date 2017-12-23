@@ -4,9 +4,30 @@
 <array>
 	<dict>
 		<key>num_colors</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>Welcome</string>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>num_colors</key>
 		<integer>2</integer>
 		<key>name</key>
-		<string>The beginning</string>
+		<string>Practice</string>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -365,7 +386,7 @@
 		<key>num_colors</key>
 		<integer>4</integer>
 		<key>name</key>
-		<string>Fun</string>
+		<string>Four</string>
 		<key>nodes</key>
 		<array>
 			<dict>
