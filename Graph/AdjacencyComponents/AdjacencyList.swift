@@ -82,6 +82,65 @@ extension AdjacencyList: Graphable {
         return solved
     }
     
+    // TODO: Actually finish 
+    func getKColor() -> Int {
+        let colors: [UIColor] = [.customRed(), .customGreen(), .customBlue(), .customPurple(), .customOrange(), .cyan]
+        let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
+
+        // USE BACKTRACKING?
+        // FIRST PASS TO CATALOGUE ALL EDGES
+        
+        // solve graph
+        var count = 0
+        for (key, value) in (graph.adjacencyDict) {
+            if count == 0 {
+                key.data.color = colors[0]
+            } else {
+                var colorIndex = -1
+
+                for (key2, value2) in (graph.adjacencyDict) {
+
+                    for edge in value {
+                        if colors.index(of: getlowestColor(for: edge.destination.data.color))! > colorIndex {
+                            colorIndex = colors.index(of: getlowestColor(for: edge.destination.data.color))!
+                        }
+                    }
+                }
+                
+                key.data.color = colors[colorIndex]
+            }
+            
+            count += 1
+        }
+        
+        var colorCount = [UIColor]()
+        
+        // count colors needed
+        for (key, _) in (graph.adjacencyDict) {
+            print(key.data.color)
+            if !colorCount.contains(key.data.color) {
+                colorCount.append(key.data.color)
+            }
+        }
+        
+        return colorCount.count
+    }
+    
+    func getlowestColor(for node_color: UIColor) -> UIColor {
+        let colors: [UIColor] = [.customRed(), .customGreen(), .customBlue(), .customPurple(), .customOrange(), .cyan]
+        
+        var count = 0
+        for color in colors {
+            count += 1
+            
+            if node_color == color {
+                return colors[count]
+            }
+        }
+        
+        return colors[0]
+    }
+    
     func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node> {
         let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
         for (key, _) in (graph.adjacencyDict) {

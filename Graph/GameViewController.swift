@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
     var activeLevel: Level?
     var animating: Bool = false
     var currentLevel: Int = 0
-    var colors: [UIColor] = [.customRed(), .customGreen(), .customBlue(), .customPurple(), .customOrange()]
+    var colors: [UIColor] = [.customRed(), .customGreen(), .customBlue(), .customPurple(), .customOrange(), .cyan]
     var selectedColorIndex: Int = 0
 
     // DEBUG
@@ -111,7 +111,7 @@ class GameViewController: UIViewController {
         activeLevel = Levels.createLevel(index: currentLevel)
         scnView.pointOfView?.position = SCNVector3(x: 0, y: 0, z: 20)
         scnView.pointOfView?.rotation = SCNVector4(x: 0, y: 0, z: 0, w: 0)
-        
+                
         createObjects()
         setupSounds()
         explodeGraph()

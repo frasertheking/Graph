@@ -19,5 +19,6 @@ protocol Graphable {
     
     // Helper functions
     func checkIfSolved() -> Bool
+    func getKColor() -> Int
     func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node>
 }
