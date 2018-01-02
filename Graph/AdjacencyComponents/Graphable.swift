@@ -18,7 +18,7 @@ protocol Graphable {
     func edges(from source: Vertex<Element>) -> [Edge<Element>]?
     
     // Helper functions
-    func checkIfSolved() -> Bool
+    func checkIfSolved(forType type: GraphType) -> Bool
     func getKColor() -> Int
     func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node>
 }

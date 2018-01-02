@@ -30,7 +30,9 @@ class GameViewController: UIViewController {
     var animating: Bool = false
     var currentLevel: Int = 0
     var colors: [UIColor] = [.customRed(), .customGreen(), .customBlue(), .customPurple(), .customOrange(), .cyan]
+    var walkColor = UIColor.goldColor()
     var selectedColorIndex: Int = 0
+    var pathArray: [Int] = []
 
     // DEBUG
     var debug = false
@@ -269,66 +271,104 @@ class GameViewController: UIViewController {
                 }
             }
             
-            geometry.materials.first?.diffuse.contents = paintColor
+            guard let hamiltonian: Bool = activeLevel?.hamiltonian else {
+                return
+            }
+            
+            let activeColor = hamiltonian ? walkColor : paintColor
+            
+            geometry.materials.first?.diffuse.contents = activeColor
             geometry.materials.first?.emission.contents = UIColor.black
             
-            if let trailEmitter = createTrail(color: paintColor, geometry: geometry) {
+            if let trailEmitter = createTrail(color: activeColor, geometry: geometry) {
                 node.removeAllParticleSystems()
                 node.addParticleSystem(trailEmitter)
             }
             
             if let _ = activeLevel?.adjacencyList {
-                activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: geometry.name, color: paintColor)
+                activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: geometry.name, color: activeColor)
             }
             
             //game.playSound(node: scnScene.rootNode, name: "SpawnGood")
         }
+
+        pathArray.append(Int(geometry.name!)!)
+
+        updateCorrectEdges(level: activeLevel)
         
-        updateCorrectEdges()
-        
-        if let _ = activeLevel?.adjacencyList {
-            if (activeLevel?.adjacencyList!.checkIfSolved())! {
+        if let _ = activeLevel?.adjacencyList, let hamiltonian: Bool = activeLevel?.hamiltonian {
+            if (activeLevel?.adjacencyList!.checkIfSolved(forType: (hamiltonian ? GraphType.hamiltonian : GraphType.kColor)))! {
                 self.implodeGraph()
             }
         }
     }
     
-    func updateCorrectEdges() {
+    func updateCorrectEdges(level: Level?) {
         guard let adjacencyList = activeLevel?.adjacencyList else {
             return
         }
         
-        for (_, value) in (adjacencyList.adjacencyDict) {
-            for edge in value {
-                if edge.source.data.color != edge.destination.data.color &&
-                    edge.source.data.color != .white &&
-                    edge.destination.data.color != .white {
-                    
-                    var pos = 0
-                    for edgeNode in edgeArray {
-                        if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
-                            
-                            guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
-                                continue
-                            }
-                            
-                            if let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
-                                edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
-                            }
+        guard let currentLevel = level else {
+            return
+        }
+        
+        guard let hamiltonian = currentLevel.hamiltonian else {
+            return
+        }
+        
+        if hamiltonian && pathArray.count > 1 {
+            for i in 0...pathArray.count-2 {
+                var pos = 0
+                for edgeNode in edgeArray {
+                    if (edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) ||
+                       (edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) {
+                        edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
+                        edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                        
+                        guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
+                            continue
                         }
-                        pos += 1
+                        
+                        if let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
+                            edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
+                        }
                     }
-                } else {
-                    var pos = 0
-                    for edgeNode in edgeArray {
-                        if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
-                            edgeNodes.childNodes[pos].removeAllParticleSystems()
+                    pos += 1
+                }
+            }
+        } else {
+            for (_, value) in (adjacencyList.adjacencyDict) {
+                for edge in value {
+                    if edge.source.data.color != edge.destination.data.color &&
+                        edge.source.data.color != .white &&
+                        edge.destination.data.color != .white {
+                        
+                        var pos = 0
+                        for edgeNode in edgeArray {
+                            if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                                
+                                guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
+                                    continue
+                                }
+                                
+                                if let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
+                                    edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
+                                }
+                            }
+                            pos += 1
                         }
-                        pos += 1
+                    } else {
+                        var pos = 0
+                        for edgeNode in edgeArray {
+                            if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
+                                edgeNodes.childNodes[pos].removeAllParticleSystems()
+                            }
+                            pos += 1
+                        }
                     }
                 }
             }
@@ -439,10 +479,6 @@ class GameViewController: UIViewController {
     }
     
     // Actions
-    func updateButtonWithColor(color: UIColor) {
-        colorSelectionButton.backgroundColor = color
-        paintColor = color
-    }
     
     func addPulse(to: UIView) {
         let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
@@ -574,7 +610,12 @@ extension GameViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath) as! ColorButtonCollectionViewCell
-        cell.backgroundColor = colors[indexPath.row]
+        
+        guard let hamiltonian = activeLevel?.hamiltonian else {
+            return cell
+        }
+        
+        cell.backgroundColor = hamiltonian ? walkColor : colors[indexPath.row]
         cell.layer.cornerRadius = cell.frame.size.width / 2
         cell.layer.borderWidth = 2
         cell.checkbox.stateChangeAnimation = .expand(.fill)
