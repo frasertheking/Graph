@@ -74,24 +74,27 @@ extension AdjacencyList: Graphable {
     
     func checkIfSolved(forType type: GraphType) -> Bool {
         let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
-        var solved: Bool = true
         
         switch type {
         case .hamiltonian:
-            return false
+            for (key, _) in (graph.adjacencyDict) {
+                if key.data.color != UIColor.goldColor() {
+                    return false
+                }
+            }
         default:
             for (_, value) in (graph.adjacencyDict) {
                 for edge in value {
                     if edge.source.data.color == edge.destination.data.color ||
                         edge.source.data.color == .white ||
                         edge.destination.data.color == .white {
-                        solved = false
+                        return false
                     }
                 }
             }
         }
         
-        return solved
+        return true
     }
     
     // TODO: Actually finish 

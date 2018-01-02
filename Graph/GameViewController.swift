@@ -33,7 +33,7 @@ class GameViewController: UIViewController {
     var walkColor = UIColor.goldColor()
     var selectedColorIndex: Int = 0
     var pathArray: [Int] = []
-    var currentStep: String!
+    var currentStep: String = ""
     
     // DEBUG
     var debug = false
@@ -599,8 +599,10 @@ class GameViewController: UIViewController {
     }
     
     @objc func cleanScene() {
-        self.vertexNodes.removeFromParentNode()
-        self.edgeNodes.removeFromParentNode()
+        vertexNodes.removeFromParentNode()
+        edgeNodes.removeFromParentNode()
+        pathArray.removeAll()
+        currentStep = ""
         
         currentLevel += 1
         refreshColorsInCollectionView()
