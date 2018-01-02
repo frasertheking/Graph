@@ -52,7 +52,7 @@ class Levels: NSObject {
                 let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: x, y: y, z: z), uid: uid, color: .white))
                 vertexBin.append(newNode)
             }
-            
+                        
             // Unpack graph edges
             for node in levelArray {
                 guard let nodeDict: Dictionary = node as? Dictionary<String, Any> else {

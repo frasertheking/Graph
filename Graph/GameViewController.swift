@@ -33,7 +33,8 @@ class GameViewController: UIViewController {
     var walkColor = UIColor.goldColor()
     var selectedColorIndex: Int = 0
     var pathArray: [Int] = []
-
+    var currentStep: String!
+    
     // DEBUG
     var debug = false
     @IBOutlet var xAxisButton: UIButton!
@@ -251,7 +252,15 @@ class GameViewController: UIViewController {
             return
         }
         
+        guard let hamiltonian: Bool = activeLevel?.hamiltonian else {
+            return
+        }
+        
         if geometry.name != "edge" {
+            
+            if hamiltonian && pathArray.count > 0 && geometry.firstMaterial?.diffuse.contents as! UIColor != UIColor.gray {
+                return
+            }
             
             if debug {
                 selectedNode = node
@@ -269,10 +278,6 @@ class GameViewController: UIViewController {
                         self.animating = false
                     }
                 }
-            }
-            
-            guard let hamiltonian: Bool = activeLevel?.hamiltonian else {
-                return
             }
             
             let activeColor = hamiltonian ? walkColor : paintColor
@@ -293,7 +298,8 @@ class GameViewController: UIViewController {
         }
 
         pathArray.append(Int(geometry.name!)!)
-
+        currentStep = geometry.name!
+        
         updateCorrectEdges(level: activeLevel)
         
         if let _ = activeLevel?.adjacencyList, let hamiltonian: Bool = activeLevel?.hamiltonian {
@@ -316,24 +322,39 @@ class GameViewController: UIViewController {
             return
         }
         
-        if hamiltonian && pathArray.count > 1 {
-            for i in 0...pathArray.count-2 {
-                var pos = 0
-                for edgeNode in edgeArray {
-                    if (edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) ||
-                       (edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) {
-                        edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
-                        edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
-                        
-                        guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
-                            continue
+        if hamiltonian {
+            if pathArray.count > 1 {
+                for i in 0...pathArray.count-2 {
+                    var pos = 0
+                    for edgeNode in edgeArray {
+                        if (edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) ||
+                           (edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                            
+                            guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
+                                continue
+                            }
+                            
+                            if let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
+                                edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
+                            }
                         }
-                        
-                        if let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
-                            edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
-                        }
+                        pos += 1
                     }
-                    pos += 1
+                }
+            }
+                
+            // update neighbours
+            let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
+            
+            for vertexNode in vertexNodes.childNodes {
+                if !pathArray.contains(Int((vertexNode.geometry?.name)!)!) {
+                    if (neighbours?.contains((vertexNode.geometry?.name)!))! {
+                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.gray
+                    } else if (vertexNode.geometry?.name)! != currentStep {
+                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                    }
                 }
             }
         } else {

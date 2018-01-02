@@ -162,4 +162,19 @@ extension AdjacencyList: Graphable {
         }
         return graph
     }
+    
+    func getNeighbours(for id: String?) -> [String] {
+        let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
+        var neighbours: [String] = []
+        
+        for (key, value) in (graph.adjacencyDict) {
+            if "\(key.data.uid)" == id {
+                for edge in value {
+                    neighbours.append("\(edge.destination.data.uid)")
+                }
+            }
+        }
+        return neighbours
+    }
+    
 }
