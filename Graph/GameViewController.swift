@@ -166,9 +166,7 @@ class GameViewController: UIViewController {
         pastelView.animationDuration = 10.0
         
         // Custom Color        
-        pastelView.setColors([UIColor(red: 247/255, green: 202/255, blue: 24/255, alpha: 1.0),
-                                UIColor(red: 255/255, green: 182/255, blue: 30/255, alpha: 1.0),
-                                UIColor(red: 247/255, green: 109/255, blue: 130/255, alpha: 1.0),
+        pastelView.setColors([ UIColor(red: 247/255, green: 109/255, blue: 130/255, alpha: 1.0),
                                 UIColor(red: 217/255, green: 68/255, blue: 82/255, alpha: 1.0),
                                 UIColor(red: 98/255, green: 221/255, blue: 189/255, alpha: 1.0),
                                 UIColor(red: 53/255, green: 187/255, blue: 155/255, alpha: 1.0),
@@ -258,7 +256,8 @@ class GameViewController: UIViewController {
         
         if geometry.name != "edge" {
             
-            if hamiltonian && pathArray.count > 0 && geometry.firstMaterial?.diffuse.contents as! UIColor != UIColor.gray {
+            let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
+            if hamiltonian && pathArray.count > 0 && !neighbours!.contains(geometry.name!) || (geometry.firstMaterial?.diffuse.contents as! UIColor == walkColor) {
                 return
             }
             
@@ -345,18 +344,18 @@ class GameViewController: UIViewController {
                 }
             }
                 
-            // update neighbours
-            let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
-            
-            for vertexNode in vertexNodes.childNodes {
-                if !pathArray.contains(Int((vertexNode.geometry?.name)!)!) {
-                    if (neighbours?.contains((vertexNode.geometry?.name)!))! {
-                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.gray
-                    } else if (vertexNode.geometry?.name)! != currentStep {
-                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.black
-                    }
-                }
-            }
+//            // update neighbours
+//            let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
+//
+//            for vertexNode in vertexNodes.childNodes {
+//                if !pathArray.contains(Int((vertexNode.geometry?.name)!)!) {
+//                    if (neighbours?.contains((vertexNode.geometry?.name)!))! {
+//                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.gray
+//                    } else if (vertexNode.geometry?.name)! != currentStep {
+//                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.black
+//                    }
+//                }
+//            }
         } else {
             for (_, value) in (adjacencyList.adjacencyDict) {
                 for edge in value {
