@@ -294,10 +294,11 @@ class GameViewController: UIViewController {
             }
             
             //game.playSound(node: scnScene.rootNode, name: "SpawnGood")
+            
+            pathArray.append(Int(geometry.name!)!)
+            currentStep = geometry.name!
         }
 
-        pathArray.append(Int(geometry.name!)!)
-        currentStep = geometry.name!
         
         updateCorrectEdges(level: activeLevel)
         
