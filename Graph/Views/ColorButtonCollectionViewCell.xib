@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,6 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undo" translatesAutoresizingMaskIntoConstraints="NO" id="fXh-uo-GSx">
+                    <rect key="frame" x="17.5" y="17.5" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="Kvd-Fl-3LB"/>
+                        <constraint firstAttribute="height" constant="25" id="MQH-HA-F6A"/>
+                    </constraints>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jza-E3-SqH" customClass="M13Checkbox" customModule="M13Checkbox">
                     <rect key="frame" x="8" y="8" width="44" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -28,13 +35,19 @@
             <constraints>
                 <constraint firstItem="Jza-E3-SqH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Bng-gr-Jjd"/>
                 <constraint firstItem="Jza-E3-SqH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OZK-um-HF6"/>
+                <constraint firstItem="fXh-uo-GSx" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Pgb-d2-uWK"/>
+                <constraint firstItem="fXh-uo-GSx" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aDv-6l-iJf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="checkbox" destination="Jza-E3-SqH" id="bMj-e6-IVt"/>
+                <outlet property="undoImage" destination="fXh-uo-GSx" id="buO-Rr-iiy"/>
             </connections>
             <point key="canvasLocation" x="-124" y="-250"/>
         </view>
     </objects>
+    <resources>
+        <image name="undo" width="100" height="100"/>
+    </resources>
 </document>

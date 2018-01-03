@@ -132,7 +132,6 @@ extension AdjacencyList: Graphable {
         
         // count colors needed
         for (key, _) in (graph.adjacencyDict) {
-            print(key.data.color)
             if !colorCount.contains(key.data.color) {
                 colorCount.append(key.data.color)
             }

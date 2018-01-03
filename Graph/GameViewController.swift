@@ -339,6 +339,10 @@ class GameViewController: UIViewController {
                             if let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
                                 edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
                             }
+                        } else if !isPartOfPath(start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
+                            edgeNodes.childNodes[pos].removeAllParticleSystems()
                         }
                         pos += 1
                     }
@@ -394,6 +398,17 @@ class GameViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func isPartOfPath(start: Int, end: Int) -> Bool {
+        for i in 0...pathArray.count-2 {
+            if (start == pathArray[i] && end == pathArray[i+1]) ||
+                (end == pathArray[i] && start == pathArray[i+1]) {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func setupSounds() {
@@ -638,6 +653,8 @@ extension GameViewController: UICollectionViewDataSource {
             return cell
         }
         
+        cell.checkbox.isHidden = hamiltonian ? true : false
+        cell.undoImage.isHidden = hamiltonian ? false : true
         cell.backgroundColor = hamiltonian ? walkColor : colors[indexPath.row]
         cell.layer.cornerRadius = cell.frame.size.width / 2
         cell.layer.borderWidth = 2
@@ -674,8 +691,44 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell: ColorButtonCollectionViewCell = collectionView.cellForItem(at: indexPath) as! ColorButtonCollectionViewCell
-        selectedColorIndex = indexPath.row
-        paintColor = cell.backgroundColor!
-        paintColorCollectionView.reloadData()
+        
+        guard let hamiltonian = activeLevel?.hamiltonian else {
+            return
+        }
+        
+        if hamiltonian && pathArray.count > 0 {
+            for node in vertexNodes.childNodes {
+                if node.geometry?.name! == "\(String(describing: pathArray.last!))" {
+                    node.geometry?.materials.first?.diffuse.contents = UIColor.black
+                    node.removeAllParticleSystems()
+                    
+                    if let _ = activeLevel?.adjacencyList {
+                        activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: node.geometry?.name, color: UIColor.black)
+                    }
+                    
+                    _ = pathArray.removeLast()
+                    if let newStep = pathArray.last {
+                        currentStep = "\(newStep)"
+                    }
+                    
+                    if pathArray.count > 1 {
+                        updateCorrectEdges(level: activeLevel)
+                    } else {
+                        var pos = 0
+                        for _ in edgeArray {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
+                            edgeNodes.childNodes[pos].removeAllParticleSystems()
+                            pos += 1
+                        }
+                    }
+                    break
+                }
+            }
+        } else {
+            selectedColorIndex = indexPath.row
+            paintColor = cell.backgroundColor!
+            paintColorCollectionView.reloadData()
+        }
     }
 }
