@@ -76,7 +76,11 @@ class Levels: NSObject {
                 continue
             }
             
-            gameLevels.append(Level(name: levelDict["name"] as? String, numberOfColorsProvided: levelDict["num_colors"] as? Int, hamiltonian: hamiltonian, adjacencyList: adjacencyList))
+            guard let planar: Bool = levelDict["planar"] as? Bool else {
+                continue
+            }
+            
+            gameLevels.append(Level(name: levelDict["name"] as? String, numberOfColorsProvided: levelDict["num_colors"] as? Int, hamiltonian: hamiltonian, planar: planar, adjacencyList: adjacencyList))
         }
     }
     
@@ -126,6 +130,6 @@ class Levels: NSObject {
             adjacencyList.add(.undirected, from: vertices[edgeStart], to: vertices[edgeEnd])
         }
         
-        return Level(name: "random", numberOfColorsProvided: 3, hamiltonian: false, adjacencyList: adjacencyList)
+        return Level(name: "random", numberOfColorsProvided: 3, hamiltonian: false, planar: false, adjacencyList: adjacencyList)
     }
 }

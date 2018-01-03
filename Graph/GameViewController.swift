@@ -94,6 +94,10 @@ class GameViewController: UIViewController {
         scnView.antialiasingMode = .multisampling4X
         scnView.delegate = self
         scnView.isPlaying = true
+        
+        axisPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesturePlanarMove(gestureRecognize:)))
+        scnView.addGestureRecognizer(axisPanGestureRecognizer!)
+        axisPanGestureRecognizer?.isEnabled = false
     }
     
     func setupScene() {
@@ -138,10 +142,6 @@ class GameViewController: UIViewController {
         Shapes.spawnShape(type: .Custom, position: SCNVector3(x: 0, y: 0, z: 0), color: UIColor.white, id: 0, node: selectedNode)
         debugNodes.addChildNode(selectedNode)
         scnScene.rootNode.addChildNode(debugNodes)
-        
-        axisPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture(gestureRecognize:)))
-        scnView.addGestureRecognizer(axisPanGestureRecognizer!)
-        axisPanGestureRecognizer?.isEnabled = false
     }
     
     func setupInteractions() {
@@ -255,9 +255,23 @@ class GameViewController: UIViewController {
         }
         
         if geometry.name != "edge" {
-            
+            let activeColor = hamiltonian ? walkColor : paintColor
+
             let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
             if hamiltonian && pathArray.count > 0 && !neighbours!.contains(geometry.name!) || (geometry.firstMaterial?.diffuse.contents as! UIColor == walkColor) {
+                return
+            }
+            
+            if (activeLevel?.planar)! {
+                if selectedNode == node {
+                    selectedNode = nil
+                    axisPanGestureRecognizer?.isEnabled = false
+                    geometry.materials.first?.diffuse.contents = UIColor.black
+                } else {
+                    selectedNode = node
+                    axisPanGestureRecognizer?.isEnabled = true
+                    geometry.materials.first?.diffuse.contents = activeColor
+                }
                 return
             }
             
@@ -278,8 +292,6 @@ class GameViewController: UIViewController {
                     }
                 }
             }
-            
-            let activeColor = hamiltonian ? walkColor : paintColor
             
             geometry.materials.first?.diffuse.contents = activeColor
             geometry.materials.first?.emission.contents = UIColor.black
@@ -610,6 +622,44 @@ class GameViewController: UIViewController {
             gestureRecognize.setTranslation(CGPoint.zero, in: gestureRecognize.view!)
         } else if gestureRecognize.state == .ended {
             print(selectedNode.position)
+        }
+    }
+    
+    @objc func panGesturePlanarMove(gestureRecognize: UIPanGestureRecognizer) {
+        if gestureRecognize.state == .changed {
+            let translation = gestureRecognize.translation(in: gestureRecognize.view!)
+         
+            let position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 75), y:selectedNode.position.y - Float(translation.y / 75), z:selectedNode.position.z)
+            selectedNode.position = position
+            
+            gestureRecognize.setTranslation(CGPoint.zero, in: gestureRecognize.view!)
+            
+            activeLevel?.adjacencyList?.updateNodePosition(id: selectedNode.geometry?.name, newPosition: position)
+            
+            guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
+                return
+            }
+
+            edgeNodes.removeFromParentNode()
+            edgeNodes = SCNNode()
+            edgeArray.removeAll()
+            
+            for (_, value) in adjacencyDict {
+
+                // Create edges
+                for edge in value {
+                    if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
+                        let node = SCNNode()
+                        edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.1, color: .black))
+
+                        edgeArray.append(edge)
+                    }
+                }
+            }
+
+            scnScene.rootNode.addChildNode(edgeNodes)
+            vertexNodes.removeAllAnimations()
+            edgeNodes.removeAllAnimations()
         }
     }
     

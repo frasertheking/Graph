@@ -165,6 +165,15 @@ extension AdjacencyList: Graphable {
         return graph
     }
     
+    func updateNodePosition(id: String?, newPosition: SCNVector3) {
+        let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
+        for (key, _) in (graph.adjacencyDict) {
+            if "\(key.data.uid)" == id {
+                key.data.position = newPosition
+            }
+        }
+    }
+    
     func getNeighbours(for id: String?) -> [String] {
         let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
         var neighbours: [String] = []

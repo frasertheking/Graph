@@ -22,4 +22,5 @@ protocol Graphable {
     func getKColor() -> Int
     func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node>
     func getNeighbours(for id: String?) -> [String]
+    func updateNodePosition(id: String?, newPosition: SCNVector3)
 }
