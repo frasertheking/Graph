@@ -4,8 +4,6 @@
 <array>
 	<dict>
 		<key>walk</key>
-		<false/>
-		<key>planar</key>
 		<true/>
 		<key>num_colors</key>
 		<integer>1</integer>

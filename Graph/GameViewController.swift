@@ -34,6 +34,7 @@ class GameViewController: UIViewController {
     var selectedColorIndex: Int = 0
     var pathArray: [Int] = []
     var currentStep: String = ""
+    var firstStep: String = ""
     
     // DEBUG
     var debug = false
@@ -257,9 +258,20 @@ class GameViewController: UIViewController {
         if geometry.name != "edge" {
             let activeColor = hamiltonian ? walkColor : paintColor
 
-            let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
-            if hamiltonian && pathArray.count > 0 && !neighbours!.contains(geometry.name!) || (geometry.firstMaterial?.diffuse.contents as! UIColor == walkColor) {
-                return
+            if hamiltonian {
+                let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
+                
+                if geometry.name == firstStep {
+                    if !(activeLevel?.adjacencyList?.isLastStep())! {
+                        return
+                    }
+                } else if (geometry.firstMaterial?.diffuse.contents as! UIColor == walkColor) {
+                    return
+                }
+                
+                if pathArray.count > 0 && !neighbours!.contains(geometry.name!) {
+                    return
+                }
             }
             
             if (activeLevel?.planar)! {
@@ -308,15 +320,21 @@ class GameViewController: UIViewController {
             //game.playSound(node: scnScene.rootNode, name: "SpawnGood")
             
             pathArray.append(Int(geometry.name!)!)
+            if currentStep == "" {
+                firstStep = geometry.name!
+            }
             currentStep = geometry.name!
         }
 
-        
         updateCorrectEdges(level: activeLevel)
         
         if let _ = activeLevel?.adjacencyList, let hamiltonian: Bool = activeLevel?.hamiltonian {
             if (activeLevel?.adjacencyList!.checkIfSolved(forType: (hamiltonian ? GraphType.hamiltonian : GraphType.kColor)))! {
-                self.implodeGraph()
+                if hamiltonian && firstStep == currentStep {
+                    self.implodeGraph()
+                } else if !hamiltonian {
+                    self.implodeGraph()
+                }
             }
         }
     }
@@ -668,6 +686,7 @@ class GameViewController: UIViewController {
         edgeNodes.removeFromParentNode()
         pathArray.removeAll()
         currentStep = ""
+        firstStep = ""
         
         currentLevel += 1
         refreshColorsInCollectionView()
@@ -771,6 +790,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                             edgeNodes.childNodes[pos].removeAllParticleSystems()
                             pos += 1
                         }
+                        firstStep = ""
+                        currentStep = ""
                     }
                     break
                 }

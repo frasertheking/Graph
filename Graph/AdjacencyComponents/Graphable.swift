@@ -19,7 +19,7 @@ protocol Graphable {
     
     // Helper functions
     func checkIfSolved(forType type: GraphType) -> Bool
-    func getKColor() -> Int
+    func isLastStep() -> Bool 
     func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node>
     func getNeighbours(for id: String?) -> [String]
     func updateNodePosition(id: String?, newPosition: SCNVector3)

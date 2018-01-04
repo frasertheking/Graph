@@ -16,11 +16,11 @@ class Level: NSObject {
     var planar: Bool?
     var adjacencyList: AdjacencyList<Node>?
     
-    init(name: String?, numberOfColorsProvided: Int?, hamiltonian: Bool?, planar: Bool?, adjacencyList: AdjacencyList<Node>?) {
+    init(name: String?, numberOfColorsProvided: Int?, hamiltonian: Bool?, adjacencyList: AdjacencyList<Node>?) {
         self.name = name
         self.numberOfColorsProvided = numberOfColorsProvided
         self.hamiltonian = hamiltonian
-        self.planar = planar
+        self.planar = false
         self.adjacencyList = adjacencyList
     }
 }

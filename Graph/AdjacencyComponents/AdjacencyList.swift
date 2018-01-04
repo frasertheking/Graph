@@ -97,47 +97,17 @@ extension AdjacencyList: Graphable {
         return true
     }
     
-    // TODO: Actually finish 
-    func getKColor() -> Int {
-        let colors: [UIColor] = [.customRed(), .customGreen(), .customBlue(), .customPurple(), .customOrange(), .cyan]
+    func isLastStep() -> Bool {
         let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
-
-        // USE BACKTRACKING?
-        // FIRST PASS TO CATALOGUE ALL EDGES
         
-        // solve graph
         var count = 0
-        for (key, value) in (graph.adjacencyDict) {
-            if count == 0 {
-                key.data.color = colors[0]
-            } else {
-                var colorIndex = -1
-
-                for (key2, value2) in (graph.adjacencyDict) {
-
-                    for edge in value {
-                        if colors.index(of: getlowestColor(for: edge.destination.data.color))! > colorIndex {
-                            colorIndex = colors.index(of: getlowestColor(for: edge.destination.data.color))!
-                        }
-                    }
-                }
-                
-                key.data.color = colors[colorIndex]
-            }
-            
-            count += 1
-        }
-        
-        var colorCount = [UIColor]()
-        
-        // count colors needed
         for (key, _) in (graph.adjacencyDict) {
-            if !colorCount.contains(key.data.color) {
-                colorCount.append(key.data.color)
+            if key.data.color == UIColor.goldColor() {
+                count += 1
             }
         }
-        
-        return colorCount.count
+
+        return (count == graph.adjacencyDict.count) ? true : false
     }
     
     func getlowestColor(for node_color: UIColor) -> UIColor {
