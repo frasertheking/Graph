@@ -28,7 +28,6 @@ class GameViewController: UIViewController {
     var activeLevel: Level?
     var animating: Bool = false
     var currentLevel: Int = 0
-    var colors: [UIColor] = [.customRed(), .customGreen(), .customBlue(), .customPurple(), .customOrange(), .cyan]
     var walkColor = UIColor.goldColor()
     var selectedColorIndex: Int = 0
     var pathArray: [Int] = []
@@ -520,7 +519,7 @@ class GameViewController: UIViewController {
         }) { (finished) in
             self.paintColorCollectionView.reloadData()
             self.selectedColorIndex = 0
-            self.paintColor = self.colors[0]
+            self.paintColor = kColors[0]
             self.collectionViewBottomConstraint.constant = 16
             
             UIView.animate(withDuration: 0.3, delay: 0.2, options: .curveEaseInOut, animations: {
@@ -709,7 +708,7 @@ extension GameViewController: UICollectionViewDataSource {
         
         cell.checkbox.isHidden = hamiltonian ? true : false
         cell.undoImage.isHidden = hamiltonian ? false : true
-        cell.backgroundColor = hamiltonian ? walkColor : colors[indexPath.row]
+        cell.backgroundColor = hamiltonian ? walkColor : kColors[indexPath.row]
         cell.layer.cornerRadius = cell.frame.size.width / 2
         cell.layer.borderWidth = 2
         cell.checkbox.stateChangeAnimation = .expand(.fill)
@@ -720,7 +719,7 @@ extension GameViewController: UICollectionViewDataSource {
             addPulse(to: cell)
         } else {
             cell.checkbox.setCheckState(.unchecked, animated: true)
-            cell.layer.borderColor = colors[indexPath.row].darker()?.cgColor
+            cell.layer.borderColor = kColors[indexPath.row].darker()?.cgColor
             cell.layer.removeAllAnimations()
         }
         cell.checkbox.hideBox = true

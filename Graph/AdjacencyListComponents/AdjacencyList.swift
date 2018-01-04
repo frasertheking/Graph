@@ -12,6 +12,8 @@ import SceneKit
 public enum GraphType {
     case kColor
     case hamiltonian
+    case planar
+    case euler
 }
 
 open class AdjacencyList<T: Hashable> {
@@ -82,6 +84,10 @@ extension AdjacencyList: Graphable {
                     return false
                 }
             }
+        case .planar:
+            return false
+        case .euler:
+            return false
         default:
             for (_, value) in (graph.adjacencyDict) {
                 for edge in value {
@@ -110,19 +116,17 @@ extension AdjacencyList: Graphable {
         return (count == graph.adjacencyDict.count) ? true : false
     }
     
-    func getlowestColor(for node_color: UIColor) -> UIColor {
-        let colors: [UIColor] = [.customRed(), .customGreen(), .customBlue(), .customPurple(), .customOrange(), .cyan]
-        
+    func getlowestColor(for node_color: UIColor) -> UIColor {        
         var count = 0
-        for color in colors {
+        for color in kColors {
             count += 1
             
             if node_color == color {
-                return colors[count]
+                return kColors[count]
             }
         }
         
-        return colors[0]
+        return kColors[0]
     }
     
     func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node> {

@@ -43,4 +43,13 @@ extension SCNVector3 {
             return (distance)
         }
     }
+    
+    func normalizeVector() -> SCNVector3 {
+        let length = sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
+        if length == 0 {
+            return SCNVector3(0.0, 0.0, 0.0)
+        }
+        
+        return SCNVector3( self.x / length, self.y / length, self.z / length)
+    }
 }

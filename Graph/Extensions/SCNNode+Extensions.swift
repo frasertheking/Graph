@@ -11,16 +11,6 @@ import SceneKit
 
 extension SCNNode {
     
-    func normalizeVector(_ iv: SCNVector3) -> SCNVector3 {
-        let length = sqrt(iv.x * iv.x + iv.y * iv.y + iv.z * iv.z)
-        if length == 0 {
-            return SCNVector3(0.0, 0.0, 0.0)
-        }
-        
-        return SCNVector3( iv.x / length, iv.y / length, iv.z / length)
-        
-    }
-    
     // Function which automatically creates "edges" between nodes defined in the level    
     func buildLineInTwoPointsWithRotation(from startPoint: SCNVector3,
                                           to endPoint: SCNVector3,
@@ -45,13 +35,13 @@ extension SCNNode {
         
         self.geometry = cyl
         
-        let ov = SCNVector3(0, l/2.0,0)
+        let ov = SCNVector3(0, l/2.0, 0)
         let nv = SCNVector3((endPoint.x - startPoint.x)/2.0, (endPoint.y - startPoint.y)/2.0,
                             (endPoint.z-startPoint.z)/2.0)
         
         let av = SCNVector3( (ov.x + nv.x)/2.0, (ov.y+nv.y)/2.0, (ov.z+nv.z)/2.0)
         
-        let av_normalized: SCNVector3 = normalizeVector(av)
+        let av_normalized: SCNVector3 = av.normalizeVector()
         let q0 = Float(0.0)
         let q1 = Float(av_normalized.x)
         let q2 = Float(av_normalized.y)
@@ -97,7 +87,6 @@ extension SCNNode {
     
     
     func triangleFrom(vector1: SCNVector3, vector2: SCNVector3, vector3: SCNVector3) -> SCNNode {
-        
         let indices: [Int32] = [0, 1, 2]
         
         let source = SCNGeometrySource(vertices: [vector1, vector2, vector3])
