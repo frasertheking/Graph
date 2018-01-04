@@ -104,6 +104,7 @@ class Levels: NSObject {
         return T(value)
     }
     
+    // TODO: Improve this generation and abstract to other graph types
     func getRandomLevel() -> Level {
         let adjacencyList = AdjacencyList<Node>()
         let numberOfVertices = randomNumber(inRange: 4...8)

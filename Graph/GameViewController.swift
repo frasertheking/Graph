@@ -21,7 +21,6 @@ class GameViewController: UIViewController {
     var edgeNodes: SCNNode!
     var edgeArray: [Edge<Node>]!
     var vertexNodes: SCNNode!
-    var game = GameHelper.sharedInstance
     var colorSelectNodes: SCNNode!
 
     // GLOBAL VARS
@@ -121,7 +120,6 @@ class GameViewController: UIViewController {
         scnView.pointOfView?.rotation = SCNVector4(x: 0, y: 0, z: 0, w: 0)
                 
         createObjects()
-        setupSounds()
         explodeGraph()
         
         Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(rotateGraphObject), userInfo: nil, repeats: false)
@@ -439,19 +437,6 @@ class GameViewController: UIViewController {
         }
         
         return false
-    }
-    
-    func setupSounds() {
-        game.loadSound(name: "ExplodeGood",
-                       fileNamed: "Graph.scnassets/Sounds/ExplodeGood.wav")
-        game.loadSound(name: "SpawnGood",
-                       fileNamed: "Graph.scnassets/Sounds/SpawnGood.wav")
-        game.loadSound(name: "ExplodeBad",
-                       fileNamed: "Graph.scnassets/Sounds/ExplodeBad.wav")
-        game.loadSound(name: "SpawnBad",
-                       fileNamed: "Graph.scnassets/Sounds/SpawnBad.wav")
-        game.loadSound(name: "GameOver",
-                       fileNamed: "Graph.scnassets/Sounds/GameOver.wav")
     }
     
     // Animations
@@ -790,8 +775,10 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                             edgeNodes.childNodes[pos].removeAllParticleSystems()
                             pos += 1
                         }
-                        firstStep = ""
-                        currentStep = ""
+                        if pathArray.count == 0 {
+                            firstStep = ""
+                            currentStep = ""
+                        }
                     }
                     break
                 }

@@ -20,6 +20,8 @@ class Level: NSObject {
         self.name = name
         self.numberOfColorsProvided = numberOfColorsProvided
         self.hamiltonian = hamiltonian
+        
+        // TODO: Fix planar code
         self.planar = false
         self.adjacencyList = adjacencyList
     }

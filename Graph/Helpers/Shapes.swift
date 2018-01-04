@@ -13,69 +13,39 @@ import SceneKit.ModelIO
 
 public enum Shapes:Int {
     
-    case Box = 0
-    case Sphere
-    case Pyramid
-    case Torus
-    case Capsule
+    case Sphere = 0
     case Cylinder
-    case Cone
-    case Tube
     case Custom
     
-    static func random() -> Shapes {
-        let maxValue = Tube.rawValue
-        let rand = arc4random_uniform(UInt32(maxValue + 1))
-        return Shapes(rawValue: Int(rand))!
+    struct ShapeConstants {
+        static let sphereRadius: CGFloat = 0.5
+        static let cylinderRadius: CGFloat = 0.1
+        static let cylinderHeight: CGFloat = 3.1
+        static let customShapeName = "node.dae"
+        static let primaryMaterialColor = UIColor.black
+        static let secondaryMaterialColor = UIColor.white
     }
     
     static func spawnShape(type: Shapes, position: SCNVector3, color: UIColor, id: Int, node: SCNNode) {
         var geometry:SCNGeometry
         
         switch type {
-        case .Box:
-            geometry = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.0)
         case .Sphere:
-            geometry = SCNSphere(radius: 0.5)
-        case .Pyramid:
-            geometry = SCNPyramid(width: 1.0, height: 1.0, length: 1.0)
-        case .Torus:
-            geometry = SCNTorus(ringRadius: 0.5, pipeRadius: 0.25)
-        case .Capsule:
-            geometry = SCNCapsule(capRadius: 0.3, height: 2.5)
+            geometry = SCNSphere(radius: ShapeConstants.sphereRadius)
         case .Cylinder:
-            geometry = SCNCylinder(radius: 0.1, height: 3.1)
-        case .Cone:
-            geometry = SCNCone(topRadius: 0.25, bottomRadius: 0.5, height: 1.0)
-        case .Tube:
-            geometry = SCNTube(innerRadius: 0.25, outerRadius: 0.5, height: 1.0)
+            geometry = SCNCylinder(radius: ShapeConstants.cylinderRadius, height: ShapeConstants.cylinderHeight)
         case .Custom:
             
-            let geoScene = SCNScene(named: "node.dae")
-            geometry = (geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry!)!
+            let geoScene = SCNScene(named: ShapeConstants.customShapeName)
+            guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
+                return
+            }
             
-            
-            // Load custom object from OBJ geom
-//            let bundle = Bundle.main
-//            let path = bundle.path(forResource: "test", ofType: "obj")
-//
-//            guard let objPath = path else {
-//                return
-//            }
-//
-//            let url = NSURL(fileURLWithPath: objPath)
-//            let asset = MDLAsset(url: url as URL)
-//            let object = asset.object(at: 0)
-//            let node = SCNNode(mdlObject: object)
-//
-//            guard let nodeGeom = node.geometry else {
-//                return
-//            }
-//            geometry = nodeGeom
+            geometry = geom
         }
         
-        geometry.materials.first?.diffuse.contents = UIColor.black
-        geometry.materials[1].diffuse.contents = UIColor.white
+        geometry.materials.first?.diffuse.contents = ShapeConstants.primaryMaterialColor
+        geometry.materials[1].diffuse.contents = ShapeConstants.secondaryMaterialColor
         
         if type == .Custom {
             geometry.name = "\(id)"
@@ -83,7 +53,7 @@ public enum Shapes:Int {
         
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.position = position
-        geometryNode.scale = SCNVector3(0.6, 0.6, 0.6)
+        geometryNode.scale = SCNVector3(ShapeConstants.sphereRadius, ShapeConstants.sphereRadius, ShapeConstants.sphereRadius)
         
         node.addChildNode(geometryNode)
     }

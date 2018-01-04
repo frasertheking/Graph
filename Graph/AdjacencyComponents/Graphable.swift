@@ -17,7 +17,7 @@ protocol Graphable {
     func add(_ type: EdgeType, from source: Vertex<Element>, to destination: Vertex<Element>)
     func edges(from source: Vertex<Element>) -> [Edge<Element>]?
     
-    // Helper functions
+    // Helpers
     func checkIfSolved(forType type: GraphType) -> Bool
     func isLastStep() -> Bool 
     func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node>
