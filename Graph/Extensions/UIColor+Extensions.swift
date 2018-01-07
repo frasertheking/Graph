@@ -153,7 +153,7 @@ extension UIColor {
         skScene.backgroundColor = UIColor.clear
         let path = Bundle.main.path(forResource: "Background", ofType: "sks")
         let backgroundParticle = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as! SKEmitterNode
-        backgroundParticle.position = CGPoint(x: view.frame.size.width/2, y: view.frame.size.height/2)
+        backgroundParticle.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
         backgroundParticle.targetNode = skScene.scene
         backgroundParticle.particlePositionRange = CGVector(dx: view.frame.size.width, dy: view.frame.size.height)
         skScene.scene?.addChild(backgroundParticle)

@@ -72,15 +72,15 @@ class Levels: NSObject {
                 }
             }
             
-            guard let hamiltonian: Bool = levelDict["walk"] as? Bool else {
+            guard let graphTypeInt: Int = levelDict["graph_type"] as? Int else {
                 continue
             }
             
-//            guard let planar: Bool = levelDict["planar"] as? Bool else {
-//                continue
-//            }
+            guard let graphType: GraphType = GraphType(rawValue: graphTypeInt) else {
+                return
+            }
             
-            gameLevels.append(Level(name: levelDict["name"] as? String, numberOfColorsProvided: levelDict["num_colors"] as? Int, hamiltonian: hamiltonian, adjacencyList: adjacencyList))
+            gameLevels.append(Level(name: levelDict["name"] as? String, numberOfColorsProvided: levelDict["num_colors"] as? Int, graphType: graphType, adjacencyList: adjacencyList))
         }
     }
     
@@ -131,6 +131,6 @@ class Levels: NSObject {
             adjacencyList.add(.undirected, from: vertices[edgeStart], to: vertices[edgeEnd])
         }
         
-        return Level(name: "random", numberOfColorsProvided: 3, hamiltonian: false, adjacencyList: adjacencyList)
+        return Level(name: "random", numberOfColorsProvided: 3, graphType: GraphType.kColor, adjacencyList: adjacencyList)
     }
 }

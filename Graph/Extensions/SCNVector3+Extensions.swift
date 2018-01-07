@@ -37,7 +37,7 @@ extension SCNVector3 {
         let zd = receiver.z - self.z
         let distance = Float(sqrt(xd * xd + yd * yd + zd * zd))
 
-        if (distance < 0){
+        if (distance < 0) {
             return (distance * -1)
         } else {
             return (distance)

@@ -9,8 +9,8 @@
 import Foundation
 import SceneKit
 
-public enum GraphType {
-    case kColor
+public enum GraphType: Int {
+    case kColor = 0
     case hamiltonian
     case planar
     case euler
@@ -168,11 +168,11 @@ extension AdjacencyList: Graphable {
             return
         }
         
-        guard let hamiltonian = currentLevel.hamiltonian else {
+        guard let graphType = currentLevel.graphType else {
             return
         }
         
-        if hamiltonian {
+        if graphType == .hamiltonian {
             if pathArray.count > 1 {
                 for i in 0...pathArray.count-2 {
                     var pos = 0

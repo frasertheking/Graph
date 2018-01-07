@@ -26,7 +26,6 @@ class GameViewController: UIViewController {
     // GLOBAL VARS
     var paintColor: UIColor = UIColor.customRed()
     var activeLevel: Level?
-    var animating: Bool = false
     var currentLevel: Int = 0
     var walkColor = UIColor.goldColor()
     var selectedColorIndex: Int = 0
@@ -40,9 +39,9 @@ class GameViewController: UIViewController {
     @IBOutlet var yAxisButton: UIButton!
     @IBOutlet var zAxisButton: UIButton!
     @IBOutlet var spawnButton: UIButton!
-    var axisPanGestureRecognizer: UIPanGestureRecognizer?
+    var axisPanGestureRecognizer: UIPanGestureRecognizer!
     var debugNodes: SCNNode!
-    var selectedAxis: Int = -1
+    var selectedAxis = axis.none
     var selectedNode: SCNNode!
     
     // UI Elements
@@ -77,6 +76,13 @@ class GameViewController: UIViewController {
         static let kCollectionViewBottomOffsetShowing: CGFloat = -115
         static let kCollectionViewBottomOffsetHidden: CGFloat = 16
         static let kDefaultCellsInSection: Int = 3
+    }
+    
+    enum axis: Int {
+        case x = 0
+        case y
+        case z
+        case none
     }
 
     override func prefersHomeIndicatorAutoHidden() -> Bool {
@@ -117,7 +123,7 @@ class GameViewController: UIViewController {
         scnView.isPlaying = true
         
         axisPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesturePlanarMove(gestureRecognize:)))
-        scnView.addGestureRecognizer(axisPanGestureRecognizer!)
+        scnView.addGestureRecognizer(axisPanGestureRecognizer)
         axisPanGestureRecognizer?.isEnabled = false
     }
     
@@ -158,9 +164,9 @@ class GameViewController: UIViewController {
         debugNodes = SCNNode()
         debugNodes.name = "debug"
         
-        scnView.removeGestureRecognizer(axisPanGestureRecognizer!)
+        scnView.removeGestureRecognizer(axisPanGestureRecognizer)
         axisPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture(gestureRecognize:)))
-        scnView.addGestureRecognizer(axisPanGestureRecognizer!)
+        scnView.addGestureRecognizer(axisPanGestureRecognizer)
         axisPanGestureRecognizer?.isEnabled = false
 
         xAxisButton.isHidden = false
@@ -226,30 +232,39 @@ class GameViewController: UIViewController {
             return
         }
         
-        guard let hamiltonian: Bool = activeLevel?.hamiltonian else {
+        guard let geoName = geometry.name else {
+            return
+        }
+        
+        guard let graphType: GraphType = activeLevel?.graphType else {
             return
         }
         
         if geometry.name != "edge" {
-            let activeColor = hamiltonian ? walkColor : paintColor
+            let activeColor = (graphType == .hamiltonian) ? walkColor : paintColor
 
-            if hamiltonian {
-                let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
+            switch graphType {
+            case .hamiltonian:
+                guard let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep) else {
+                    return
+                }
                 
                 if geometry.name == firstStep {
-                    if !(activeLevel?.adjacencyList?.isLastStep())! {
+                    guard let isLastStep = activeLevel?.adjacencyList?.isLastStep() else {
                         return
                     }
-                } else if (geometry.firstMaterial?.diffuse.contents as! UIColor == walkColor) {
+                    
+                    if !isLastStep {
+                        return
+                    }
+                } else if (geometry.firstMaterial?.diffuse.contents as? UIColor == walkColor) {
                     return
                 }
                 
-                if pathArray.count > 0 && !neighbours!.contains(geometry.name!) {
+                if pathArray.count > 0 && !neighbours.contains(geoName) {
                     return
                 }
-            }
-            
-            if (activeLevel?.planar)! {
+            case .planar:
                 if selectedNode == node {
                     selectedNode = nil
                     axisPanGestureRecognizer?.isEnabled = false
@@ -260,6 +275,10 @@ class GameViewController: UIViewController {
                     geometry.materials.first?.diffuse.contents = activeColor
                 }
                 return
+            case .kColor:
+                break
+            case .euler:
+                break
             }
             
             if debug {
@@ -271,15 +290,10 @@ class GameViewController: UIViewController {
             let scaleDownAction = SCNAction.scale(by: GameConstants.kScaleShrink, duration: GameConstants.kVeryShortTimeDelay)
             scaleDownAction.timingMode = .easeInEaseOut
             
-            if !animating {
-                animating = true
-                node.runAction(scaleUpAction) {
-                    node.runAction(scaleDownAction) {
-                        self.animating = false
-                    }
-                }
+            node.runAction(scaleUpAction) {
+                node.runAction(scaleDownAction) {}
             }
-            
+
             geometry.materials.first?.diffuse.contents = activeColor
             geometry.materials.first?.emission.contents = UIColor.defaultVertexColor()
             
@@ -292,20 +306,23 @@ class GameViewController: UIViewController {
                 activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: geometry.name, color: activeColor)
             }
             
-            pathArray.append(Int(geometry.name!)!)
-            if currentStep == "" {
-                firstStep = geometry.name!
+            if let nameToInt = Int(geoName) {
+                pathArray.append(nameToInt)
             }
-            currentStep = geometry.name!
+            
+            if currentStep == "" {
+                firstStep = geoName
+            }
+            currentStep = geoName
         }
 
         activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
         
-        if let _ = activeLevel?.adjacencyList, let hamiltonian: Bool = activeLevel?.hamiltonian {
-            if (activeLevel?.adjacencyList!.checkIfSolved(forType: (hamiltonian ? GraphType.hamiltonian : GraphType.kColor)))! {
-                if hamiltonian && firstStep == currentStep {
+        if let list = activeLevel?.adjacencyList {
+            if list.checkIfSolved(forType: graphType) {
+                if (graphType == .hamiltonian) && firstStep == currentStep {
                     GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
-                } else if !hamiltonian {
+                } else if !(graphType == .hamiltonian) {
                     GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
                 }
             }
@@ -333,19 +350,24 @@ class GameViewController: UIViewController {
         let hitResults = scnView.hitTest(location, options: nil)
         
         if hitResults.count > 0 {
-            let result = hitResults.first!
-            handleTouchFor(node: result.node)
+            if let result = hitResults.first {
+                handleTouchFor(node: result.node)
+            }
         }
     }
     
     @objc func panGesturePlanarMove(gestureRecognize: UIPanGestureRecognizer) {
         if gestureRecognize.state == .changed {
-            let translation = gestureRecognize.translation(in: gestureRecognize.view!)
+            guard let recognizerView = gestureRecognize.view else {
+                return
+            }
+            
+            let translation = gestureRecognize.translation(in: recognizerView)
             
             let position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 75), y:selectedNode.position.y - Float(translation.y / 75), z:selectedNode.position.z)
             selectedNode.position = position
             
-            gestureRecognize.setTranslation(CGPoint.zero, in: gestureRecognize.view!)
+            gestureRecognize.setTranslation(CGPoint.zero, in: recognizerView)
             
             activeLevel?.adjacencyList?.updateNodePosition(id: selectedNode.geometry?.name, newPosition: position)
             
@@ -390,12 +412,12 @@ class GameViewController: UIViewController {
     
     // DEBUG MODE CODE
     @IBAction func debugXPress() {
-        if selectedAxis == 0 {
-            selectedAxis = -1
+        if selectedAxis == .x {
+            selectedAxis = .none
             xAxisButton.backgroundColor = .white
             editModeDeactivate()
         } else {
-            selectedAxis = 0
+            selectedAxis = .x
             xAxisButton.backgroundColor = .customBlue()
             editModeActivate()
         }
@@ -404,12 +426,12 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func debugYPress() {
-        if selectedAxis == 1 {
-            selectedAxis = -1
+        if selectedAxis == .y {
+            selectedAxis = .none
             yAxisButton.backgroundColor = .white
             editModeDeactivate()
         } else {
-            selectedAxis = 1
+            selectedAxis = .y
             yAxisButton.backgroundColor = .customBlue()
             editModeActivate()
         }
@@ -418,12 +440,12 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func debugZPress() {
-        if selectedAxis == 2 {
-            selectedAxis = -1
+        if selectedAxis == .z {
+            selectedAxis = .none
             zAxisButton.backgroundColor = .white
             editModeDeactivate()
         } else {
-            selectedAxis = 2
+            selectedAxis = .z
             zAxisButton.backgroundColor = .customBlue()
             editModeActivate()
         }
@@ -449,18 +471,24 @@ class GameViewController: UIViewController {
     
     @objc func panGesture(gestureRecognize: UIPanGestureRecognizer){
         if gestureRecognize.state == .changed {
-            let translation = gestureRecognize.translation(in: gestureRecognize.view!)
-            
-            switch selectedAxis {
-            case 0:
-                selectedNode.position = SCNVector3(x:selectedNode.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor), y:selectedNode.position.y, z:selectedNode.position.z)
-            case 1:
-                selectedNode.position = SCNVector3(x:selectedNode.position.x, y:selectedNode.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor), z:selectedNode.position.z)
-            default:
-                selectedNode.position = SCNVector3(x:selectedNode.position.x, y:selectedNode.position.y, z:selectedNode.position.z - Float(translation.x / GameConstants.kPanTranslationScaleFactor))
+            guard let recognizerView = gestureRecognize.view else {
+                return
             }
             
-            gestureRecognize.setTranslation(CGPoint.zero, in: gestureRecognize.view!)
+            let translation = gestureRecognize.translation(in: recognizerView)
+            
+            switch selectedAxis {
+            case .x:
+                selectedNode.position = SCNVector3(x:selectedNode.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor), y:selectedNode.position.y, z:selectedNode.position.z)
+            case .y:
+                selectedNode.position = SCNVector3(x:selectedNode.position.x, y:selectedNode.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor), z:selectedNode.position.z)
+            case .z:
+                selectedNode.position = SCNVector3(x:selectedNode.position.x, y:selectedNode.position.y, z:selectedNode.position.z - Float(translation.x / GameConstants.kPanTranslationScaleFactor))
+            default:
+                break
+            }
+            
+            gestureRecognize.setTranslation(CGPoint.zero, in: recognizerView)
         } else if gestureRecognize.state == .ended {
             // Print & record final location
             print(selectedNode.position)
@@ -493,13 +521,13 @@ extension GameViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GameConstants.kPaintCellReuseIdentifier, for: indexPath as IndexPath) as! ColorButtonCollectionViewCell
         
-        guard let hamiltonian = activeLevel?.hamiltonian else {
+        guard let graphType = activeLevel?.graphType else {
             return cell
         }
         
-        cell.checkbox.isHidden = hamiltonian ? true : false
-        cell.undoImage.isHidden = hamiltonian ? false : true
-        cell.backgroundColor = hamiltonian ? walkColor : kColors[indexPath.row]
+        cell.checkbox.isHidden = (graphType == .hamiltonian) ? true : false
+        cell.undoImage.isHidden = (graphType == .hamiltonian) ? false : true
+        cell.backgroundColor = (graphType == .hamiltonian) ? walkColor : kColors[indexPath.row]
         cell.layer.cornerRadius = cell.frame.size.width / 2
         cell.layer.borderWidth = 2
         cell.checkbox.stateChangeAnimation = .expand(.fill)
@@ -536,13 +564,21 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell: ColorButtonCollectionViewCell = collectionView.cellForItem(at: indexPath) as! ColorButtonCollectionViewCell
         
-        guard let hamiltonian = activeLevel?.hamiltonian else {
+        guard let graphType = activeLevel?.graphType else {
             return
         }
         
-        if hamiltonian && pathArray.count > 0 {
+        if (graphType == .hamiltonian) && pathArray.count > 0 {
             for node in vertexNodes.childNodes {
-                if node.geometry?.name! == "\(String(describing: pathArray.last!))" {
+                guard let geoName = node.geometry?.name else {
+                    return
+                }
+                
+                guard let lastItem = pathArray.last else {
+                    return
+                }
+                
+                if geoName == "\(String(describing: lastItem))" {
                     node.geometry?.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
                     node.removeAllParticleSystems()
                     
@@ -574,8 +610,11 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                 }
             }
         } else {
+            if let color = cell.backgroundColor {
+                paintColor = color
+            }
+            
             selectedColorIndex = indexPath.row
-            paintColor = cell.backgroundColor!
             paintColorCollectionView.reloadData()
         }
     }
