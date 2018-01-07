@@ -24,10 +24,10 @@ class GameViewController: UIViewController {
     var colorSelectNodes: SCNNode!
 
     // GLOBAL VARS
-    var paintColor: UIColor = UIColor.customRed()
+    var paintColor: UIColor = .customRed()
     var activeLevel: Level?
     var currentLevel: Int = 0
-    var walkColor = UIColor.goldColor()
+    var walkColor: UIColor = .goldColor()
     var selectedColorIndex: Int = 0
     var pathArray: [Int] = []
     var currentStep: String = ""
@@ -44,7 +44,7 @@ class GameViewController: UIViewController {
     var selectedAxis = axis.none
     var selectedNode: SCNNode!
     
-    // UI Elements
+    // UI
     @IBOutlet var skView: SKView!
     @IBOutlet var paintColorCollectionView: UICollectionView!
     @IBOutlet var collectionViewBottomConstraint: NSLayoutConstraint!
@@ -296,6 +296,11 @@ class GameViewController: UIViewController {
 
             geometry.materials.first?.diffuse.contents = activeColor
             geometry.materials.first?.emission.contents = UIColor.defaultVertexColor()
+            
+            if graphType == .hamiltonian && currentStep == "" {
+                geometry.materials[1].diffuse.contents = activeColor
+                geometry.materials[0].diffuse.contents = UIColor.defaultVertexColor()
+            }
             
             if let trailEmitter = ParticleGeneration.createTrail(color: activeColor, geometry: geometry) {
                 node.removeAllParticleSystems()
@@ -580,6 +585,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                 
                 if geoName == "\(String(describing: lastItem))" {
                     node.geometry?.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
+                    node.geometry?.materials[1].diffuse.contents = UIColor.white
                     node.removeAllParticleSystems()
                     
                     if let _ = activeLevel?.adjacencyList {
