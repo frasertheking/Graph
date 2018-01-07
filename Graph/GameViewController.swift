@@ -119,12 +119,17 @@ class GameViewController: UIViewController {
         scnView.pointOfView?.rotation = SCNVector4(x: 0, y: 0, z: 0, w: 0)
                 
         createObjects()
-        explodeGraph()
+        GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
         
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(rotateGraphObject), userInfo: nil, repeats: false)
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(swellGraphObject), userInfo: nil, repeats: false)
-        Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(scaleGraphObject), userInfo: nil, repeats: false)
-        Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(animateInCollectionView), userInfo: nil, repeats: false)
+        GraphAnimation.delayWithSeconds(0.5) {
+            GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+            GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+        }
+        
+        GraphAnimation.delayWithSeconds(1.0) {
+            GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+            GraphAnimation.animateInCollectionView(view: self.view, collectionViewBottomConstraint: self.collectionViewBottomConstraint)
+        }
     }
     
     func setupDebug() {
@@ -308,86 +313,12 @@ class GameViewController: UIViewController {
         if let _ = activeLevel?.adjacencyList, let hamiltonian: Bool = activeLevel?.hamiltonian {
             if (activeLevel?.adjacencyList!.checkIfSolved(forType: (hamiltonian ? GraphType.hamiltonian : GraphType.kColor)))! {
                 if hamiltonian && firstStep == currentStep {
-                    self.implodeGraph()
+                    GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
                 } else if !hamiltonian {
-                    self.implodeGraph()
+                    GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
                 }
             }
         }
-    }
-    
-    // Animations
-    @objc func rotateGraphObject() {
-        let spin = CABasicAnimation(keyPath: "rotation")
-        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        spin.fromValue = NSValue(scnVector4: SCNVector4(x: 0, y: 1, z: 0, w: 0))
-        spin.toValue = NSValue(scnVector4: SCNVector4(x: 0, y: 1, z: 0, w: Float(CGFloat(Double.pi*2))))
-        spin.duration = 2
-        spin.repeatCount = 1
-        spin.timingFunction = easeInOut
-        vertexNodes.addAnimation(spin, forKey: "spin around")
-        edgeNodes.addAnimation(spin, forKey: "spin around")
-    }
-    
-    @objc func scaleGraphObject() {
-        let scale = CABasicAnimation(keyPath: "scale")
-        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
-        scale.toValue = NSValue(scnVector4: SCNVector4(x: 2, y: 2, z: 2, w: 0))
-        scale.duration = 0.5
-        scale.repeatCount = 0
-        scale.autoreverses = true
-        scale.timingFunction = easeInOut
-        vertexNodes.addAnimation(scale, forKey: "scale up")
-        edgeNodes.addAnimation(scale, forKey: "scale up")
-    }
-    
-    @objc func explodeGraph() {
-        let scale = CABasicAnimation(keyPath: "scale")
-        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-        scale.toValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
-        scale.duration = 0.5
-        scale.repeatCount = 0
-        scale.autoreverses = true
-        scale.timingFunction = easeInOut
-        vertexNodes.addAnimation(scale, forKey: "explode")
-        edgeNodes.addAnimation(scale, forKey: "explode")
-    }
-    
-    @objc func implodeGraph() {
-        let scale = CABasicAnimation(keyPath: "scale")
-        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
-        scale.toValue = NSValue(scnVector4: SCNVector4(x: 0, y: 0, z: 0, w: 0))
-        scale.duration = 0.5
-        scale.repeatCount = 0
-        scale.autoreverses = true
-        scale.timingFunction = easeInOut
-        vertexNodes.addAnimation(scale, forKey: "implode")
-        edgeNodes.addAnimation(scale, forKey: "implode")
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(cleanScene), userInfo: nil, repeats: false)
-    }
-    
-    @objc func swellGraphObject() {
-        let scale = CABasicAnimation(keyPath: "scale")
-        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
-        scale.toValue = NSValue(scnVector4: SCNVector4(x: 1.08, y: 1.08, z: 1.08, w: 0))
-        scale.duration = 2
-        scale.repeatCount = .infinity
-        scale.autoreverses = true
-        scale.timingFunction = easeInOut
-        vertexNodes.addAnimation(scale, forKey: "swell")
-        edgeNodes.addAnimation(scale, forKey: "swell")
-    }
-    
-    @objc func animateInCollectionView() {
-        collectionViewBottomConstraint.constant = 16
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
     }
     
     @objc func refreshColorsInCollectionView() {
@@ -405,19 +336,6 @@ class GameViewController: UIViewController {
             }, completion: nil)
         }
     }
-    
-    // Actions
-    
-    func addPulse(to: UIView) {
-        let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
-        pulseAnimation.duration = 0.75
-        pulseAnimation.toValue = NSNumber(value: 1.1)
-        pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        pulseAnimation.autoreverses = true
-        pulseAnimation.repeatCount = .greatestFiniteMagnitude
-        to.layer.add(pulseAnimation, forKey: nil)
-    }
-    
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         let location = gestureRecognize.location(in: scnView)
         let hitResults = scnView.hitTest(location, options: nil)
@@ -594,7 +512,7 @@ extension GameViewController: UICollectionViewDataSource {
         if selectedColorIndex == indexPath.row {
             cell.checkbox.setCheckState(.checked, animated: true)
             cell.layer.borderColor = UIColor.customWhite().cgColor
-            addPulse(to: cell)
+            GraphAnimation.addPulse(to: cell)
         } else {
             cell.checkbox.setCheckState(.unchecked, animated: true)
             cell.layer.borderColor = kColors[indexPath.row].darker()?.cgColor
