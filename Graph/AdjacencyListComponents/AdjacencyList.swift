@@ -190,8 +190,8 @@ extension AdjacencyList: Graphable {
                                 edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
                             }
                         } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
                             edgeNodes.childNodes[pos].removeAllParticleSystems()
                         }
                         pos += 1
@@ -238,8 +238,8 @@ extension AdjacencyList: Graphable {
                         var pos = 0
                         for edgeNode in edgeArray {
                             if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
-                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
-                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
                                 edgeNodes.childNodes[pos].removeAllParticleSystems()
                             }
                             pos += 1

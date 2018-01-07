@@ -7,6 +7,8 @@
 //
 
 import SceneKit
+import SpriteKit
+import Pastel
 
 let UIColorList:[UIColor] = [
     UIColor.black,
@@ -121,6 +123,41 @@ extension UIColor {
     }
     
     public static func defaultVertexColor() -> UIColor {
-        return UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        return UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+    }
+    
+    public static func setupBackgrounds(view: UIView, skView: SKView) {
+        let pastelView = PastelView(frame: view.bounds)
+        
+        // Custom Direction
+        pastelView.startPastelPoint = .bottom
+        pastelView.endPastelPoint = .top
+        
+        // Custom Duration
+        pastelView.animationDuration = 10.0
+        
+        // Custom Color
+        pastelView.setColors([ UIColor(red: 247/255, green: 109/255, blue: 130/255, alpha: 1.0),
+                               UIColor(red: 217/255, green: 68/255, blue: 82/255, alpha: 1.0),
+                               UIColor(red: 98/255, green: 221/255, blue: 189/255, alpha: 1.0),
+                               UIColor(red: 53/255, green: 187/255, blue: 155/255, alpha: 1.0),
+                               UIColor(red: 115/255, green: 177/255, blue: 244/255, alpha: 1.0),
+                               UIColor(red: 75/255, green: 137/255, blue: 218/255, alpha: 1.0)])
+        
+        pastelView.startAnimation()
+        
+        view.insertSubview(pastelView, at: 0)
+        
+        // Add background particles
+        let skScene = SKScene(size: CGSize(width: view.frame.size.width, height: view.frame.size.height))
+        skScene.backgroundColor = UIColor.clear
+        let path = Bundle.main.path(forResource: "Background", ofType: "sks")
+        let backgroundParticle = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as! SKEmitterNode
+        backgroundParticle.position = CGPoint(x: view.frame.size.width/2, y: view.frame.size.height/2)
+        backgroundParticle.targetNode = skScene.scene
+        backgroundParticle.particlePositionRange = CGVector(dx: view.frame.size.width, dy: view.frame.size.height)
+        skScene.scene?.addChild(backgroundParticle)
+        skView.presentScene(skScene)
+        skView.backgroundColor = UIColor.clear
     }
 }

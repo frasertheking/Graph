@@ -42,7 +42,7 @@ class GameViewController: UIViewController {
     @IBOutlet var spawnButton: UIButton!
     var axisPanGestureRecognizer: UIPanGestureRecognizer?
     var debugNodes: SCNNode!
-    var selectedAxis = -1
+    var selectedAxis: Int = -1
     var selectedNode: SCNNode!
     
     // UI Elements
@@ -56,7 +56,37 @@ class GameViewController: UIViewController {
     var cameraOrbit: SCNNode!
     var cameraNode: SCNNode!
     let camera = SCNCamera()
+    
+    struct GameConstants {
+        static let kCameraZ: Float = 20
+        static let kScaleShrink: CGFloat = 0.8
+        static let kScaleGrow: CGFloat = 1.25
+        static let kPanTranslationScaleFactor: CGFloat = 100
+        
+        // Timing Constants
+        static let kVeryShortTimeDelay: Double = 0.1
+        static let kShortTimeDelay: Double = 0.3
+        static let kMediumTimeDelay: Double = 0.55
+        static let kLongTimeDelay: Double = 1.05
+        static let kVeryLongDelay: Double = 1.5
+        
+        // CollectionView Constants
+        static let kPaintCellReuseIdentifier: String = "cell"
+        static let kPaintCellWidthHeight: Int = 60
+        static let kPaintCellPadding: Int = 10
+        static let kCollectionViewBottomOffsetShowing: CGFloat = -115
+        static let kCollectionViewBottomOffsetHidden: CGFloat = 16
+        static let kDefaultCellsInSection: Int = 3
+    }
 
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,16 +103,8 @@ class GameViewController: UIViewController {
         
     }
     
-    override func prefersHomeIndicatorAutoHidden() -> Bool {
-        return true
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     func setupView() {
-        guard let sceneView = self.scnView else {
+        guard let sceneView = scnView else {
             return
         }
 
@@ -109,24 +131,24 @@ class GameViewController: UIViewController {
     func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 20)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ)
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
     @objc func setupLevel() {
         activeLevel = Levels.createLevel(index: currentLevel)
-        scnView.pointOfView?.position = SCNVector3(x: 0, y: 0, z: 20)
+        scnView.pointOfView?.position = SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ)
         scnView.pointOfView?.rotation = SCNVector4(x: 0, y: 0, z: 0, w: 0)
                 
         createObjects()
         GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
         
-        GraphAnimation.delayWithSeconds(0.5) {
+        GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
             GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
         }
         
-        GraphAnimation.delayWithSeconds(1.0) {
+        GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay) {
             GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             GraphAnimation.animateInCollectionView(view: self.view, collectionViewBottomConstraint: self.collectionViewBottomConstraint)
         }
@@ -135,6 +157,11 @@ class GameViewController: UIViewController {
     func setupDebug() {
         debugNodes = SCNNode()
         debugNodes.name = "debug"
+        
+        scnView.removeGestureRecognizer(axisPanGestureRecognizer!)
+        axisPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture(gestureRecognize:)))
+        scnView.addGestureRecognizer(axisPanGestureRecognizer!)
+        axisPanGestureRecognizer?.isEnabled = false
 
         xAxisButton.isHidden = false
         yAxisButton.isHidden = false
@@ -148,8 +175,7 @@ class GameViewController: UIViewController {
     }
     
     func setupInteractions() {
-        
-        paintColorCollectionView.register(UINib(nibName: "ColorButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+        paintColorCollectionView.register(UINib(nibName: "ColorButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: GameConstants.kPaintCellReuseIdentifier)
         paintColorCollectionView.delegate = self
         paintColorCollectionView.dataSource = self
         paintColorCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
@@ -159,40 +185,10 @@ class GameViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
     
-        let pastelView = PastelView(frame: view.bounds)
-        
-        // Custom Direction
-        pastelView.startPastelPoint = .bottom
-        pastelView.endPastelPoint = .top
-        
-        // Custom Duration
-        pastelView.animationDuration = 10.0
-        
-        // Custom Color        
-        pastelView.setColors([ UIColor(red: 247/255, green: 109/255, blue: 130/255, alpha: 1.0),
-                                UIColor(red: 217/255, green: 68/255, blue: 82/255, alpha: 1.0),
-                                UIColor(red: 98/255, green: 221/255, blue: 189/255, alpha: 1.0),
-                                UIColor(red: 53/255, green: 187/255, blue: 155/255, alpha: 1.0),
-                                UIColor(red: 115/255, green: 177/255, blue: 244/255, alpha: 1.0),
-                                UIColor(red: 75/255, green: 137/255, blue: 218/255, alpha: 1.0)])
-        
-        pastelView.startAnimation()
-        
-        view.insertSubview(pastelView, at: 0)
-
-        // Add background particles
-        let skScene = SKScene(size: CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height))
-        skScene.backgroundColor = UIColor.clear
-        let path = Bundle.main.path(forResource: "Background", ofType: "sks")
-        let backgroundParticle = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as! SKEmitterNode
-        backgroundParticle.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height/2)
-        backgroundParticle.targetNode = skScene.scene
-        backgroundParticle.particlePositionRange = CGVector(dx: self.view.frame.size.width, dy: self.view.frame.size.height)
-        skScene.scene?.addChild(backgroundParticle)
-        skView.presentScene(skScene)
-        skView.backgroundColor = UIColor.clear
+        UIColor.setupBackgrounds(view: view, skView: skView)
     }
     
+    // OBJECT CREATION AND HANDLING
     func createObjects() {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
@@ -213,19 +209,16 @@ class GameViewController: UIViewController {
             for edge in value {
                 if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
                     let node = SCNNode()
-                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.1, color: .black))
+                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: .defaultVertexColor()))
                     
                     edgeArray.append(edge)
                 }
-                
             }
         }
         
         scnScene.rootNode.addChildNode(vertexNodes)
         scnScene.rootNode.addChildNode(edgeNodes)
     }
-    
- 
     
     func handleTouchFor(node: SCNNode) {
         
@@ -260,7 +253,7 @@ class GameViewController: UIViewController {
                 if selectedNode == node {
                     selectedNode = nil
                     axisPanGestureRecognizer?.isEnabled = false
-                    geometry.materials.first?.diffuse.contents = UIColor.black
+                    geometry.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
                 } else {
                     selectedNode = node
                     axisPanGestureRecognizer?.isEnabled = true
@@ -273,13 +266,13 @@ class GameViewController: UIViewController {
                 selectedNode = node
             }
             
-            let scaleUpAction = SCNAction.scale(by: 1.25, duration: 0.1)
+            let scaleUpAction = SCNAction.scale(by: GameConstants.kScaleGrow, duration: GameConstants.kVeryShortTimeDelay)
             scaleUpAction.timingMode = .easeInEaseOut
-            let scaleDownAction = SCNAction.scale(by: 0.8, duration: 0.1)
+            let scaleDownAction = SCNAction.scale(by: GameConstants.kScaleShrink, duration: GameConstants.kVeryShortTimeDelay)
             scaleDownAction.timingMode = .easeInEaseOut
             
             if !animating {
-                self.animating = true
+                animating = true
                 node.runAction(scaleUpAction) {
                     node.runAction(scaleDownAction) {
                         self.animating = false
@@ -288,7 +281,7 @@ class GameViewController: UIViewController {
             }
             
             geometry.materials.first?.diffuse.contents = activeColor
-            geometry.materials.first?.emission.contents = UIColor.black
+            geometry.materials.first?.emission.contents = UIColor.defaultVertexColor()
             
             if let trailEmitter = ParticleGeneration.createTrail(color: activeColor, geometry: geometry) {
                 node.removeAllParticleSystems()
@@ -298,8 +291,6 @@ class GameViewController: UIViewController {
             if let _ = activeLevel?.adjacencyList {
                 activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: geometry.name, color: activeColor)
             }
-            
-            //game.playSound(node: scnScene.rootNode, name: "SpawnGood")
             
             pathArray.append(Int(geometry.name!)!)
             if currentStep == "" {
@@ -322,20 +313,21 @@ class GameViewController: UIViewController {
     }
     
     @objc func refreshColorsInCollectionView() {
-        collectionViewBottomConstraint.constant = -115
-        UIView.animate(withDuration: 0.3, delay: 1.35, options: .curveEaseInOut, animations: {
+        collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
+        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 1.35, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         }) { (finished) in
             self.paintColorCollectionView.reloadData()
             self.selectedColorIndex = 0
             self.paintColor = kColors[0]
-            self.collectionViewBottomConstraint.constant = 16
+            self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
             
-            UIView.animate(withDuration: 0.3, delay: 0.2, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         }
     }
+    
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         let location = gestureRecognize.location(in: scnView)
         let hitResults = scnView.hitTest(location, options: nil)
@@ -346,46 +338,97 @@ class GameViewController: UIViewController {
         }
     }
     
+    @objc func panGesturePlanarMove(gestureRecognize: UIPanGestureRecognizer) {
+        if gestureRecognize.state == .changed {
+            let translation = gestureRecognize.translation(in: gestureRecognize.view!)
+            
+            let position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 75), y:selectedNode.position.y - Float(translation.y / 75), z:selectedNode.position.z)
+            selectedNode.position = position
+            
+            gestureRecognize.setTranslation(CGPoint.zero, in: gestureRecognize.view!)
+            
+            activeLevel?.adjacencyList?.updateNodePosition(id: selectedNode.geometry?.name, newPosition: position)
+            
+            guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
+                return
+            }
+            
+            edgeNodes.removeFromParentNode()
+            edgeNodes = SCNNode()
+            edgeArray.removeAll()
+            
+            for (_, value) in adjacencyDict {
+                
+                // Create edges
+                for edge in value {
+                    if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
+                        let node = SCNNode()
+                        edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: .defaultVertexColor()))
+                        
+                        edgeArray.append(edge)
+                    }
+                }
+            }
+            
+            scnScene.rootNode.addChildNode(edgeNodes)
+            vertexNodes.removeAllAnimations()
+            edgeNodes.removeAllAnimations()
+        }
+    }
+    
+    @objc func cleanScene() {
+        vertexNodes.removeFromParentNode()
+        edgeNodes.removeFromParentNode()
+        pathArray.removeAll()
+        currentStep = ""
+        firstStep = ""
+        
+        currentLevel += 1
+        refreshColorsInCollectionView()
+        Timer.scheduledTimer(timeInterval: TimeInterval(GameConstants.kVeryLongDelay), target: self, selector: #selector(setupLevel), userInfo: nil, repeats: false)
+    }
+    
+    // DEBUG MODE CODE
     @IBAction func debugXPress() {
         if selectedAxis == 0 {
             selectedAxis = -1
-            xAxisButton.backgroundColor = UIColor.white
+            xAxisButton.backgroundColor = .white
             editModeDeactivate()
         } else {
             selectedAxis = 0
-            xAxisButton.backgroundColor = UIColor.customBlue()
+            xAxisButton.backgroundColor = .customBlue()
             editModeActivate()
         }
-        yAxisButton.backgroundColor = UIColor.white
-        zAxisButton.backgroundColor = UIColor.white
+        yAxisButton.backgroundColor = .white
+        zAxisButton.backgroundColor = .white
     }
     
     @IBAction func debugYPress() {
         if selectedAxis == 1 {
             selectedAxis = -1
-            yAxisButton.backgroundColor = UIColor.white
+            yAxisButton.backgroundColor = .white
             editModeDeactivate()
         } else {
             selectedAxis = 1
-            yAxisButton.backgroundColor = UIColor.customBlue()
+            yAxisButton.backgroundColor = .customBlue()
             editModeActivate()
         }
-        xAxisButton.backgroundColor = UIColor.white
-        zAxisButton.backgroundColor = UIColor.white
+        xAxisButton.backgroundColor = .white
+        zAxisButton.backgroundColor = .white
     }
     
     @IBAction func debugZPress() {
         if selectedAxis == 2 {
             selectedAxis = -1
-            zAxisButton.backgroundColor = UIColor.white
+            zAxisButton.backgroundColor = .white
             editModeDeactivate()
         } else {
             selectedAxis = 2
-            zAxisButton.backgroundColor = UIColor.customBlue()
+            zAxisButton.backgroundColor = .customBlue()
             editModeActivate()
         }
-        xAxisButton.backgroundColor = UIColor.white
-        yAxisButton.backgroundColor = UIColor.white
+        xAxisButton.backgroundColor = .white
+        yAxisButton.backgroundColor = .white
     }
     
     @IBAction func spawnDebugNode() {
@@ -410,93 +453,45 @@ class GameViewController: UIViewController {
             
             switch selectedAxis {
             case 0:
-                selectedNode.position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 100), y:selectedNode.position.y, z:selectedNode.position.z)
+                selectedNode.position = SCNVector3(x:selectedNode.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor), y:selectedNode.position.y, z:selectedNode.position.z)
             case 1:
-                selectedNode.position = SCNVector3(x:selectedNode.position.x, y:selectedNode.position.y - Float(translation.y / 100), z:selectedNode.position.z)
+                selectedNode.position = SCNVector3(x:selectedNode.position.x, y:selectedNode.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor), z:selectedNode.position.z)
             default:
-                selectedNode.position = SCNVector3(x:selectedNode.position.x, y:selectedNode.position.y, z:selectedNode.position.z - Float(translation.x / 100))
+                selectedNode.position = SCNVector3(x:selectedNode.position.x, y:selectedNode.position.y, z:selectedNode.position.z - Float(translation.x / GameConstants.kPanTranslationScaleFactor))
             }
             
             gestureRecognize.setTranslation(CGPoint.zero, in: gestureRecognize.view!)
         } else if gestureRecognize.state == .ended {
+            // Print & record final location
             print(selectedNode.position)
         }
     }
-    
-    @objc func panGesturePlanarMove(gestureRecognize: UIPanGestureRecognizer) {
-        if gestureRecognize.state == .changed {
-            let translation = gestureRecognize.translation(in: gestureRecognize.view!)
-         
-            let position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 75), y:selectedNode.position.y - Float(translation.y / 75), z:selectedNode.position.z)
-            selectedNode.position = position
-            
-            gestureRecognize.setTranslation(CGPoint.zero, in: gestureRecognize.view!)
-            
-            activeLevel?.adjacencyList?.updateNodePosition(id: selectedNode.geometry?.name, newPosition: position)
-            
-            guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
-                return
-            }
-
-            edgeNodes.removeFromParentNode()
-            edgeNodes = SCNNode()
-            edgeArray.removeAll()
-            
-            for (_, value) in adjacencyDict {
-
-                // Create edges
-                for edge in value {
-                    if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
-                        let node = SCNNode()
-                        edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: 0.1, color: .black))
-
-                        edgeArray.append(edge)
-                    }
-                }
-            }
-
-            scnScene.rootNode.addChildNode(edgeNodes)
-            vertexNodes.removeAllAnimations()
-            edgeNodes.removeAllAnimations()
-        }
-    }
-    
-    @objc func cleanScene() {
-        vertexNodes.removeFromParentNode()
-        edgeNodes.removeFromParentNode()
-        pathArray.removeAll()
-        currentStep = ""
-        firstStep = ""
-        
-        currentLevel += 1
-        refreshColorsInCollectionView()
-        Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(setupLevel), userInfo: nil, repeats: false)
-    }
 }
 
+// Draw Loop
 extension GameViewController: SCNSceneRendererDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        //spawnShape()
-        //game.updateHUD()
+
     }
 }
 
+// UICollectionView / UI Elements
 extension GameViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let colorCount = activeLevel?.numberOfColorsProvided  {
             return colorCount
         }
-        return 3
+        return GameConstants.kDefaultCellsInSection
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 60, height: 60)
+        return CGSize(width: GameConstants.kPaintCellWidthHeight, height: GameConstants.kPaintCellWidthHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath) as! ColorButtonCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GameConstants.kPaintCellReuseIdentifier, for: indexPath as IndexPath) as! ColorButtonCollectionViewCell
         
         guard let hamiltonian = activeLevel?.hamiltonian else {
             return cell
@@ -528,8 +523,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        let totalCellWidth = 60 * collectionView.numberOfItems(inSection: 0)
-        let totalSpacingWidth = 10 * (collectionView.numberOfItems(inSection: 0) - 1)
+        let totalCellWidth = GameConstants.kPaintCellWidthHeight * collectionView.numberOfItems(inSection: 0)
+        let totalSpacingWidth = GameConstants.kPaintCellPadding * (collectionView.numberOfItems(inSection: 0) - 1)
         
         let leftInset = (collectionView.layer.frame.size.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
         let rightInset = leftInset
@@ -548,11 +543,11 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
         if hamiltonian && pathArray.count > 0 {
             for node in vertexNodes.childNodes {
                 if node.geometry?.name! == "\(String(describing: pathArray.last!))" {
-                    node.geometry?.materials.first?.diffuse.contents = UIColor.black
+                    node.geometry?.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
                     node.removeAllParticleSystems()
                     
                     if let _ = activeLevel?.adjacencyList {
-                        activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: node.geometry?.name, color: UIColor.black)
+                        activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: node.geometry?.name, color: UIColor.defaultVertexColor())
                     }
                     
                     _ = pathArray.removeLast()
@@ -565,8 +560,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                     } else {
                         var pos = 0
                         for _ in edgeArray {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
                             edgeNodes.childNodes[pos].removeAllParticleSystems()
                             pos += 1
                         }

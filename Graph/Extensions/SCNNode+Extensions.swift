@@ -31,7 +31,7 @@ extension SCNNode {
         
         let cyl = SCNCylinder(radius: radius, height: l)
         cyl.name = "edge"
-        cyl.firstMaterial?.diffuse.contents = UIColor.black
+        cyl.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
         
         self.geometry = cyl
         

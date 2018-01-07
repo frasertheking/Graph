@@ -16,7 +16,7 @@ struct GraphAnimation {
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         spin.fromValue = NSValue(scnVector4: SCNVector4(x: 0, y: 1, z: 0, w: 0))
         spin.toValue = NSValue(scnVector4: SCNVector4(x: 0, y: 1, z: 0, w: Float(CGFloat(Double.pi*2))))
-        spin.duration = 2
+        spin.duration = 2.25
         spin.repeatCount = 1
         spin.timingFunction = easeInOut
         vertexNodes.addAnimation(spin, forKey: "spin around")
@@ -43,7 +43,7 @@ struct GraphAnimation {
         scale.toValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
         scale.duration = 0.5
         scale.repeatCount = 0
-        scale.autoreverses = true
+        scale.autoreverses = false
         scale.timingFunction = easeInOut
         vertexNodes.addAnimation(scale, forKey: "explode")
         edgeNodes.addAnimation(scale, forKey: "explode")

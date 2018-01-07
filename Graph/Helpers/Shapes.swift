@@ -22,7 +22,7 @@ public enum Shapes:Int {
         static let cylinderRadius: CGFloat = 0.1
         static let cylinderHeight: CGFloat = 3.1
         static let customShapeName = "node.dae"
-        static let primaryMaterialColor = UIColor.black
+        static let primaryMaterialColor = UIColor.defaultVertexColor()
         static let secondaryMaterialColor = UIColor.white
     }
     
