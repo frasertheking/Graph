@@ -220,27 +220,7 @@ class GameViewController: UIViewController {
         scnScene.rootNode.addChildNode(edgeNodes)
     }
     
-    func createTrail(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem? {
-        guard let particles = SCNParticleSystem(named: "Trail.scnp", inDirectory: nil) else {
-            return nil
-        }
-        
-        let trail = particles
-        trail.particleColor = color
-        trail.emitterShape = geometry
-        return trail
-    }
-
-    func createSmoke(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem? {
-        guard let particles = SCNParticleSystem(named: "Glow.scnp", inDirectory: nil) else {
-            return nil
-        }
-
-        let smoke = particles
-        smoke.particleColor = color
-        smoke.emitterShape = geometry
-        return smoke
-    }
+ 
     
     func handleTouchFor(node: SCNNode) {
         
@@ -305,7 +285,7 @@ class GameViewController: UIViewController {
             geometry.materials.first?.diffuse.contents = activeColor
             geometry.materials.first?.emission.contents = UIColor.black
             
-            if let trailEmitter = createTrail(color: activeColor, geometry: geometry) {
+            if let trailEmitter = ParticleGeneration.createTrail(color: activeColor, geometry: geometry) {
                 node.removeAllParticleSystems()
                 node.addParticleSystem(trailEmitter)
             }
@@ -323,7 +303,7 @@ class GameViewController: UIViewController {
             currentStep = geometry.name!
         }
 
-        updateCorrectEdges(level: activeLevel)
+        activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
         
         if let _ = activeLevel?.adjacencyList, let hamiltonian: Bool = activeLevel?.hamiltonian {
             if (activeLevel?.adjacencyList!.checkIfSolved(forType: (hamiltonian ? GraphType.hamiltonian : GraphType.kColor)))! {
@@ -334,108 +314,6 @@ class GameViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    func updateCorrectEdges(level: Level?) {
-        guard let adjacencyList = activeLevel?.adjacencyList else {
-            return
-        }
-        
-        guard let currentLevel = level else {
-            return
-        }
-        
-        guard let hamiltonian = currentLevel.hamiltonian else {
-            return
-        }
-        
-        if hamiltonian {
-            if pathArray.count > 1 {
-                for i in 0...pathArray.count-2 {
-                    var pos = 0
-                    for edgeNode in edgeArray {
-                        if (edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) ||
-                           (edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
-                            
-                            guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
-                                continue
-                            }
-                            
-                            if let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
-                                edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
-                            }
-                        } else if !isPartOfPath(start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
-                            edgeNodes.childNodes[pos].removeAllParticleSystems()
-                        }
-                        pos += 1
-                    }
-                }
-            }
-                
-//            // update neighbours
-//            let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
-//
-//            for vertexNode in vertexNodes.childNodes {
-//                if !pathArray.contains(Int((vertexNode.geometry?.name)!)!) {
-//                    if (neighbours?.contains((vertexNode.geometry?.name)!))! {
-//                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.gray
-//                    } else if (vertexNode.geometry?.name)! != currentStep {
-//                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.black
-//                    }
-//                }
-//            }
-        } else {
-            for (_, value) in (adjacencyList.adjacencyDict) {
-                for edge in value {
-                    if edge.source.data.color != edge.destination.data.color &&
-                        edge.source.data.color != .white &&
-                        edge.destination.data.color != .white {
-                        
-                        var pos = 0
-                        for edgeNode in edgeArray {
-                            if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
-                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
-                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
-                                
-                                guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
-                                    continue
-                                }
-                                
-                                if let smokeEmitter = createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
-                                    edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
-                                }
-                            }
-                            pos += 1
-                        }
-                    } else {
-                        var pos = 0
-                        for edgeNode in edgeArray {
-                            if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
-                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
-                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
-                                edgeNodes.childNodes[pos].removeAllParticleSystems()
-                            }
-                            pos += 1
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func isPartOfPath(start: Int, end: Int) -> Bool {
-        for i in 0...pathArray.count-2 {
-            if (start == pathArray[i] && end == pathArray[i+1]) ||
-                (end == pathArray[i] && start == pathArray[i+1]) {
-                return true
-            }
-        }
-        
-        return false
     }
     
     // Animations
@@ -765,7 +643,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                     }
                     
                     if pathArray.count > 1 {
-                        updateCorrectEdges(level: activeLevel)
+                        activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
                     } else {
                         var pos = 0
                         for _ in edgeArray {

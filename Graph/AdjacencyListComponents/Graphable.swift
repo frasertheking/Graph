@@ -21,6 +21,7 @@ protocol Graphable {
     func checkIfSolved(forType type: GraphType) -> Bool
     func isLastStep() -> Bool 
     func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node>
+    func updateCorrectEdges(level: Level?, pathArray: [Int], edgeArray: [Edge<Node>], edgeNodes: SCNNode)
     func getNeighbours(for id: String?) -> [String]
     func updateNodePosition(id: String?, newPosition: SCNVector3)
 }

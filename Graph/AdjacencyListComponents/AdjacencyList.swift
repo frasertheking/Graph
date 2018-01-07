@@ -162,4 +162,102 @@ extension AdjacencyList: Graphable {
         return neighbours
     }
     
+    func updateCorrectEdges(level: Level?, pathArray: [Int], edgeArray: [Edge<Node>], edgeNodes: SCNNode) {
+        
+        guard let currentLevel = level else {
+            return
+        }
+        
+        guard let hamiltonian = currentLevel.hamiltonian else {
+            return
+        }
+        
+        if hamiltonian {
+            if pathArray.count > 1 {
+                for i in 0...pathArray.count-2 {
+                    var pos = 0
+                    for edgeNode in edgeArray {
+                        if (edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) ||
+                            (edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                            
+                            guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
+                                continue
+                            }
+                            
+                            if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
+                                edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
+                            }
+                        } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
+                            edgeNodes.childNodes[pos].removeAllParticleSystems()
+                        }
+                        pos += 1
+                    }
+                }
+            }
+            
+            //            // update neighbours
+            //            let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
+            //
+            //            for vertexNode in vertexNodes.childNodes {
+            //                if !pathArray.contains(Int((vertexNode.geometry?.name)!)!) {
+            //                    if (neighbours?.contains((vertexNode.geometry?.name)!))! {
+            //                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.gray
+            //                    } else if (vertexNode.geometry?.name)! != currentStep {
+            //                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.black
+            //                    }
+            //                }
+            //            }
+        } else {
+            for (_, value) in (self.adjacencyDict) {
+                for case let edge as Edge<Node> in value  {
+                    if edge.source.data.color != edge.destination.data.color &&
+                        edge.source.data.color != .white &&
+                        edge.destination.data.color != .white {
+                        
+                        var pos = 0
+                        for edgeNode in edgeArray {
+                            if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                                
+                                guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
+                                    continue
+                                }
+                                
+                                if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
+                                    edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
+                                }
+                            }
+                            pos += 1
+                        }
+                    } else {
+                        var pos = 0
+                        for edgeNode in edgeArray {
+                            if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.black
+                                edgeNodes.childNodes[pos].removeAllParticleSystems()
+                            }
+                            pos += 1
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func isPartOfPath(path: [Int], start: Int, end: Int) -> Bool {
+        for i in 0...path.count-2 {
+            if (start == path[i] && end == path[i+1]) ||
+                (end == path[i] && start == path[i+1]) {
+                return true
+            }
+        }
+        
+        return false
+    }
 }
