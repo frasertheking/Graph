@@ -241,7 +241,7 @@ class GameViewController: UIViewController {
         }
         
         if geometry.name != "edge" {
-            let activeColor = (graphType == .hamiltonian) ? walkColor : paintColor
+            var activeColor = (graphType == .hamiltonian) ? walkColor : paintColor
 
             switch graphType {
             case .hamiltonian:
@@ -265,14 +265,20 @@ class GameViewController: UIViewController {
                     return
                 }
             case .planar:
+                activeColor = UIColor.red
+                for node in vertexNodes.childNodes {
+                    node.geometry?.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
+                    node.removeAllParticleSystems()
+                }
+                
                 if selectedNode == node {
                     selectedNode = nil
                     axisPanGestureRecognizer?.isEnabled = false
-                    geometry.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
                 } else {
                     selectedNode = node
                     axisPanGestureRecognizer?.isEnabled = true
                     geometry.materials.first?.diffuse.contents = activeColor
+                    selectNode(node: node, graphType: graphType, activeColor: activeColor)
                 }
                 return
             case .kColor:
@@ -285,27 +291,7 @@ class GameViewController: UIViewController {
                 selectedNode = node
             }
             
-            let scaleUpAction = SCNAction.scale(by: GameConstants.kScaleGrow, duration: GameConstants.kVeryShortTimeDelay)
-            scaleUpAction.timingMode = .easeInEaseOut
-            let scaleDownAction = SCNAction.scale(by: GameConstants.kScaleShrink, duration: GameConstants.kVeryShortTimeDelay)
-            scaleDownAction.timingMode = .easeInEaseOut
-            
-            node.runAction(scaleUpAction) {
-                node.runAction(scaleDownAction) {}
-            }
-
-            geometry.materials.first?.diffuse.contents = activeColor
-            geometry.materials.first?.emission.contents = UIColor.defaultVertexColor()
-            
-            if graphType == .hamiltonian && currentStep == "" {
-                geometry.materials[1].diffuse.contents = activeColor
-                geometry.materials[0].diffuse.contents = UIColor.defaultVertexColor()
-            }
-            
-            if let trailEmitter = ParticleGeneration.createTrail(color: activeColor, geometry: geometry) {
-                node.removeAllParticleSystems()
-                node.addParticleSystem(trailEmitter)
-            }
+           selectNode(node: node, graphType: graphType, activeColor: activeColor)
             
             if let _ = activeLevel?.adjacencyList {
                 activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: geometry.name, color: activeColor)
@@ -331,6 +317,34 @@ class GameViewController: UIViewController {
                     GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
                 }
             }
+        }
+    }
+    
+    func selectNode(node: SCNNode, graphType: GraphType, activeColor: UIColor) {
+        let scaleUpAction = SCNAction.scale(by: GameConstants.kScaleGrow, duration: GameConstants.kVeryShortTimeDelay)
+        scaleUpAction.timingMode = .easeInEaseOut
+        let scaleDownAction = SCNAction.scale(by: GameConstants.kScaleShrink, duration: GameConstants.kVeryShortTimeDelay)
+        scaleDownAction.timingMode = .easeInEaseOut
+        
+        node.runAction(scaleUpAction) {
+            node.runAction(scaleDownAction) {}
+        }
+        
+        guard let geometry = node.geometry else {
+            return
+        }
+        
+        geometry.materials.first?.diffuse.contents = activeColor
+        geometry.materials.first?.emission.contents = UIColor.defaultVertexColor()
+        
+        if graphType == .hamiltonian && currentStep == "" {
+            geometry.materials[1].diffuse.contents = activeColor
+            geometry.materials[0].diffuse.contents = UIColor.defaultVertexColor()
+        }
+        
+        if let trailEmitter = ParticleGeneration.createTrail(color: activeColor, geometry: geometry) {
+            node.removeAllParticleSystems()
+            node.addParticleSystem(trailEmitter)
         }
     }
     
