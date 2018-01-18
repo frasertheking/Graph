@@ -430,7 +430,7 @@ class GameViewController: UIViewController {
             }
             
             scnScene.rootNode.addChildNode(edgeNodes)
-            
+        } else if gestureRecognize.state == .ended {
             checkIfSolved()
         }
     }
