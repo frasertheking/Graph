@@ -151,7 +151,13 @@ class GameViewController: UIViewController {
         
         GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
             GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
-            GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+            guard let graphType = self.activeLevel?.graphType else {
+                return
+            }
+            
+            if graphType != .planar {
+                GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+            }
         }
         
         GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay) {
@@ -280,6 +286,7 @@ class GameViewController: UIViewController {
                     geometry.materials.first?.diffuse.contents = activeColor
                     selectNode(node: node, graphType: graphType, activeColor: activeColor)
                 }
+                checkIfSolved()
                 return
             case .kColor:
                 break
@@ -308,9 +315,20 @@ class GameViewController: UIViewController {
         }
 
         activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+        checkIfSolved()
+    }
+    
+    func checkIfSolved() {
+        guard let graphType: GraphType = activeLevel?.graphType else {
+            return
+        }
         
         if let list = activeLevel?.adjacencyList {
             if list.checkIfSolved(forType: graphType) {
+                if (graphType == .planar) {
+                    axisPanGestureRecognizer?.isEnabled = false
+                }
+                
                 if (graphType == .hamiltonian) && firstStep == currentStep {
                     GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
                 } else if !(graphType == .hamiltonian) {
@@ -412,8 +430,8 @@ class GameViewController: UIViewController {
             }
             
             scnScene.rootNode.addChildNode(edgeNodes)
-            vertexNodes.removeAllAnimations()
-            edgeNodes.removeAllAnimations()
+            
+            checkIfSolved()
         }
     }
     
@@ -426,6 +444,7 @@ class GameViewController: UIViewController {
         
         currentLevel += 1
         refreshColorsInCollectionView()
+        axisPanGestureRecognizer?.isEnabled = false
         Timer.scheduledTimer(timeInterval: TimeInterval(GameConstants.kVeryLongDelay), target: self, selector: #selector(setupLevel), userInfo: nil, repeats: false)
     }
     

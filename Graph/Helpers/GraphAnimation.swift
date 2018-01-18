@@ -78,7 +78,7 @@ struct GraphAnimation {
         vertexNodes.addAnimation(scale, forKey: "swell")
         edgeNodes.addAnimation(scale, forKey: "swell")
     }
-    
+
     static func animateInCollectionView(view: UIView, collectionViewBottomConstraint: NSLayoutConstraint) {
         collectionViewBottomConstraint.constant = 16
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {

@@ -85,7 +85,25 @@ extension AdjacencyList: Graphable {
                 }
             }
         case .planar:
-            return false
+            var edgeArray: [Edge<Node>] = []
+            for (_, value) in (graph.adjacencyDict) {
+                for edge in value {
+                    let temp_edge = Edge(source: edge.destination, destination: edge.source)
+                    if !edgeArray.contains(temp_edge) {
+                        edgeArray.append(edge)
+                    }
+                }
+            }
+            
+            var solved: Bool = true
+            for edge1 in edgeArray {
+                for edge2 in edgeArray {
+                    if edge1 != edge2 && doEdgesIntersect(edge1: edge1, edge2: edge2) {
+                        solved = false
+                    }
+                }
+            }
+            return solved
         case .euler:
             return false
         default:
@@ -259,5 +277,30 @@ extension AdjacencyList: Graphable {
         }
         
         return false
+    }
+    
+    func doEdgesIntersect(edge1: Edge<Node>, edge2: Edge<Node>) -> Bool {
+        let edge1Start: CGPoint = CGPoint(x: CGFloat(edge1.source.data.position.x), y: CGFloat(edge1.source.data.position.y)) // A
+        let edge1End: CGPoint = CGPoint(x: CGFloat(edge1.destination.data.position.x), y: CGFloat(edge1.destination.data.position.y)) // B
+        let edge2Start: CGPoint = CGPoint(x: CGFloat(edge2.source.data.position.x), y: CGFloat(edge2.source.data.position.y)) // C
+        let edge2End: CGPoint = CGPoint(x: CGFloat(edge2.destination.data.position.x), y: CGFloat(edge2.destination.data.position.y)) // D
+        
+        let distance = (edge1End.x - edge1Start.x) * (edge2End.y - edge2Start.y) - (edge1End.y - edge1Start.y) * (edge2End.x - edge2Start.x)
+        
+        if distance == 0 && edge1.source != edge2.destination && edge1.destination != edge2.source  {
+            return false
+        }
+
+        let u = ((edge2Start.x - edge1Start.x) * (edge2End.y - edge2Start.y) - (edge2Start.y - edge1Start.y) * (edge2End.x - edge2Start.x)) / distance
+        let v = ((edge2Start.x - edge1Start.x) * (edge1End.y - edge1Start.y) - (edge2Start.y - edge1Start.y) * (edge1End.x - edge1Start.x)) / distance
+
+        if (u <= 0.0 || u >= 1.0) {
+            return false
+        }
+        if (v <= 0.0 || v >= 1.0) {
+            return false
+        }
+    
+        return true
     }
 }
