@@ -332,7 +332,7 @@ class GameViewController: UIViewController {
             }
             currentStep = geoName
         }
-
+        
         activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
         checkIfSolved()
     }
@@ -379,9 +379,16 @@ class GameViewController: UIViewController {
             geometry.materials[0].diffuse.contents = UIColor.defaultVertexColor()
         }
         
-        if let trailEmitter = ParticleGeneration.createTrail(color: activeColor, geometry: geometry) {
+        if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: geometry) {
             node.removeAllParticleSystems()
-            node.addParticleSystem(trailEmitter)
+            node.addParticleSystem(explosion)
+        }
+        
+        GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
+            if let trailEmitter = ParticleGeneration.createTrail(color: activeColor, geometry: geometry) {
+                node.removeAllParticleSystems()
+                node.addParticleSystem(trailEmitter)
+            }
         }
     }
     
