@@ -281,6 +281,9 @@ class GameViewController: UIViewController {
                     selectedNode = nil
                     axisPanGestureRecognizer?.isEnabled = false
                 } else {
+                    scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
+                    scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
+                    
                     selectedNode = node
                     axisPanGestureRecognizer?.isEnabled = true
                     geometry.materials.first?.diffuse.contents = activeColor
