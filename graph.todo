@@ -2,7 +2,7 @@
 Graph:
   ☐ Add a few more planar levels
   ☐ Add the difficult hamiltonian levels
-  ☐ Improve planar experience (highlight lines that aren't intersecting)
+  ✔ Improve planar experience (highlight lines that aren't intersecting) @done (18-01-20 19:40)
   ☐ Begin work on the Sim game mode
   ☐ Add basic AI for the Sim mode
   ☐ Begin creating actual game world and level layout - the grid

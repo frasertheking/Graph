@@ -216,19 +216,27 @@ extension AdjacencyList: Graphable {
                     }
                 }
             }
+        } else if graphType == .planar {
+            var intersectingEdges: [Edge<Node>] = []
+            for edge1 in edgeArray {
+                for edge2 in edgeArray {
+                    if edge1 != edge2 && doEdgesIntersect(edge1: edge1, edge2: edge2) {
+                        intersectingEdges.append(edge1)
+                        intersectingEdges.append(edge2)
+                    }
+                }
+            }
             
-            //            // update neighbours
-            //            let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep)
-            //
-            //            for vertexNode in vertexNodes.childNodes {
-            //                if !pathArray.contains(Int((vertexNode.geometry?.name)!)!) {
-            //                    if (neighbours?.contains((vertexNode.geometry?.name)!))! {
-            //                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.gray
-            //                    } else if (vertexNode.geometry?.name)! != currentStep {
-            //                        vertexNode.geometry?.firstMaterial?.diffuse.contents = UIColor.black
-            //                    }
-            //                }
-            //            }
+            var pos = 0
+            for edgeNode in edgeArray {
+                if intersectingEdges.contains(edgeNode) {
+                    edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                } else {
+                    edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
+                    edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                }
+                pos += 1
+            }
         } else {
             for (_, value) in (self.adjacencyDict) {
                 for case let edge as Edge<Node> in value  {

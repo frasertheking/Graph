@@ -143,8 +143,8 @@ class GameViewController: UIViewController {
     
     @objc func setupLevel() {
         activeLevel = Levels.createLevel(index: currentLevel)
-        scnView.pointOfView?.position = SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ)
-        scnView.pointOfView?.rotation = SCNVector4(x: 0, y: 0, z: 0, w: 0)
+        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
+        scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
                 
         createObjects()
         GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
@@ -289,6 +289,7 @@ class GameViewController: UIViewController {
                     geometry.materials.first?.diffuse.contents = activeColor
                     selectNode(node: node, graphType: graphType, activeColor: activeColor)
                 }
+                activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
                 checkIfSolved()
                 return
             case .kColor:
@@ -433,6 +434,7 @@ class GameViewController: UIViewController {
             }
             
             scnScene.rootNode.addChildNode(edgeNodes)
+            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
         } else if gestureRecognize.state == .ended {
             checkIfSolved()
         }
