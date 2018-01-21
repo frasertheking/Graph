@@ -180,6 +180,30 @@ extension AdjacencyList: Graphable {
         return neighbours
     }
     
+    func updateNeighbourColors(level: Level?, neighbours: [String], vertexNodes: SCNNode) {
+        guard let currentLevel = level else {
+            return
+        }
+        
+        guard let graphType = currentLevel.graphType else {
+            return
+        }
+        
+        let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
+
+        if graphType == .planar {
+            var pos = 0
+            for (key, _) in (graph.adjacencyDict) {
+                if neighbours.contains("\(key.data.uid)") {
+                    vertexNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.goldColor()
+                } else if vertexNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents as! UIColor != UIColor.red {
+                    vertexNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                }
+                pos += 1
+            }
+        }
+    }
+    
     func updateCorrectEdges(level: Level?, pathArray: [Int], edgeArray: [Edge<Node>], edgeNodes: SCNNode) {
         
         guard let currentLevel = level else {

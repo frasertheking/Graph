@@ -230,6 +230,14 @@ class GameViewController: UIViewController {
         
         scnScene.rootNode.addChildNode(vertexNodes)
         scnScene.rootNode.addChildNode(edgeNodes)
+        
+        guard let graphType: GraphType = activeLevel?.graphType else {
+            return
+        }
+        
+        if graphType == .planar {
+            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+        }
     }
     
     func handleTouchFor(node: SCNNode) {
@@ -285,10 +293,17 @@ class GameViewController: UIViewController {
                     scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
                     
                     selectedNode = node
+                    
+                    guard let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: selectedNode.geometry?.name) else {
+                        return
+                    }
+                    activeLevel?.adjacencyList?.updateNeighbourColors(level: activeLevel, neighbours: neighbours, vertexNodes: vertexNodes)
+                    
                     axisPanGestureRecognizer?.isEnabled = true
                     geometry.materials.first?.diffuse.contents = activeColor
                     selectNode(node: node, graphType: graphType, activeColor: activeColor)
                 }
+                
                 activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
                 checkIfSolved()
                 return
@@ -434,8 +449,9 @@ class GameViewController: UIViewController {
             }
             
             scnScene.rootNode.addChildNode(edgeNodes)
-            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+
         } else if gestureRecognize.state == .ended {
+            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
             checkIfSolved()
         }
     }
