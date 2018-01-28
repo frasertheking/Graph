@@ -58,7 +58,7 @@ class GameViewController: UIViewController {
     let camera = SCNCamera()
     
     struct GameConstants {
-        static let kCameraZ: Float = 20
+        static let kCameraZ: Float = 30
         static let kScaleShrink: CGFloat = 0.8
         static let kScaleGrow: CGFloat = 1.25
         static let kPanTranslationScaleFactor: CGFloat = 100
