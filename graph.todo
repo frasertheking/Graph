@@ -8,3 +8,5 @@ Graph:
   ☐ Add basic AI for the Sim mode
   ☐ Begin creating actual game world and level layout - the grid
   ☐ Add level complete animation
+  ☐ Fix sizing issue (make graphs relative)
+  
