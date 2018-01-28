@@ -32,6 +32,7 @@ class GameViewController: UIViewController {
     var pathArray: [Int] = []
     var currentStep: String = ""
     var firstStep: String = ""
+    let axisArray: [String] = ["X", "Y", "Z"]
     
     // DEBUG
     var debug = false
@@ -591,13 +592,21 @@ extension GameViewController: UICollectionViewDataSource {
             return cell
         }
         
-        cell.checkbox.isHidden = (graphType == .hamiltonian) ? true : false
-        cell.undoImage.isHidden = (graphType == .hamiltonian) ? false : true
+        cell.checkbox.isHidden = (graphType == .hamiltonian || graphType == .planar) ? true : false
+        cell.palletImage.isHidden = (graphType == .hamiltonian || graphType == .planar) ? false : true
         cell.backgroundColor = (graphType == .hamiltonian) ? walkColor : kColors[indexPath.row]
         cell.layer.cornerRadius = cell.frame.size.width / 2
         cell.layer.borderWidth = 2
         cell.checkbox.stateChangeAnimation = .expand(.fill)
-
+        
+        if graphType == .planar {
+            cell.palletImage.image = UIImage(named: "move")
+        } else if graphType == .hamiltonian {
+            cell.palletImage.image = UIImage(named: "undo")
+        }
+        cell.palletImage.image = cell.palletImage.image?.withRenderingMode(.alwaysTemplate)
+        cell.palletImage.tintColor = .white
+        
         if selectedColorIndex == indexPath.row {
             cell.checkbox.setCheckState(.checked, animated: true)
             cell.layer.borderColor = UIColor.customWhite().cgColor
@@ -676,6 +685,9 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                     break
                 }
             }
+        } else if graphType == .planar {
+            selectedColorIndex = indexPath.row
+            paintColorCollectionView.reloadData()
         } else {
             if let color = cell.backgroundColor {
                 paintColor = color

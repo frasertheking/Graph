@@ -11,5 +11,5 @@ import M13Checkbox
 
 class ColorButtonCollectionViewCell: UICollectionViewCell {
     @IBOutlet var checkbox: M13Checkbox!
-    @IBOutlet var undoImage: UIImageView!
+    @IBOutlet var palletImage: UIImageView!
 }

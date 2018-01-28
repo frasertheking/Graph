@@ -2,6 +2,7 @@
 Graph:
   ☐ Add a few more planar levels
   ☐ Add the difficult hamiltonian levels
+  ✔ Add xyz axis switcher planar mode @done (18-01-28 12:25)
   ✔ Improve planar experience (highlight lines that aren't intersecting) @done (18-01-20 19:40)
   ☐ Begin work on the Sim game mode
   ☐ Add basic AI for the Sim mode
