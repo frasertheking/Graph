@@ -23,12 +23,12 @@ struct GraphAnimation {
         edgeNodes.addAnimation(spin, forKey: "spin around")
     }
     
-    static func scaleGraphObject(vertexNodes: SCNNode, edgeNodes: SCNNode) {
+    static func scaleGraphObject(vertexNodes: SCNNode, edgeNodes: SCNNode, duration: TimeInterval, toScale: SCNVector4) {
         let scale = CABasicAnimation(keyPath: "scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         scale.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
-        scale.toValue = NSValue(scnVector4: SCNVector4(x: 2, y: 2, z: 2, w: 0))
-        scale.duration = 0.5
+        scale.toValue = NSValue(scnVector4: toScale)
+        scale.duration = duration
         scale.repeatCount = 0
         scale.autoreverses = true
         scale.timingFunction = easeInOut

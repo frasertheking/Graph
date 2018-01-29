@@ -50,6 +50,9 @@ class GameViewController: UIViewController {
     @IBOutlet var paintColorCollectionView: UICollectionView!
     @IBOutlet var collectionViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var levelTitle: UILabel!
+    @IBOutlet var completedView: UIView!
+    @IBOutlet var completedCheckmark: M13Checkbox!
+    @IBOutlet var completedViewBottomConstraint: NSLayoutConstraint!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -58,7 +61,7 @@ class GameViewController: UIViewController {
     let camera = SCNCamera()
     
     struct GameConstants {
-        static let kCameraZ: Float = 30
+        static let kCameraZ: Float = 25
         static let kScaleShrink: CGFloat = 0.8
         static let kScaleGrow: CGFloat = 1.25
         static let kPanTranslationScaleFactor: CGFloat = 100
@@ -114,7 +117,7 @@ class GameViewController: UIViewController {
         guard let sceneView = scnView else {
             return
         }
-
+        
         scnView = sceneView
         scnView.showsStatistics = debug ? true : false
         scnView.allowsCameraControl = true
@@ -143,6 +146,7 @@ class GameViewController: UIViewController {
     }
     
     @objc func setupLevel() {
+        scnView.isUserInteractionEnabled = true
         activeLevel = Levels.createLevel(index: currentLevel)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
@@ -162,7 +166,7 @@ class GameViewController: UIViewController {
         }
         
         GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay) {
-            GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+            GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2, y: 2, z: 2, w: 0))
             GraphAnimation.animateInCollectionView(view: self.view, collectionViewBottomConstraint: self.collectionViewBottomConstraint)
         }
     }
@@ -345,14 +349,39 @@ class GameViewController: UIViewController {
         
         if let list = activeLevel?.adjacencyList {
             if list.checkIfSolved(forType: graphType) {
-                if (graphType == .planar) {
-                    axisPanGestureRecognizer?.isEnabled = false
-                }
-                
-                if (graphType == .hamiltonian) && firstStep == currentStep {
-                    GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
-                } else if !(graphType == .hamiltonian) {
-                    GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
+                if ((graphType == .hamiltonian) && firstStep == currentStep) || !(graphType == .hamiltonian) {
+                    
+                    for node in vertexNodes.childNodes {
+                        if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
+                            node.removeAllParticleSystems()
+                            node.addParticleSystem(explosion)
+                        }
+                    }
+                    
+                    for node in edgeNodes.childNodes {
+                        if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
+                            node.removeAllParticleSystems()
+                            node.addParticleSystem(explosion)
+                        }
+                    }
+                    
+                    completedCheckmark.setCheckState(.checked, animated: true)
+                    
+                    scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
+                    scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
+                    
+                    GraphAnimation.delayWithSeconds(0.5, completion: {
+                        self.scnView.isUserInteractionEnabled = false
+                        GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+                        GraphAnimation.delayWithSeconds(0.5, completion: {
+                            GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
+                            self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
+                            self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
+                            UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
+                                self.view.layoutIfNeeded()
+                            })
+                        })
+                    })
                 }
             }
         }
@@ -465,6 +494,7 @@ class GameViewController: UIViewController {
     }
     
     @objc func cleanScene() {
+        axisPanGestureRecognizer?.isEnabled = false
         vertexNodes.removeFromParentNode()
         edgeNodes.removeFromParentNode()
         pathArray.removeAll()
@@ -474,7 +504,7 @@ class GameViewController: UIViewController {
         currentLevel += 1
         refreshColorsInCollectionView()
         axisPanGestureRecognizer?.isEnabled = false
-        Timer.scheduledTimer(timeInterval: TimeInterval(GameConstants.kVeryLongDelay), target: self, selector: #selector(setupLevel), userInfo: nil, repeats: false)
+        setupLevel()
     }
     
     // DEBUG MODE CODE
@@ -524,6 +554,14 @@ class GameViewController: UIViewController {
         selectedNode = SCNNode()
         Shapes.spawnShape(type: .Custom, position: SCNVector3(x: 0, y: 0, z: 0), color: UIColor.white, id: 0, node: selectedNode)
         debugNodes.addChildNode(selectedNode)
+    }
+    
+    @IBAction func nextLevel() {
+        GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
+        self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
+        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
     
     func editModeActivate() {
