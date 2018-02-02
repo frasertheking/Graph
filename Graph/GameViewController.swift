@@ -670,7 +670,9 @@ extension GameViewController: UICollectionViewDataSource {
         if selectedColorIndex == indexPath.row {
             cell.checkbox.setCheckState(.checked, animated: true)
             cell.layer.borderColor = UIColor.customWhite().cgColor
-            GraphAnimation.addPulse(to: cell)
+            GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
+                GraphAnimation.addPulse(to: cell)
+            }
         } else {
             cell.checkbox.setCheckState(.unchecked, animated: true)
             cell.layer.borderColor = kColors[indexPath.row].darker()?.cgColor
