@@ -33,6 +33,7 @@ class GameViewController: UIViewController {
     var currentStep: String = ""
     var firstStep: String = ""
     let axisArray: [String] = ["X", "Y", "Z"]
+    var solved = false
     
     // DEBUG
     var debug = false
@@ -332,7 +333,9 @@ class GameViewController: UIViewController {
                 selectedNode = node
             }
             
-           selectNode(node: node, graphType: graphType, activeColor: activeColor)
+            if !solved {
+                selectNode(node: node, graphType: graphType, activeColor: activeColor)
+            }
             
             if let _ = activeLevel?.adjacencyList {
                 activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: geometry.name, color: activeColor)
@@ -361,6 +364,8 @@ class GameViewController: UIViewController {
             if list.checkIfSolved(forType: graphType) {
                 if ((graphType == .hamiltonian) && firstStep == currentStep) || !(graphType == .hamiltonian) {
                     
+                    solved = true
+                    
                     for node in vertexNodes.childNodes {
                         if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
                             node.removeAllParticleSystems()
@@ -375,8 +380,11 @@ class GameViewController: UIViewController {
                         }
                     }
                     
-                    completedCheckmark.setCheckState(.checked, animated: true)
+                    for node in vertexNodes.childNodes {
+                        node.removeAllParticleSystems()
+                    }
                     
+                    completedCheckmark.setCheckState(.checked, animated: true)
                     scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
                     scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
                     
@@ -388,13 +396,7 @@ class GameViewController: UIViewController {
                             self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
                             self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
                             
-                            guard let graphType: GraphType = self.activeLevel?.graphType else {
-                                return
-                            }
-                            
-                            if graphType == .planar {
-                                self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
-                            }
+                            self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
                             
                             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
                                 self.view.layoutIfNeeded()
@@ -519,6 +521,7 @@ class GameViewController: UIViewController {
         pathArray.removeAll()
         currentStep = ""
         firstStep = ""
+        solved = false
         
         currentLevel += 1
         refreshColorsInCollectionView()
