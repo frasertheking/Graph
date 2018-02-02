@@ -258,6 +258,14 @@ extension AdjacencyList: Graphable {
                 } else {
                     edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
                     edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                    
+                    guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
+                        continue
+                    }
+                    
+                    if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
+                        edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
+                    }
                 }
                 pos += 1
             }

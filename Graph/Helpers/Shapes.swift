@@ -14,7 +14,6 @@ import SceneKit.ModelIO
 public enum Shapes:Int {
     
     case Sphere = 0
-    case Cylinder
     case Custom
     
     struct ShapeConstants {
@@ -32,10 +31,7 @@ public enum Shapes:Int {
         switch type {
         case .Sphere:
             geometry = SCNSphere(radius: ShapeConstants.sphereRadius)
-        case .Cylinder:
-            geometry = SCNCylinder(radius: ShapeConstants.cylinderRadius, height: ShapeConstants.cylinderHeight)
         case .Custom:
-            
             let geoScene = SCNScene(named: ShapeConstants.customShapeName)
             guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
                 return

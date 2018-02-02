@@ -169,6 +169,16 @@ class GameViewController: UIViewController {
             GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2, y: 2, z: 2, w: 0))
             GraphAnimation.animateInCollectionView(view: self.view, collectionViewBottomConstraint: self.collectionViewBottomConstraint)
         }
+        
+        GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay + 0.6) {
+            guard let graphType: GraphType = self.activeLevel?.graphType else {
+                return
+            }
+            
+            if graphType == .planar {
+                self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+            }
+        }
     }
     
     func setupDebug() {
@@ -377,6 +387,15 @@ class GameViewController: UIViewController {
                             GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
                             self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
                             self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
+                            
+                            guard let graphType: GraphType = self.activeLevel?.graphType else {
+                                return
+                            }
+                            
+                            if graphType == .planar {
+                                self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                            }
+                            
                             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
                                 self.view.layoutIfNeeded()
                             })

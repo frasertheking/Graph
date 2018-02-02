@@ -32,7 +32,8 @@ extension SCNNode {
         let cyl = SCNCylinder(radius: radius, height: l)
         cyl.name = "edge"
         cyl.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
-        
+        cyl.materials.first?.normal.contents = UIImage(named: "thenormal")
+
         self.geometry = cyl
         
         let ov = SCNVector3(0, l/2.0, 0)
