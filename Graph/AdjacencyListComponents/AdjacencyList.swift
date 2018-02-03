@@ -13,7 +13,7 @@ public enum GraphType: Int {
     case kColor = 0
     case hamiltonian
     case planar
-    case euler
+    case sim
 }
 
 open class AdjacencyList<T: Hashable> {
@@ -104,7 +104,7 @@ extension AdjacencyList: Graphable {
                 }
             }
             return solved
-        case .euler:
+        case .sim:
             return false
         default:
             for (_, value) in (graph.adjacencyDict) {

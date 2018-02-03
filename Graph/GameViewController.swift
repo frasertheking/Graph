@@ -325,7 +325,7 @@ class GameViewController: UIViewController {
                 return
             case .kColor:
                 break
-            case .euler:
+            case .sim:
                 break
             }
             
