@@ -67,6 +67,11 @@ struct GraphAnimation {
     }
     
     static func swellGraphObject(vertexNodes: SCNNode, edgeNodes: SCNNode) {
+        GraphAnimation.swellNode(node: vertexNodes)
+        GraphAnimation.swellNode(node: edgeNodes)
+    }
+    
+    static func swellNode(node: SCNNode) {
         let scale = CABasicAnimation(keyPath: "scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         scale.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
@@ -75,10 +80,9 @@ struct GraphAnimation {
         scale.repeatCount = .infinity
         scale.autoreverses = true
         scale.timingFunction = easeInOut
-        vertexNodes.addAnimation(scale, forKey: "swell")
-        edgeNodes.addAnimation(scale, forKey: "swell")
+        node.addAnimation(scale, forKey: "swell")
     }
-
+    
     static func animateInCollectionView(view: UIView, collectionViewBottomConstraint: NSLayoutConstraint) {
         collectionViewBottomConstraint.constant = 16
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {

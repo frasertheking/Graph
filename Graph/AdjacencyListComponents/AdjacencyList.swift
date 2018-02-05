@@ -270,6 +270,33 @@ extension AdjacencyList: Graphable {
                 }
                 pos += 1
             }
+        } else if graphType == .sim {
+            if pathArray.count > 1 {
+                for i in 0...pathArray.count-2 {
+                    var pos = 0
+                    for edgeNode in edgeArray {
+                        //edgeNodes.childNodes[pos].removeAllParticleSystems()
+                        if (edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) ||
+                            (edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.red
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.red
+                            
+                            guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
+                                continue
+                            }
+                            
+                            if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.red, geometry: edgeGeometry) {
+                                edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
+                            }
+                        } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) &&
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents as! UIColor == UIColor.black {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
+                        }
+                        pos += 1
+                    }
+                }
+            }
         } else {
             for (_, value) in (self.adjacencyDict) {
                 for case let edge as Edge<Node> in value  {

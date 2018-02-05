@@ -50,7 +50,12 @@ public enum Shapes:Int {
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.position = position
         geometryNode.scale = SCNVector3(ShapeConstants.sphereRadius, ShapeConstants.sphereRadius, ShapeConstants.sphereRadius)
+        geometryNode.rotation = SCNVector4(x: 0, y: 1, z: 0, w: Float(Double.pi/2))
         
         node.addChildNode(geometryNode)
+    }
+    
+    static func randomCGFloat() -> Float {
+        return Float(arc4random()) /  Float(UInt32.max)
     }
 }

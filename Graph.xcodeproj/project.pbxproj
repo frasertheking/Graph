@@ -10,6 +10,11 @@
 		16A81C9217142F81161F4A98 /* Pods_Graph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C84D32F8969AA271E3E3E3 /* Pods_Graph.framework */; };
 		432110542014D67900E1A24B /* Explode.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 432110532014D67800E1A24B /* Explode.scnp */; };
 		432617651FED71A70031EA1E /* node.dae in Resources */ = {isa = PBXBuildFile; fileRef = 432617641FED71A70031EA1E /* node.dae */; };
+		43270DA620279CEE00BBF1CF /* Crystal14.png in Resources */ = {isa = PBXBuildFile; fileRef = 43270DA520279CEE00BBF1CF /* Crystal14.png */; };
+		43270DAB2027A17700BBF1CF /* Crystal14_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 43270DA92027A17700BBF1CF /* Crystal14_1.png */; };
+		43270DAC2027A17700BBF1CF /* Crystal14_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43270DAA2027A17700BBF1CF /* Crystal14_2.png */; };
+		43270DB02027A3F000BBF1CF /* crystal.dae in Resources */ = {isa = PBXBuildFile; fileRef = 43270DAF2027A3F000BBF1CF /* crystal.dae */; };
+		43270DB82027E47B00BBF1CF /* SceneKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43270DB72027E47B00BBF1CF /* SceneKit+Extensions.swift */; };
 		432EC2A5201E3FBC0075B477 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 432EC2A4201E3FBB0075B477 /* Assets.xcassets */; };
 		433512C61FDE26070078DB5F /* Glow.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 433512C51FDE26060078DB5F /* Glow.scnp */; };
 		4344E96920026712003FC234 /* ParticleGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344E96820026712003FC234 /* ParticleGeneration.swift */; };
@@ -43,6 +48,11 @@
 		156BEFBF47AC34201AC31AC9 /* Pods-Graph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Graph.release.xcconfig"; path = "Pods/Target Support Files/Pods-Graph/Pods-Graph.release.xcconfig"; sourceTree = "<group>"; };
 		432110532014D67800E1A24B /* Explode.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explode.scnp; sourceTree = "<group>"; };
 		432617641FED71A70031EA1E /* node.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = node.dae; sourceTree = "<group>"; };
+		43270DA520279CEE00BBF1CF /* Crystal14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crystal14.png; sourceTree = "<group>"; };
+		43270DA92027A17700BBF1CF /* Crystal14_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crystal14_1.png; sourceTree = "<group>"; };
+		43270DAA2027A17700BBF1CF /* Crystal14_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crystal14_2.png; sourceTree = "<group>"; };
+		43270DAF2027A3F000BBF1CF /* crystal.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = crystal.dae; sourceTree = "<group>"; };
+		43270DB72027E47B00BBF1CF /* SceneKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneKit+Extensions.swift"; sourceTree = "<group>"; };
 		432EC2A4201E3FBB0075B477 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		433512C51FDE26060078DB5F /* Glow.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Glow.scnp; sourceTree = "<group>"; };
 		4344E96820026712003FC234 /* ParticleGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleGeneration.swift; sourceTree = "<group>"; };
@@ -104,6 +114,7 @@
 				43860BCE1FB8ECA70076B0CF /* SCNNode+Extensions.swift */,
 				437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */,
 				43CA8FF71FB762D300B962D9 /* SCNAction+Extensions.swift */,
+				43270DB72027E47B00BBF1CF /* SceneKit+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -135,6 +146,10 @@
 		43B012791FD62DBF00F017A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				43270DAF2027A3F000BBF1CF /* crystal.dae */,
+				43270DA92027A17700BBF1CF /* Crystal14_1.png */,
+				43270DAA2027A17700BBF1CF /* Crystal14_2.png */,
+				43270DA520279CEE00BBF1CF /* Crystal14.png */,
 				432617641FED71A70031EA1E /* node.dae */,
 				434A574E1FDB109400FD172B /* levels.plist */,
 				43B012751FD62BA500F017A6 /* icosahedron.obj */,
@@ -272,12 +287,16 @@
 			files = (
 				435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */,
 				43CA8FE51FB6919900B962D9 /* LaunchScreen.storyboard in Resources */,
+				43270DAB2027A17700BBF1CF /* Crystal14_1.png in Resources */,
 				43B012761FD62BA500F017A6 /* icosahedron.obj in Resources */,
+				43270DB02027A3F000BBF1CF /* crystal.dae in Resources */,
 				433512C61FDE26070078DB5F /* Glow.scnp in Resources */,
 				43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */,
 				43C581851FE4481B00D344B0 /* ColorButtonCollectionViewCell.xib in Resources */,
 				432617651FED71A70031EA1E /* node.dae in Resources */,
 				434A574F1FDB109400FD172B /* levels.plist in Resources */,
+				43270DA620279CEE00BBF1CF /* Crystal14.png in Resources */,
+				43270DAC2027A17700BBF1CF /* Crystal14_2.png in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,
 				43C581811FE356AF00D344B0 /* Background.sks in Resources */,
 				432EC2A5201E3FBC0075B477 /* Assets.xcassets in Resources */,
@@ -351,6 +370,7 @@
 				43CA8FDD1FB6919900B962D9 /* GameViewController.swift in Sources */,
 				43860BC91FB7E1DA0076B0CF /* Edges.swift in Sources */,
 				43860BC71FB7E17C0076B0CF /* Vertex.swift in Sources */,
+				43270DB82027E47B00BBF1CF /* SceneKit+Extensions.swift in Sources */,
 				43CA8FF31FB697B600B962D9 /* Shapes.swift in Sources */,
 				43A018F31FC10B28005FF276 /* Node.swift in Sources */,
 				437C90C81FB7B1BF0017A454 /* SCNVector3+Extensions.swift in Sources */,

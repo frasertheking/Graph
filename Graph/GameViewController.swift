@@ -34,6 +34,7 @@ class GameViewController: UIViewController {
     var firstStep: String = ""
     let axisArray: [String] = ["X", "Y", "Z"]
     var solved = false
+    var simPlayerNodeCount: Int = 0
     
     // DEBUG
     var debug = false
@@ -326,7 +327,9 @@ class GameViewController: UIViewController {
             case .kColor:
                 break
             case .sim:
-                break
+                
+                simPlayerNodeCount += 1
+                
             }
             
             if debug {
@@ -351,7 +354,26 @@ class GameViewController: UIViewController {
             currentStep = geoName
         }
         
-        activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+        if graphType == .sim {
+            if simPlayerNodeCount == 2 {
+                print("draw line")
+                simPlayerNodeCount = 0
+                
+                GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
+                    for node in self.vertexNodes.childNodes {
+                        node.removeAllParticleSystems()
+                        
+                        node.geometry?.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
+                        node.geometry?.materials.first?.emission.contents = UIColor.defaultVertexColor()
+                    }
+                }
+                activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+                pathArray.removeAll()
+            }
+        } else {
+            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+        }
+        
         checkIfSolved()
     }
     
