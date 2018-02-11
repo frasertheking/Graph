@@ -21,6 +21,8 @@ open class AdjacencyList<T: Hashable> {
     public init() {}
 }
 
+fileprivate var simPath: [Int] = []
+
 extension AdjacencyList: Graphable {
     public typealias Element = T
     
@@ -204,6 +206,73 @@ extension AdjacencyList: Graphable {
         }
     }
     
+    func makeSimMove(edgeArray: [Edge<Node>], edgeNodes: SCNNode, simArray: [Int]) {
+        
+        var randomEdge: [Int] = []
+        
+        while true {
+            var edge = uniqueRandoms(numberOfRandoms: 2, minNum: 1, maxNum: 5)
+
+            if !doesEdgeExistInArray(array: simArray, uid1: edge[0], uid2: edge[1]) {
+                if !doesEdgeExistInArray(array: simPath, uid1: edge[0], uid2: edge[1]) {
+                    randomEdge = edge
+                    break
+                }
+            }
+        }
+        
+        for (_, value) in (self.adjacencyDict) {
+            for case let edge as Edge<Node> in value  {
+                if ( edge.source.data.uid      == randomEdge[0] &&
+                     edge.destination.data.uid == randomEdge[1]) ||
+                   ( edge.destination.data.uid == randomEdge[0] &&
+                     edge.source.data.uid      == randomEdge[1]) {
+                    var pos = 0
+                    for edgeNode in edgeArray {
+                        if edgeNode.source == edge.source && edgeNode.destination == edge.destination  {
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+                            
+                            guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
+                                continue
+                            }
+                            
+                            if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.blue, geometry: edgeGeometry) {
+                                edgeNodes.childNodes[pos].removeAllParticleSystems()
+                                edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
+                            }
+                            
+                            edge.source.data.color = UIColor.blue
+                            edge.destination.data.color = UIColor.blue
+                            
+                            simPath.append(edge.source.data.uid)
+                            simPath.append(edge.destination.data.uid)
+                        }
+                        pos += 1
+                    }
+                }
+            }
+        }
+    }
+    
+    func doesEdgeExistInArray(array: [Int], uid1: Int, uid2: Int) -> Bool {
+        var pos = 0
+        while pos <= array.count-2 {
+            if (array[pos] == uid1 && array[pos+1] == uid2) || (array[pos] == uid2 && array[pos+1] == uid1) {
+                return true
+            }
+            pos += 2
+        }
+        return false
+    }
+    
+    func uniqueRandoms(numberOfRandoms: Int, minNum: Int, maxNum: UInt32) -> [Int] {
+        var uniqueNumbers = Set<Int>()
+        while uniqueNumbers.count < numberOfRandoms {
+            uniqueNumbers.insert(Int(arc4random_uniform(maxNum + 1)) + minNum)
+        }
+        return Array(uniqueNumbers).shuffle
+    }
+    
     func updateCorrectEdges(level: Level?, pathArray: [Int], edgeArray: [Edge<Node>], edgeNodes: SCNNode) {
         
         guard let currentLevel = level else {
@@ -275,7 +344,6 @@ extension AdjacencyList: Graphable {
                 for i in 0...pathArray.count-2 {
                     var pos = 0
                     for edgeNode in edgeArray {
-                        //edgeNodes.childNodes[pos].removeAllParticleSystems()
                         if (edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) ||
                             (edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) {
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.red
@@ -290,8 +358,8 @@ extension AdjacencyList: Graphable {
                             }
                         } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) &&
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents as! UIColor == UIColor.black {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
                         }
                         pos += 1
                     }

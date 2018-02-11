@@ -30,6 +30,7 @@ class GameViewController: UIViewController {
     var walkColor: UIColor = .goldColor()
     var selectedColorIndex: Int = 0
     var pathArray: [Int] = []
+    var simArray: [Int] = []
     var currentStep: String = ""
     var firstStep: String = ""
     let axisArray: [String] = ["X", "Y", "Z"]
@@ -356,7 +357,6 @@ class GameViewController: UIViewController {
         
         if graphType == .sim {
             if simPlayerNodeCount == 2 {
-                print("draw line")
                 simPlayerNodeCount = 0
                 
                 GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
@@ -368,6 +368,13 @@ class GameViewController: UIViewController {
                     }
                 }
                 activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+                
+                for item in pathArray {
+                    simArray.append(item)
+                }
+                
+                activeLevel?.adjacencyList?.makeSimMove(edgeArray: edgeArray, edgeNodes: edgeNodes, simArray: simArray)
+                
                 pathArray.removeAll()
             }
         } else {
@@ -541,6 +548,7 @@ class GameViewController: UIViewController {
         vertexNodes.removeFromParentNode()
         edgeNodes.removeFromParentNode()
         pathArray.removeAll()
+        simArray.removeAll()
         currentStep = ""
         firstStep = ""
         solved = false
@@ -752,7 +760,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                     }
                     
                     if pathArray.count > 1 {
-                        activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+                        activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray,  edgeArray: edgeArray, edgeNodes: edgeNodes)
                     } else {
                         var pos = 0
                         for _ in edgeArray {

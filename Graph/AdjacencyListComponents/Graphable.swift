@@ -26,4 +26,5 @@ protocol Graphable {
     func updateNeighbourColors(level: Level?, neighbours: [String], vertexNodes: SCNNode)
     func updateNodePosition(id: String?, newPosition: SCNVector3)
     func doEdgesIntersect(edge1: Edge<Node>, edge2: Edge<Node>) -> Bool
+    func makeSimMove(edgeArray: [Edge<Node>], edgeNodes: SCNNode, simArray: [Int])
 }
