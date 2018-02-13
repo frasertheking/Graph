@@ -210,7 +210,8 @@ extension AdjacencyList: Graphable {
         
         var randomEdge: [Int] = []
         
-        while true {
+        var count = 0
+        while count < 100 {
             var edge = uniqueRandoms(numberOfRandoms: 2, minNum: 1, maxNum: 5)
 
             if !doesEdgeExistInArray(array: simArray, uid1: edge[0], uid2: edge[1]) {
@@ -219,7 +220,11 @@ extension AdjacencyList: Graphable {
                     break
                 }
             }
+            count += 1
         }
+        
+        // Last edge, no move to make
+        if randomEdge.count == 0 { return }
         
         for (_, value) in (self.adjacencyDict) {
             for case let edge as Edge<Node> in value  {
