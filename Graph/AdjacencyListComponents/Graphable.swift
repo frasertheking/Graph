@@ -27,4 +27,5 @@ protocol Graphable {
     func updateNodePosition(id: String?, newPosition: SCNVector3)
     func doEdgesIntersect(edge1: Edge<Node>, edge2: Edge<Node>) -> Bool
     func makeSimMove(edgeArray: [Edge<Node>], edgeNodes: SCNNode, simArray: [Int])
+    func isLegalMove(simArray: [Int], uid1: Int, uid2: Int) -> Bool
 }

@@ -328,9 +328,7 @@ class GameViewController: UIViewController {
             case .kColor:
                 break
             case .sim:
-                
                 simPlayerNodeCount += 1
-                
             }
             
             if debug {
@@ -367,6 +365,16 @@ class GameViewController: UIViewController {
                         node.geometry?.materials.first?.emission.contents = UIColor.defaultVertexColor()
                     }
                 }
+                
+                if pathArray.count > 1 {
+                    if let isLegalMove = activeLevel?.adjacencyList?.isLegalMove(simArray: simArray, uid1: pathArray[0], uid2: pathArray[1]) {
+                        if !isLegalMove {
+                            pathArray.removeAll()
+                            return
+                        }
+                    }
+                }
+                
                 activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
                 
                 for item in pathArray {
@@ -374,7 +382,6 @@ class GameViewController: UIViewController {
                 }
                 
                 activeLevel?.adjacencyList?.makeSimMove(edgeArray: edgeArray, edgeNodes: edgeNodes, simArray: simArray)
-                
                 pathArray.removeAll()
             }
         } else {

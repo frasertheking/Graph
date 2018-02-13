@@ -21,7 +21,7 @@ open class AdjacencyList<T: Hashable> {
     public init() {}
 }
 
-fileprivate var simPath: [Int] = []
+public var simPath: [Int] = []
 
 extension AdjacencyList: Graphable {
     public typealias Element = T
@@ -252,6 +252,10 @@ extension AdjacencyList: Graphable {
                 }
             }
         }
+    }
+    
+    func isLegalMove(simArray: [Int], uid1: Int, uid2: Int) -> Bool {
+        return !doesEdgeExistInArray(array: simArray, uid1: uid1, uid2: uid2) && !doesEdgeExistInArray(array: simPath, uid1: uid1, uid2: uid2)
     }
     
     func doesEdgeExistInArray(array: [Int], uid1: Int, uid2: Int) -> Bool {
