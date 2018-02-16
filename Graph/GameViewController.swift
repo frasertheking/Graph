@@ -21,6 +21,7 @@ class GameViewController: UIViewController {
     var edgeNodes: SCNNode!
     var edgeArray: [Edge<Node>]!
     var vertexNodes: SCNNode!
+    var lightNodes: SCNNode!
     var colorSelectNodes: SCNNode!
 
     // GLOBAL VARS
@@ -36,6 +37,7 @@ class GameViewController: UIViewController {
     let axisArray: [String] = ["X", "Y", "Z"]
     var solved = false
     var simPlayerNodeCount: Int = 0
+    var lightLayer: CALayer!
     
     // DEBUG
     var debug = false
@@ -114,6 +116,9 @@ class GameViewController: UIViewController {
         }
         setupInteractions()
         
+        GraphAnimation.delayWithSeconds(1) {
+            self.setupStraylights()
+        }
     }
     
     func setupView() {
@@ -139,6 +144,11 @@ class GameViewController: UIViewController {
         scnView.scene = scnScene
         scnView.backgroundColor = UIColor.clear
         scnScene.background.contents = UIColor.clear
+        
+        lightLayer = CALayer()
+        lightLayer.frame = skView.frame
+        lightLayer.opacity = 0
+        skView.layer.addSublayer(lightLayer)
     }
     
     func setupCamera() {
@@ -214,8 +224,28 @@ class GameViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
-    
+        
         UIColor.setupBackgrounds(view: view, skView: skView)
+    }
+    
+    func setupStraylights() {
+        let numberOfLines = Int.random(min: 3, max: 5)
+        let slope = Float.random(min: 1.35, max: 3)
+        
+        for _ in 0...numberOfLines {
+            let randomYStart = Int.random(min: 50, max: 600)
+            let randomYEnd = Float(randomYStart) * slope
+            let randomWidth = Int.random(min: 10, max: 16)
+            lightLayer.drawLine(fromPoint: CGPoint(x: 450, y: randomYStart), toPoint: CGPoint(x: -450, y: Int(randomYEnd)), width: CGFloat(randomWidth))
+        }
+        
+        let animation : CABasicAnimation = CABasicAnimation(keyPath: "opacity")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.duration = 1.5
+        animation.isRemovedOnCompletion = false
+        animation.fillMode = kCAFillModeForwards
+        lightLayer.add(animation, forKey: nil)
     }
     
     // OBJECT CREATION AND HANDLING
@@ -328,7 +358,13 @@ class GameViewController: UIViewController {
             case .kColor:
                 break
             case .sim:
+                if selectedNode == node {
+                    return
+                }
+                
                 simPlayerNodeCount += 1
+                
+                selectedNode = node
             }
             
             if debug {
@@ -356,7 +392,8 @@ class GameViewController: UIViewController {
         if graphType == .sim {
             if simPlayerNodeCount == 2 {
                 simPlayerNodeCount = 0
-                
+                selectedNode = nil
+
                 GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
                     for node in self.vertexNodes.childNodes {
                         node.removeAllParticleSystems()
