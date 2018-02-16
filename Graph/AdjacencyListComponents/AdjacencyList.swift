@@ -109,27 +109,32 @@ extension AdjacencyList: Graphable {
         case .sim:
             for (_, value) in (graph.adjacencyDict) {
                 for edge1 in value {
+                    let edge1Color = getEdgeColor(source: String(edge1.source.data.uid), destination: String(edge1.destination.data.uid), edgeArray: edgeArray, edgeNodes: edgeNodes)
+                    
+                    if edge1Color != .blue && edge1Color != .red {
+                        continue
+                    }
+                    
                     for (_, value) in (graph.adjacencyDict) {
                         for edge2 in value {
+                            let edge2Color = getEdgeColor(source: String(edge2.source.data.uid), destination: String(edge2.destination.data.uid), edgeArray: edgeArray, edgeNodes: edgeNodes)
+                            if edge2Color != edge1Color {
+                                continue
+                            }
+                            
                             for (_, value) in (graph.adjacencyDict) {
                                 for edge3 in value {
-                                    let edge1Color = getEdgeColor(source: String(edge1.source.data.uid), destination: String(edge1.destination.data.uid), edgeArray: edgeArray, edgeNodes: edgeNodes)
-                                    
-                                    let edge2Color = getEdgeColor(source: String(edge2.source.data.uid), destination: String(edge2.destination.data.uid), edgeArray: edgeArray, edgeNodes: edgeNodes)
-                                    
                                     let edge3Color = getEdgeColor(source: String(edge3.source.data.uid), destination: String(edge3.destination.data.uid), edgeArray: edgeArray, edgeNodes: edgeNodes)
+                                    if edge3Color != edge2Color {
+                                        continue
+                                    }
                                     
-                                    
-                                    
-                                    if (edge1Color == .red || edge1Color == .blue) &&
-                                        (edge1 != edge2 && edge1 != edge3 && edge2 != edge3) &&
-                                        (edge1Color == edge2Color && edge2Color == edge3Color) {
+                                    if (edge1 != edge2 && edge1 != edge3 && edge2 != edge3) {
                                         let vertexSet = Set([edge1.source.data.uid, edge1.destination.data.uid,
                                                             edge2.source.data.uid, edge2.destination.data.uid,
                                                             edge3.source.data.uid, edge3.destination.data.uid])
                                         if vertexSet.count == 3 {
                                             return true
-                                            
                                         }
                                     }
                                 }
