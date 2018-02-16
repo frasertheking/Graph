@@ -76,7 +76,7 @@ extension AdjacencyList: Graphable {
         return adjacencyDict[source]
     }
     
-    func checkIfSolved(forType type: GraphType) -> Bool {
+    func checkIfSolved(forType type: GraphType, edgeArray: [Edge<Node>], edgeNodes: SCNNode) -> Bool {
         let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
         
         switch type {
@@ -107,6 +107,37 @@ extension AdjacencyList: Graphable {
             }
             return solved
         case .sim:
+            for (_, value) in (graph.adjacencyDict) {
+                for edge1 in value {
+                    for (_, value) in (graph.adjacencyDict) {
+                        for edge2 in value {
+                            for (_, value) in (graph.adjacencyDict) {
+                                for edge3 in value {
+                                    let edge1Color = getEdgeColor(source: String(edge1.source.data.uid), destination: String(edge1.destination.data.uid), edgeArray: edgeArray, edgeNodes: edgeNodes)
+                                    
+                                    let edge2Color = getEdgeColor(source: String(edge2.source.data.uid), destination: String(edge2.destination.data.uid), edgeArray: edgeArray, edgeNodes: edgeNodes)
+                                    
+                                    let edge3Color = getEdgeColor(source: String(edge3.source.data.uid), destination: String(edge3.destination.data.uid), edgeArray: edgeArray, edgeNodes: edgeNodes)
+                                    
+                                    
+                                    
+                                    if (edge1Color == .red || edge1Color == .blue) &&
+                                        (edge1 != edge2 && edge1 != edge3 && edge2 != edge3) &&
+                                        (edge1Color == edge2Color && edge2Color == edge3Color) {
+                                        let vertexSet = Set([edge1.source.data.uid, edge1.destination.data.uid,
+                                                            edge2.source.data.uid, edge2.destination.data.uid,
+                                                            edge3.source.data.uid, edge3.destination.data.uid])
+                                        if vertexSet.count == 3 {
+                                            return true
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             return false
         default:
             for (_, value) in (graph.adjacencyDict) {
@@ -257,6 +288,17 @@ extension AdjacencyList: Graphable {
                 }
             }
         }
+    }
+    
+    func getEdgeColor(source: String, destination: String, edgeArray: [Edge<Node>], edgeNodes: SCNNode) -> UIColor? {
+        var pos = 0
+        for edgeNode in edgeArray {
+            if String(edgeNode.source.data.uid) == source && String(edgeNode.destination.data.uid) == destination  {
+                return edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents as? UIColor
+            }
+            pos += 1
+        }
+        return nil
     }
     
     func isLegalMove(simArray: [Int], uid1: Int, uid2: Int) -> Bool {

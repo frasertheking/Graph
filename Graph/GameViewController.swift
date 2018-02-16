@@ -434,7 +434,7 @@ class GameViewController: UIViewController {
         }
         
         if let list = activeLevel?.adjacencyList {
-            if list.checkIfSolved(forType: graphType) {
+            if list.checkIfSolved(forType: graphType, edgeArray: edgeArray, edgeNodes: edgeNodes) {
                 if ((graphType == .hamiltonian) && firstStep == currentStep) || !(graphType == .hamiltonian) {
                     
                     solved = true
