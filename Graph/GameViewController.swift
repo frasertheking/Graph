@@ -38,6 +38,7 @@ class GameViewController: UIViewController {
     var solved = false
     var simPlayerNodeCount: Int = 0
     var lightLayer: CALayer!
+    var straylightView: UIView!
     
     // DEBUG
     var debug = false
@@ -115,10 +116,6 @@ class GameViewController: UIViewController {
             setupLevel()
         }
         setupInteractions()
-        
-        GraphAnimation.delayWithSeconds(1) {
-            self.setupStraylights()
-        }
     }
     
     func setupView() {
@@ -147,8 +144,12 @@ class GameViewController: UIViewController {
         
         lightLayer = CALayer()
         lightLayer.frame = skView.frame
-        lightLayer.opacity = 0
-        skView.layer.addSublayer(lightLayer)
+        straylightView = UIView()
+        straylightView.frame = skView.frame
+        straylightView.backgroundColor = .clear
+        straylightView.layer.addSublayer(lightLayer)
+        straylightView.addParallaxToView()
+        skView.addSubview(straylightView)
     }
     
     func setupCamera() {
@@ -163,7 +164,8 @@ class GameViewController: UIViewController {
         activeLevel = Levels.createLevel(index: currentLevel)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
-                
+        
+        setupStraylights()
         createObjects()
         GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
         
@@ -229,23 +231,36 @@ class GameViewController: UIViewController {
     }
     
     func setupStraylights() {
-        let numberOfLines = Int.random(min: 3, max: 5)
-        let slope = Float.random(min: 1.35, max: 3)
-        
-        for _ in 0...numberOfLines {
-            let randomYStart = Int.random(min: 50, max: 600)
-            let randomYEnd = Float(randomYStart) * slope
-            let randomWidth = Int.random(min: 10, max: 16)
-            lightLayer.drawLine(fromPoint: CGPoint(x: 450, y: randomYStart), toPoint: CGPoint(x: -450, y: Int(randomYEnd)), width: CGFloat(randomWidth))
+        UIView.animate(withDuration: 0.5, animations: {
+            self.straylightView.alpha = 0
+        }) { (finished) in
+            self.lightLayer.sublayers = nil
+            GraphAnimation.delayWithSeconds(0.2) {
+                self.straylightView.alpha = 1
+            }
+            
+            let numberOfLines = Int.random(min: 3, max: 4)
+            let slope = Float.random(min: 1.35, max: 3)
+            
+            for _ in 0...numberOfLines {
+                let randomYStart = Int.random(min: 100, max: 400)
+                let randomYEnd = Float(randomYStart) * slope
+                let randomWidth = Int.random(min: 8, max: 16)
+                self.lightLayer.drawLine(fromPoint: CGPoint(x: Int(self.view.frame.size.width)+50, y: randomYStart), toPoint: CGPoint(x: -50, y: Int(randomYEnd)), width: CGFloat(randomWidth))
+            }
+            
+            for layer in self.lightLayer.sublayers! {
+                GraphAnimation.delayWithSeconds(Double.random(min: 0.5, max: 2)) {
+                    let animation : CABasicAnimation = CABasicAnimation(keyPath: "opacity")
+                    animation.fromValue = 0
+                    animation.toValue = Float.random(min: 0.05, max: 0.15)
+                    animation.duration = Double.random(min: 1, max: 1.5)
+                    animation.isRemovedOnCompletion = false
+                    animation.fillMode = kCAFillModeForwards
+                    layer.add(animation, forKey: nil)
+                }
+            }
         }
-        
-        let animation : CABasicAnimation = CABasicAnimation(keyPath: "opacity")
-        animation.fromValue = 0
-        animation.toValue = 1
-        animation.duration = 1.5
-        animation.isRemovedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        lightLayer.add(animation, forKey: nil)
     }
     
     // OBJECT CREATION AND HANDLING
