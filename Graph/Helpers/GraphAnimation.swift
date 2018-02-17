@@ -100,6 +100,16 @@ struct GraphAnimation {
         to.layer.add(pulseAnimation, forKey: nil)
     }
     
+    static func addOpacityPulse(to: CALayer) {
+        let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "opacity")
+        pulseAnimation.duration = 8
+        pulseAnimation.toValue = NSNumber(value: to.opacity + 0.2)
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        pulseAnimation.autoreverses = true
+        pulseAnimation.repeatCount = .greatestFiniteMagnitude
+        to.add(pulseAnimation, forKey: nil)
+    }
+    
     static func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
             completion()

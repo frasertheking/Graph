@@ -258,6 +258,9 @@ class GameViewController: UIViewController {
                     animation.isRemovedOnCompletion = false
                     animation.fillMode = kCAFillModeForwards
                     layer.add(animation, forKey: nil)
+                    GraphAnimation.delayWithSeconds(Double.random(min: 0, max: 5)) {
+                        GraphAnimation.addOpacityPulse(to: layer)
+                    }
                 }
             }
         }
