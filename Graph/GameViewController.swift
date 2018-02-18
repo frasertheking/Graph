@@ -169,28 +169,28 @@ class GameViewController: UIViewController {
         setupStraylights()
         createObjects()
         GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
-        
+
         GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
             GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             guard let graphType = self.activeLevel?.graphType else {
                 return
             }
-            
+
             if graphType != .planar {
                 GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             }
         }
-        
+
         GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay) {
             GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2, y: 2, z: 2, w: 0))
             GraphAnimation.animateInCollectionView(view: self.view, collectionViewBottomConstraint: self.collectionViewBottomConstraint)
         }
-        
+
         GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay + 0.6) {
             guard let graphType: GraphType = self.activeLevel?.graphType else {
                 return
             }
-            
+
             if graphType == .planar {
                 self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
             }
@@ -461,6 +461,7 @@ class GameViewController: UIViewController {
                     self.selectedColorIndex = 0
                     self.paintColorCollectionView.reloadData()
                     self.scnView.isUserInteractionEnabled = true
+                    self.checkIfSolved()
                 })
             }
         } else {

@@ -133,7 +133,27 @@ extension AdjacencyList: Graphable {
                                         let vertexSet = Set([edge1.source.data.uid, edge1.destination.data.uid,
                                                             edge2.source.data.uid, edge2.destination.data.uid,
                                                             edge3.source.data.uid, edge3.destination.data.uid])
+                                        
+                                        let positionArray: [SCNVector3] = [edge1.source.data.position, edge1.destination.data.position,
+                                                                           edge2.source.data.position, edge2.destination.data.position,
+                                                                           edge3.source.data.position, edge3.destination.data.position]
+                                        
                                         if vertexSet.count == 3 {
+                                            
+                                            var thirdPosition: SCNVector3?
+                                            for position in positionArray {
+                                                if !position.equal(b: positionArray[0]) && !position.equal(b: positionArray[1]) {
+                                                    thirdPosition = position
+                                                    break
+                                                }
+                                            }
+
+                                            let triangle = SCNGeometry.triangleFrom(vector1: positionArray[0], vector2: positionArray[1], vector3: thirdPosition!)
+                                            let triangleNode = SCNNode(geometry: triangle)
+                                            triangleNode.geometry?.firstMaterial?.diffuse.contents = edge1Color
+                                            triangleNode.geometry?.firstMaterial?.isDoubleSided = true
+                                            edgeNodes.addChildNode(triangleNode)
+                                            
                                             return true
                                         }
                                     }
