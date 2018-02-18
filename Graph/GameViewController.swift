@@ -58,6 +58,7 @@ class GameViewController: UIViewController {
     @IBOutlet var collectionViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var levelTitle: UILabel!
     @IBOutlet var completedView: UIView!
+    @IBOutlet var completedText: UILabel!
     @IBOutlet var completedCheckmark: M13Checkbox!
     @IBOutlet var completedViewBottomConstraint: NSLayoutConstraint!
     var colorSelectionButton: UIButton!
@@ -410,7 +411,6 @@ class GameViewController: UIViewController {
         }
         
         if graphType == .sim {
-            
             // Is player done making SIM move?
             if simPlayerNodeCount == 2 { // Yes
                 scnView.isUserInteractionEnabled = false
@@ -449,7 +449,10 @@ class GameViewController: UIViewController {
                 
                 checkIfSolved()
                 if solved {
+                    completedText.text = "YOU LOST"
                     return
+                } else {
+                    completedText.text = "YOU WON"
                 }
                 
                 GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay, completion: {
@@ -462,6 +465,7 @@ class GameViewController: UIViewController {
                     self.paintColorCollectionView.reloadData()
                     self.scnView.isUserInteractionEnabled = true
                     self.checkIfSolved()
+                    return
                 })
             }
         } else {
@@ -496,10 +500,6 @@ class GameViewController: UIViewController {
                         }
                     }
                     
-                    for node in vertexNodes.childNodes {
-                        node.removeAllParticleSystems()
-                    }
-                    
                     completedCheckmark.setCheckState(.checked, animated: true)
                     scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
                     scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
@@ -512,7 +512,9 @@ class GameViewController: UIViewController {
                             self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
                             self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
                             
-                            self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                            if graphType != .sim {
+                                self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                            }
                             
                             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
                                 self.view.layoutIfNeeded()
@@ -639,6 +641,7 @@ class GameViewController: UIViewController {
         currentStep = ""
         firstStep = ""
         solved = false
+        completedText.text = "ZONE CLEAR"
         
         currentLevel += 1
         refreshColorsInCollectionView()

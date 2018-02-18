@@ -374,6 +374,7 @@ extension AdjacencyList: Graphable {
                             }
                             
                             if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
+                                edgeNodes.childNodes[pos].removeAllParticleSystems()
                                 edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
                             }
                         } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) {
@@ -430,6 +431,7 @@ extension AdjacencyList: Graphable {
                             }
                             
                             if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.red, geometry: edgeGeometry) {
+                                edgeNodes.childNodes[pos].removeAllParticleSystems()
                                 edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
                             }
                         } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) &&

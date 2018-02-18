@@ -239,6 +239,7 @@
                     <connections>
                         <outlet property="collectionViewBottomConstraint" destination="cN3-Vm-Fsb" id="DEN-14-yAs"/>
                         <outlet property="completedCheckmark" destination="Tcf-EL-ItZ" id="oa4-rD-pis"/>
+                        <outlet property="completedText" destination="7Ge-cL-CJY" id="Eik-Yg-8In"/>
                         <outlet property="completedView" destination="UUX-un-aJT" id="TgG-2n-eTh"/>
                         <outlet property="completedViewBottomConstraint" destination="EFa-0d-cvQ" id="DQa-eW-jzJ"/>
                         <outlet property="levelTitle" destination="lfu-dL-2CN" id="o7h-jj-rn7"/>
