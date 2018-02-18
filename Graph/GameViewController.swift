@@ -39,6 +39,7 @@ class GameViewController: UIViewController {
     var simPlayerNodeCount: Int = 0
     var lightLayer: CALayer!
     var straylightView: UIView!
+    var simPlayerColor: UIColor = .red
     
     // DEBUG
     var debug = false
@@ -258,7 +259,7 @@ class GameViewController: UIViewController {
                     animation.isRemovedOnCompletion = false
                     animation.fillMode = kCAFillModeForwards
                     layer.add(animation, forKey: nil)
-                    GraphAnimation.delayWithSeconds(Double.random(min: 0, max: 5)) {
+                    GraphAnimation.delayWithSeconds(Double.random(min: 3, max: 6)) {
                         GraphAnimation.addOpacityPulse(to: layer)
                     }
                 }
@@ -381,8 +382,9 @@ class GameViewController: UIViewController {
                 }
                 
                 simPlayerNodeCount += 1
-                
+                selectedColorIndex += 1
                 selectedNode = node
+                paintColorCollectionView.reloadData()
             }
             
             if debug {
@@ -408,39 +410,61 @@ class GameViewController: UIViewController {
         }
         
         if graphType == .sim {
-            if simPlayerNodeCount == 2 {
-                simPlayerNodeCount = 0
-                selectedNode = nil
+            
+            // Is player done making SIM move?
+            if simPlayerNodeCount == 2 { // Yes
+                scnView.isUserInteractionEnabled = false
 
-                GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
+                GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay) {
                     for node in self.vertexNodes.childNodes {
                         node.removeAllParticleSystems()
-                        
+
                         node.geometry?.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
                         node.geometry?.materials.first?.emission.contents = UIColor.defaultVertexColor()
                     }
                 }
-                
+
                 if pathArray.count > 1 {
                     if let isLegalMove = activeLevel?.adjacencyList?.isLegalMove(simArray: simArray, uid1: pathArray[0], uid2: pathArray[1]) {
                         if !isLegalMove {
+                            simPlayerNodeCount = 0
+                            selectedNode = nil
+                            selectedColorIndex = 0
                             pathArray.removeAll()
+                            paintColorCollectionView.reloadData()
+                            scnView.isUserInteractionEnabled = true
+                            GraphAnimation.addShake(to: paintColorCollectionView)
                             return
+                        } else {
+                            GraphAnimation.addExplode(to: paintColorCollectionView)
                         }
                     }
                 }
-                
+
                 activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
-                
+
                 for item in pathArray {
                     simArray.append(item)
                 }
                 
-                activeLevel?.adjacencyList?.makeSimMove(edgeArray: edgeArray, edgeNodes: edgeNodes, simArray: simArray)
-                pathArray.removeAll()
+                checkIfSolved()
+                if solved {
+                    return
+                }
+                
+                GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay, completion: {
+                    self.simPlayerNodeCount = 0
+                    self.selectedNode = nil
+
+                    self.activeLevel?.adjacencyList?.makeSimMove(edgeArray: self.edgeArray, edgeNodes: self.edgeNodes, simArray: self.simArray)
+                    self.pathArray.removeAll()
+                    self.selectedColorIndex = 0
+                    self.paintColorCollectionView.reloadData()
+                    self.scnView.isUserInteractionEnabled = true
+                })
             }
         } else {
-            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+            activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
         }
         
         checkIfSolved()
@@ -744,9 +768,21 @@ extension GameViewController: UICollectionViewDataSource {
             return cell
         }
         
-        cell.checkbox.isHidden = (graphType == .hamiltonian || graphType == .planar) ? true : false
-        cell.palletImage.isHidden = (graphType == .hamiltonian || graphType == .planar) ? false : true
-        cell.backgroundColor = (graphType == .hamiltonian) ? walkColor : kColors[indexPath.row]
+        cell.checkbox.isHidden = (graphType == .hamiltonian || graphType == .planar || graphType == .sim) ? true : false
+        cell.palletImage.isHidden = (graphType == .hamiltonian || graphType == .planar || graphType == .sim) ? false : true
+        
+        if graphType == .sim {
+            if simPlayerNodeCount > indexPath.row {
+                cell.backgroundColor = simPlayerColor
+            } else {
+                cell.backgroundColor = .black
+            }
+        } else if graphType == .hamiltonian {
+            cell.backgroundColor = walkColor
+        } else {
+            cell.backgroundColor = kColors[indexPath.row]
+        }
+        
         cell.layer.cornerRadius = cell.frame.size.width / 2
         cell.layer.borderWidth = 2
         cell.checkbox.stateChangeAnimation = .expand(.fill)
@@ -755,7 +791,10 @@ extension GameViewController: UICollectionViewDataSource {
             cell.palletImage.image = UIImage(named: "move")
         } else if graphType == .hamiltonian {
             cell.palletImage.image = UIImage(named: "undo")
+        } else if graphType == .sim {
+            cell.palletImage.image = UIImage(named: "node")
         }
+        
         cell.palletImage.image = cell.palletImage.image?.withRenderingMode(.alwaysTemplate)
         cell.palletImage.tintColor = .white
         
@@ -767,7 +806,7 @@ extension GameViewController: UICollectionViewDataSource {
             }
         } else {
             cell.checkbox.setCheckState(.unchecked, animated: true)
-            cell.layer.borderColor = kColors[indexPath.row].darker()?.cgColor
+            cell.layer.borderColor = graphType == .sim ? UIColor.customWhite().darker()?.cgColor : kColors[indexPath.row].darker()?.cgColor
             cell.layer.removeAllAnimations()
         }
         cell.checkbox.hideBox = true
@@ -842,6 +881,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
         } else if graphType == .planar {
             selectedColorIndex = indexPath.row
             paintColorCollectionView.reloadData()
+        } else if graphType == .sim {
+            return
         } else {
             if let color = cell.backgroundColor {
                 paintColor = color

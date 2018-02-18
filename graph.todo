@@ -4,9 +4,13 @@ Graph:
   ☐ Add the difficult hamiltonian levels
   ✔ Add xyz axis switcher planar mode @done (18-01-28 12:25)
   ✔ Improve planar experience (highlight lines that aren't intersecting) @done (18-01-20 19:40)
-  ☐ Begin work on the Sim game mode
-  ☐ Add basic AI for the Sim mode
+  ✔ Begin work on the Sim game mode @done (18-02-18 12:23)
+  ✔ Add basic AI for the Sim mode @done (18-02-18 12:23)
   ☐ Begin creating actual game world and level layout - the grid
-  ☐ Add level complete animation
+  ✔ Add level complete animation @done (18-02-18 12:22)
   ✔ Fix sizing issue (make graphs relative) @done (18-01-28 13:54)
-  
+  ☐ Add SIM bottom icons for selected nodes
+  ☐ Add SIM turn indicator
+  ☐ Slow AI moves down
+  ☐ Fix SIM bug where AI still makes move after player loses
+  ☐ Improve AI / Make multiple AI versions for SIM

@@ -100,6 +100,29 @@ struct GraphAnimation {
         to.layer.add(pulseAnimation, forKey: nil)
     }
     
+    static func addExplode(to: UIView) {
+        let scale = CABasicAnimation(keyPath: "transform.scale")
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        scale.toValue = NSNumber(value: 1.25)
+        scale.duration = 0.25
+        scale.repeatCount = 0
+        scale.autoreverses = true
+        scale.timingFunction = easeInOut
+        to.layer.add(scale, forKey: nil)
+    }
+    
+    static func addShake(to: UIView) {
+        let animation = CABasicAnimation(keyPath: "position")
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.duration = 0.1
+        animation.repeatCount = 3
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: to.center.x - 15, y: to.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: to.center.x + 15, y: to.center.y))
+        animation.timingFunction = easeInOut
+        to.layer.add(animation, forKey: "position")
+    }
+    
     static func addOpacityPulse(to: CALayer) {
         let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "opacity")
         pulseAnimation.duration = 8

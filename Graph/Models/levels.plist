@@ -6,7 +6,7 @@
 		<key>graph_type</key>
 		<integer>3</integer>
 		<key>num_colors</key>
-		<integer>1</integer>
+		<integer>2</integer>
 		<key>name</key>
 		<string>SIM</string>
 		<key>nodes</key>

@@ -54,6 +54,10 @@ extension UIColor {
         return self.adjust(by: -1 * abs(percentage) )
     }
     
+    func lighter(by percentage:CGFloat=20.0) -> UIColor? {
+        return self.adjust(by: 1 * abs(percentage) )
+    }
+    
     func adjust(by percentage:CGFloat=5.0) -> UIColor? {
         var r:CGFloat=0, g:CGFloat=0, b:CGFloat=0, a:CGFloat=0;
         if(self.getRed(&r, green: &g, blue: &b, alpha: &a)){
@@ -137,8 +141,8 @@ extension UIColor {
         pastelView.animationDuration = 10.0
         
         // Custom Color
-        pastelView.setColors([ UIColor(red: 247/255, green: 109/255, blue: 130/255, alpha: 1.0),
-                               UIColor(red: 217/255, green: 68/255, blue: 82/255, alpha: 1.0),
+        pastelView.setColors([ UIColor(red: 245/255, green: 215/255, blue: 110/255, alpha: 1.0),
+                               UIColor(red: 244/255, green: 208/255, blue: 63/255, alpha: 1.0),
                                UIColor(red: 98/255, green: 221/255, blue: 189/255, alpha: 1.0),
                                UIColor(red: 53/255, green: 187/255, blue: 155/255, alpha: 1.0),
                                UIColor(red: 115/255, green: 177/255, blue: 244/255, alpha: 1.0),
