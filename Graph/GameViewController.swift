@@ -416,6 +416,7 @@ class GameViewController: UIViewController {
                 scnView.isUserInteractionEnabled = false
 
                 GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay) {
+                    self.scnView.isUserInteractionEnabled = true
                     for node in self.vertexNodes.childNodes {
                         node.removeAllParticleSystems()
 
@@ -432,7 +433,6 @@ class GameViewController: UIViewController {
                             selectedColorIndex = 0
                             pathArray.removeAll()
                             paintColorCollectionView.reloadData()
-                            scnView.isUserInteractionEnabled = true
                             GraphAnimation.addShake(to: paintColorCollectionView)
                             return
                         } else {
@@ -882,10 +882,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                     break
                 }
             }
-        } else if graphType == .planar {
-            selectedColorIndex = indexPath.row
-            paintColorCollectionView.reloadData()
-        } else if graphType == .sim {
+        } else if graphType == .planar || graphType == .sim {
             return
         } else {
             if let color = cell.backgroundColor {

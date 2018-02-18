@@ -9,8 +9,8 @@ Graph:
   ☐ Begin creating actual game world and level layout - the grid
   ✔ Add level complete animation @done (18-02-18 12:22)
   ✔ Fix sizing issue (make graphs relative) @done (18-01-28 13:54)
-  ☐ Add SIM bottom icons for selected nodes
-  ☐ Add SIM turn indicator
-  ☐ Slow AI moves down
-  ☐ Fix SIM bug where AI still makes move after player loses
+  ✔ Add SIM bottom icons for selected nodes @done (18-02-18 15:32)
+  ✔ Add SIM turn indicator @done (18-02-18 15:32)
+  ✔ Slow AI moves down @done (18-02-18 15:32)
+  ✔ Fix SIM bug where AI still makes move after player loses @done (18-02-18 15:32)
   ☐ Improve AI / Make multiple AI versions for SIM
