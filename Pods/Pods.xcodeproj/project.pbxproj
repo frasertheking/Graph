@@ -3,52 +3,78 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3AFA54C6DC0961AD0F4CC8A4F1AF915E /* M13CheckboxDisclosurePathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0D9873C294A33CED39BE17AC9670B4 /* M13CheckboxDisclosurePathGenerator.swift */; };
-		3D976DD35C822B9B6971ED06121B4A44 /* M13CheckboxFlatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287D09B0A13E84FF62123F18671485CD /* M13CheckboxFlatController.swift */; };
-		3E2FFD3C073383B859F71C2B1411FA89 /* M13Checkbox+IB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E01747387E02D36E74BE10AEFEAEA4 /* M13Checkbox+IB.swift */; };
-		40897730B01BE8C60FB61A02DD7A1F6A /* M13CheckboxStrokeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4EEDFE956E1FAA9069FCE64F0D76F0 /* M13CheckboxStrokeController.swift */; };
-		445378EF15B25DB3370FF77B2F6F42D7 /* M13Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FECE9BF1BD4E63E63F9B9C82821FB0C /* M13Checkbox.swift */; };
-		6B7AE24D12D36561B9A722D1CEAE67DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE59B0D97841C2542CA3D20540685C26 /* Foundation.framework */; };
-		6B7F6283CE6F6418FD195E43D2216FBF /* M13Checkbox-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 26405E9B04E7B3B2F7099A24C6A701E6 /* M13Checkbox-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71823AB0E839B34A32E71C871B4AE4E9 /* Pods-Graph-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 58DC74FCC0000EC9B30EBD0E6D6725C4 /* Pods-Graph-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		72DC14E956F45F642E3207BDA5E5E478 /* PastelGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A6020A60108F6491B587918480406 /* PastelGradient.swift */; };
-		76D3E2602CFAE6474D2DFA89F5328A24 /* M13CheckboxPathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6AAFEA2DDAB9ABC4A6F7C54F4E2480 /* M13CheckboxPathGenerator.swift */; };
-		80CD994ABA1A2B01AD1838A4D4BB794C /* M13CheckboxFillController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4B70E38F04B7A3CEA3D85080D22DB2 /* M13CheckboxFillController.swift */; };
-		80E34254247C5B1984E2FB9EC58774E4 /* M13CheckboxDotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1656D5BAACA445EC38B0E0576169E008 /* M13CheckboxDotController.swift */; };
-		85CB53B9E438E280DA1690CCFD778689 /* M13CheckboxRadioPathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B371C35AE2C36A7F0A061A9EECB2D5A0 /* M13CheckboxRadioPathGenerator.swift */; };
-		8ED3FB14D1852DD05FDF6E23E94A4657 /* M13CheckboxAddRemovePathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A4CC00AD5AC7F70D2E2CEC448D3DB /* M13CheckboxAddRemovePathGenerator.swift */; };
-		900B6F52434A35E9F88CE6D22F0E5160 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE59B0D97841C2542CA3D20540685C26 /* Foundation.framework */; };
-		92AFFB45085BA809F46F186B6496ADE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5224A726D9EABB2D5F18E4597390EF3 /* UIKit.framework */; };
-		AAE54CDA46FD620F4BC54BC583EA255C /* M13Checkbox-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 20892189A2362F362B91B0615CABD771 /* M13Checkbox-dummy.m */; };
-		BCB82BDDA7C30F0B0AFE479CC479B522 /* M13CheckboxExpandController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E7F69FB2BCF4881DCB1547012ACA6E /* M13CheckboxExpandController.swift */; };
-		BD8B7D24D6479F73CE7D03DA8A3857FD /* Pods-Graph-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 939392D0D5BC6E17BD64140B86B880C2 /* Pods-Graph-dummy.m */; };
-		C277B9EAC728D880FF1F15EE98C8B200 /* M13CheckboxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B24259F0C593FE66761AF04C3CB63DE /* M13CheckboxController.swift */; };
-		C3876E92B5D48CFC1C10A10AE2B3E812 /* PastelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D96D9B74F12330E43E09CFE4531B9 /* PastelView.swift */; };
-		C6D0B50C214C9E7CC815F2773D702779 /* M13CheckboxAnimationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37D237F7625EC0C5C1EE18191D7D5B0 /* M13CheckboxAnimationGenerator.swift */; };
-		C8D41C0D4E89BE8510BA40F04EFF4FA8 /* M13CheckboxCheckPathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E99B429A83AC7E1104ACD1A713A529 /* M13CheckboxCheckPathGenerator.swift */; };
-		D6039515F84B2167BBAC8D1CE12A5F4E /* M13CheckboxGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ECD101E09EB76DACBEB3AC22B42F64 /* M13CheckboxGestureRecognizer.swift */; };
-		E03F419287F929DF0C7FCE665F0E96EA /* Pastel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A10CBC4E456B7112D12B32018CB5A30C /* Pastel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E4268869183317C5E39F79399AB6EFFB /* Pastel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CEA346750F8D71C75ABFBA8C9E69AC /* Pastel-dummy.m */; };
-		EAFC0EA4762962766C946FC37569310A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C06B1B209CA23EC16EBF65CF890313 /* CoreGraphics.framework */; };
-		F7A5B0214108C732898DD2C00BA6FE56 /* M13CheckboxBounceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E046778C36806C06652FC569AF9AAE7 /* M13CheckboxBounceController.swift */; };
-		FA2B271AAF040F6C1B860C6C3DF0558F /* M13CheckboxSpiralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15104CD609F0AD9D9D727C1F2C7D4CF /* M13CheckboxSpiralController.swift */; };
+		0744231B4276CDE27CB12C5C084A347E /* M13CheckboxBounceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E38D136906D0978E1FE3090ED7BF3C5 /* M13CheckboxBounceController.swift */; };
+		0B46C87D7C9BBDC0F31A84A6E6720983 /* LTCharacterDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E014687BAD7B2026A8BD1A064315CE81 /* LTCharacterDiffResult.swift */; };
+		13FC128B4DD17CD90F02593EAAAE9A67 /* M13CheckboxStrokeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B24BED0DCE303C231FED11CE927970C /* M13CheckboxStrokeController.swift */; };
+		183F3E45381030F3C43E1398361387D3 /* M13Checkbox-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E031320BCD39EF9F981B505B0ADDFF38 /* M13Checkbox-dummy.m */; };
+		1EB79404C783C6997ADCC1DD5EC40BC2 /* M13CheckboxExpandController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579ABEAA17C2C7867CCDF472B42D6014 /* M13CheckboxExpandController.swift */; };
+		2110386154BC3992FB1D69D0DA2DAF0A /* M13CheckboxGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D958ACD3C7C012BB1A7E61022DB1E3E /* M13CheckboxGestureRecognizer.swift */; };
+		2E903E65241641AFF0E46CBC57B26015 /* M13CheckboxFadeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE02A0E14AC6985309F769E773AE17B /* M13CheckboxFadeController.swift */; };
+		31FF504EA3FB7681D1ABD8D03652087A /* Pods-Graph-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 939392D0D5BC6E17BD64140B86B880C2 /* Pods-Graph-dummy.m */; };
+		38F80E96539DDE5339A8426DC087758D /* LTMorphingLabel+Anvil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D25CEC990508BA87A756EBF36183AD /* LTMorphingLabel+Anvil.swift */; };
+		57FEC3575D668D3A78A4A7586FC1FEF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE59B0D97841C2542CA3D20540685C26 /* Foundation.framework */; };
+		5B7F1D075B76798E5B25257815EE36CF /* LTMorphingLabel+Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4F5FFC6B093F1679DC07F3CA20FA34 /* LTMorphingLabel+Sparkle.swift */; };
+		5C76EAC0C7DD314C24415C4F2215E3D6 /* LTMorphingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09C5C9C64C8219F7A306A5C48CF2394 /* LTMorphingLabel.swift */; };
+		6853FB4167701B2DF94D7CDFB38B8CAD /* M13Checkbox-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D0EFD35F59DCB7C1247C47D01D3892A /* M13Checkbox-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		72DC14E956F45F642E3207BDA5E5E478 /* PastelGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94046E8F366EC1ACFB41330D98BF08F1 /* PastelGradient.swift */; };
+		734B7AC8EAECFFA3C06D89229ACA3960 /* CountdownLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B6FEEC3481D4F91FF0E6A490FB3AA8 /* CountdownLabel.swift */; };
+		73A3753C550F26AEE354F43D7AA98ACE /* M13CheckboxSpiralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DD170E8F270016FB7A4FC61AD05AA1 /* M13CheckboxSpiralController.swift */; };
+		7D5AB7A91E820D7EECD12A6EA221D479 /* M13CheckboxRadioPathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D0067089DCA9EA552222D62B027CB /* M13CheckboxRadioPathGenerator.swift */; };
+		7D94389D13C85695A7E5328202FF9CB0 /* M13CheckboxDotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D43C9AD7ABDCCCBA54C5C9C33F0D70F /* M13CheckboxDotController.swift */; };
+		7FC815D58329BCB48AA8E8199B9D142A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C06B1B209CA23EC16EBF65CF890313 /* CoreGraphics.framework */; };
+		80DC15A0582068D6EDE31A6178375C89 /* M13CheckboxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A845D649C34FCA8E7FBF6FB1B69EC70 /* M13CheckboxController.swift */; };
+		8942922B30F9E19A21D2EB015F832D2F /* M13CheckboxPathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBA37EA0E152BA0B207185D9954380D /* M13CheckboxPathGenerator.swift */; };
+		8C6EB311B0B897CD705D6F53BDDF0EFB /* M13CheckboxFlatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9526414813EF3F617A50ACBC1369788 /* M13CheckboxFlatController.swift */; };
+		8FA870156921760C688FBED5819B9BA5 /* LTMorphingLabel+Pixelate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD989B6F1BEA798E3497A5B3B299E4 /* LTMorphingLabel+Pixelate.swift */; };
+		91E56E34A99E791CF95D393752F334A5 /* LTMorphingLabel+Evaporate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C2647FCEB1DF9034FD5380E3BDCE4E /* LTMorphingLabel+Evaporate.swift */; };
+		9639865A2ED46826C52A6995A5294096 /* CountdownLabel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CA15313DDF845D753EEF77145275C803 /* CountdownLabel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		97713C0235F372715A3AD292C57C8FEC /* M13Checkbox+IB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2694F266CDD6EF6AF4DB0579142C884 /* M13Checkbox+IB.swift */; };
+		996FC5C6DC31D26EDF56F1B747BC3879 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5224A726D9EABB2D5F18E4597390EF3 /* UIKit.framework */; };
+		A26BA9F8E876A788CEE8623E08D72A9E /* CountdownLabel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDE15A43AA539D8405ECE055F643263 /* CountdownLabel-dummy.m */; };
+		AB839F535003BA79950BDC9A0B50D923 /* M13CheckboxDisclosurePathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9C5E3CB04362B357D8ADC8DB21177A /* M13CheckboxDisclosurePathGenerator.swift */; };
+		B5DE980791D4DBD13DF2F0A44893E255 /* M13CheckboxAnimationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D3FBADF46A510FA5A86AF37A7F782A /* M13CheckboxAnimationGenerator.swift */; };
+		B7D8254786CE0AE3BF97982B7FAAD198 /* M13CheckboxCheckPathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072E83A00232386EF768BB906459A54B /* M13CheckboxCheckPathGenerator.swift */; };
+		B8E7F36176917E71F2E97A233C1FCCA4 /* LTCharacterLimbo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CE4C56CBAE54AB16CE73EF7E84A719 /* LTCharacterLimbo.swift */; };
+		BD78E8DDD27AF7518D2AE2456285730C /* M13CheckboxAddRemovePathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4123787957A1E992E526D480EAF907 /* M13CheckboxAddRemovePathGenerator.swift */; };
+		C0E7D15F27ECD51003CB899B9C096931 /* LTMorphingLabel+Burn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8310C4807C42A5BFFD4B13A39B3491 /* LTMorphingLabel+Burn.swift */; };
+		C1E29AF8AB5107E5A310E4617BC472A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE59B0D97841C2542CA3D20540685C26 /* Foundation.framework */; };
+		C3876E92B5D48CFC1C10A10AE2B3E812 /* PastelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D94646AC5D9C5F7B5DD642C90B71D6F /* PastelView.swift */; };
+		C4D1D1EDBA79F0D39627DE5FF26272BC /* LTEmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99054DC53AA0CBDF2525B2AF7466C57B /* LTEmitterView.swift */; };
+		C88F144420533BCDEE60E418C316FB8E /* M13Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51EC8AD69B757D0E9C917A3103F47FC /* M13Checkbox.swift */; };
+		CE682D3A3A6CB00A16952975695706FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5224A726D9EABB2D5F18E4597390EF3 /* UIKit.framework */; };
+		D26B66606862EBD7C7C3C8578202012E /* LTEasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E3C492CA9CBD96D84F7B09D69DF400 /* LTEasing.swift */; };
+		D5218FB15C76B99D57BDB9EB6B27D7BA /* M13CheckboxFillController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1725AEB61AFA9E8DF9650205A74B1378 /* M13CheckboxFillController.swift */; };
+		D560242116899637FC3EAFAAEB48FEDA /* LTStringDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A58C002DC913056E37B84CD726CD76C /* LTStringDiffResult.swift */; };
+		E03F419287F929DF0C7FCE665F0E96EA /* Pastel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B97A669C8FF0007C059E1A08FF887DB5 /* Pastel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2917C44B502EB6B7F4C8E0F7A989085 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE59B0D97841C2542CA3D20540685C26 /* Foundation.framework */; };
+		E4268869183317C5E39F79399AB6EFFB /* Pastel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6F5782146A5ED6EFB497565A9D3253 /* Pastel-dummy.m */; };
+		E46559D5C2F89367FE61EA281FB31F2B /* LTMorphingLabel+Fall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82E5E5B6DB2AF281CA7C58C1F7B12CB /* LTMorphingLabel+Fall.swift */; };
+		E666272E5B493FD582AB3734B95E7ABC /* Pods-Graph-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 58DC74FCC0000EC9B30EBD0E6D6725C4 /* Pods-Graph-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3D690F6C4EF6CB02AAC682D74FC7615 /* LTMorphingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5567477C3D6A18EFF6149E3A64A1C3 /* LTMorphingEffect.swift */; };
+		FF4E2AB7D604B3D36AF26C8D7EECE416 /* DefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893CD4AC581C400170E1C5C60D9816A6 /* DefaultValues.swift */; };
 		FFD7EC2E785ED7B99BA0071E5C16F575 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE59B0D97841C2542CA3D20540685C26 /* Foundation.framework */; };
-		FFF489DE367C237C0E8F7E4442DA06D7 /* M13CheckboxFadeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75826E353A867F312BD38FA59363A3C3 /* M13CheckboxFadeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5896EF0134E16760E243181778117012 /* PBXContainerItemProxy */ = {
+		1E5EFC1194942A927D5DF666DB6763E2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 20A9DD9ABBF08BC57372A26C35327BF1;
+			remoteGlobalIDString = 8F254C70EA7289F49F560FEF44F5E03E;
+			remoteInfo = CountdownLabel;
+		};
+		7F8CEA9EC94F0E5D940E6DB724065DE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CD9FC035D83AD9BA719108E6A9A694F;
 			remoteInfo = M13Checkbox;
 		};
-		D9879B08F4E186A3D9C47B34011FCADB /* PBXContainerItemProxy */ = {
+		F6E9BF035FEBBC7F85DD193074F8068E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -58,73 +84,104 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		010138C2FB64AC3B9B7FDD06C45F6848 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		072E83A00232386EF768BB906459A54B /* M13CheckboxCheckPathGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxCheckPathGenerator.swift; path = Sources/Paths/M13CheckboxCheckPathGenerator.swift; sourceTree = "<group>"; };
+		0790EF3DB2636733EE4760F16F9D9BCD /* CountdownLabel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CountdownLabel.xcconfig; sourceTree = "<group>"; };
+		0816516A9F6D0864063C4EFCC0EA3789 /* Pastel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Pastel.modulemap; sourceTree = "<group>"; };
 		081A53C2DAC2FE0D13796229F0AAA93C /* Pods-Graph-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Graph-frameworks.sh"; sourceTree = "<group>"; };
-		0E046778C36806C06652FC569AF9AAE7 /* M13CheckboxBounceController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxBounceController.swift; path = Sources/Managers/M13CheckboxBounceController.swift; sourceTree = "<group>"; };
-		1656D5BAACA445EC38B0E0576169E008 /* M13CheckboxDotController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxDotController.swift; path = Sources/Managers/M13CheckboxDotController.swift; sourceTree = "<group>"; };
-		20892189A2362F362B91B0615CABD771 /* M13Checkbox-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "M13Checkbox-dummy.m"; sourceTree = "<group>"; };
-		26405E9B04E7B3B2F7099A24C6A701E6 /* M13Checkbox-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "M13Checkbox-umbrella.h"; sourceTree = "<group>"; };
-		287D09B0A13E84FF62123F18671485CD /* M13CheckboxFlatController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxFlatController.swift; path = Sources/Managers/M13CheckboxFlatController.swift; sourceTree = "<group>"; };
-		29CEA346750F8D71C75ABFBA8C9E69AC /* Pastel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pastel-dummy.m"; sourceTree = "<group>"; };
-		38E99B429A83AC7E1104ACD1A713A529 /* M13CheckboxCheckPathGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxCheckPathGenerator.swift; path = Sources/Paths/M13CheckboxCheckPathGenerator.swift; sourceTree = "<group>"; };
-		41ED1F1DCE232A4BBB6D4F50798669C2 /* Pods-Graph.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Graph.modulemap"; sourceTree = "<group>"; };
-		4D9A4CC00AD5AC7F70D2E2CEC448D3DB /* M13CheckboxAddRemovePathGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxAddRemovePathGenerator.swift; path = Sources/Paths/M13CheckboxAddRemovePathGenerator.swift; sourceTree = "<group>"; };
-		4FD2331F75CF3578352831E3F46283B4 /* M13Checkbox.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = M13Checkbox.modulemap; sourceTree = "<group>"; };
+		0E6F5782146A5ED6EFB497565A9D3253 /* Pastel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pastel-dummy.m"; sourceTree = "<group>"; };
+		144D0067089DCA9EA552222D62B027CB /* M13CheckboxRadioPathGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxRadioPathGenerator.swift; path = Sources/Paths/M13CheckboxRadioPathGenerator.swift; sourceTree = "<group>"; };
+		1725AEB61AFA9E8DF9650205A74B1378 /* M13CheckboxFillController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxFillController.swift; path = Sources/Managers/M13CheckboxFillController.swift; sourceTree = "<group>"; };
+		17E3C492CA9CBD96D84F7B09D69DF400 /* LTEasing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LTEasing.swift; path = CountdownLabel/LTMorphingLabel/LTEasing.swift; sourceTree = "<group>"; };
+		1C9C5E3CB04362B357D8ADC8DB21177A /* M13CheckboxDisclosurePathGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxDisclosurePathGenerator.swift; path = Sources/Paths/M13CheckboxDisclosurePathGenerator.swift; sourceTree = "<group>"; };
+		22CE4C56CBAE54AB16CE73EF7E84A719 /* LTCharacterLimbo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LTCharacterLimbo.swift; path = CountdownLabel/LTMorphingLabel/LTCharacterLimbo.swift; sourceTree = "<group>"; };
+		2A58C002DC913056E37B84CD726CD76C /* LTStringDiffResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LTStringDiffResult.swift; path = CountdownLabel/LTMorphingLabel/LTStringDiffResult.swift; sourceTree = "<group>"; };
+		3E47E9C3851D2591C8D698FE62662DF7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E5567477C3D6A18EFF6149E3A64A1C3 /* LTMorphingEffect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LTMorphingEffect.swift; path = CountdownLabel/LTMorphingLabel/LTMorphingEffect.swift; sourceTree = "<group>"; };
+		41ED1F1DCE232A4BBB6D4F50798669C2 /* Pods-Graph.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Graph.modulemap"; sourceTree = "<group>"; };
+		4D43C9AD7ABDCCCBA54C5C9C33F0D70F /* M13CheckboxDotController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxDotController.swift; path = Sources/Managers/M13CheckboxDotController.swift; sourceTree = "<group>"; };
 		52B38BAE7F89E3D4F5B731DB3813304E /* Pods-Graph-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Graph-acknowledgements.plist"; sourceTree = "<group>"; };
+		579ABEAA17C2C7867CCDF472B42D6014 /* M13CheckboxExpandController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxExpandController.swift; path = Sources/Managers/M13CheckboxExpandController.swift; sourceTree = "<group>"; };
 		58DC74FCC0000EC9B30EBD0E6D6725C4 /* Pods-Graph-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Graph-umbrella.h"; sourceTree = "<group>"; };
-		5A0D740F1012376EB6152B1DA81D2D5A /* M13Checkbox-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "M13Checkbox-prefix.pch"; sourceTree = "<group>"; };
-		5B24259F0C593FE66761AF04C3CB63DE /* M13CheckboxController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxController.swift; path = Sources/M13CheckboxController.swift; sourceTree = "<group>"; };
 		6371F59141F0787A48FF98B2686EC218 /* Pods-Graph-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Graph-resources.sh"; sourceTree = "<group>"; };
-		63E7F69FB2BCF4881DCB1547012ACA6E /* M13CheckboxExpandController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxExpandController.swift; path = Sources/Managers/M13CheckboxExpandController.swift; sourceTree = "<group>"; };
-		64ECD101E09EB76DACBEB3AC22B42F64 /* M13CheckboxGestureRecognizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxGestureRecognizer.swift; path = Sources/M13CheckboxGestureRecognizer.swift; sourceTree = "<group>"; };
-		75826E353A867F312BD38FA59363A3C3 /* M13CheckboxFadeController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxFadeController.swift; path = Sources/Managers/M13CheckboxFadeController.swift; sourceTree = "<group>"; };
-		8FECE9BF1BD4E63E63F9B9C82821FB0C /* M13Checkbox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13Checkbox.swift; path = Sources/M13Checkbox.swift; sourceTree = "<group>"; };
+		6A8310C4807C42A5BFFD4B13A39B3491 /* LTMorphingLabel+Burn.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LTMorphingLabel+Burn.swift"; path = "CountdownLabel/LTMorphingLabel/LTMorphingLabel+Burn.swift"; sourceTree = "<group>"; };
+		6B24BED0DCE303C231FED11CE927970C /* M13CheckboxStrokeController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxStrokeController.swift; path = Sources/Managers/M13CheckboxStrokeController.swift; sourceTree = "<group>"; };
+		6D94646AC5D9C5F7B5DD642C90B71D6F /* PastelView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PastelView.swift; path = Pastel/Classes/PastelView.swift; sourceTree = "<group>"; };
+		71CD989B6F1BEA798E3497A5B3B299E4 /* LTMorphingLabel+Pixelate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LTMorphingLabel+Pixelate.swift"; path = "CountdownLabel/LTMorphingLabel/LTMorphingLabel+Pixelate.swift"; sourceTree = "<group>"; };
+		76DD170E8F270016FB7A4FC61AD05AA1 /* M13CheckboxSpiralController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxSpiralController.swift; path = Sources/Managers/M13CheckboxSpiralController.swift; sourceTree = "<group>"; };
+		77D3FBADF46A510FA5A86AF37A7F782A /* M13CheckboxAnimationGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxAnimationGenerator.swift; path = Sources/M13CheckboxAnimationGenerator.swift; sourceTree = "<group>"; };
+		7B08F37BF4062716967841DBC273D8DC /* M13Checkbox-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "M13Checkbox-prefix.pch"; sourceTree = "<group>"; };
+		7D0EFD35F59DCB7C1247C47D01D3892A /* M13Checkbox-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "M13Checkbox-umbrella.h"; sourceTree = "<group>"; };
+		821A05CD8A143A0C1F24C0039A5F91D7 /* CountdownLabel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = CountdownLabel.modulemap; sourceTree = "<group>"; };
+		832BB3224EEAB91D61F2D50F32887E4B /* M13Checkbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = M13Checkbox.framework; path = M13Checkbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85B6FEEC3481D4F91FF0E6A490FB3AA8 /* CountdownLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CountdownLabel.swift; path = CountdownLabel/CountdownLabel.swift; sourceTree = "<group>"; };
+		87E9E23B4987AA96C7CEA45DFFC7AB94 /* CountdownLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CountdownLabel.framework; path = CountdownLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		893CD4AC581C400170E1C5C60D9816A6 /* DefaultValues.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultValues.swift; path = Sources/DefaultValues.swift; sourceTree = "<group>"; };
+		8A845D649C34FCA8E7FBF6FB1B69EC70 /* M13CheckboxController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxController.swift; path = Sources/M13CheckboxController.swift; sourceTree = "<group>"; };
+		8E38D136906D0978E1FE3090ED7BF3C5 /* M13CheckboxBounceController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxBounceController.swift; path = Sources/Managers/M13CheckboxBounceController.swift; sourceTree = "<group>"; };
 		939392D0D5BC6E17BD64140B86B880C2 /* Pods-Graph-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Graph-dummy.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		93E01747387E02D36E74BE10AEFEAEA4 /* M13Checkbox+IB.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "M13Checkbox+IB.swift"; path = "Sources/M13Checkbox+IB.swift"; sourceTree = "<group>"; };
-		953495E60248BD9D121DF6A49F75EDB6 /* Pastel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pastel-prefix.pch"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93C2647FCEB1DF9034FD5380E3BDCE4E /* LTMorphingLabel+Evaporate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LTMorphingLabel+Evaporate.swift"; path = "CountdownLabel/LTMorphingLabel/LTMorphingLabel+Evaporate.swift"; sourceTree = "<group>"; };
+		94046E8F366EC1ACFB41330D98BF08F1 /* PastelGradient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PastelGradient.swift; path = Pastel/Classes/PastelGradient.swift; sourceTree = "<group>"; };
+		99054DC53AA0CBDF2525B2AF7466C57B /* LTEmitterView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LTEmitterView.swift; path = CountdownLabel/LTMorphingLabel/LTEmitterView.swift; sourceTree = "<group>"; };
 		99C06B1B209CA23EC16EBF65CF890313 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		9A0D9873C294A33CED39BE17AC9670B4 /* M13CheckboxDisclosurePathGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxDisclosurePathGenerator.swift; path = Sources/Paths/M13CheckboxDisclosurePathGenerator.swift; sourceTree = "<group>"; };
-		A10CBC4E456B7112D12B32018CB5A30C /* Pastel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pastel-umbrella.h"; sourceTree = "<group>"; };
-		A37D237F7625EC0C5C1EE18191D7D5B0 /* M13CheckboxAnimationGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxAnimationGenerator.swift; path = Sources/M13CheckboxAnimationGenerator.swift; sourceTree = "<group>"; };
+		9D958ACD3C7C012BB1A7E61022DB1E3E /* M13CheckboxGestureRecognizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxGestureRecognizer.swift; path = Sources/M13CheckboxGestureRecognizer.swift; sourceTree = "<group>"; };
+		A2D25CEC990508BA87A756EBF36183AD /* LTMorphingLabel+Anvil.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LTMorphingLabel+Anvil.swift"; path = "CountdownLabel/LTMorphingLabel/LTMorphingLabel+Anvil.swift"; sourceTree = "<group>"; };
+		A3F5191569F68399FAF6B856B684A41A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5224A726D9EABB2D5F18E4597390EF3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		A8169D50CA8DDCC5BD01A6C7E3E15A10 /* Pods-Graph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Graph.release.xcconfig"; sourceTree = "<group>"; };
-		A9B7E34930FA8315EDEF848A4AE278ED /* M13Checkbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = M13Checkbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB4EEDFE956E1FAA9069FCE64F0D76F0 /* M13CheckboxStrokeController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxStrokeController.swift; path = Sources/Managers/M13CheckboxStrokeController.swift; sourceTree = "<group>"; };
+		A9C6B61E1976E2F8393F3CD63235CA52 /* CountdownLabel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CountdownLabel-prefix.pch"; sourceTree = "<group>"; };
+		AA4F5FFC6B093F1679DC07F3CA20FA34 /* LTMorphingLabel+Sparkle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LTMorphingLabel+Sparkle.swift"; path = "CountdownLabel/LTMorphingLabel/LTMorphingLabel+Sparkle.swift"; sourceTree = "<group>"; };
 		AC1CA94B92CA052E336A2BEC54889171 /* Pods-Graph.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Graph.debug.xcconfig"; sourceTree = "<group>"; };
-		AC365F3981328FFF444B0E4F8114BD86 /* Pastel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pastel.xcconfig; sourceTree = "<group>"; };
-		AE4B70E38F04B7A3CEA3D85080D22DB2 /* M13CheckboxFillController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxFillController.swift; path = Sources/Managers/M13CheckboxFillController.swift; sourceTree = "<group>"; };
-		B03D96D9B74F12330E43E09CFE4531B9 /* PastelView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PastelView.swift; path = Pastel/Classes/PastelView.swift; sourceTree = "<group>"; };
-		B371C35AE2C36A7F0A061A9EECB2D5A0 /* M13CheckboxRadioPathGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxRadioPathGenerator.swift; path = Sources/Paths/M13CheckboxRadioPathGenerator.swift; sourceTree = "<group>"; };
-		B7BD7627B46C6E1FBCF05ADBCF3166E4 /* M13Checkbox.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = M13Checkbox.xcconfig; sourceTree = "<group>"; };
-		BFBADEA3295BD02B59BF7D4CFA7DCF75 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C195251DE0A57BE70B75F26A39965431 /* Pods_Graph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Graph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B97A669C8FF0007C059E1A08FF887DB5 /* Pastel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pastel-umbrella.h"; sourceTree = "<group>"; };
+		BC5CFDE1DA8942654E66307BEBA7A011 /* Pastel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pastel.framework; path = Pastel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2694F266CDD6EF6AF4DB0579142C884 /* M13Checkbox+IB.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "M13Checkbox+IB.swift"; path = "Sources/M13Checkbox+IB.swift"; sourceTree = "<group>"; };
+		C5054FF793F457FE1042F35CAF04FBBB /* M13Checkbox.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = M13Checkbox.modulemap; sourceTree = "<group>"; };
 		C766D93F1DCB3B9979168FBAA0FA7F0F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C80178BE59065D9D3E8E5DA771607AD9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C82E5E5B6DB2AF281CA7C58C1F7B12CB /* LTMorphingLabel+Fall.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LTMorphingLabel+Fall.swift"; path = "CountdownLabel/LTMorphingLabel/LTMorphingLabel+Fall.swift"; sourceTree = "<group>"; };
+		CA15313DDF845D753EEF77145275C803 /* CountdownLabel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CountdownLabel-umbrella.h"; sourceTree = "<group>"; };
 		CE59B0D97841C2542CA3D20540685C26 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D28A6020A60108F6491B587918480406 /* PastelGradient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PastelGradient.swift; path = Pastel/Classes/PastelGradient.swift; sourceTree = "<group>"; };
-		D3C8D30CCEBAEA2FDB0A1D9AE36AE6CE /* Pastel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pastel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFF6C96E265398787E3B7616F8A920BD /* Pods_Graph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Graph.framework; path = "Pods-Graph.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D51EC8AD69B757D0E9C917A3103F47FC /* M13Checkbox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13Checkbox.swift; path = Sources/M13Checkbox.swift; sourceTree = "<group>"; };
+		D56BC7F1BA7A5FF7503D0EC2F2E30B46 /* Pastel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pastel-prefix.pch"; sourceTree = "<group>"; };
+		D81FBDCCEEB7376BFBFAF263DDE1D7C2 /* Pastel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pastel.xcconfig; sourceTree = "<group>"; };
+		DBE02A0E14AC6985309F769E773AE17B /* M13CheckboxFadeController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxFadeController.swift; path = Sources/Managers/M13CheckboxFadeController.swift; sourceTree = "<group>"; };
+		DCDE15A43AA539D8405ECE055F643263 /* CountdownLabel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CountdownLabel-dummy.m"; sourceTree = "<group>"; };
+		DEBA37EA0E152BA0B207185D9954380D /* M13CheckboxPathGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxPathGenerator.swift; path = Sources/Paths/M13CheckboxPathGenerator.swift; sourceTree = "<group>"; };
+		E014687BAD7B2026A8BD1A064315CE81 /* LTCharacterDiffResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LTCharacterDiffResult.swift; path = CountdownLabel/LTMorphingLabel/LTCharacterDiffResult.swift; sourceTree = "<group>"; };
+		E031320BCD39EF9F981B505B0ADDFF38 /* M13Checkbox-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "M13Checkbox-dummy.m"; sourceTree = "<group>"; };
+		E079B92F989F248D700CF4D18FA0D6BD /* M13Checkbox.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = M13Checkbox.xcconfig; sourceTree = "<group>"; };
 		E4C146116A76A7E0317E2E8157133720 /* Pods-Graph-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Graph-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E743BDD9C6FBC2CAB92CF9678A8AB8F6 /* Pastel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pastel.modulemap; sourceTree = "<group>"; };
-		F15104CD609F0AD9D9D727C1F2C7D4CF /* M13CheckboxSpiralController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxSpiralController.swift; path = Sources/Managers/M13CheckboxSpiralController.swift; sourceTree = "<group>"; };
-		FB6AAFEA2DDAB9ABC4A6F7C54F4E2480 /* M13CheckboxPathGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxPathGenerator.swift; path = Sources/Paths/M13CheckboxPathGenerator.swift; sourceTree = "<group>"; };
+		E9526414813EF3F617A50ACBC1369788 /* M13CheckboxFlatController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxFlatController.swift; path = Sources/Managers/M13CheckboxFlatController.swift; sourceTree = "<group>"; };
+		EB4123787957A1E992E526D480EAF907 /* M13CheckboxAddRemovePathGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = M13CheckboxAddRemovePathGenerator.swift; path = Sources/Paths/M13CheckboxAddRemovePathGenerator.swift; sourceTree = "<group>"; };
+		F09C5C9C64C8219F7A306A5C48CF2394 /* LTMorphingLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LTMorphingLabel.swift; path = CountdownLabel/LTMorphingLabel/LTMorphingLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		07F652575A6FF8C5B499F6B7A8A2D978 /* Frameworks */ = {
+		06BB84603C1CB09162F0940A1DC099F0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B7AE24D12D36561B9A722D1CEAE67DC /* Foundation.framework in Frameworks */,
+				57FEC3575D668D3A78A4A7586FC1FEF6 /* Foundation.framework in Frameworks */,
+				CE682D3A3A6CB00A16952975695706FB /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		53797C5F84C3B718634123945FF8378E /* Frameworks */ = {
+		18E1935E0C8C4E59034C3351029A46F5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAFC0EA4762962766C946FC37569310A /* CoreGraphics.framework in Frameworks */,
-				900B6F52434A35E9F88CE6D22F0E5160 /* Foundation.framework in Frameworks */,
-				92AFFB45085BA809F46F186B6496ADE5 /* UIKit.framework in Frameworks */,
+				C1E29AF8AB5107E5A310E4617BC472A4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80427CF56420818BEF0449F95F82D7EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FC815D58329BCB48AA8E8199B9D142A /* CoreGraphics.framework in Frameworks */,
+				E2917C44B502EB6B7F4C8E0F7A989085 /* Foundation.framework in Frameworks */,
+				996FC5C6DC31D26EDF56F1B747BC3879 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +196,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05B941CCEAD24994CBA4DD11C7215A9A /* M13Checkbox */ = {
+			isa = PBXGroup;
+			children = (
+				893CD4AC581C400170E1C5C60D9816A6 /* DefaultValues.swift */,
+				D51EC8AD69B757D0E9C917A3103F47FC /* M13Checkbox.swift */,
+				C2694F266CDD6EF6AF4DB0579142C884 /* M13Checkbox+IB.swift */,
+				EB4123787957A1E992E526D480EAF907 /* M13CheckboxAddRemovePathGenerator.swift */,
+				77D3FBADF46A510FA5A86AF37A7F782A /* M13CheckboxAnimationGenerator.swift */,
+				8E38D136906D0978E1FE3090ED7BF3C5 /* M13CheckboxBounceController.swift */,
+				072E83A00232386EF768BB906459A54B /* M13CheckboxCheckPathGenerator.swift */,
+				8A845D649C34FCA8E7FBF6FB1B69EC70 /* M13CheckboxController.swift */,
+				1C9C5E3CB04362B357D8ADC8DB21177A /* M13CheckboxDisclosurePathGenerator.swift */,
+				4D43C9AD7ABDCCCBA54C5C9C33F0D70F /* M13CheckboxDotController.swift */,
+				579ABEAA17C2C7867CCDF472B42D6014 /* M13CheckboxExpandController.swift */,
+				DBE02A0E14AC6985309F769E773AE17B /* M13CheckboxFadeController.swift */,
+				1725AEB61AFA9E8DF9650205A74B1378 /* M13CheckboxFillController.swift */,
+				E9526414813EF3F617A50ACBC1369788 /* M13CheckboxFlatController.swift */,
+				9D958ACD3C7C012BB1A7E61022DB1E3E /* M13CheckboxGestureRecognizer.swift */,
+				DEBA37EA0E152BA0B207185D9954380D /* M13CheckboxPathGenerator.swift */,
+				144D0067089DCA9EA552222D62B027CB /* M13CheckboxRadioPathGenerator.swift */,
+				76DD170E8F270016FB7A4FC61AD05AA1 /* M13CheckboxSpiralController.swift */,
+				6B24BED0DCE303C231FED11CE927970C /* M13CheckboxStrokeController.swift */,
+				F9378B4AA9FD88958896BC06D6052EA5 /* Support Files */,
+			);
+			name = M13Checkbox;
+			path = M13Checkbox;
+			sourceTree = "<group>";
+		};
 		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,54 +232,38 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1DE5EA19C275388C1C4E279F90133520 /* Support Files */ = {
+		1D75C0659AA8C00C8F710A2FE1166DBF /* Pastel */ = {
 			isa = PBXGroup;
 			children = (
-				BFBADEA3295BD02B59BF7D4CFA7DCF75 /* Info.plist */,
-				E743BDD9C6FBC2CAB92CF9678A8AB8F6 /* Pastel.modulemap */,
-				AC365F3981328FFF444B0E4F8114BD86 /* Pastel.xcconfig */,
-				29CEA346750F8D71C75ABFBA8C9E69AC /* Pastel-dummy.m */,
-				953495E60248BD9D121DF6A49F75EDB6 /* Pastel-prefix.pch */,
-				A10CBC4E456B7112D12B32018CB5A30C /* Pastel-umbrella.h */,
+				94046E8F366EC1ACFB41330D98BF08F1 /* PastelGradient.swift */,
+				6D94646AC5D9C5F7B5DD642C90B71D6F /* PastelView.swift */,
+				CE60F837BE289DEA78546C3E42B88027 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/Pastel";
-			sourceTree = "<group>";
-		};
-		7506C0C8400BF52A5CE74D9C26F0BCDC /* M13Checkbox */ = {
-			isa = PBXGroup;
-			children = (
-				8FECE9BF1BD4E63E63F9B9C82821FB0C /* M13Checkbox.swift */,
-				93E01747387E02D36E74BE10AEFEAEA4 /* M13Checkbox+IB.swift */,
-				4D9A4CC00AD5AC7F70D2E2CEC448D3DB /* M13CheckboxAddRemovePathGenerator.swift */,
-				A37D237F7625EC0C5C1EE18191D7D5B0 /* M13CheckboxAnimationGenerator.swift */,
-				0E046778C36806C06652FC569AF9AAE7 /* M13CheckboxBounceController.swift */,
-				38E99B429A83AC7E1104ACD1A713A529 /* M13CheckboxCheckPathGenerator.swift */,
-				5B24259F0C593FE66761AF04C3CB63DE /* M13CheckboxController.swift */,
-				9A0D9873C294A33CED39BE17AC9670B4 /* M13CheckboxDisclosurePathGenerator.swift */,
-				1656D5BAACA445EC38B0E0576169E008 /* M13CheckboxDotController.swift */,
-				63E7F69FB2BCF4881DCB1547012ACA6E /* M13CheckboxExpandController.swift */,
-				75826E353A867F312BD38FA59363A3C3 /* M13CheckboxFadeController.swift */,
-				AE4B70E38F04B7A3CEA3D85080D22DB2 /* M13CheckboxFillController.swift */,
-				287D09B0A13E84FF62123F18671485CD /* M13CheckboxFlatController.swift */,
-				64ECD101E09EB76DACBEB3AC22B42F64 /* M13CheckboxGestureRecognizer.swift */,
-				FB6AAFEA2DDAB9ABC4A6F7C54F4E2480 /* M13CheckboxPathGenerator.swift */,
-				B371C35AE2C36A7F0A061A9EECB2D5A0 /* M13CheckboxRadioPathGenerator.swift */,
-				F15104CD609F0AD9D9D727C1F2C7D4CF /* M13CheckboxSpiralController.swift */,
-				AB4EEDFE956E1FAA9069FCE64F0D76F0 /* M13CheckboxStrokeController.swift */,
-				FC14D49BD8D49B6182F48CAA97AE2130 /* Support Files */,
-			);
-			path = M13Checkbox;
-			sourceTree = "<group>";
-		};
-		75DDEE775FD1653B5D84D42E22677409 /* Pastel */ = {
-			isa = PBXGroup;
-			children = (
-				D28A6020A60108F6491B587918480406 /* PastelGradient.swift */,
-				B03D96D9B74F12330E43E09CFE4531B9 /* PastelView.swift */,
-				1DE5EA19C275388C1C4E279F90133520 /* Support Files */,
-			);
+			name = Pastel;
 			path = Pastel;
+			sourceTree = "<group>";
+		};
+		5287A047543F22498E6FB2A260D8A4D9 /* CountdownLabel */ = {
+			isa = PBXGroup;
+			children = (
+				85B6FEEC3481D4F91FF0E6A490FB3AA8 /* CountdownLabel.swift */,
+				E014687BAD7B2026A8BD1A064315CE81 /* LTCharacterDiffResult.swift */,
+				22CE4C56CBAE54AB16CE73EF7E84A719 /* LTCharacterLimbo.swift */,
+				17E3C492CA9CBD96D84F7B09D69DF400 /* LTEasing.swift */,
+				99054DC53AA0CBDF2525B2AF7466C57B /* LTEmitterView.swift */,
+				3E5567477C3D6A18EFF6149E3A64A1C3 /* LTMorphingEffect.swift */,
+				F09C5C9C64C8219F7A306A5C48CF2394 /* LTMorphingLabel.swift */,
+				A2D25CEC990508BA87A756EBF36183AD /* LTMorphingLabel+Anvil.swift */,
+				6A8310C4807C42A5BFFD4B13A39B3491 /* LTMorphingLabel+Burn.swift */,
+				93C2647FCEB1DF9034FD5380E3BDCE4E /* LTMorphingLabel+Evaporate.swift */,
+				C82E5E5B6DB2AF281CA7C58C1F7B12CB /* LTMorphingLabel+Fall.swift */,
+				71CD989B6F1BEA798E3497A5B3B299E4 /* LTMorphingLabel+Pixelate.swift */,
+				AA4F5FFC6B093F1679DC07F3CA20FA34 /* LTMorphingLabel+Sparkle.swift */,
+				2A58C002DC913056E37B84CD726CD76C /* LTStringDiffResult.swift */,
+				AAC22EEEC0BF754825DCFEEAE209BDE6 /* Support Files */,
+			);
+			name = CountdownLabel;
+			path = CountdownLabel;
 			sourceTree = "<group>";
 		};
 		7D9124306962DF667999643F15E1EC6E /* Targets Support Files */ = {
@@ -210,19 +279,10 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				82DB0B8BC54850FEC97A617E1B1C0D18 /* Pods */,
-				A99CC22441EDC3ED3614DBB22809A780 /* Products */,
+				E6A0DADB6F5D4D48A07CE6F721C6683D /* Pods */,
+				B387331144772182C749ED3A14E76B58 /* Products */,
 				7D9124306962DF667999643F15E1EC6E /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		82DB0B8BC54850FEC97A617E1B1C0D18 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7506C0C8400BF52A5CE74D9C26F0BCDC /* M13Checkbox */,
-				75DDEE775FD1653B5D84D42E22677409 /* Pastel */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		93FD095B5FC2A2BCC81B8E3CFC167E67 /* iOS */ = {
@@ -235,14 +295,53 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		A99CC22441EDC3ED3614DBB22809A780 /* Products */ = {
+		AAC22EEEC0BF754825DCFEEAE209BDE6 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				A9B7E34930FA8315EDEF848A4AE278ED /* M13Checkbox.framework */,
-				D3C8D30CCEBAEA2FDB0A1D9AE36AE6CE /* Pastel.framework */,
-				C195251DE0A57BE70B75F26A39965431 /* Pods_Graph.framework */,
+				821A05CD8A143A0C1F24C0039A5F91D7 /* CountdownLabel.modulemap */,
+				0790EF3DB2636733EE4760F16F9D9BCD /* CountdownLabel.xcconfig */,
+				DCDE15A43AA539D8405ECE055F643263 /* CountdownLabel-dummy.m */,
+				A9C6B61E1976E2F8393F3CD63235CA52 /* CountdownLabel-prefix.pch */,
+				CA15313DDF845D753EEF77145275C803 /* CountdownLabel-umbrella.h */,
+				3E47E9C3851D2591C8D698FE62662DF7 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/CountdownLabel";
+			sourceTree = "<group>";
+		};
+		B387331144772182C749ED3A14E76B58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				87E9E23B4987AA96C7CEA45DFFC7AB94 /* CountdownLabel.framework */,
+				832BB3224EEAB91D61F2D50F32887E4B /* M13Checkbox.framework */,
+				BC5CFDE1DA8942654E66307BEBA7A011 /* Pastel.framework */,
+				CFF6C96E265398787E3B7616F8A920BD /* Pods_Graph.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CE60F837BE289DEA78546C3E42B88027 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C80178BE59065D9D3E8E5DA771607AD9 /* Info.plist */,
+				0816516A9F6D0864063C4EFCC0EA3789 /* Pastel.modulemap */,
+				D81FBDCCEEB7376BFBFAF263DDE1D7C2 /* Pastel.xcconfig */,
+				0E6F5782146A5ED6EFB497565A9D3253 /* Pastel-dummy.m */,
+				D56BC7F1BA7A5FF7503D0EC2F2E30B46 /* Pastel-prefix.pch */,
+				B97A669C8FF0007C059E1A08FF887DB5 /* Pastel-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pastel";
+			sourceTree = "<group>";
+		};
+		E6A0DADB6F5D4D48A07CE6F721C6683D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5287A047543F22498E6FB2A260D8A4D9 /* CountdownLabel */,
+				05B941CCEAD24994CBA4DD11C7215A9A /* M13Checkbox */,
+				1D75C0659AA8C00C8F710A2FE1166DBF /* Pastel */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		F76B357F9CEB83886BB941EEF725D06A /* Pods-Graph */ = {
@@ -263,15 +362,15 @@
 			path = "Target Support Files/Pods-Graph";
 			sourceTree = "<group>";
 		};
-		FC14D49BD8D49B6182F48CAA97AE2130 /* Support Files */ = {
+		F9378B4AA9FD88958896BC06D6052EA5 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				010138C2FB64AC3B9B7FDD06C45F6848 /* Info.plist */,
-				4FD2331F75CF3578352831E3F46283B4 /* M13Checkbox.modulemap */,
-				B7BD7627B46C6E1FBCF05ADBCF3166E4 /* M13Checkbox.xcconfig */,
-				20892189A2362F362B91B0615CABD771 /* M13Checkbox-dummy.m */,
-				5A0D740F1012376EB6152B1DA81D2D5A /* M13Checkbox-prefix.pch */,
-				26405E9B04E7B3B2F7099A24C6A701E6 /* M13Checkbox-umbrella.h */,
+				A3F5191569F68399FAF6B856B684A41A /* Info.plist */,
+				C5054FF793F457FE1042F35CAF04FBBB /* M13Checkbox.modulemap */,
+				E079B92F989F248D700CF4D18FA0D6BD /* M13Checkbox.xcconfig */,
+				E031320BCD39EF9F981B505B0ADDFF38 /* M13Checkbox-dummy.m */,
+				7B08F37BF4062716967841DBC273D8DC /* M13Checkbox-prefix.pch */,
+				7D0EFD35F59DCB7C1247C47D01D3892A /* M13Checkbox-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/M13Checkbox";
@@ -280,6 +379,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		4673425E73D18B79A45EE5570E15D26D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6853FB4167701B2DF94D7CDFB38B8CAD /* M13Checkbox-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4A60B5084C7CB5B3D0A5465B55459558 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -288,32 +395,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		714DC262BF2FB332E82AC2E7CD6D73D1 /* Headers */ = {
+		8B06DBF5BF9F8875A28E256B1E64CFB9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B7F6283CE6F6418FD195E43D2216FBF /* M13Checkbox-umbrella.h in Headers */,
+				E666272E5B493FD582AB3734B95E7ABC /* Pods-Graph-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ED5541DBE216619B48BCF72ECD4051F0 /* Headers */ = {
+		D9D46631DF58F24E9B09B000935ACE65 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71823AB0E839B34A32E71C871B4AE4E9 /* Pods-Graph-umbrella.h in Headers */,
+				9639865A2ED46826C52A6995A5294096 /* CountdownLabel-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		20A9DD9ABBF08BC57372A26C35327BF1 /* M13Checkbox */ = {
+		8CD9FC035D83AD9BA719108E6A9A694F /* M13Checkbox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 08913436C5D3DFB2C8CEA353ED9FF003 /* Build configuration list for PBXNativeTarget "M13Checkbox" */;
+			buildConfigurationList = FD8541BF5774BA6A1CEA3B6D3D8D3860 /* Build configuration list for PBXNativeTarget "M13Checkbox" */;
 			buildPhases = (
-				923F4E7F3A2B8E74326EFD309DCEEE04 /* Sources */,
-				53797C5F84C3B718634123945FF8378E /* Frameworks */,
-				714DC262BF2FB332E82AC2E7CD6D73D1 /* Headers */,
+				DCEE5581913946BE6573D0B329081888 /* Sources */,
+				80427CF56420818BEF0449F95F82D7EC /* Frameworks */,
+				4673425E73D18B79A45EE5570E15D26D /* Headers */,
 			);
 			buildRules = (
 			);
@@ -321,7 +428,7 @@
 			);
 			name = M13Checkbox;
 			productName = M13Checkbox;
-			productReference = A9B7E34930FA8315EDEF848A4AE278ED /* M13Checkbox.framework */;
+			productReference = 832BB3224EEAB91D61F2D50F32887E4B /* M13Checkbox.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8E1D092BF86FB8C0ABE055E421219B71 /* Pastel */ = {
@@ -338,26 +445,44 @@
 			);
 			name = Pastel;
 			productName = Pastel;
-			productReference = D3C8D30CCEBAEA2FDB0A1D9AE36AE6CE /* Pastel.framework */;
+			productReference = BC5CFDE1DA8942654E66307BEBA7A011 /* Pastel.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		A1B9C3C7A20927BE5B92439F1D4CC5D2 /* Pods-Graph */ = {
+		8F254C70EA7289F49F560FEF44F5E03E /* CountdownLabel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5600A32F47F6E337DE64F8CEE2F50968 /* Build configuration list for PBXNativeTarget "Pods-Graph" */;
+			buildConfigurationList = DCD9278D904B88D5FAB37B348F99E96C /* Build configuration list for PBXNativeTarget "CountdownLabel" */;
 			buildPhases = (
-				D9D9465ACC23CF7BA8C10BF0DD619559 /* Sources */,
-				07F652575A6FF8C5B499F6B7A8A2D978 /* Frameworks */,
-				ED5541DBE216619B48BCF72ECD4051F0 /* Headers */,
+				A804DF45A8EE2379EE6DF42112FF477C /* Sources */,
+				06BB84603C1CB09162F0940A1DC099F0 /* Frameworks */,
+				D9D46631DF58F24E9B09B000935ACE65 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D3E58CF152A62FF438B076BEE84F3944 /* PBXTargetDependency */,
-				B2435FEF9EBDF50D34EC5CC9F6CA17BB /* PBXTargetDependency */,
+			);
+			name = CountdownLabel;
+			productName = CountdownLabel;
+			productReference = 87E9E23B4987AA96C7CEA45DFFC7AB94 /* CountdownLabel.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ACA7AF5455B3918B5BD2965AC3C655F1 /* Pods-Graph */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2919561FB173E735780E0FF863D380E /* Build configuration list for PBXNativeTarget "Pods-Graph" */;
+			buildPhases = (
+				9B344A3A60C1BAFA5BB22064AEFD8A12 /* Sources */,
+				18E1935E0C8C4E59034C3351029A46F5 /* Frameworks */,
+				8B06DBF5BF9F8875A28E256B1E64CFB9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03406311FF7E9832F396B5147F885BAF /* PBXTargetDependency */,
+				288C3F2F59971D2302327E0209767F9F /* PBXTargetDependency */,
+				DE1271A531FD3B96534EE38A5039B1CE /* PBXTargetDependency */,
 			);
 			name = "Pods-Graph";
 			productName = "Pods-Graph";
-			productReference = C195251DE0A57BE70B75F26A39965431 /* Pods_Graph.framework */;
+			productReference = CFF6C96E265398787E3B7616F8A920BD /* Pods_Graph.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -367,7 +492,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -377,13 +502,14 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = A99CC22441EDC3ED3614DBB22809A780 /* Products */;
+			productRefGroup = B387331144772182C749ED3A14E76B58 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				20A9DD9ABBF08BC57372A26C35327BF1 /* M13Checkbox */,
+				8F254C70EA7289F49F560FEF44F5E03E /* CountdownLabel */,
+				8CD9FC035D83AD9BA719108E6A9A694F /* M13Checkbox */,
 				8E1D092BF86FB8C0ABE055E421219B71 /* Pastel */,
-				A1B9C3C7A20927BE5B92439F1D4CC5D2 /* Pods-Graph */,
+				ACA7AF5455B3918B5BD2965AC3C655F1 /* Pods-Graph */,
 			);
 		};
 /* End PBXProject section */
@@ -399,58 +525,156 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		923F4E7F3A2B8E74326EFD309DCEEE04 /* Sources */ = {
+		9B344A3A60C1BAFA5BB22064AEFD8A12 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E2FFD3C073383B859F71C2B1411FA89 /* M13Checkbox+IB.swift in Sources */,
-				AAE54CDA46FD620F4BC54BC583EA255C /* M13Checkbox-dummy.m in Sources */,
-				445378EF15B25DB3370FF77B2F6F42D7 /* M13Checkbox.swift in Sources */,
-				8ED3FB14D1852DD05FDF6E23E94A4657 /* M13CheckboxAddRemovePathGenerator.swift in Sources */,
-				C6D0B50C214C9E7CC815F2773D702779 /* M13CheckboxAnimationGenerator.swift in Sources */,
-				F7A5B0214108C732898DD2C00BA6FE56 /* M13CheckboxBounceController.swift in Sources */,
-				C8D41C0D4E89BE8510BA40F04EFF4FA8 /* M13CheckboxCheckPathGenerator.swift in Sources */,
-				C277B9EAC728D880FF1F15EE98C8B200 /* M13CheckboxController.swift in Sources */,
-				3AFA54C6DC0961AD0F4CC8A4F1AF915E /* M13CheckboxDisclosurePathGenerator.swift in Sources */,
-				80E34254247C5B1984E2FB9EC58774E4 /* M13CheckboxDotController.swift in Sources */,
-				BCB82BDDA7C30F0B0AFE479CC479B522 /* M13CheckboxExpandController.swift in Sources */,
-				FFF489DE367C237C0E8F7E4442DA06D7 /* M13CheckboxFadeController.swift in Sources */,
-				80CD994ABA1A2B01AD1838A4D4BB794C /* M13CheckboxFillController.swift in Sources */,
-				3D976DD35C822B9B6971ED06121B4A44 /* M13CheckboxFlatController.swift in Sources */,
-				D6039515F84B2167BBAC8D1CE12A5F4E /* M13CheckboxGestureRecognizer.swift in Sources */,
-				76D3E2602CFAE6474D2DFA89F5328A24 /* M13CheckboxPathGenerator.swift in Sources */,
-				85CB53B9E438E280DA1690CCFD778689 /* M13CheckboxRadioPathGenerator.swift in Sources */,
-				FA2B271AAF040F6C1B860C6C3DF0558F /* M13CheckboxSpiralController.swift in Sources */,
-				40897730B01BE8C60FB61A02DD7A1F6A /* M13CheckboxStrokeController.swift in Sources */,
+				31FF504EA3FB7681D1ABD8D03652087A /* Pods-Graph-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9D9465ACC23CF7BA8C10BF0DD619559 /* Sources */ = {
+		A804DF45A8EE2379EE6DF42112FF477C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD8B7D24D6479F73CE7D03DA8A3857FD /* Pods-Graph-dummy.m in Sources */,
+				A26BA9F8E876A788CEE8623E08D72A9E /* CountdownLabel-dummy.m in Sources */,
+				734B7AC8EAECFFA3C06D89229ACA3960 /* CountdownLabel.swift in Sources */,
+				0B46C87D7C9BBDC0F31A84A6E6720983 /* LTCharacterDiffResult.swift in Sources */,
+				B8E7F36176917E71F2E97A233C1FCCA4 /* LTCharacterLimbo.swift in Sources */,
+				D26B66606862EBD7C7C3C8578202012E /* LTEasing.swift in Sources */,
+				C4D1D1EDBA79F0D39627DE5FF26272BC /* LTEmitterView.swift in Sources */,
+				F3D690F6C4EF6CB02AAC682D74FC7615 /* LTMorphingEffect.swift in Sources */,
+				38F80E96539DDE5339A8426DC087758D /* LTMorphingLabel+Anvil.swift in Sources */,
+				C0E7D15F27ECD51003CB899B9C096931 /* LTMorphingLabel+Burn.swift in Sources */,
+				91E56E34A99E791CF95D393752F334A5 /* LTMorphingLabel+Evaporate.swift in Sources */,
+				E46559D5C2F89367FE61EA281FB31F2B /* LTMorphingLabel+Fall.swift in Sources */,
+				8FA870156921760C688FBED5819B9BA5 /* LTMorphingLabel+Pixelate.swift in Sources */,
+				5B7F1D075B76798E5B25257815EE36CF /* LTMorphingLabel+Sparkle.swift in Sources */,
+				5C76EAC0C7DD314C24415C4F2215E3D6 /* LTMorphingLabel.swift in Sources */,
+				D560242116899637FC3EAFAAEB48FEDA /* LTStringDiffResult.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCEE5581913946BE6573D0B329081888 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF4E2AB7D604B3D36AF26C8D7EECE416 /* DefaultValues.swift in Sources */,
+				97713C0235F372715A3AD292C57C8FEC /* M13Checkbox+IB.swift in Sources */,
+				183F3E45381030F3C43E1398361387D3 /* M13Checkbox-dummy.m in Sources */,
+				C88F144420533BCDEE60E418C316FB8E /* M13Checkbox.swift in Sources */,
+				BD78E8DDD27AF7518D2AE2456285730C /* M13CheckboxAddRemovePathGenerator.swift in Sources */,
+				B5DE980791D4DBD13DF2F0A44893E255 /* M13CheckboxAnimationGenerator.swift in Sources */,
+				0744231B4276CDE27CB12C5C084A347E /* M13CheckboxBounceController.swift in Sources */,
+				B7D8254786CE0AE3BF97982B7FAAD198 /* M13CheckboxCheckPathGenerator.swift in Sources */,
+				80DC15A0582068D6EDE31A6178375C89 /* M13CheckboxController.swift in Sources */,
+				AB839F535003BA79950BDC9A0B50D923 /* M13CheckboxDisclosurePathGenerator.swift in Sources */,
+				7D94389D13C85695A7E5328202FF9CB0 /* M13CheckboxDotController.swift in Sources */,
+				1EB79404C783C6997ADCC1DD5EC40BC2 /* M13CheckboxExpandController.swift in Sources */,
+				2E903E65241641AFF0E46CBC57B26015 /* M13CheckboxFadeController.swift in Sources */,
+				D5218FB15C76B99D57BDB9EB6B27D7BA /* M13CheckboxFillController.swift in Sources */,
+				8C6EB311B0B897CD705D6F53BDDF0EFB /* M13CheckboxFlatController.swift in Sources */,
+				2110386154BC3992FB1D69D0DA2DAF0A /* M13CheckboxGestureRecognizer.swift in Sources */,
+				8942922B30F9E19A21D2EB015F832D2F /* M13CheckboxPathGenerator.swift in Sources */,
+				7D5AB7A91E820D7EECD12A6EA221D479 /* M13CheckboxRadioPathGenerator.swift in Sources */,
+				73A3753C550F26AEE354F43D7AA98ACE /* M13CheckboxSpiralController.swift in Sources */,
+				13FC128B4DD17CD90F02593EAAAE9A67 /* M13CheckboxStrokeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B2435FEF9EBDF50D34EC5CC9F6CA17BB /* PBXTargetDependency */ = {
+		03406311FF7E9832F396B5147F885BAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CountdownLabel;
+			target = 8F254C70EA7289F49F560FEF44F5E03E /* CountdownLabel */;
+			targetProxy = 1E5EFC1194942A927D5DF666DB6763E2 /* PBXContainerItemProxy */;
+		};
+		288C3F2F59971D2302327E0209767F9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = M13Checkbox;
+			target = 8CD9FC035D83AD9BA719108E6A9A694F /* M13Checkbox */;
+			targetProxy = 7F8CEA9EC94F0E5D940E6DB724065DE6 /* PBXContainerItemProxy */;
+		};
+		DE1271A531FD3B96534EE38A5039B1CE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Pastel;
 			target = 8E1D092BF86FB8C0ABE055E421219B71 /* Pastel */;
-			targetProxy = D9879B08F4E186A3D9C47B34011FCADB /* PBXContainerItemProxy */;
-		};
-		D3E58CF152A62FF438B076BEE84F3944 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = M13Checkbox;
-			target = 20A9DD9ABBF08BC57372A26C35327BF1 /* M13Checkbox */;
-			targetProxy = 5896EF0134E16760E243181778117012 /* PBXContainerItemProxy */;
+			targetProxy = F6E9BF035FEBBC7F85DD193074F8068E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		07925A509902AEB6D9AB45706E2F5C21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E079B92F989F248D700CF4D18FA0D6BD /* M13Checkbox.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/M13Checkbox/M13Checkbox-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/M13Checkbox/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/M13Checkbox/M13Checkbox.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = M13Checkbox;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		10BC557FA213CCAE2089D3970D728908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E079B92F989F248D700CF4D18FA0D6BD /* M13Checkbox.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/M13Checkbox/M13Checkbox-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/M13Checkbox/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/M13Checkbox/M13Checkbox.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = M13Checkbox;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		1A41B15D3AA834993ADDD808FA9D8764 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -461,9 +685,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -471,20 +693,14 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
@@ -503,9 +719,43 @@
 			};
 			name = Release;
 		};
+		2E18CFE7F6E4DB364CA1E66A729951C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0790EF3DB2636733EE4760F16F9D9BCD /* CountdownLabel.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CountdownLabel/CountdownLabel-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CountdownLabel/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CountdownLabel/CountdownLabel.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = CountdownLabel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		3EEC4B3F5979AA3DC31A71D5BB154E86 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC365F3981328FFF444B0E4F8114BD86 /* Pastel.xcconfig */;
+			baseConfigurationReference = D81FBDCCEEB7376BFBFAF263DDE1D7C2 /* Pastel.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -538,204 +788,7 @@
 			};
 			name = Debug;
 		};
-		4CF33F5E903725474FC882A4E4CDFCAE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8169D50CA8DDCC5BD01A6C7E3E15A10 /* Pods-Graph.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Graph/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Graph/Pods-Graph.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Graph;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		7D144F724433A09597E3476A57631255 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_DEBUG=1",
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
-		83AED6B8D3E76A4E5F8F11E7B303F447 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC365F3981328FFF444B0E4F8114BD86 /* Pastel.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pastel/Pastel-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pastel/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pastel/Pastel.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = Pastel;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		A7321C1EC55F15FEFAF4102ED750FFE3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7BD7627B46C6E1FBCF05ADBCF3166E4 /* M13Checkbox.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/M13Checkbox/M13Checkbox-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/M13Checkbox/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/M13Checkbox/M13Checkbox.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = M13Checkbox;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		F305404726DD07ED99C4DBFA66B9F1D7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7BD7627B46C6E1FBCF05ADBCF3166E4 /* M13Checkbox.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/M13Checkbox/M13Checkbox-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/M13Checkbox/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/M13Checkbox/M13Checkbox.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = M13Checkbox;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		FE42665E354C7B6C6933FEBED86C98D5 /* Debug */ = {
+		59CC4D8A80FCA05EF7ECB8114DE7EAC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AC1CA94B92CA052E336A2BEC54889171 /* Pods-Graph.debug.xcconfig */;
 			buildSettings = {
@@ -774,18 +827,164 @@
 			};
 			name = Debug;
 		};
+		7D144F724433A09597E3476A57631255 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		83AED6B8D3E76A4E5F8F11E7B303F447 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D81FBDCCEEB7376BFBFAF263DDE1D7C2 /* Pastel.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pastel/Pastel-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pastel/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pastel/Pastel.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Pastel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B2118B87163AD28E114A691759F944E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0790EF3DB2636733EE4760F16F9D9BCD /* CountdownLabel.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CountdownLabel/CountdownLabel-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CountdownLabel/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CountdownLabel/CountdownLabel.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = CountdownLabel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DBF05FA1FA199242F7F8932A1E58BA2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8169D50CA8DDCC5BD01A6C7E3E15A10 /* Pods-Graph.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Graph/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Graph/Pods-Graph.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Graph;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		08913436C5D3DFB2C8CEA353ED9FF003 /* Build configuration list for PBXNativeTarget "M13Checkbox" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A7321C1EC55F15FEFAF4102ED750FFE3 /* Debug */,
-				F305404726DD07ED99C4DBFA66B9F1D7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -795,20 +994,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5600A32F47F6E337DE64F8CEE2F50968 /* Build configuration list for PBXNativeTarget "Pods-Graph" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FE42665E354C7B6C6933FEBED86C98D5 /* Debug */,
-				4CF33F5E903725474FC882A4E4CDFCAE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		9C6593740037C02E9291E1477CEB6528 /* Build configuration list for PBXNativeTarget "Pastel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3EEC4B3F5979AA3DC31A71D5BB154E86 /* Debug */,
 				83AED6B8D3E76A4E5F8F11E7B303F447 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2919561FB173E735780E0FF863D380E /* Build configuration list for PBXNativeTarget "Pods-Graph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59CC4D8A80FCA05EF7ECB8114DE7EAC3 /* Debug */,
+				DBF05FA1FA199242F7F8932A1E58BA2B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCD9278D904B88D5FAB37B348F99E96C /* Build configuration list for PBXNativeTarget "CountdownLabel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2118B87163AD28E114A691759F944E3 /* Debug */,
+				2E18CFE7F6E4DB364CA1E66A729951C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD8541BF5774BA6A1CEA3B6D3D8D3860 /* Build configuration list for PBXNativeTarget "M13Checkbox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10BC557FA213CCAE2089D3970D728908 /* Debug */,
+				07925A509902AEB6D9AB45706E2F5C21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

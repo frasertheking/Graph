@@ -1,15 +1,18 @@
 PODS:
-  - M13Checkbox (3.1.3)
+  - CountdownLabel (3.0.0)
+  - M13Checkbox (3.2.2)
   - Pastel (0.3.0)
 
 DEPENDENCIES:
+  - CountdownLabel (~> 3.0)
   - M13Checkbox
   - Pastel
 
 SPEC CHECKSUMS:
-  M13Checkbox: c132a7e0eb964731855eff67b883a0b21b7c0977
+  CountdownLabel: 4534a68892b1deb73fda18702dfdc2c8444cec08
+  M13Checkbox: a8c2491cfbbca10797925fd0b9154a782bf40d89
   Pastel: 738740c84f2b15bbcd96ebe99c4e6c2f5dd42262
 
-PODFILE CHECKSUM: dd541a107a71ea05a6b30ea920028b2a4a5eec79
+PODFILE CHECKSUM: f0b65633a460581745136b7327daccf3bb4c1451
 
 COCOAPODS: 1.2.1

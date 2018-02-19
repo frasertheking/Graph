@@ -12,6 +12,7 @@ import SceneKit
 import SpriteKit
 import Pastel
 import M13Checkbox
+import CountdownLabel
 
 class GameViewController: UIViewController {
 
@@ -56,11 +57,11 @@ class GameViewController: UIViewController {
     @IBOutlet var skView: SKView!
     @IBOutlet var paintColorCollectionView: UICollectionView!
     @IBOutlet var collectionViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet var levelTitle: UILabel!
     @IBOutlet var completedView: UIView!
     @IBOutlet var completedText: UILabel!
     @IBOutlet var completedCheckmark: M13Checkbox!
     @IBOutlet var completedViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var countdownLabel: CountdownLabel!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -136,6 +137,10 @@ class GameViewController: UIViewController {
         axisPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesturePlanarMove(gestureRecognize:)))
         scnView.addGestureRecognizer(axisPanGestureRecognizer)
         axisPanGestureRecognizer?.isEnabled = false
+    
+        countdownLabel.countdownDelegate = self
+        countdownLabel.timeFormat = "ss"
+        countdownLabel.isHidden = true
     }
     
     func setupScene() {
@@ -179,6 +184,12 @@ class GameViewController: UIViewController {
 
             if graphType != .planar {
                 GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+            }
+            
+            if graphType == .sim {
+                self.countdownLabel.isHidden = false
+                self.countdownLabel.setCountDownTime(minutes: 60)
+                self.countdownLabel.start()
             }
         }
 
@@ -273,8 +284,6 @@ class GameViewController: UIViewController {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
         
-        levelTitle.text = activeLevel?.name
-
         guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
             return
         }
@@ -485,6 +494,7 @@ class GameViewController: UIViewController {
                 if ((graphType == .hamiltonian) && firstStep == currentStep) || !(graphType == .hamiltonian) {
                     
                     solved = true
+                    self.scnView.isUserInteractionEnabled = false
                     
                     for node in vertexNodes.childNodes {
                         if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
@@ -505,7 +515,6 @@ class GameViewController: UIViewController {
                     scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
                     
                     GraphAnimation.delayWithSeconds(0.5, completion: {
-                        self.scnView.isUserInteractionEnabled = false
                         GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
                         GraphAnimation.delayWithSeconds(0.5, completion: {
                             GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
@@ -642,6 +651,7 @@ class GameViewController: UIViewController {
         firstStep = ""
         solved = false
         completedText.text = "ZONE CLEAR"
+        countdownLabel.isHidden = true
         
         currentLevel += 1
         refreshColorsInCollectionView()
@@ -892,5 +902,11 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
             selectedColorIndex = indexPath.row
             paintColorCollectionView.reloadData()
         }
+    }
+}
+
+extension GameViewController: CountdownLabelDelegate {
+    func countdownFinished() {
+        print("You lose")
     }
 }

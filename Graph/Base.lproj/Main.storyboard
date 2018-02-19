@@ -24,13 +24,7 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="scene" translatesAutoresizingMaskIntoConstraints="NO" id="vYt-dz-Sce">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </sceneKitView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfu-dL-2CN">
-                                <rect key="frame" x="150" y="36" width="76" height="39"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCJ-Dq-VgM">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCJ-Dq-VgM">
                                 <rect key="frame" x="62" y="83" width="50" height="30"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -48,7 +42,7 @@
                                     <action selector="debugXPress" destination="EcQ-vt-J7h" eventType="touchUpInside" id="uTp-AJ-4YG"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82e-M2-jU7">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82e-M2-jU7">
                                 <rect key="frame" x="162" y="83" width="50" height="30"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -90,7 +84,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1x-2a-Zqn">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1x-2a-Zqn">
                                 <rect key="frame" x="62" y="129" width="252" height="30"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Spawn Node">
@@ -105,7 +99,7 @@
                                     <action selector="spawnDebugNode" destination="EcQ-vt-J7h" eventType="touchUpInside" id="em0-8E-heO"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UE-dl-Ejm">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UE-dl-Ejm">
                                 <rect key="frame" x="262" y="83" width="50" height="30"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -201,30 +195,34 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fds-b0-QSW" customClass="CountdownLabel" customModule="CountdownLabel">
+                                <rect key="frame" x="150" y="38" width="75.5" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="fds-b0-QSW" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="1RK-1a-hTj"/>
                             <constraint firstItem="82e-M2-jU7" firstAttribute="leading" secondItem="zCJ-Dq-VgM" secondAttribute="trailing" constant="50" id="3Hd-An-950"/>
                             <constraint firstItem="k1x-2a-Zqn" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="7aU-sb-aP1"/>
                             <constraint firstAttribute="bottom" secondItem="UDE-42-eyU" secondAttribute="bottom" id="9DA-Of-8tY"/>
+                            <constraint firstItem="fds-b0-QSW" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="18" id="A5j-F1-ZPe"/>
                             <constraint firstAttribute="bottomMargin" secondItem="UUX-un-aJT" secondAttribute="bottom" constant="-100" id="EFa-0d-cvQ"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="UDE-42-eyU" secondAttribute="trailing" id="GKE-8f-Way"/>
-                            <constraint firstItem="lfu-dL-2CN" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="16" id="Gc0-g7-caM"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="Idl-6u-hdf"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="vYt-dz-Sce" secondAttribute="trailing" id="Qd0-67-PSc"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="7q1-cd-kdY" secondAttribute="trailing" constant="24" id="QvP-X8-6ob"/>
-                            <constraint firstItem="lfu-dL-2CN" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="Veb-fx-hdu"/>
                             <constraint firstItem="k1x-2a-Zqn" firstAttribute="leading" secondItem="zCJ-Dq-VgM" secondAttribute="leading" id="Y9i-hj-BpI"/>
                             <constraint firstItem="2UE-dl-Ejm" firstAttribute="leading" secondItem="82e-M2-jU7" secondAttribute="trailing" constant="50" id="bX5-sQ-TPb"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="7q1-cd-kdY" secondAttribute="bottom" constant="-115" id="cN3-Vm-Fsb"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="cc3-z6-EuS"/>
-                            <constraint firstItem="lfu-dL-2CN" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="dN5-wy-nCp"/>
                             <constraint firstItem="EGZ-SW-AI5" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="ek8-wK-YxR"/>
                             <constraint firstItem="EGZ-SW-AI5" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="20" id="f8D-9C-wVQ"/>
                             <constraint firstItem="82e-M2-jU7" firstAttribute="centerY" secondItem="zCJ-Dq-VgM" secondAttribute="centerY" id="fui-eo-GVS"/>
                             <constraint firstItem="UUX-un-aJT" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="g1P-dH-Wu6"/>
                             <constraint firstItem="k1x-2a-Zqn" firstAttribute="top" secondItem="82e-M2-jU7" secondAttribute="bottom" constant="16" id="gOH-ks-xrU"/>
-                            <constraint firstItem="82e-M2-jU7" firstAttribute="top" secondItem="lfu-dL-2CN" secondAttribute="bottom" constant="8" id="i6t-fI-lkm"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="UUX-un-aJT" secondAttribute="trailing" constant="24" id="knz-jc-vFi"/>
                             <constraint firstItem="UUX-un-aJT" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" constant="24" id="nBs-TB-cJL"/>
                             <constraint firstItem="UDE-42-eyU" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="ogh-Fo-ERn"/>
@@ -242,7 +240,7 @@
                         <outlet property="completedText" destination="7Ge-cL-CJY" id="Eik-Yg-8In"/>
                         <outlet property="completedView" destination="UUX-un-aJT" id="TgG-2n-eTh"/>
                         <outlet property="completedViewBottomConstraint" destination="EFa-0d-cvQ" id="DQa-eW-jzJ"/>
-                        <outlet property="levelTitle" destination="lfu-dL-2CN" id="o7h-jj-rn7"/>
+                        <outlet property="countdownLabel" destination="fds-b0-QSW" id="4Ol-rT-qEl"/>
                         <outlet property="paintColorCollectionView" destination="7q1-cd-kdY" id="MAu-lS-IE3"/>
                         <outlet property="scnView" destination="vYt-dz-Sce" id="fgv-wB-KRi"/>
                         <outlet property="skView" destination="UDE-42-eyU" id="98S-F5-Xv0"/>
