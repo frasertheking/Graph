@@ -155,7 +155,7 @@ class GameViewController: UIViewController {
         straylightView.frame = skView.frame
         straylightView.backgroundColor = .clear
         straylightView.layer.addSublayer(lightLayer)
-        straylightView.addParallaxToView()
+        straylightView.addParallaxToView(amount: 20)
         skView.addSubview(straylightView)
     }
     
