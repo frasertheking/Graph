@@ -156,6 +156,7 @@ class GameViewController: UIViewController {
         straylightView.backgroundColor = .clear
         straylightView.layer.addSublayer(lightLayer)
         straylightView.addParallaxToView(amount: 20)
+        
         skView.addSubview(straylightView)
     }
     
@@ -252,13 +253,13 @@ class GameViewController: UIViewController {
                 self.straylightView.alpha = 1
             }
             
-            let numberOfLines = Int.random(min: 3, max: 4)
-            let slope = Float.random(min: 1.35, max: 3)
+            let numberOfLines = Int.random(min: 3, max: 5)
+            let slope = Float.random(min: 1.35, max: 1.5)
             
             for _ in 0...numberOfLines {
-                let randomYStart = Int.random(min: 100, max: 400)
-                let randomYEnd = Float(randomYStart) * slope
-                let randomWidth = Int.random(min: 8, max: 16)
+                let randomYStart = Int.random(min: 100, max: 500)
+                let randomYEnd = Float(self.view.frame.size.width) * slope + Float(randomYStart)
+                let randomWidth = Int.random(min: 10, max: 20)
                 self.lightLayer.drawLine(fromPoint: CGPoint(x: Int(self.view.frame.size.width)+50, y: randomYStart), toPoint: CGPoint(x: -50, y: Int(randomYEnd)), width: CGFloat(randomWidth))
             }
             
@@ -266,7 +267,7 @@ class GameViewController: UIViewController {
                 GraphAnimation.delayWithSeconds(Double.random(min: 0.5, max: 2)) {
                     let animation : CABasicAnimation = CABasicAnimation(keyPath: "opacity")
                     animation.fromValue = 0
-                    animation.toValue = Float.random(min: 0.05, max: 0.15)
+                    animation.toValue = Float.random(min: 0.5, max: 0.65)
                     animation.duration = Double.random(min: 1, max: 1.5)
                     animation.isRemovedOnCompletion = false
                     animation.fillMode = kCAFillModeForwards

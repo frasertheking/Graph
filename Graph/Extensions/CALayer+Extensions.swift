@@ -17,8 +17,19 @@ extension CALayer {
         line.path = linePath.cgPath
         line.fillColor = UIColor.white.cgColor
         line.strokeColor = UIColor.white.cgColor
-        line.opacity = 0
+        line.opacity = 0.5
         line.lineWidth = width
-        self.addSublayer(line)
+        
+        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        let gradient = CAGradientLayer()
+        gradient.frame = frame
+
+        gradient.colors = [UIColor.white.cgColor,
+                           UIColor.clear.cgColor]
+        gradient.startPoint = CGPoint(x: 1, y: 0)
+        gradient.endPoint = CGPoint(x: 0, y: 0)
+        gradient.mask = line
+        gradient.opacity = 0.5
+        self.addSublayer(gradient)
     }
 }
