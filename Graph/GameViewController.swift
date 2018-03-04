@@ -38,9 +38,12 @@ class GameViewController: UIViewController {
     let axisArray: [String] = ["X", "Y", "Z"]
     var solved = false
     var simPlayerNodeCount: Int = 0
-    var lightLayer: CALayer!
-    var straylightView: UIView!
+    var lightLayerFront: CALayer!
+    var straylightViewFront: UIView!
+    var lightLayerBack: CALayer!
+    var straylightViewBack: UIView!
     var simPlayerColor: UIColor = .red
+    var simBarView: UIView!
     
     // DEBUG
     var debug = false
@@ -149,15 +152,41 @@ class GameViewController: UIViewController {
         scnView.backgroundColor = UIColor.clear
         scnScene.background.contents = UIColor.clear
         
-        lightLayer = CALayer()
-        lightLayer.frame = skView.frame
-        straylightView = UIView()
-        straylightView.frame = skView.frame
-        straylightView.backgroundColor = .clear
-        straylightView.layer.addSublayer(lightLayer)
-        straylightView.addParallaxToView(amount: 20)
+        lightLayerFront = CALayer()
+        lightLayerFront.frame = skView.frame
+        straylightViewFront = UIView()
+        straylightViewFront.frame = skView.frame
+        straylightViewFront.backgroundColor = .clear
+        straylightViewFront.layer.addSublayer(lightLayerFront)
+        straylightViewFront.addParallaxToView(amount: 25)
+        straylightViewFront.isUserInteractionEnabled = false
         
-        skView.addSubview(straylightView)
+        lightLayerBack = CALayer()
+        lightLayerBack.frame = skView.frame
+        straylightViewBack = UIView()
+        straylightViewBack.frame = skView.frame
+        straylightViewBack.backgroundColor = .clear
+        straylightViewBack.layer.addSublayer(lightLayerBack)
+        straylightViewBack.addParallaxToView(amount: 10)
+        
+        skView.addSubview(straylightViewBack)
+        scnView.addSubview(straylightViewFront)
+        
+        let gradientLayer:CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame.size = self.view.frame.size
+        gradientLayer.colors = [UIColor.white.cgColor, UIColor.clear] //Use diffrent colors
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+        gradientLayer.opacity = 0.5
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        simBarView = UIView(frame: CGRect(x: (view.frame.size.width/2) - 30, y: 718, width: 50, height: 10))
+        simBarView.backgroundColor = UIColor.black
+        simBarView.layer.borderWidth = 2
+        simBarView.layer.borderColor = UIColor.customWhite().cgColor
+        view.addSubview(simBarView)
+        view.bringSubview(toFront: paintColorCollectionView)
+        simBarView.isHidden = true
     }
     
     func setupCamera() {
@@ -186,9 +215,12 @@ class GameViewController: UIViewController {
             if graphType != .planar {
                 GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             }
+            self.simBarView.alpha = 0
+            self.simBarView.isHidden = true
             
             if graphType == .sim {
                 self.countdownLabel.isHidden = false
+                self.simBarView.isHidden = false
                 self.countdownLabel.setCountDownTime(minutes: 60)
                 self.countdownLabel.start()
             }
@@ -196,7 +228,11 @@ class GameViewController: UIViewController {
 
         GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay) {
             GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2, y: 2, z: 2, w: 0))
-            GraphAnimation.animateInCollectionView(view: self.view, collectionViewBottomConstraint: self.collectionViewBottomConstraint)
+            GraphAnimation.animateInCollectionView(view: self.view, collectionViewBottomConstraint: self.collectionViewBottomConstraint, completion: {
+                UIView.animate(withDuration: GameConstants.kShortTimeDelay, animations: {
+                    self.simBarView.alpha = 1
+                })
+            })
         }
 
         GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay + 0.6) {
@@ -246,34 +282,62 @@ class GameViewController: UIViewController {
     
     func setupStraylights() {
         UIView.animate(withDuration: 0.5, animations: {
-            self.straylightView.alpha = 0
+            self.straylightViewFront.alpha = 0
+            self.straylightViewBack.alpha = 0
         }) { (finished) in
-            self.lightLayer.sublayers = nil
+            self.lightLayerFront.sublayers = nil
+            self.lightLayerBack.sublayers = nil
             GraphAnimation.delayWithSeconds(0.2) {
-                self.straylightView.alpha = 1
+                self.straylightViewFront.alpha = 1
+                self.straylightViewBack.alpha = 1
             }
             
             let numberOfLines = Int.random(min: 3, max: 5)
             let slope = Float.random(min: 1.35, max: 1.5)
-            
+
             for _ in 0...numberOfLines {
-                let randomYStart = Int.random(min: 100, max: 500)
+                let frontOrBack = Int.random(min: 0, max: 1)
+                let randomYStart = Int.random(min: 50, max: 450)
                 let randomYEnd = Float(self.view.frame.size.width) * slope + Float(randomYStart)
-                let randomWidth = Int.random(min: 10, max: 20)
-                self.lightLayer.drawLine(fromPoint: CGPoint(x: Int(self.view.frame.size.width)+50, y: randomYStart), toPoint: CGPoint(x: -50, y: Int(randomYEnd)), width: CGFloat(randomWidth))
+                let randomWidth = Int.random(min: 8, max: 18)
+
+                if frontOrBack == 1 {
+                    self.lightLayerFront.drawLine(fromPoint: CGPoint(x: Int(self.view.frame.size.width)+50, y: randomYStart), toPoint: CGPoint(x: -50, y: Int(randomYEnd)), width: CGFloat(randomWidth))
+                } else {
+                    self.lightLayerBack.drawLine(fromPoint: CGPoint(x: Int(self.view.frame.size.width)+50, y: randomYStart), toPoint: CGPoint(x: -50, y: Int(randomYEnd)), width: CGFloat(randomWidth))
+                }
             }
             
-            for layer in self.lightLayer.sublayers! {
-                GraphAnimation.delayWithSeconds(Double.random(min: 0.5, max: 2)) {
-                    let animation : CABasicAnimation = CABasicAnimation(keyPath: "opacity")
-                    animation.fromValue = 0
-                    animation.toValue = Float.random(min: 0.5, max: 0.65)
-                    animation.duration = Double.random(min: 1, max: 1.5)
-                    animation.isRemovedOnCompletion = false
-                    animation.fillMode = kCAFillModeForwards
-                    layer.add(animation, forKey: nil)
-                    GraphAnimation.delayWithSeconds(Double.random(min: 3, max: 6)) {
-                        GraphAnimation.addOpacityPulse(to: layer)
+            if let frontLayers = self.lightLayerFront.sublayers {
+                for layer in frontLayers {
+                    GraphAnimation.delayWithSeconds(Double.random(min: 0.5, max: 2)) {
+                        let animation : CABasicAnimation = CABasicAnimation(keyPath: "opacity")
+                        animation.fromValue = 0
+                        animation.toValue = Float.random(min: 0.02, max: 0.06)
+                        animation.duration = Double.random(min: 1, max: 1.5)
+                        animation.isRemovedOnCompletion = false
+                        animation.fillMode = kCAFillModeForwards
+                        layer.add(animation, forKey: nil)
+                        GraphAnimation.delayWithSeconds(Double.random(min: 3, max: 6)) {
+                            GraphAnimation.addOpacityPulse(to: layer)
+                        }
+                    }
+                }
+            }
+                        
+            if let backLayers = self.lightLayerBack.sublayers {
+                for layer in backLayers {
+                    GraphAnimation.delayWithSeconds(Double.random(min: 0.5, max: 2)) {
+                        let animation : CABasicAnimation = CABasicAnimation(keyPath: "opacity")
+                        animation.fromValue = 0
+                        animation.toValue = Float.random(min: 0.1, max: 0.15)
+                        animation.duration = Double.random(min: 1, max: 1.5)
+                        animation.isRemovedOnCompletion = false
+                        animation.fillMode = kCAFillModeForwards
+                        layer.add(animation, forKey: nil)
+                        GraphAnimation.delayWithSeconds(Double.random(min: 3, max: 6)) {
+                            GraphAnimation.addOpacityPulse(to: layer)
+                        }
                     }
                 }
             }
@@ -423,6 +487,7 @@ class GameViewController: UIViewController {
         if graphType == .sim {
             // Is player done making SIM move?
             if simPlayerNodeCount == 2 { // Yes
+                simBarView.applyGradient(withColours: [.red, .red])
                 scnView.isUserInteractionEnabled = false
 
                 GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay) {
@@ -447,6 +512,7 @@ class GameViewController: UIViewController {
                             return
                         } else {
                             GraphAnimation.addExplode(to: paintColorCollectionView)
+                            GraphAnimation.addExplode(to: simBarView)
                         }
                     }
                 }
@@ -468,6 +534,7 @@ class GameViewController: UIViewController {
                 GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay, completion: {
                     self.simPlayerNodeCount = 0
                     self.selectedNode = nil
+                    self.simBarView.applyGradient(withColours: [.black, .black])
 
                     self.activeLevel?.adjacencyList?.makeSimMove(edgeArray: self.edgeArray, edgeNodes: self.edgeNodes, simArray: self.simArray)
                     self.pathArray.removeAll()
@@ -477,6 +544,8 @@ class GameViewController: UIViewController {
                     self.checkIfSolved()
                     return
                 })
+            } else {
+                simBarView.applyGradient(withColours: [.red, .black])
             }
         } else {
             activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
@@ -524,6 +593,12 @@ class GameViewController: UIViewController {
                             
                             if graphType != .sim {
                                 self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                            } else {
+                                UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
+                                    self.simBarView.alpha = 0
+                                }, completion: { (finished) in
+                                    self.simBarView.isHidden = true
+                                })
                             }
                             
                             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {

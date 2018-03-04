@@ -24,4 +24,14 @@ extension UIView {
         group.motionEffects = [horizontal, vertical]
         self.addMotionEffect(group)
     }
+    
+    func applyGradient(withColours colours: [UIColor]) {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1, y: 0.5)
+        self.layer.sublayers = nil
+        self.layer.insertSublayer(gradient, at: 0)
+    }
 }

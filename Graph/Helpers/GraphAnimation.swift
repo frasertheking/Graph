@@ -83,11 +83,13 @@ struct GraphAnimation {
         node.addAnimation(scale, forKey: "swell")
     }
     
-    static func animateInCollectionView(view: UIView, collectionViewBottomConstraint: NSLayoutConstraint) {
+    static func animateInCollectionView(view: UIView, collectionViewBottomConstraint: NSLayoutConstraint, completion: @escaping () -> Void) {
         collectionViewBottomConstraint.constant = 16
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
             view.layoutIfNeeded()
-        }, completion: nil)
+        }, completion: { (finished) in
+            completion()
+        })
     }
     
     static func addPulse(to: UIView) {
