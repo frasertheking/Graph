@@ -65,6 +65,7 @@ class GameViewController: UIViewController {
     @IBOutlet var completedCheckmark: M13Checkbox!
     @IBOutlet var completedViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var countdownLabel: CountdownLabel!
+    @IBOutlet var timerBackgroundView: UIView!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -142,8 +143,9 @@ class GameViewController: UIViewController {
         axisPanGestureRecognizer?.isEnabled = false
     
         countdownLabel.countdownDelegate = self
-        countdownLabel.timeFormat = "ss"
+        countdownLabel.timeFormat = "s"
         countdownLabel.isHidden = true
+        timerBackgroundView.isHidden = true
     }
     
     func setupScene() {
@@ -180,7 +182,7 @@ class GameViewController: UIViewController {
         gradientLayer.opacity = 0.5
         view.layer.insertSublayer(gradientLayer, at: 0)
         
-        simBarView = UIView(frame: CGRect(x: (view.frame.size.width/2) - 30, y: 718, width: 50, height: 10))
+        simBarView = UIView(frame: CGRect(x: (view.frame.size.width/2) - 20, y: 718, width: 40, height: 10))
         simBarView.backgroundColor = UIColor.black
         simBarView.layer.borderWidth = 2
         simBarView.layer.borderColor = UIColor.customWhite().cgColor
@@ -220,6 +222,7 @@ class GameViewController: UIViewController {
             
             if graphType == .sim {
                 self.countdownLabel.isHidden = false
+                self.timerBackgroundView.isHidden = false
                 self.simBarView.isHidden = false
                 self.countdownLabel.setCountDownTime(minutes: 60)
                 self.countdownLabel.start()
@@ -599,6 +602,7 @@ class GameViewController: UIViewController {
                                 }, completion: { (finished) in
                                     self.simBarView.isHidden = true
                                 })
+                                self.countdownLabel.countdownDelegate = nil
                             }
                             
                             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
@@ -728,6 +732,7 @@ class GameViewController: UIViewController {
         solved = false
         completedText.text = "ZONE CLEAR"
         countdownLabel.isHidden = true
+        timerBackgroundView.isHidden = true
         
         currentLevel += 1
         refreshColorsInCollectionView()
@@ -983,6 +988,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
 
 extension GameViewController: CountdownLabelDelegate {
     func countdownFinished() {
+        timerBackgroundView.backgroundColor = .red
+        countdownLabel.countdownDelegate = nil
         print("You lose")
     }
 }

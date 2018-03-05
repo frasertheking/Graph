@@ -15,4 +15,6 @@ Graph:
   ✔ Fix SIM bug where AI still makes move after player loses @done (18-02-18 15:32)
   ☐ Improve AI / Make multiple AI versions for SIM
   ☐ Add faded background to scene (similar to Alto)
-  ☐ Make light beams fade to the left
+  ✔ Make light beams fade to the left @done (18-03-04 17:47)
+  ✔ Add bar between node UI for sim @done (18-03-04 17:47)
+  ☐ Add UI for timer

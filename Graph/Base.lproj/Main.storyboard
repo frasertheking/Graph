@@ -262,21 +262,61 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fds-b0-QSW" customClass="CountdownLabel" customModule="CountdownLabel">
-                                <rect key="frame" x="150" y="38" width="76" height="39"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ct-nq-dMJ">
+                                <rect key="frame" x="153.5" y="75" width="80" height="44"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXf-da-bxj">
+                                        <rect key="frame" x="-18" y="0.0" width="44" height="44"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="Iz9-IU-NWQ">
+                                                <rect key="frame" x="10" y="10" width="24" height="24"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.97143840987471164" blue="0.98896751596352173" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Iz9-IU-NWQ" secondAttribute="bottom" constant="10" id="Cxf-bG-rTn"/>
+                                            <constraint firstAttribute="trailing" secondItem="Iz9-IU-NWQ" secondAttribute="trailing" constant="10" id="P1T-1s-XkH"/>
+                                            <constraint firstAttribute="height" constant="44" id="QpS-Vt-EbM"/>
+                                            <constraint firstAttribute="width" constant="44" id="c9K-Jv-2z5"/>
+                                            <constraint firstItem="Iz9-IU-NWQ" firstAttribute="leading" secondItem="UXf-da-bxj" secondAttribute="leading" constant="10" id="oas-sa-g37"/>
+                                            <constraint firstItem="Iz9-IU-NWQ" firstAttribute="top" secondItem="UXf-da-bxj" secondAttribute="top" constant="10" id="oi8-AO-J2J"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fds-b0-QSW" customClass="CountdownLabel" customModule="CountdownLabel">
+                                        <rect key="frame" x="34" y="2" width="40" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="UXf-da-bxj" firstAttribute="top" secondItem="8Ct-nq-dMJ" secondAttribute="top" id="9gq-aq-fyk"/>
+                                    <constraint firstItem="fds-b0-QSW" firstAttribute="centerY" secondItem="8Ct-nq-dMJ" secondAttribute="centerY" id="DSz-4v-1iM"/>
+                                    <constraint firstItem="fds-b0-QSW" firstAttribute="leading" secondItem="UXf-da-bxj" secondAttribute="trailing" constant="8" id="NVa-Yb-ydy"/>
+                                    <constraint firstAttribute="height" constant="44" id="Suy-dl-If7"/>
+                                    <constraint firstAttribute="width" constant="80" id="XRH-20-4Do"/>
+                                    <constraint firstAttribute="trailing" secondItem="fds-b0-QSW" secondAttribute="trailing" constant="6" id="n7y-ZH-FbU"/>
+                                    <constraint firstItem="UXf-da-bxj" firstAttribute="leading" secondItem="8Ct-nq-dMJ" secondAttribute="leading" constant="-18" id="tFT-Qz-h25"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fds-b0-QSW" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="1RK-1a-hTj"/>
                             <constraint firstItem="82e-M2-jU7" firstAttribute="leading" secondItem="zCJ-Dq-VgM" secondAttribute="trailing" constant="50" id="3Hd-An-950"/>
                             <constraint firstItem="k1x-2a-Zqn" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="7aU-sb-aP1"/>
                             <constraint firstItem="zCJ-Dq-VgM" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="63" id="90y-Zp-QDy"/>
                             <constraint firstAttribute="bottom" secondItem="UDE-42-eyU" secondAttribute="bottom" id="9DA-Of-8tY"/>
-                            <constraint firstItem="fds-b0-QSW" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="18" id="A5j-F1-ZPe"/>
                             <constraint firstAttribute="bottomMargin" secondItem="UUX-un-aJT" secondAttribute="bottom" constant="-100" id="EFa-0d-cvQ"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="UDE-42-eyU" secondAttribute="trailing" id="GKE-8f-Way"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="Idl-6u-hdf"/>
@@ -287,6 +327,7 @@
                             <constraint firstItem="D3R-0S-508" firstAttribute="bottom" secondItem="7q1-cd-kdY" secondAttribute="bottom" constant="-115" id="cN3-Vm-Fsb"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="cc3-z6-EuS"/>
                             <constraint firstItem="EGZ-SW-AI5" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="ek8-wK-YxR"/>
+                            <constraint firstItem="8Ct-nq-dMJ" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" constant="6" id="f0I-j7-bvw"/>
                             <constraint firstItem="EGZ-SW-AI5" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="20" id="f8D-9C-wVQ"/>
                             <constraint firstItem="82e-M2-jU7" firstAttribute="centerY" secondItem="zCJ-Dq-VgM" secondAttribute="centerY" id="fui-eo-GVS"/>
                             <constraint firstItem="UUX-un-aJT" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="g1P-dH-Wu6"/>
@@ -297,6 +338,7 @@
                             <constraint firstItem="2UE-dl-Ejm" firstAttribute="centerY" secondItem="82e-M2-jU7" secondAttribute="centerY" id="qOA-9u-Hhh"/>
                             <constraint firstItem="UDE-42-eyU" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="qaV-lE-gc0"/>
                             <constraint firstItem="7q1-cd-kdY" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" constant="24" id="tS8-jy-iU6"/>
+                            <constraint firstItem="8Ct-nq-dMJ" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" constant="75" id="uZI-Ab-MuJ"/>
                             <constraint firstItem="82e-M2-jU7" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="ugw-tP-SuJ"/>
                             <constraint firstAttribute="bottom" secondItem="vYt-dz-Sce" secondAttribute="bottom" id="yNr-9M-bfp"/>
                         </constraints>
@@ -313,6 +355,7 @@
                         <outlet property="scnView" destination="vYt-dz-Sce" id="fgv-wB-KRi"/>
                         <outlet property="skView" destination="UDE-42-eyU" id="98S-F5-Xv0"/>
                         <outlet property="spawnButton" destination="k1x-2a-Zqn" id="at1-Dw-dxp"/>
+                        <outlet property="timerBackgroundView" destination="8Ct-nq-dMJ" id="zIn-Bv-Rus"/>
                         <outlet property="xAxisButton" destination="zCJ-Dq-VgM" id="wwU-x1-NBf"/>
                         <outlet property="yAxisButton" destination="82e-M2-jU7" id="25x-LR-GI4"/>
                         <outlet property="zAxisButton" destination="2UE-dl-Ejm" id="Aaa-ig-a4X"/>
@@ -327,5 +370,6 @@
         <image name="background-1" width="2000" height="2000"/>
         <image name="foreground" width="2000" height="2000"/>
         <image name="lines" width="2000" height="2000"/>
+        <image name="timer" width="100" height="100"/>
     </resources>
 </document>
