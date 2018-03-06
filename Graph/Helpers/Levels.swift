@@ -45,11 +45,11 @@ class Levels: NSObject {
                     continue
                 }
                 
-                guard let x: Float = nodeDict["x"] as? Float, let y: Float = nodeDict["y"] as? Float, let z: Float = nodeDict["z"] as? Float, let uid: Int = nodeDict["uid"] as? Int else {
+                guard let x: Double = nodeDict["x"] as? Double, let y: Double = nodeDict["y"] as? Double, let z: Double = nodeDict["z"] as? Double, let uid: Int = nodeDict["uid"] as? Int else {
                     continue
                 }
                 
-                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: x, y: y, z: z), uid: uid, color: .white))
+                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: Float(x), y: Float(y), z: Float(z)), uid: uid, color: .white))
                 vertexBin.append(newNode)
             }
                         

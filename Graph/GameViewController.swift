@@ -43,7 +43,6 @@ class GameViewController: UIViewController {
     var lightLayerBack: CALayer!
     var straylightViewBack: UIView!
     var simPlayerColor: UIColor = .red
-    var simBarView: UIView!
     
     // DEBUG
     var debug = false
@@ -66,6 +65,7 @@ class GameViewController: UIViewController {
     @IBOutlet var completedViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var countdownLabel: CountdownLabel!
     @IBOutlet var timerBackgroundView: UIView!
+    @IBOutlet var simBarView: UIView!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -181,13 +181,10 @@ class GameViewController: UIViewController {
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         gradientLayer.opacity = 0.5
         view.layer.insertSublayer(gradientLayer, at: 0)
-        
-        simBarView = UIView(frame: CGRect(x: (view.frame.size.width/2) - 20, y: 718, width: 40, height: 10))
+
         simBarView.backgroundColor = UIColor.black
         simBarView.layer.borderWidth = 2
         simBarView.layer.borderColor = UIColor.customWhite().cgColor
-        view.addSubview(simBarView)
-        view.bringSubview(toFront: paintColorCollectionView)
         simBarView.isHidden = true
     }
     
@@ -224,7 +221,7 @@ class GameViewController: UIViewController {
                 self.countdownLabel.isHidden = false
                 self.timerBackgroundView.isHidden = false
                 self.simBarView.isHidden = false
-                self.countdownLabel.setCountDownTime(minutes: 60)
+                self.countdownLabel.setCountDownTime(minutes: 59)
                 self.countdownLabel.start()
             }
         }
@@ -602,6 +599,8 @@ class GameViewController: UIViewController {
                                 }, completion: { (finished) in
                                     self.simBarView.isHidden = true
                                 })
+                                self.timerBackgroundView.isHidden = true
+                                self.countdownLabel.cancel()
                                 self.countdownLabel.countdownDelegate = nil
                             }
                             
@@ -659,7 +658,7 @@ class GameViewController: UIViewController {
             self.selectedColorIndex = 0
             self.paintColor = kColors[0]
             self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
-            
+
             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
@@ -836,9 +835,9 @@ class GameViewController: UIViewController {
 
 // Draw Loop
 extension GameViewController: SCNSceneRendererDelegate {
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-
-    }
+//    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+//
+//    }
 }
 
 // UICollectionView / UI Elements
@@ -988,6 +987,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
 
 extension GameViewController: CountdownLabelDelegate {
     func countdownFinished() {
+        countdownLabel.cancel()
         timerBackgroundView.backgroundColor = .red
         countdownLabel.countdownDelegate = nil
         print("You lose")
