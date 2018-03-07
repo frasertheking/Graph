@@ -508,7 +508,9 @@ class GameViewController: UIViewController {
                             selectedColorIndex = 0
                             pathArray.removeAll()
                             paintColorCollectionView.reloadData()
+                            simBarView.applyGradient(withColours: [.black, .black])
                             GraphAnimation.addShake(to: paintColorCollectionView)
+                            GraphAnimation.addShake(to: simBarView)
                             return
                         } else {
                             GraphAnimation.addExplode(to: paintColorCollectionView)
@@ -561,56 +563,64 @@ class GameViewController: UIViewController {
         
         if let list = activeLevel?.adjacencyList {
             if list.checkIfSolved(forType: graphType, edgeArray: edgeArray, edgeNodes: edgeNodes) {
-                if ((graphType == .hamiltonian) && firstStep == currentStep) || !(graphType == .hamiltonian) {
-                    
-                    solved = true
-                    self.scnView.isUserInteractionEnabled = false
-                    
-                    for node in vertexNodes.childNodes {
-                        if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
-                            node.removeAllParticleSystems()
-                            node.addParticleSystem(explosion)
-                        }
-                    }
-                    
-                    for node in edgeNodes.childNodes {
-                        if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
-                            node.removeAllParticleSystems()
-                            node.addParticleSystem(explosion)
-                        }
-                    }
-                    
-                    completedCheckmark.setCheckState(.checked, animated: true)
-                    scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
-                    scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
-                    
-                    GraphAnimation.delayWithSeconds(0.5, completion: {
-                        GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
-                        GraphAnimation.delayWithSeconds(0.5, completion: {
-                            GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
-                            self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
-                            self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
-                            
-                            if graphType != .sim {
-                                self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
-                            } else {
-                                UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
-                                    self.simBarView.alpha = 0
-                                }, completion: { (finished) in
-                                    self.simBarView.isHidden = true
-                                })
-                                self.timerBackgroundView.isHidden = true
-                                self.countdownLabel.cancel()
-                                self.countdownLabel.countdownDelegate = nil
-                            }
-                            
-                            UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
-                                self.view.layoutIfNeeded()
-                            })
-                        })
-                    })
+                endLevel()
+            }
+        }
+    }
+    
+    func endLevel() {
+        guard let graphType: GraphType = activeLevel?.graphType else {
+            return
+        }
+        
+        if ((graphType == .hamiltonian) && firstStep == currentStep) || !(graphType == .hamiltonian) {
+            
+            solved = true
+            self.scnView.isUserInteractionEnabled = false
+            
+            for node in vertexNodes.childNodes {
+                if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
+                    node.removeAllParticleSystems()
+                    node.addParticleSystem(explosion)
                 }
             }
+            
+            for node in edgeNodes.childNodes {
+                if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
+                    node.removeAllParticleSystems()
+                    node.addParticleSystem(explosion)
+                }
+            }
+            
+            completedCheckmark.setCheckState(.checked, animated: true)
+            scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
+            scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
+            
+            GraphAnimation.delayWithSeconds(0.5, completion: {
+                GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+                GraphAnimation.delayWithSeconds(0.5, completion: {
+                    GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
+                    self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
+                    self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
+                    
+                    if graphType != .sim {
+                        self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                    } else {
+                        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
+                            self.simBarView.alpha = 0
+                        }, completion: { (finished) in
+                            self.simBarView.isHidden = true
+                        })
+                        self.timerBackgroundView.isHidden = true
+                        self.countdownLabel.cancel()
+                        self.countdownLabel.countdownDelegate = nil
+                    }
+                    
+                    UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
+                        self.view.layoutIfNeeded()
+                    })
+                })
+            })
         }
     }
     
@@ -990,6 +1000,7 @@ extension GameViewController: CountdownLabelDelegate {
         countdownLabel.cancel()
         timerBackgroundView.backgroundColor = .red
         countdownLabel.countdownDelegate = nil
-        print("You lose")
+        completedText.text = "TIMES UP"
+        endLevel()
     }
 }
