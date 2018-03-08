@@ -255,7 +255,7 @@ extension AdjacencyList: Graphable {
                 if neighbours.contains("\(key.data.uid)") {
                     vertexNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.goldColor()
                 } else if vertexNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents as! UIColor != UIColor.red {
-                    vertexNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                    vertexNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
                 }
                 pos += 1
             }
@@ -400,7 +400,7 @@ extension AdjacencyList: Graphable {
             var pos = 0
             for edgeNode in edgeArray {
                 if intersectingEdges.contains(edgeNode) {
-                    edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.black
+                    edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
                 } else {
                     edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
                     edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
@@ -435,9 +435,9 @@ extension AdjacencyList: Graphable {
                                 edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
                             }
                         } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) &&
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents as! UIColor == UIColor.black {
-                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
-                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
+                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents as! UIColor == UIColor.clear {
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.clear
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.clear
                         }
                         pos += 1
                     }

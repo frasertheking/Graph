@@ -348,9 +348,18 @@ class GameViewController: UIViewController {
     func createObjects() {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
+        var edgeColor = UIColor.defaultVertexColor()
         
         guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
             return
+        }
+        
+        guard let graphType: GraphType = activeLevel?.graphType else {
+            return
+        }
+        
+        if graphType == .sim {
+            edgeColor = .clear
         }
         
         edgeArray = []
@@ -363,7 +372,7 @@ class GameViewController: UIViewController {
             for edge in value {
                 if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
                     let node = SCNNode()
-                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: .defaultVertexColor()))
+                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: edgeColor))
                     
                     edgeArray.append(edge)
                 }
@@ -372,10 +381,6 @@ class GameViewController: UIViewController {
         
         scnScene.rootNode.addChildNode(vertexNodes)
         scnScene.rootNode.addChildNode(edgeNodes)
-        
-        guard let graphType: GraphType = activeLevel?.graphType else {
-            return
-        }
         
         if graphType == .planar {
             activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
@@ -879,7 +884,7 @@ extension GameViewController: UICollectionViewDataSource {
             if simPlayerNodeCount > indexPath.row {
                 cell.backgroundColor = simPlayerColor
             } else {
-                cell.backgroundColor = .black
+                cell.backgroundColor = UIColor.defaultVertexColor()
             }
         } else if graphType == .hamiltonian {
             cell.backgroundColor = walkColor
