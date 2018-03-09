@@ -3,6 +3,8 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>3</integer>
 		<key>num_colors</key>
@@ -106,6 +108,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<true/>
 		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
@@ -174,6 +178,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
@@ -270,6 +276,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
@@ -423,6 +431,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
@@ -647,6 +657,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>1</integer>
 		<key>num_colors</key>
@@ -715,6 +727,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>1</integer>
 		<key>num_colors</key>
@@ -841,6 +855,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>1</integer>
 		<key>num_colors</key>
@@ -1141,6 +1157,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>1</integer>
 		<key>num_colors</key>
@@ -1323,6 +1341,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>0</integer>
 		<key>num_colors</key>
@@ -1346,6 +1366,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>0</integer>
 		<key>num_colors</key>
@@ -1383,6 +1405,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>0</integer>
 		<key>num_colors</key>
@@ -1435,6 +1459,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>0</integer>
 		<key>num_colors</key>
@@ -1558,6 +1584,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>0</integer>
 		<key>num_colors</key>
@@ -1713,6 +1741,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>0</integer>
 		<key>num_colors</key>
@@ -1895,6 +1925,8 @@
 		</array>
 	</dict>
 	<dict>
+		<key>timed</key>
+		<false/>
 		<key>graph_type</key>
 		<integer>0</integer>
 		<key>num_colors</key>

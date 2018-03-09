@@ -210,6 +210,11 @@ class GameViewController: UIViewController {
             guard let graphType = self.activeLevel?.graphType else {
                 return
             }
+            
+            guard let timedLevel = self.activeLevel?.timed else {
+                return
+            }
+
 
             if graphType != .planar {
                 GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
@@ -217,7 +222,7 @@ class GameViewController: UIViewController {
             self.simBarView.alpha = 0
             self.simBarView.isHidden = true
             
-            if graphType == .sim {
+            if timedLevel {
                 self.countdownLabel.isHidden = false
                 self.timerBackgroundView.isHidden = false
                 self.simBarView.isHidden = false

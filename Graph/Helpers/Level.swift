@@ -13,12 +13,14 @@ class Level: NSObject {
     var name: String?
     var numberOfColorsProvided: Int?
     var graphType: GraphType?
+    var timed: Bool?
     var adjacencyList: AdjacencyList<Node>?
     
-    init(name: String?, numberOfColorsProvided: Int?, graphType: GraphType?, adjacencyList: AdjacencyList<Node>?) {
+    init(name: String?, numberOfColorsProvided: Int?, graphType: GraphType?, timed: Bool?, adjacencyList: AdjacencyList<Node>?) {
         self.name = name
         self.numberOfColorsProvided = numberOfColorsProvided
         self.graphType = graphType
+        self.timed = timed
         self.adjacencyList = adjacencyList
     }
 }
