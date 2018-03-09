@@ -583,6 +583,10 @@ class GameViewController: UIViewController {
             return
         }
         
+        guard let timedLevel: Bool = activeLevel?.timed else {
+            return
+        }
+        
         if ((graphType == .hamiltonian) && firstStep == currentStep) || !(graphType == .hamiltonian) {
             
             solved = true
@@ -621,6 +625,9 @@ class GameViewController: UIViewController {
                         }, completion: { (finished) in
                             self.simBarView.isHidden = true
                         })
+                    }
+                    
+                    if timedLevel {
                         self.timerBackgroundView.isHidden = true
                         self.countdownLabel.cancel()
                         self.countdownLabel.countdownDelegate = nil
