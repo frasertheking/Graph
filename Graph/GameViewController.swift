@@ -214,18 +214,21 @@ class GameViewController: UIViewController {
             guard let timedLevel = self.activeLevel?.timed else {
                 return
             }
-
-
+            
+            self.simBarView.alpha = 0
+            self.simBarView.isHidden = true
+            
             if graphType != .planar {
                 GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             }
-            self.simBarView.alpha = 0
-            self.simBarView.isHidden = true
+            
+            if graphType == .sim {
+                self.simBarView.isHidden = false
+            }
             
             if timedLevel {
                 self.countdownLabel.isHidden = false
                 self.timerBackgroundView.isHidden = false
-                self.simBarView.isHidden = false
                 self.countdownLabel.setCountDownTime(minutes: 59)
                 self.countdownLabel.start()
             }
