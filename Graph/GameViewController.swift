@@ -762,6 +762,7 @@ class GameViewController: UIViewController {
         completedText.text = "ZONE CLEAR"
         countdownLabel.isHidden = true
         timerBackgroundView.isHidden = true
+        simPlayerNodeCount = 0
         
         currentLevel += 1
         refreshColorsInCollectionView()
