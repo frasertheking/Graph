@@ -49,7 +49,12 @@ class Levels: NSObject {
                     continue
                 }
                 
-                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: Float(x), y: Float(y), z: Float(z)), uid: uid, color: .white))
+                var scaleFactor: Float = 1
+                if levelDict["name"] as? String == "Icosian" {
+                    scaleFactor = 3
+                }
+                
+                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: scaleFactor*Float(x), y: scaleFactor*Float(y), z: scaleFactor*Float(z)), uid: uid, color: .white))
                 vertexBin.append(newNode)
             }
                         
