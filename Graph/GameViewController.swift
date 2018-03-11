@@ -821,6 +821,13 @@ class GameViewController: UIViewController {
         debugNodes.addChildNode(selectedNode)
     }
     
+    @IBAction func printLevel() {
+        let children = scnScene.rootNode.childNodes[1]
+        for child in children.childNodes {
+            print(child.position)
+        }
+    }
+    
     @IBAction func nextLevel() {
         GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
         self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
