@@ -4,6 +4,76 @@
 <array>
 	<dict>
 		<key>timed</key>
+		<true/>
+		<key>graph_type</key>
+		<integer>2</integer>
+		<key>num_colors</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>Planar</string>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<real>-3.2</real>
+				<key>y</key>
+				<real>3.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>3</integer>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<real>-3.2</real>
+				<key>y</key>
+				<real>-3.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<real>3.4</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
 		<false/>
 		<key>graph_type</key>
 		<integer>3</integer>
@@ -19,7 +89,7 @@
 				<key>x</key>
 				<integer>-3</integer>
 				<key>y</key>
-				<integer>-3</integer>
+				<integer>0</integer>
 				<key>z</key>
 				<integer>-3</integer>
 				<key>edges</key>
@@ -37,7 +107,7 @@
 				<key>x</key>
 				<integer>-3</integer>
 				<key>y</key>
-				<integer>-3</integer>
+				<integer>0</integer>
 				<key>z</key>
 				<integer>3</integer>
 				<key>edges</key>
@@ -54,7 +124,7 @@
 				<key>x</key>
 				<integer>3</integer>
 				<key>y</key>
-				<integer>-3</integer>
+				<integer>0</integer>
 				<key>z</key>
 				<integer>-3</integer>
 				<key>edges</key>
@@ -70,7 +140,7 @@
 				<key>x</key>
 				<integer>3</integer>
 				<key>y</key>
-				<integer>-3</integer>
+				<integer>0</integer>
 				<key>z</key>
 				<integer>3</integer>
 				<key>edges</key>
@@ -85,7 +155,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>3</integer>
+				<integer>6</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -99,7 +169,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>-3</integer>
+				<integer>-6</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -312,76 +382,6 @@
 				<real>-4.1</real>
 				<key>z</key>
 				<real>-0.5</real>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<true/>
-		<key>graph_type</key>
-		<integer>2</integer>
-		<key>num_colors</key>
-		<integer>1</integer>
-		<key>name</key>
-		<string>Planar</string>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>3</integer>
-				<key>y</key>
-				<integer>3</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<real>-3.2</real>
-				<key>y</key>
-				<real>3.4</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>3</integer>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<real>-3.2</real>
-				<key>y</key>
-				<real>-3.4</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<real>3.4</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
 				<key>edges</key>
 				<array/>
 			</dict>

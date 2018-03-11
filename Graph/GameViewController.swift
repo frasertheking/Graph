@@ -756,6 +756,7 @@ class GameViewController: UIViewController {
         edgeNodes.removeFromParentNode()
         pathArray.removeAll()
         simArray.removeAll()
+        simPath.removeAll()
         currentStep = ""
         firstStep = ""
         solved = false
@@ -763,6 +764,7 @@ class GameViewController: UIViewController {
         countdownLabel.isHidden = true
         timerBackgroundView.isHidden = true
         simPlayerNodeCount = 0
+        simBarView.applyGradient(withColours: [.black, .black])
         
         currentLevel += 1
         refreshColorsInCollectionView()
