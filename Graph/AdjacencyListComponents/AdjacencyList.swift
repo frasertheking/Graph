@@ -502,27 +502,45 @@ extension AdjacencyList: Graphable {
     }
     
     func doEdgesIntersect(edge1: Edge<Node>, edge2: Edge<Node>) -> Bool {
-        let edge1Start: CGPoint = CGPoint(x: CGFloat(edge1.source.data.position.x), y: CGFloat(edge1.source.data.position.y)) // A
-        let edge1End: CGPoint = CGPoint(x: CGFloat(edge1.destination.data.position.x), y: CGFloat(edge1.destination.data.position.y)) // B
-        let edge2Start: CGPoint = CGPoint(x: CGFloat(edge2.source.data.position.x), y: CGFloat(edge2.source.data.position.y)) // C
-        let edge2End: CGPoint = CGPoint(x: CGFloat(edge2.destination.data.position.x), y: CGFloat(edge2.destination.data.position.y)) // D
+        let edge1StartXY: CGPoint = CGPoint(x: CGFloat(edge1.source.data.position.x), y: CGFloat(edge1.source.data.position.y)) // A
+        let edge1EndXY: CGPoint = CGPoint(x: CGFloat(edge1.destination.data.position.x), y: CGFloat(edge1.destination.data.position.y)) // B
+        let edge2StartXY: CGPoint = CGPoint(x: CGFloat(edge2.source.data.position.x), y: CGFloat(edge2.source.data.position.y)) // C
+        let edge2EndXY: CGPoint = CGPoint(x: CGFloat(edge2.destination.data.position.x), y: CGFloat(edge2.destination.data.position.y)) // D
+        let checkEdgeXY = checkIntersection(edge1Start: edge1StartXY, edge1End: edge1EndXY, edge2Start: edge2StartXY, edge2End: edge2EndXY, edge1: edge1, edge2: edge2)
         
+        let edge1StartZY: CGPoint = CGPoint(x: CGFloat(edge1.source.data.position.z), y: CGFloat(edge1.source.data.position.y)) // A
+        let edge1EndZY: CGPoint = CGPoint(x: CGFloat(edge1.destination.data.position.z), y: CGFloat(edge1.destination.data.position.y)) // B
+        let edge2StartZY: CGPoint = CGPoint(x: CGFloat(edge2.source.data.position.z), y: CGFloat(edge2.source.data.position.y)) // C
+        let edge2EndZY: CGPoint = CGPoint(x: CGFloat(edge2.destination.data.position.z), y: CGFloat(edge2.destination.data.position.y)) // D
+        let checkEdgeZY = checkIntersection(edge1Start: edge1StartZY, edge1End: edge1EndZY, edge2Start: edge2StartZY, edge2End: edge2EndZY, edge1: edge1, edge2: edge2)
+       
+        let edge1StartXZ: CGPoint = CGPoint(x: CGFloat(edge1.source.data.position.x), y: CGFloat(edge1.source.data.position.z)) // A
+        let edge1EndXZ: CGPoint = CGPoint(x: CGFloat(edge1.destination.data.position.x), y: CGFloat(edge1.destination.data.position.z)) // B
+        let edge2StartXZ: CGPoint = CGPoint(x: CGFloat(edge2.source.data.position.x), y: CGFloat(edge2.source.data.position.z)) // C
+        let edge2EndXZ: CGPoint = CGPoint(x: CGFloat(edge2.destination.data.position.x), y: CGFloat(edge2.destination.data.position.z)) // D
+        let checkEdgeXZ = checkIntersection(edge1Start: edge1StartXZ, edge1End: edge1EndXZ, edge2Start: edge2StartXZ, edge2End: edge2EndXZ, edge1: edge1, edge2: edge2)
+        
+        return checkEdgeXY || checkEdgeZY || checkEdgeXZ
+    }
+
+    func checkIntersection(edge1Start: CGPoint, edge1End: CGPoint, edge2Start: CGPoint, edge2End: CGPoint, edge1: Edge<Node>, edge2: Edge<Node>) -> Bool {
         let distance = (edge1End.x - edge1Start.x) * (edge2End.y - edge2Start.y) - (edge1End.y - edge1Start.y) * (edge2End.x - edge2Start.x)
         
         if distance == 0 && edge1.source != edge2.destination && edge1.destination != edge2.source  {
             return false
         }
-
+        
         let u = ((edge2Start.x - edge1Start.x) * (edge2End.y - edge2Start.y) - (edge2Start.y - edge1Start.y) * (edge2End.x - edge2Start.x)) / distance
         let v = ((edge2Start.x - edge1Start.x) * (edge1End.y - edge1Start.y) - (edge2Start.y - edge1Start.y) * (edge1End.x - edge1Start.x)) / distance
-
+        
         if (u <= 0.0 || u >= 1.0) {
             return false
         }
         if (v <= 0.0 || v >= 1.0) {
             return false
         }
-    
+        
         return true
     }
+
 }

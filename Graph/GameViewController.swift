@@ -753,8 +753,6 @@ class GameViewController: UIViewController {
             }
             
             let translation = gestureRecognize.translation(in: recognizerView)
-           
-            
             var position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 75), y:selectedNode.position.y - Float(translation.y / 75), z:selectedNode.position.z)
             
             if planar_x_active {
