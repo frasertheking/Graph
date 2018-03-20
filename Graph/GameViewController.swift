@@ -43,6 +43,8 @@ class GameViewController: UIViewController {
     var lightLayerBack: CALayer!
     var straylightViewBack: UIView!
     var simPlayerColor: UIColor = .red
+    var planar_x_active: Bool = false
+    var planar_y_active: Bool = false
     
     // DEBUG
     var debug = false
@@ -78,6 +80,7 @@ class GameViewController: UIViewController {
         static let kScaleShrink: CGFloat = 0.8
         static let kScaleGrow: CGFloat = 1.25
         static let kPanTranslationScaleFactor: CGFloat = 100
+        static let kPlanarMaxMagnitude: Float = 7
         
         // Timing Constants
         static let kVeryShortTimeDelay: Double = 0.1
@@ -220,6 +223,9 @@ class GameViewController: UIViewController {
             
             if graphType != .planar {
                 GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+            } else {
+                self.selectedColorIndex = -1
+                self.paintColorCollectionView.reloadData()
             }
             
             if graphType == .sim {
@@ -434,6 +440,9 @@ class GameViewController: UIViewController {
                     return
                 }
             case .planar:
+                scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
+                scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
+                
                 activeColor = UIColor.red
                 for node in vertexNodes.childNodes {
                     node.geometry?.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
@@ -444,9 +453,6 @@ class GameViewController: UIViewController {
                     selectedNode = nil
                     axisPanGestureRecognizer?.isEnabled = false
                 } else {
-                    scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
-                    scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
-                    
                     selectedNode = node
                     
                     guard let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: selectedNode.geometry?.name) else {
@@ -679,6 +685,40 @@ class GameViewController: UIViewController {
         }
     }
     
+    func updatePlanarAxis(axis: Int) -> Bool {
+        if axis == 0 && !planar_y_active && !planar_x_active {
+            runCustomAction(x: 0, y: 1.57)
+            planar_x_active = true
+        } else if axis == 1 && !planar_x_active && !planar_y_active {
+            runCustomAction(x: -1.57, y: 0)
+            planar_y_active = true
+        } else if axis == 0 && planar_x_active {
+            runCustomAction(x: 0, y: -1.57)
+            planar_x_active = false
+        } else if axis == 1 && planar_y_active {
+            runCustomAction(x: 1.57, y: 0)
+            planar_y_active = false
+        }
+        
+        if (axis == 0 && planar_y_active) || (axis == 1 && planar_x_active) { // Fail to update axis
+            return false
+        }
+        
+        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
+        scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
+        return true
+    }
+    
+    func runCustomAction(x: CGFloat, y: CGFloat) {
+        scnView.isUserInteractionEnabled = false
+        scnScene.rootNode.childNodes[1].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: 0.5)), completionHandler: {
+            DispatchQueue.main.async {
+                self.scnView.isUserInteractionEnabled = true
+            }
+        })
+        scnScene.rootNode.childNodes[2].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: 0.5)))
+    }
+    
     @objc func refreshColorsInCollectionView() {
         collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 1.35, options: .curveEaseInOut, animations: {
@@ -713,21 +753,34 @@ class GameViewController: UIViewController {
             }
             
             let translation = gestureRecognize.translation(in: recognizerView)
+           
             
-            let position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 75), y:selectedNode.position.y - Float(translation.y / 75), z:selectedNode.position.z)
+            var position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 75), y:selectedNode.position.y - Float(translation.y / 75), z:selectedNode.position.z)
+            
+            if planar_x_active {
+                position = SCNVector3(x:selectedNode.position.x, y:selectedNode.position.y - Float(translation.y / 75), z:selectedNode.position.z + Float(translation.x / 75))
+            } else if planar_y_active {
+                position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 75), y:selectedNode.position.y, z:selectedNode.position.z - Float(translation.y / 75))
+            }
+            
+            if abs(position.x) > GameConstants.kPlanarMaxMagnitude || abs(position.y) > GameConstants.kPlanarMaxMagnitude || abs(position.z) > GameConstants.kPlanarMaxMagnitude {
+                return
+            }
+            
             selectedNode.position = position
             
             gestureRecognize.setTranslation(CGPoint.zero, in: recognizerView)
             
             activeLevel?.adjacencyList?.updateNodePosition(id: selectedNode.geometry?.name, newPosition: position)
             
-            guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
-                return
-            }
-            
+            // @CLEANUP Move this to the .ended?
             edgeNodes.removeFromParentNode()
             edgeNodes = SCNNode()
             edgeArray.removeAll()
+            
+            guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
+                return
+            }
             
             for (_, value) in adjacencyDict {
                 
@@ -742,8 +795,14 @@ class GameViewController: UIViewController {
                 }
             }
             
+            if planar_x_active {
+                edgeNodes.pivot = SCNMatrix4MakeRotation(-Float(Double.pi)/2, 0, 1, 0)
+            } else if planar_y_active {
+                edgeNodes.pivot = SCNMatrix4MakeRotation(Float(Double.pi)/2, 1, 0, 0)
+            }
+            
             scnScene.rootNode.addChildNode(edgeNodes)
-
+            
         } else if gestureRecognize.state == .ended {
             activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
             checkIfSolved()
@@ -903,8 +962,9 @@ extension GameViewController: UICollectionViewDataSource {
         }
         
         cell.checkbox.isHidden = (graphType == .hamiltonian || graphType == .planar || graphType == .sim) ? true : false
-        cell.palletImage.isHidden = (graphType == .hamiltonian || graphType == .planar || graphType == .sim) ? false : true
-        
+        cell.palletImage.isHidden = (graphType == .hamiltonian || graphType == .sim) ? false : true
+        cell.label.isHidden = (graphType == .hamiltonian || graphType == .kColor || graphType == .sim) ? true : false
+
         if graphType == .sim {
             if simPlayerNodeCount > indexPath.row {
                 cell.backgroundColor = simPlayerColor
@@ -927,6 +987,17 @@ extension GameViewController: UICollectionViewDataSource {
             cell.palletImage.image = UIImage(named: "undo")
         } else if graphType == .sim {
             cell.palletImage.image = UIImage(named: "node")
+        }
+        
+        if graphType == .planar {
+            switch indexPath.row {
+            case 0:
+                cell.label.text = "X"
+            case 1:
+                cell.label.text = "Y"
+            default:
+                cell.label.text = "Z"
+            }
         }
         
         cell.palletImage.image = cell.palletImage.image?.withRenderingMode(.alwaysTemplate)
@@ -1012,7 +1083,19 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                     break
                 }
             }
-        } else if graphType == .planar || graphType == .sim {
+        } else if graphType == .planar {
+            let success = updatePlanarAxis(axis: indexPath.row)
+            
+            if success {
+                selectedColorIndex = indexPath.row
+                
+                if !planar_x_active && !planar_y_active {
+                    selectedColorIndex = -1
+                }
+                
+                paintColorCollectionView.reloadData()
+            }
+        } else if graphType == .sim {
             return
         } else {
             if let color = cell.backgroundColor {

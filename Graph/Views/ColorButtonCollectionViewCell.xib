@@ -15,6 +15,12 @@
             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyd-oV-bmz">
+                    <rect key="frame" x="8" y="8" width="44" height="44"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undo" translatesAutoresizingMaskIntoConstraints="NO" id="fXh-uo-GSx">
                     <rect key="frame" x="15" y="15" width="30" height="30"/>
                     <constraints>
@@ -33,15 +39,20 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="iyd-oV-bmz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="4ao-LZ-VVA"/>
                 <constraint firstItem="Jza-E3-SqH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Bng-gr-Jjd"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="iyd-oV-bmz" secondAttribute="bottom" constant="8" id="Jp2-vI-UNr"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="iyd-oV-bmz" secondAttribute="trailing" constant="8" id="Loi-I8-Pje"/>
                 <constraint firstItem="Jza-E3-SqH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OZK-um-HF6"/>
                 <constraint firstItem="fXh-uo-GSx" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Pgb-d2-uWK"/>
                 <constraint firstItem="fXh-uo-GSx" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aDv-6l-iJf"/>
+                <constraint firstItem="iyd-oV-bmz" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="nAz-Vo-Dub"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="checkbox" destination="Jza-E3-SqH" id="bMj-e6-IVt"/>
+                <outlet property="label" destination="iyd-oV-bmz" id="OnF-x2-3Uw"/>
                 <outlet property="palletImage" destination="fXh-uo-GSx" id="buO-Rr-iiy"/>
             </connections>
             <point key="canvasLocation" x="-124" y="-250"/>

@@ -16,6 +16,13 @@ public enum GraphType: Int {
     case sim
 }
 
+public enum axis: Int {
+    case x = 0
+    case y
+    case z
+}
+
+
 open class AdjacencyList<T: Hashable> {
     public var adjacencyDict : [Vertex<T>: [Edge<T>]] = [:]
     public init() {}

@@ -52,6 +52,11 @@ extension SCNVector3 {
         
         return SCNVector3( self.x / length, self.y / length, self.z / length)
     }
+    
+//    func rotate(vector: SCNVector4, angle: Float) -> SCNVector3 {
+//        let rotationMatrix = SCNMatrix4MakeRotation(angle, 1, 0, 0)
+//        return vector * rotationMatrix
+//    }
 }
 
 // MARK: Int Extension
