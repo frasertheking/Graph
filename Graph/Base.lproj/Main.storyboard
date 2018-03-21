@@ -198,7 +198,7 @@
                                     <constraint firstAttribute="width" constant="100" id="g3C-hQ-JN1"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="printLevel" destination="EcQ-vt-J7h" eventType="touchUpInside" id="tfg-0M-R1y"/>
+                                    <action selector="nextLevel" destination="EcQ-vt-J7h" eventType="touchUpInside" id="f7b-6p-ZBl"/>
                                 </connections>
                             </button>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UUX-un-aJT">
@@ -216,7 +216,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2v8-hj-9jg">
                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="66"/>
                                                         <connections>
-                                                            <action selector="nextLevel" destination="EcQ-vt-J7h" eventType="touchUpInside" id="ipC-FA-peO"/>
+                                                            <action selector="nextLevel" destination="EcQ-vt-J7h" eventType="touchUpInside" id="ki5-DK-vNy"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZONE CLEAR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ge-cL-CJY">

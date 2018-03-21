@@ -592,62 +592,94 @@ class GameViewController: UIViewController {
             return
         }
         
+        if ((graphType == .hamiltonian) && firstStep == currentStep) || !(graphType == .hamiltonian) {
+            
+            var planarReset: Bool = false
+            
+            if graphType == .planar {
+                if planar_x_active {
+                    runCustomAction(x: 0, y: -1.57, duration: 0.2)
+                    planarReset = true
+                } else if planar_y_active {
+                    planarReset = true
+                    runCustomAction(x: 1.57, y: 0, duration: 0.2)
+                }
+                
+                planar_y_active = false
+                planar_x_active = false
+            }
+            
+            if planarReset {
+                GraphAnimation.delayWithSeconds(0.2, completion: {
+                    self.executeLevelFinished()
+                })
+            } else {
+                executeLevelFinished()
+            }
+            
+        }
+            
+    }
+        
+    func executeLevelFinished() {
+        guard let graphType: GraphType = activeLevel?.graphType else {
+            return
+        }
+        
         guard let timedLevel: Bool = activeLevel?.timed else {
             return
         }
         
-        if ((graphType == .hamiltonian) && firstStep == currentStep) || !(graphType == .hamiltonian) {
-            
-            solved = true
-            self.scnView.isUserInteractionEnabled = false
-            
-            for node in vertexNodes.childNodes {
-                if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
-                    node.removeAllParticleSystems()
-                    node.addParticleSystem(explosion)
-                }
+        solved = true
+        self.scnView.isUserInteractionEnabled = false
+        
+        for node in vertexNodes.childNodes {
+            if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
+                node.removeAllParticleSystems()
+                node.addParticleSystem(explosion)
             }
-            
-            for node in edgeNodes.childNodes {
-                if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
-                    node.removeAllParticleSystems()
-                    node.addParticleSystem(explosion)
-                }
+        }
+        
+        for node in edgeNodes.childNodes {
+            if let explosion = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
+                node.removeAllParticleSystems()
+                node.addParticleSystem(explosion)
             }
-            
-            completedCheckmark.setCheckState(.checked, animated: true)
-            scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
-            scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
-            
+        }
+        
+        redrawEdges()
+        completedCheckmark.setCheckState(.checked, animated: true)
+        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
+        scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
+        
+        GraphAnimation.delayWithSeconds(0.5, completion: {
+            GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             GraphAnimation.delayWithSeconds(0.5, completion: {
-                GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
-                GraphAnimation.delayWithSeconds(0.5, completion: {
-                    GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
-                    self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
-                    self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
-                    
-                    if graphType != .sim {
-                        self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
-                    } else {
-                        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
-                            self.simBarView.alpha = 0
-                        }, completion: { (finished) in
-                            self.simBarView.isHidden = true
-                        })
-                    }
-                    
-                    if timedLevel {
-                        self.timerBackgroundView.isHidden = true
-                        self.countdownLabel.cancel()
-                        self.countdownLabel.countdownDelegate = nil
-                    }
-                    
-                    UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
-                        self.view.layoutIfNeeded()
+                GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
+                self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
+                self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
+                
+                if graphType != .sim {
+                    self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                } else {
+                    UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
+                        self.simBarView.alpha = 0
+                    }, completion: { (finished) in
+                        self.simBarView.isHidden = true
                     })
+                }
+                
+                if timedLevel {
+                    self.timerBackgroundView.isHidden = true
+                    self.countdownLabel.cancel()
+                    self.countdownLabel.countdownDelegate = nil
+                }
+                
+                UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
+                    self.view.layoutIfNeeded()
                 })
             })
-        }
+        })
     }
     
     func selectNode(node: SCNNode, graphType: GraphType, activeColor: UIColor) {
@@ -687,16 +719,16 @@ class GameViewController: UIViewController {
     
     func updatePlanarAxis(axis: Int) -> Bool {
         if axis == 0 && !planar_y_active && !planar_x_active {
-            runCustomAction(x: 0, y: 1.57)
+            runCustomAction(x: 0, y: 1.57, duration: 0.5)
             planar_x_active = true
         } else if axis == 1 && !planar_x_active && !planar_y_active {
-            runCustomAction(x: -1.57, y: 0)
+            runCustomAction(x: -1.57, y: 0, duration: 0.5)
             planar_y_active = true
         } else if axis == 0 && planar_x_active {
-            runCustomAction(x: 0, y: -1.57)
+            runCustomAction(x: 0, y: -1.57, duration: 0.5)
             planar_x_active = false
         } else if axis == 1 && planar_y_active {
-            runCustomAction(x: 1.57, y: 0)
+            runCustomAction(x: 1.57, y: 0, duration: 0.5)
             planar_y_active = false
         }
         
@@ -709,14 +741,16 @@ class GameViewController: UIViewController {
         return true
     }
     
-    func runCustomAction(x: CGFloat, y: CGFloat) {
+    func runCustomAction(x: CGFloat, y: CGFloat, duration: TimeInterval) {
         scnView.isUserInteractionEnabled = false
-        scnScene.rootNode.childNodes[1].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: 0.5)), completionHandler: {
+        scnScene.rootNode.childNodes[1].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: duration)), completionHandler: {
             DispatchQueue.main.async {
+                self.redrawEdges()
+                self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
                 self.scnView.isUserInteractionEnabled = true
             }
         })
-        scnScene.rootNode.childNodes[2].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: 0.5)))
+        scnScene.rootNode.childNodes[2].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: duration)))
     }
     
     @objc func refreshColorsInCollectionView() {
@@ -771,40 +805,43 @@ class GameViewController: UIViewController {
             
             activeLevel?.adjacencyList?.updateNodePosition(id: selectedNode.geometry?.name, newPosition: position)
             
-            // @CLEANUP Move this to the .ended?
-            edgeNodes.removeFromParentNode()
-            edgeNodes = SCNNode()
-            edgeArray.removeAll()
-            
-            guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
-                return
-            }
-            
-            for (_, value) in adjacencyDict {
-                
-                // Create edges
-                for edge in value {
-                    if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
-                        let node = SCNNode()
-                        edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: .defaultVertexColor()))
-                        
-                        edgeArray.append(edge)
-                    }
-                }
-            }
-            
-            if planar_x_active {
-                edgeNodes.pivot = SCNMatrix4MakeRotation(-Float(Double.pi)/2, 0, 1, 0)
-            } else if planar_y_active {
-                edgeNodes.pivot = SCNMatrix4MakeRotation(Float(Double.pi)/2, 1, 0, 0)
-            }
-            
-            scnScene.rootNode.addChildNode(edgeNodes)
+            redrawEdges()
             
         } else if gestureRecognize.state == .ended {
             activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
             checkIfSolved()
         }
+    }
+    
+    func redrawEdges() {
+        edgeNodes.removeFromParentNode()
+        edgeNodes = SCNNode()
+        edgeArray.removeAll()
+        
+        guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
+            return
+        }
+        
+        for (_, value) in adjacencyDict {
+            
+            // Create edges
+            for edge in value {
+                if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
+                    let node = SCNNode()
+                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: .defaultVertexColor()))
+                    
+                    edgeArray.append(edge)
+                }
+            }
+        }
+        
+        if planar_x_active {
+            edgeNodes.pivot = SCNMatrix4MakeRotation(-Float(Double.pi)/2, 0, 1, 0)
+        } else if planar_y_active {
+            edgeNodes.pivot = SCNMatrix4MakeRotation(Float(Double.pi)/2, 1, 0, 0)
+        }
+        
+        scnScene.rootNode.addChildNode(edgeNodes)
     }
     
     @objc func cleanScene() {
