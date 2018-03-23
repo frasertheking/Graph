@@ -751,7 +751,7 @@
 		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>name</key>
 		<string>Icosian</string>
 		<key>nodes</key>
@@ -1060,7 +1060,7 @@
 		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>name</key>
 		<string>Planar-medium</string>
 		<key>nodes</key>
@@ -1601,7 +1601,7 @@
 		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>name</key>
 		<string>Traped</string>
 		<key>nodes</key>
@@ -1699,7 +1699,7 @@
 		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>name</key>
 		<string>GETTING OVER IT</string>
 		<key>nodes</key>
@@ -1854,7 +1854,7 @@
 		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>name</key>
 		<string>cant beat me</string>
 		<key>nodes</key>

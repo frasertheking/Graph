@@ -580,8 +580,12 @@ class GameViewController: UIViewController {
             return
         }
         
+        guard let numberConfig: Int = activeLevel?.numberOfColorsProvided else {
+            return
+        }
+        
         if let list = activeLevel?.adjacencyList {
-            if list.checkIfSolved(forType: graphType, edgeArray: edgeArray, edgeNodes: edgeNodes) {
+            if list.checkIfSolved(forType: graphType, numberConfig: numberConfig, edgeArray: edgeArray, edgeNodes: edgeNodes) {
                 endLevel()
             }
         }
@@ -647,7 +651,9 @@ class GameViewController: UIViewController {
             }
         }
         
-        redrawEdges()
+        if graphType == .planar {
+            redrawEdges()
+        }
         completedCheckmark.setCheckState(.checked, animated: true)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
@@ -817,6 +823,7 @@ class GameViewController: UIViewController {
         edgeNodes.removeFromParentNode()
         edgeNodes = SCNNode()
         edgeArray.removeAll()
+        let edgeColor: UIColor = solved ? .white : .defaultVertexColor()
         
         guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
             return
@@ -828,8 +835,11 @@ class GameViewController: UIViewController {
             for edge in value {
                 if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
                     let node = SCNNode()
-                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: .defaultVertexColor()))
+                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: edgeColor))
                     
+                    if solved {
+                        node.geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                    }
                     edgeArray.append(edge)
                 }
             }

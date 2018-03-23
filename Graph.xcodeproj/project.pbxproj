@@ -160,13 +160,8 @@
 		43B012791FD62DBF00F017A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				43270DAF2027A3F000BBF1CF /* crystal.dae */,
-				43270DA92027A17700BBF1CF /* Crystal14_1.png */,
-				43270DAA2027A17700BBF1CF /* Crystal14_2.png */,
-				43270DA520279CEE00BBF1CF /* Crystal14.png */,
-				432617641FED71A70031EA1E /* node.dae */,
+				43D732F7206484E300AA0EFB /* old */,
 				434A574E1FDB109400FD172B /* levels.plist */,
-				43B012751FD62BA500F017A6 /* icosahedron.obj */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -228,6 +223,19 @@
 				43CA8FE61FB6919900B962D9 /* Info.plist */,
 			);
 			path = Graph;
+			sourceTree = "<group>";
+		};
+		43D732F7206484E300AA0EFB /* old */ = {
+			isa = PBXGroup;
+			children = (
+				43B012751FD62BA500F017A6 /* icosahedron.obj */,
+				43270DAF2027A3F000BBF1CF /* crystal.dae */,
+				43270DA92027A17700BBF1CF /* Crystal14_1.png */,
+				43270DAA2027A17700BBF1CF /* Crystal14_2.png */,
+				43270DA520279CEE00BBF1CF /* Crystal14.png */,
+				432617641FED71A70031EA1E /* node.dae */,
+			);
+			path = old;
 			sourceTree = "<group>";
 		};
 		D2BDD0E822987D36EEED68DF /* Frameworks */ = {
