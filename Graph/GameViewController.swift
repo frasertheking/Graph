@@ -71,6 +71,11 @@ class GameViewController: UIViewController {
     @IBOutlet var nextLevelButton: UIButton!
     @IBOutlet var repeatLevelButton: UIButton!
     @IBOutlet var menuButton: UIButton!
+    @IBOutlet var leftSphere: UIImageView!
+    @IBOutlet var middleSphere: UIImageView!
+    @IBOutlet var rightSphere: UIImageView!
+    @IBOutlet var leftSeparator: UIView!
+    @IBOutlet var rightSeparator: UIView!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -153,6 +158,8 @@ class GameViewController: UIViewController {
         timerBackgroundView.isHidden = true
         
         menuButton.isEnabled = false
+        leftSeparator.layer.borderColor = UIColor.glowColor().cgColor
+        rightSeparator.layer.borderColor = UIColor.glowColor().cgColor
     }
     
     func setupScene() {
@@ -209,6 +216,10 @@ class GameViewController: UIViewController {
         activeLevel = Levels.createLevel(index: currentLevel)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
+        
+        GraphAnimation.addPulse(to: leftSphere)
+        GraphAnimation.addPulse(to: middleSphere)
+        GraphAnimation.addPulse(to: rightSphere)
         
         setupStraylights()
         createObjects()
@@ -666,7 +677,7 @@ class GameViewController: UIViewController {
                 GraphAnimation.delayWithSeconds(0.5, completion: {
                     GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
                     self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
-                    self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 215
+                    self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 235
                     
                     if graphType != .sim {
                         self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
@@ -691,7 +702,7 @@ class GameViewController: UIViewController {
             })
         } else {
             self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
-            self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 215
+            self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 235
             
             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
@@ -882,7 +893,7 @@ class GameViewController: UIViewController {
         simPlayerNodeCount = 0
         simBarView.applyGradient(withColours: [.black, .black])
         timerBackgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-
+        
         currentLevel += 1
         refreshColorsInCollectionView()
         axisPanGestureRecognizer?.isEnabled = false

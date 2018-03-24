@@ -207,19 +207,29 @@
                                     <rect key="frame" x="0.0" y="0.0" width="327" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ld-g7-A0R">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ld-g7-A0R" userLabel="left_separator">
                                             <rect key="frame" x="72" y="110" width="68" height="10"/>
                                             <color key="backgroundColor" red="1" green="0.97068081114767912" blue="0.77632198726260504" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="10" id="hhs-nW-NN6"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                    <integer key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7n-NW-UNT">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7n-NW-UNT" userLabel="right_separator">
                                             <rect key="frame" x="186" y="110" width="69" height="10"/>
                                             <color key="backgroundColor" red="1" green="0.97068081110000004" blue="0.77632198730000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="10" id="JpD-XS-U77"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                    <integer key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sphere" translatesAutoresizingMaskIntoConstraints="NO" id="TgJ-hT-eHK" userLabel="sphere_left">
                                             <rect key="frame" x="24" y="90" width="50" height="50"/>
@@ -448,10 +458,15 @@
                         <outlet property="completedView" destination="UUX-un-aJT" id="TgG-2n-eTh"/>
                         <outlet property="completedViewBottomConstraint" destination="EFa-0d-cvQ" id="DQa-eW-jzJ"/>
                         <outlet property="countdownLabel" destination="fds-b0-QSW" id="4Ol-rT-qEl"/>
+                        <outlet property="leftSeparator" destination="7ld-g7-A0R" id="DM3-7A-Fxl"/>
+                        <outlet property="leftSphere" destination="TgJ-hT-eHK" id="m0X-rX-K8a"/>
                         <outlet property="menuButton" destination="KIC-sj-GtL" id="0VP-LW-AL7"/>
+                        <outlet property="middleSphere" destination="mwa-gb-KSr" id="aA0-7q-FwR"/>
                         <outlet property="nextLevelButton" destination="hBo-Vm-IDM" id="Kiv-tL-PvS"/>
                         <outlet property="paintColorCollectionView" destination="7q1-cd-kdY" id="MAu-lS-IE3"/>
                         <outlet property="repeatLevelButton" destination="o27-2e-ibt" id="KXy-xM-vr9"/>
+                        <outlet property="rightSeparator" destination="M7n-NW-UNT" id="sPE-fS-ztB"/>
+                        <outlet property="rightSphere" destination="ZeV-Yv-MnS" id="zHP-OA-tiv"/>
                         <outlet property="scnView" destination="vYt-dz-Sce" id="fgv-wB-KRi"/>
                         <outlet property="simBarView" destination="3fy-dg-lHv" id="xiQ-zi-38s"/>
                         <outlet property="skView" destination="UDE-42-eyU" id="98S-F5-Xv0"/>
