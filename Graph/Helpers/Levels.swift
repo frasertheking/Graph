@@ -9,12 +9,12 @@
 import Foundation
 import SceneKit
 
-class Levels: NSObject {
+class Levels: NSObject, NSCopying {
     
     static let sharedInstance = Levels()
     var gameLevels: [Level] = []
 
-    override init() {
+    required override init() {
         var levels: NSArray?
         
         // Read curated levels from plist
@@ -93,8 +93,15 @@ class Levels: NSObject {
         }
     }
     
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = type(of: self).init()
+        return copy
+    }
+    
     static func createLevel(index: Int) -> Level? {
-        let levels = Levels.sharedInstance
+        guard let levels = Levels.sharedInstance.copy() as? Levels else {
+            return nil
+        }
         var level = levels.getRandomLevel()
         
         // Check to see if we have a level for current progress

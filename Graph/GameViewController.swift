@@ -64,11 +64,13 @@ class GameViewController: UIViewController {
     @IBOutlet var collectionViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var completedView: UIView!
     @IBOutlet var completedText: UILabel!
-    @IBOutlet var completedCheckmark: M13Checkbox!
     @IBOutlet var completedViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var countdownLabel: CountdownLabel!
     @IBOutlet var timerBackgroundView: UIView!
     @IBOutlet var simBarView: UIView!
+    @IBOutlet var nextLevelButton: UIButton!
+    @IBOutlet var repeatLevelButton: UIButton!
+    @IBOutlet var menuButton: UIButton!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -146,10 +148,11 @@ class GameViewController: UIViewController {
         scnView.addGestureRecognizer(axisPanGestureRecognizer)
         axisPanGestureRecognizer?.isEnabled = false
     
-        countdownLabel.countdownDelegate = self
         countdownLabel.timeFormat = "s"
         countdownLabel.isHidden = true
         timerBackgroundView.isHidden = true
+        
+        menuButton.isEnabled = false
     }
     
     func setupScene() {
@@ -201,6 +204,8 @@ class GameViewController: UIViewController {
     
     @objc func setupLevel() {
         scnView.isUserInteractionEnabled = true
+        nextLevelButton.isEnabled = true
+        countdownLabel.countdownDelegate = self
         activeLevel = Levels.createLevel(index: currentLevel)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
@@ -548,6 +553,7 @@ class GameViewController: UIViewController {
                 checkIfSolved()
                 if solved {
                     completedText.text = "YOU LOST"
+                    nextLevelButton.isEnabled = false
                     return
                 } else {
                     completedText.text = "YOU WON"
@@ -651,7 +657,6 @@ class GameViewController: UIViewController {
             }
         }
         
-        completedCheckmark.setCheckState(.checked, animated: true)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
@@ -661,7 +666,7 @@ class GameViewController: UIViewController {
                 GraphAnimation.delayWithSeconds(0.5, completion: {
                     GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
                     self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
-                    self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 250
+                    self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 215
                     
                     if graphType != .sim {
                         self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
@@ -686,7 +691,7 @@ class GameViewController: UIViewController {
             })
         } else {
             self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
-            self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
+            self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 215
             
             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
@@ -870,13 +875,14 @@ class GameViewController: UIViewController {
         currentStep = ""
         firstStep = ""
         solved = false
-        completedText.text = "ZONE CLEAR"
+        completedText.text = "COMPLETE"
         countdownLabel.isHidden = true
         timerBackgroundView.isHidden = true
         levelFailed = false
         simPlayerNodeCount = 0
         simBarView.applyGradient(withColours: [.black, .black])
-        
+        timerBackgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+
         currentLevel += 1
         refreshColorsInCollectionView()
         axisPanGestureRecognizer?.isEnabled = false
@@ -940,6 +946,15 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func nextLevel() {
+        GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
+        self.completedViewBottomConstraint.constant = -450
+        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    @IBAction func repeatLevel() {
+        currentLevel -= 1
         GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
         self.completedViewBottomConstraint.constant = -450
         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
@@ -1166,6 +1181,7 @@ extension GameViewController: CountdownLabelDelegate {
         timerBackgroundView.backgroundColor = .red
         countdownLabel.countdownDelegate = nil
         completedText.text = "TIMES UP"
+        nextLevelButton.isEnabled = false
         levelFailed = true
         endLevel()
     }
