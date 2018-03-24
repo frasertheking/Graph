@@ -202,31 +202,31 @@
                                 </connections>
                             </button>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UUX-un-aJT">
-                                <rect key="frame" x="24" y="701" width="327" height="66"/>
+                                <rect key="frame" x="24" y="717" width="327" height="400"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fBu-jG-ziS">
-                                    <rect key="frame" x="0.0" y="0.0" width="327" height="66"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="327" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0q-4u-Pu1">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="66"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="400"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tkS-Dq-Vsi">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="66"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="400"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2v8-hj-9jg">
-                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="66"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="400"/>
                                                         <connections>
                                                             <action selector="nextLevel" destination="EcQ-vt-J7h" eventType="touchUpInside" id="ki5-DK-vNy"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZONE CLEAR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ge-cL-CJY">
-                                                        <rect key="frame" x="76" y="16" width="235" height="34"/>
+                                                        <rect key="frame" x="76" y="16" width="235" height="368"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tcf-EL-ItZ" customClass="M13Checkbox" customModule="M13Checkbox">
-                                                        <rect key="frame" x="24" y="11" width="44" height="44"/>
+                                                        <rect key="frame" x="24" y="178" width="44" height="44"/>
                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="44" id="7II-Ih-5k0"/>
@@ -260,7 +260,7 @@
                                     </constraints>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="66" id="7F2-fa-LJA"/>
+                                    <constraint firstAttribute="height" constant="400" id="7F2-fa-LJA"/>
                                 </constraints>
                                 <blurEffect style="light"/>
                                 <userDefinedRuntimeAttributes>
@@ -326,7 +326,7 @@
                             <constraint firstItem="zCJ-Dq-VgM" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="63" id="90y-Zp-QDy"/>
                             <constraint firstItem="7q1-cd-kdY" firstAttribute="centerY" secondItem="3fy-dg-lHv" secondAttribute="centerY" constant="7" id="95o-vI-0Fl"/>
                             <constraint firstAttribute="bottom" secondItem="UDE-42-eyU" secondAttribute="bottom" id="9DA-Of-8tY"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="UUX-un-aJT" secondAttribute="bottom" constant="-100" id="EFa-0d-cvQ"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="UUX-un-aJT" secondAttribute="bottom" constant="-450" id="EFa-0d-cvQ"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="UDE-42-eyU" secondAttribute="trailing" id="GKE-8f-Way"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="Idl-6u-hdf"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="vYt-dz-Sce" secondAttribute="trailing" id="Qd0-67-PSc"/>

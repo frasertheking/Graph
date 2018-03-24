@@ -45,6 +45,7 @@ class GameViewController: UIViewController {
     var simPlayerColor: UIColor = .red
     var planar_x_active: Bool = false
     var planar_y_active: Bool = false
+    var levelFailed: Bool = false
     
     // DEBUG
     var debug = false
@@ -622,7 +623,6 @@ class GameViewController: UIViewController {
             }
             
         }
-            
     }
         
     func executeLevelFinished() {
@@ -651,41 +651,47 @@ class GameViewController: UIViewController {
             }
         }
         
-        if graphType == .planar {
-            redrawEdges()
-        }
         completedCheckmark.setCheckState(.checked, animated: true)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
-        GraphAnimation.delayWithSeconds(0.5, completion: {
-            GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+        if !levelFailed {
             GraphAnimation.delayWithSeconds(0.5, completion: {
-                GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
-                self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
-                self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
-                
-                if graphType != .sim {
-                    self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
-                } else {
-                    UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
-                        self.simBarView.alpha = 0
-                    }, completion: { (finished) in
-                        self.simBarView.isHidden = true
+                GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+                GraphAnimation.delayWithSeconds(0.5, completion: {
+                    GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
+                    self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
+                    self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 250
+                    
+                    if graphType != .sim {
+                        self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                    } else {
+                        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
+                            self.simBarView.alpha = 0
+                        }, completion: { (finished) in
+                            self.simBarView.isHidden = true
+                        })
+                    }
+                    
+                    if timedLevel {
+                        self.timerBackgroundView.isHidden = true
+                        self.countdownLabel.cancel()
+                        self.countdownLabel.countdownDelegate = nil
+                    }
+                    
+                    UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
+                        self.view.layoutIfNeeded()
                     })
-                }
-                
-                if timedLevel {
-                    self.timerBackgroundView.isHidden = true
-                    self.countdownLabel.cancel()
-                    self.countdownLabel.countdownDelegate = nil
-                }
-                
-                UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
-                    self.view.layoutIfNeeded()
                 })
             })
-        })
+        } else {
+            self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
+            self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetHidden
+            
+            UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
     }
     
     func selectNode(node: SCNNode, graphType: GraphType, activeColor: UIColor) {
@@ -823,7 +829,7 @@ class GameViewController: UIViewController {
         edgeNodes.removeFromParentNode()
         edgeNodes = SCNNode()
         edgeArray.removeAll()
-        let edgeColor: UIColor = solved ? .white : .defaultVertexColor()
+        let edgeColor: UIColor = levelFailed ? .red : (solved ? .white : .defaultVertexColor())
         
         guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
             return
@@ -838,7 +844,7 @@ class GameViewController: UIViewController {
                     edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: edgeColor))
                     
                     if solved {
-                        node.geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
+                        node.geometry?.firstMaterial?.emission.contents = UIColor.glowColor
                     }
                     edgeArray.append(edge)
                 }
@@ -867,6 +873,7 @@ class GameViewController: UIViewController {
         completedText.text = "ZONE CLEAR"
         countdownLabel.isHidden = true
         timerBackgroundView.isHidden = true
+        levelFailed = false
         simPlayerNodeCount = 0
         simBarView.applyGradient(withColours: [.black, .black])
         
@@ -934,7 +941,7 @@ class GameViewController: UIViewController {
     
     @IBAction func nextLevel() {
         GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
-        self.completedViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
+        self.completedViewBottomConstraint.constant = -450
         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         })
@@ -1159,6 +1166,7 @@ extension GameViewController: CountdownLabelDelegate {
         timerBackgroundView.backgroundColor = .red
         countdownLabel.countdownDelegate = nil
         completedText.text = "TIMES UP"
+        levelFailed = true
         endLevel()
     }
 }
