@@ -21,11 +21,12 @@ protocol Graphable {
     func checkIfSolved(forType type: GraphType, numberConfig: Int, edgeArray: [Edge<Node>], edgeNodes: SCNNode) -> Bool
     func isLastStep() -> Bool 
     func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node>
-    func updateCorrectEdges(level: Level?, pathArray: [Int], edgeArray: [Edge<Node>], edgeNodes: SCNNode)
+    func updateCorrectEdges(level: Level?, pathArray: [Int], mirrorArray: [Int], edgeArray: [Edge<Node>], edgeNodes: SCNNode)
     func getNeighbours(for id: String?) -> [String]
     func updateNeighbourColors(level: Level?, neighbours: [String], vertexNodes: SCNNode)
     func updateNodePosition(id: String?, newPosition: SCNVector3)
     func doEdgesIntersect(edge1: Edge<Node>, edge2: Edge<Node>, numberOfAxis: Int) -> Bool
     func makeSimMove(edgeArray: [Edge<Node>], edgeNodes: SCNNode, simArray: [Int])
     func isLegalMove(simArray: [Int], uid1: Int, uid2: Int) -> Bool
+    func getMirrorNodeUID(id: String?) -> Int?
 }

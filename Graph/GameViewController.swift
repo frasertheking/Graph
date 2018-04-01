@@ -32,6 +32,7 @@ class GameViewController: UIViewController {
     var walkColor: UIColor = .goldColor()
     var selectedColorIndex: Int = 0
     var pathArray: [Int] = []
+    var mirrorArray: [Int] = []
     var simArray: [Int] = []
     var currentStep: String = ""
     var firstStep: String = ""
@@ -272,7 +273,7 @@ class GameViewController: UIViewController {
             }
 
             if graphType == .planar {
-                self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
             }
         }
     }
@@ -414,7 +415,7 @@ class GameViewController: UIViewController {
         scnScene.rootNode.addChildNode(edgeNodes)
         
         if graphType == .planar {
-            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
         }
     }
     
@@ -429,6 +430,10 @@ class GameViewController: UIViewController {
         }
         
         guard let graphType: GraphType = activeLevel?.graphType else {
+            return
+        }
+        
+        guard let isMirror: Bool = activeLevel?.isMirror else {
             return
         }
         
@@ -482,7 +487,7 @@ class GameViewController: UIViewController {
                     selectNode(node: node, graphType: graphType, activeColor: activeColor)
                 }
                 
-                activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+                activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
                 checkIfSolved()
                 return
             case .kColor:
@@ -503,6 +508,10 @@ class GameViewController: UIViewController {
             }
             
             if !solved {
+                if isMirror {
+                    selectMirrorNode(node: node, graphType: graphType, activeColor: activeColor)
+                }
+                
                 selectNode(node: node, graphType: graphType, activeColor: activeColor)
             }
             
@@ -512,6 +521,13 @@ class GameViewController: UIViewController {
             
             if let nameToInt = Int(geoName) {
                 pathArray.append(nameToInt)
+                
+                if isMirror {
+                    guard let mirrorName = self.activeLevel?.adjacencyList?.getMirrorNodeUID(id: node.geometry?.name) else {
+                        return
+                    }
+                    mirrorArray.append(mirrorName)
+                }
             }
             
             if currentStep == "" {
@@ -555,7 +571,7 @@ class GameViewController: UIViewController {
                     }
                 }
 
-                activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+                activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
 
                 for item in pathArray {
                     simArray.append(item)
@@ -587,7 +603,7 @@ class GameViewController: UIViewController {
                 simBarView.applyGradient(withColours: [.red, .black])
             }
         } else {
-            activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+            activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
         }
         
         checkIfSolved()
@@ -680,7 +696,7 @@ class GameViewController: UIViewController {
                     self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 235
                     
                     if graphType != .sim {
-                        self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                        self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
                     } else {
                         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
                             self.simBarView.alpha = 0
@@ -707,6 +723,22 @@ class GameViewController: UIViewController {
             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
             })
+        }
+    }
+    
+    func selectMirrorNode(node: SCNNode, graphType: GraphType, activeColor: UIColor) {
+        for childNode in vertexNodes.childNodes {
+            guard let geoName = childNode.geometry?.name else {
+                return
+            }
+            
+            guard let mirrorName = self.activeLevel?.adjacencyList?.getMirrorNodeUID(id: node.geometry?.name) else {
+                return
+            }
+            
+            if geoName == String(describing: mirrorName) {
+                selectNode(node: childNode, graphType: graphType, activeColor: activeColor)
+            }
         }
     }
     
@@ -774,7 +806,7 @@ class GameViewController: UIViewController {
         scnScene.rootNode.childNodes[1].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: duration)), completionHandler: {
             DispatchQueue.main.async {
                 self.redrawEdges()
-                self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
                 self.scnView.isUserInteractionEnabled = true
             }
         })
@@ -836,7 +868,7 @@ class GameViewController: UIViewController {
             redrawEdges()
             
         } else if gestureRecognize.state == .ended {
-            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: self.mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
             checkIfSolved()
         }
     }
@@ -876,11 +908,32 @@ class GameViewController: UIViewController {
         scnScene.rootNode.addChildNode(edgeNodes)
     }
     
+    func undoMove(node: SCNNode, isMirror: Bool) {
+        node.geometry?.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
+        node.geometry?.materials[1].diffuse.contents = UIColor.white
+        node.removeAllParticleSystems()
+
+        if isMirror {
+            _ = mirrorArray.removeLast()
+        } else {
+            _ = pathArray.removeLast()
+        }
+        
+        if let _ = activeLevel?.adjacencyList {
+            activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: node.geometry?.name, color: UIColor.defaultVertexColor())
+        }
+        
+        if let newStep = pathArray.last {
+            currentStep = "\(newStep)"
+        }
+    }
+    
     @objc func cleanScene() {
         axisPanGestureRecognizer?.isEnabled = false
         vertexNodes.removeFromParentNode()
         edgeNodes.removeFromParentNode()
         pathArray.removeAll()
+        mirrorArray.removeAll()
         simArray.removeAll()
         simPath.removeAll()
         currentStep = ""
@@ -1119,46 +1172,74 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
             return
         }
         
+        guard let isMirror = activeLevel?.isMirror else {
+            return
+        }
+        
         if (graphType == .hamiltonian) && pathArray.count > 0 {
+            var lastPathNode: SCNNode? = nil
+            var lastMirrorNode: SCNNode? = nil
+            
             for node in vertexNodes.childNodes {
-                guard let geoName = node.geometry?.name else {
+                guard let lastItemPath = pathArray.last else {
                     return
                 }
                 
-                guard let lastItem = pathArray.last else {
+                guard let lastItemMirror = mirrorArray.last else {
                     return
                 }
                 
-                if geoName == "\(String(describing: lastItem))" {
-                    node.geometry?.materials.first?.diffuse.contents = UIColor.defaultVertexColor()
-                    node.geometry?.materials[1].diffuse.contents = UIColor.white
-                    node.removeAllParticleSystems()
-                    
-                    if let _ = activeLevel?.adjacencyList {
-                        activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: node.geometry?.name, color: UIColor.defaultVertexColor())
-                    }
-                    
-                    _ = pathArray.removeLast()
-                    if let newStep = pathArray.last {
-                        currentStep = "\(newStep)"
-                    }
-                    
-                    if pathArray.count > 1 {
-                        activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray,  edgeArray: edgeArray, edgeNodes: edgeNodes)
-                    } else {
-                        var pos = 0
-                        for _ in edgeArray {
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
-                            edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
-                            edgeNodes.childNodes[pos].removeAllParticleSystems()
-                            pos += 1
+                if node.geometry?.name == String(describing: lastItemPath) {
+                    lastPathNode = node
+                } else if node.geometry?.name == String(describing: lastItemMirror) {
+                    lastMirrorNode = node
+                }
+                
+                if isMirror {
+                    if let pathNode = lastPathNode, let mirrorNode = lastMirrorNode {
+                        undoMove(node: mirrorNode, isMirror: true)
+                        undoMove(node: pathNode, isMirror: false)
+                        
+                        if pathArray.count > 1 {
+                            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+                        } else {
+                            var pos = 0
+                            for _ in edgeArray {
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
+                                edgeNodes.childNodes[pos].removeAllParticleSystems()
+                                pos += 1
+                            }
+                            if pathArray.count == 0 {
+                                firstStep = ""
+                                currentStep = ""
+                            }
                         }
-                        if pathArray.count == 0 {
-                            firstStep = ""
-                            currentStep = ""
-                        }
+                        
+                        break
                     }
-                    break
+                } else {
+                    if let pathNode = lastPathNode {
+                        undoMove(node: pathNode, isMirror: false)
+                        
+                        if pathArray.count > 1 {
+                            activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
+                        } else {
+                            var pos = 0
+                            for _ in edgeArray {
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
+                                edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
+                                edgeNodes.childNodes[pos].removeAllParticleSystems()
+                                pos += 1
+                            }
+                            if pathArray.count == 0 {
+                                firstStep = ""
+                                currentStep = ""
+                            }
+                        }
+                        
+                        break
+                    }
                 }
             }
         } else if graphType == .planar {

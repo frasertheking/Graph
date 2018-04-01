@@ -14,13 +14,15 @@ class Level: NSObject {
     var numberOfColorsProvided: Int?
     var graphType: GraphType?
     var timed: Bool?
+    var isMirror: Bool?
     var adjacencyList: AdjacencyList<Node>?
     
-    init(name: String?, numberOfColorsProvided: Int?, graphType: GraphType?, timed: Bool?, adjacencyList: AdjacencyList<Node>?) {
+    init(name: String?, numberOfColorsProvided: Int?, graphType: GraphType?, timed: Bool?, isMirror: Bool?, adjacencyList: AdjacencyList<Node>?) {
         self.name = name
         self.numberOfColorsProvided = numberOfColorsProvided
         self.graphType = graphType
         self.timed = timed
+        self.isMirror = isMirror
         self.adjacencyList = adjacencyList
     }
 }

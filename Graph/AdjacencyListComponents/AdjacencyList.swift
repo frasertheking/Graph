@@ -245,6 +245,16 @@ extension AdjacencyList: Graphable {
         return neighbours
     }
     
+    func getMirrorNodeUID(id: String?) -> Int? {
+        let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
+        for (key, _) in (graph.adjacencyDict) {
+            if "\(key.data.uid)" == id {
+                return key.data.mirrorUID
+            }
+        }
+        return nil
+    }
+    
     func updateNeighbourColors(level: Level?, neighbours: [String], vertexNodes: SCNNode) {
         guard let currentLevel = level else {
             return
@@ -356,7 +366,7 @@ extension AdjacencyList: Graphable {
         return Array(uniqueNumbers).shuffle
     }
     
-    func updateCorrectEdges(level: Level?, pathArray: [Int], edgeArray: [Edge<Node>], edgeNodes: SCNNode) {
+    func updateCorrectEdges(level: Level?, pathArray: [Int], mirrorArray: [Int], edgeArray: [Edge<Node>], edgeNodes: SCNNode) {
         
         guard let currentLevel = level else {
             return
@@ -375,8 +385,8 @@ extension AdjacencyList: Graphable {
                 for i in 0...pathArray.count-2 {
                     var pos = 0
                     for edgeNode in edgeArray {
-                        if (edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) ||
-                            (edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) {
+                        if ((edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) || (edgeNode.source.data.uid == mirrorArray[i] && edgeNode.destination.data.uid == mirrorArray[i+1])) ||
+                           ((edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) || (edgeNode.destination.data.uid == mirrorArray[i] && edgeNode.source.data.uid == mirrorArray[i+1])) {
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
                             
@@ -388,7 +398,8 @@ extension AdjacencyList: Graphable {
                                 edgeNodes.childNodes[pos].removeAllParticleSystems()
                                 edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
                             }
-                        } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) {
+                        } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) &&
+                                  !isPartOfPath(path: mirrorArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) {
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
                             edgeNodes.childNodes[pos].removeAllParticleSystems()

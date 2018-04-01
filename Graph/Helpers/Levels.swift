@@ -35,6 +35,10 @@ class Levels: NSObject, NSCopying {
             let adjacencyList = AdjacencyList<Node>()
             var vertexBin: [Vertex<Node>] = []
             
+            guard let isMirror: Bool = levelDict["is_mirror"] as? Bool else {
+                continue
+            }            
+            
             guard let levelArray: NSArray = levelDict["nodes"] as? NSArray else {
                 continue
             }
@@ -54,7 +58,13 @@ class Levels: NSObject, NSCopying {
                     scaleFactor = 3
                 }
                 
-                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: scaleFactor*Float(x), y: scaleFactor*Float(y), z: scaleFactor*Float(z)), uid: uid, color: .white))
+                var mirrorUID: Int? = nil
+                
+                if isMirror {
+                    mirrorUID = nodeDict["mirror"] as? Int
+                }
+                
+                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: scaleFactor*Float(x), y: scaleFactor*Float(y), z: scaleFactor*Float(z)), uid: uid, color: .white, mirrorUID: mirrorUID))
                 vertexBin.append(newNode)
             }
                         
@@ -89,7 +99,7 @@ class Levels: NSObject, NSCopying {
                 return
             }
             
-            gameLevels.append(Level(name: levelDict["name"] as? String, numberOfColorsProvided: levelDict["num_colors"] as? Int, graphType: graphType, timed: timed, adjacencyList: adjacencyList))
+            gameLevels.append(Level(name: levelDict["name"] as? String, numberOfColorsProvided: levelDict["num_colors"] as? Int, graphType: graphType, timed: timed, isMirror: isMirror, adjacencyList: adjacencyList))
         }
     }
     
@@ -133,7 +143,7 @@ class Levels: NSObject, NSCopying {
             let randomY = Float(randomNumber(inRange: -7...7))
             let randomZ = Float(randomNumber(inRange: -5...5))
             
-            let vertex = adjacencyList.createVertex(data: Node(position: SCNVector3(x: randomX, y: randomY, z: randomZ), uid: count, color: .white))
+            let vertex = adjacencyList.createVertex(data: Node(position: SCNVector3(x: randomX, y: randomY, z: randomZ), uid: count, color: .white, mirrorUID: nil))
             vertices.append(vertex)
             count += 1
         }
@@ -147,6 +157,6 @@ class Levels: NSObject, NSCopying {
             adjacencyList.add(.undirected, from: vertices[edgeStart], to: vertices[edgeEnd])
         }
         
-        return Level(name: "random", numberOfColorsProvided: 3, graphType: GraphType.kColor, timed: false, adjacencyList: adjacencyList)
+        return Level(name: "random", numberOfColorsProvided: 3, graphType: GraphType.kColor, timed: false, isMirror: false, adjacencyList: adjacencyList)
     }
 }
