@@ -515,10 +515,6 @@ class GameViewController: UIViewController {
                 selectNode(node: node, graphType: graphType, activeColor: activeColor)
             }
             
-            if let _ = activeLevel?.adjacencyList {
-                activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: geometry.name, color: activeColor)
-            }
-            
             if let nameToInt = Int(geoName) {
                 pathArray.append(nameToInt)
                 
@@ -743,6 +739,10 @@ class GameViewController: UIViewController {
     }
     
     func selectNode(node: SCNNode, graphType: GraphType, activeColor: UIColor) {
+        if let _ = activeLevel?.adjacencyList, let geoName = node.geometry?.name {
+            activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: geoName, color: activeColor)
+        }
+        
         let scaleUpAction = SCNAction.scale(by: GameConstants.kScaleGrow, duration: GameConstants.kVeryShortTimeDelay)
         scaleUpAction.timingMode = .easeInEaseOut
         let scaleDownAction = SCNAction.scale(by: GameConstants.kScaleShrink, duration: GameConstants.kVeryShortTimeDelay)
