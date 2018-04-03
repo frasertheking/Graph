@@ -385,8 +385,10 @@ extension AdjacencyList: Graphable {
                 for i in 0...pathArray.count-2 {
                     var pos = 0
                     for edgeNode in edgeArray {
-                        if ((edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) || (edgeNode.source.data.uid == mirrorArray[i] && edgeNode.destination.data.uid == mirrorArray[i+1])) ||
-                           ((edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) || (edgeNode.destination.data.uid == mirrorArray[i] && edgeNode.source.data.uid == mirrorArray[i+1])) {
+                        if ((edgeNode.source.data.uid == pathArray[i] && edgeNode.destination.data.uid == pathArray[i+1]) ||
+                            (mirrorArray.count > 0 && edgeNode.source.data.uid == mirrorArray[i] && edgeNode.destination.data.uid == mirrorArray[i+1])) ||
+                           ((edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) ||
+                            (mirrorArray.count > 0 && edgeNode.destination.data.uid == mirrorArray[i] && edgeNode.source.data.uid == mirrorArray[i+1])) {
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
                             
@@ -506,6 +508,10 @@ extension AdjacencyList: Graphable {
     }
     
     func isPartOfPath(path: [Int], start: Int, end: Int) -> Bool {
+        if path.count == 0 {
+            return false
+        }
+        
         for i in 0...path.count-2 {
             if (start == path[i] && end == path[i+1]) ||
                 (end == path[i] && start == path[i+1]) {

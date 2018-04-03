@@ -449,10 +449,6 @@ class GameViewController: UIViewController {
                     return
                 }
                 
-                guard let mirrorNeighbours = activeLevel?.adjacencyList?.getNeighbours(for: mirrorStep) else {
-                    return
-                }
-                
                 if geometry.name == firstStep || geometry.name == firstMirrorStep {
                     guard let isLastStep = activeLevel?.adjacencyList?.isLastStep() else {
                         return
@@ -469,12 +465,18 @@ class GameViewController: UIViewController {
                     return
                 }
                 
-                guard let mirrorName = self.activeLevel?.adjacencyList?.getMirrorNodeUID(id: node.geometry?.name) else {
-                    return
-                }
-                
-                if mirrorArray.count > 0 && !mirrorNeighbours.contains("\(mirrorName)") {
-                    return
+                if isMirror {
+                    guard let mirrorNeighbours = activeLevel?.adjacencyList?.getNeighbours(for: mirrorStep) else {
+                        return
+                    }
+                    
+                    guard let mirrorName = self.activeLevel?.adjacencyList?.getMirrorNodeUID(id: node.geometry?.name) else {
+                        return
+                    }
+                    
+                    if mirrorArray.count > 0 && !mirrorNeighbours.contains("\(mirrorName)") {
+                        return
+                    }
                 }
             case .planar:
                 scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
@@ -1214,14 +1216,14 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                     return
                 }
                 
-                guard let lastItemMirror = mirrorArray.last else {
-                    return
+                if let lastItemMirror = mirrorArray.last {
+                    if node.geometry?.name == String(describing: lastItemMirror) {
+                        lastMirrorNode = node
+                    }
                 }
                 
                 if node.geometry?.name == String(describing: lastItemPath) {
                     lastPathNode = node
-                } else if node.geometry?.name == String(describing: lastItemMirror) {
-                    lastMirrorNode = node
                 }
                 
                 if isMirror {
