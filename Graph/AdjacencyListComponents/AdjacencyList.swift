@@ -280,7 +280,6 @@ extension AdjacencyList: Graphable {
     }
     
     func makeSimMove(edgeArray: [Edge<Node>], edgeNodes: SCNNode, simArray: [Int]) {
-        
         var randomEdge: [Int] = []
         
         var count = 0

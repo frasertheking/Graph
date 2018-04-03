@@ -53,6 +53,7 @@ class Levels: NSObject, NSCopying {
                     continue
                 }
                 
+                // @Cleanup: Why is this here again?... Likely shouldn't be :/
                 var scaleFactor: Float = 1
                 if levelDict["name"] as? String == "Icosian" {
                     scaleFactor = 3

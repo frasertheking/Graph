@@ -301,6 +301,8 @@
 		<integer>1</integer>
 		<key>name</key>
 		<string>really hard hamiltonian</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -573,6 +575,8 @@
 		<integer>1</integer>
 		<key>name</key>
 		<string>harder hamiltonian</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -930,6 +934,8 @@
 		<integer>1</integer>
 		<key>name</key>
 		<string>Planar</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -1000,6 +1006,8 @@
 		<integer>2</integer>
 		<key>name</key>
 		<string>Cube-planar haha</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -1125,6 +1133,8 @@
 		<integer>3</integer>
 		<key>name</key>
 		<string>Icosian</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -1434,6 +1444,8 @@
 		<integer>1</integer>
 		<key>name</key>
 		<string>Icosian</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -1743,6 +1755,8 @@
 		<integer>0</integer>
 		<key>name</key>
 		<string>Icosian</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -2052,6 +2066,8 @@
 		<integer>0</integer>
 		<key>name</key>
 		<string>Planar-medium</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -2208,6 +2224,8 @@
 		<integer>2</integer>
 		<key>name</key>
 		<string>SIM</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -2313,6 +2331,8 @@
 		<integer>2</integer>
 		<key>name</key>
 		<string>SIM</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -2418,6 +2438,8 @@
 		<integer>2</integer>
 		<key>name</key>
 		<string>SIM</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -2523,6 +2545,8 @@
 		<integer>0</integer>
 		<key>name</key>
 		<string>Traped</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -2621,6 +2645,8 @@
 		<integer>0</integer>
 		<key>name</key>
 		<string>GETTING OVER IT</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -2776,6 +2802,8 @@
 		<integer>0</integer>
 		<key>name</key>
 		<string>cant beat me</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -3002,6 +3030,8 @@
 		<integer>1</integer>
 		<key>name</key>
 		<string>Walk it out</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -3072,6 +3102,8 @@
 		<integer>1</integer>
 		<key>name</key>
 		<string>branching</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -3200,6 +3232,8 @@
 		<integer>1</integer>
 		<key>name</key>
 		<string>tough</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -3502,6 +3536,8 @@
 		<integer>1</integer>
 		<key>name</key>
 		<string>isocahedron</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -3686,6 +3722,8 @@
 		<integer>1</integer>
 		<key>name</key>
 		<string>Welcome</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -3711,6 +3749,8 @@
 		<integer>2</integer>
 		<key>name</key>
 		<string>Practice</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -3750,6 +3790,8 @@
 		<integer>3</integer>
 		<key>name</key>
 		<string>Triangle</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -3804,6 +3846,8 @@
 		<integer>2</integer>
 		<key>name</key>
 		<string>Cube</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -3929,6 +3973,8 @@
 		<integer>3</integer>
 		<key>name</key>
 		<string>Difficult</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -4086,6 +4132,8 @@
 		<integer>3</integer>
 		<key>name</key>
 		<string>complex</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -4270,6 +4318,8 @@
 		<integer>4</integer>
 		<key>name</key>
 		<string>Four</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
