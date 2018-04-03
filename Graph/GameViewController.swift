@@ -35,7 +35,9 @@ class GameViewController: UIViewController {
     var mirrorArray: [Int] = []
     var simArray: [Int] = []
     var currentStep: String = ""
+    var mirrorStep: String = ""
     var firstStep: String = ""
+    var firstMirrorStep: String = ""
     let axisArray: [String] = ["X", "Y", "Z"]
     var solved = false
     var simPlayerNodeCount: Int = 0
@@ -437,6 +439,7 @@ class GameViewController: UIViewController {
             return
         }
         
+        // First check for legal moves - return early if illegal
         if geometry.name != "edge" {
             var activeColor = (graphType == .hamiltonian) ? walkColor : paintColor
 
@@ -446,7 +449,11 @@ class GameViewController: UIViewController {
                     return
                 }
                 
-                if geometry.name == firstStep {
+                guard let mirrorNeighbours = activeLevel?.adjacencyList?.getNeighbours(for: mirrorStep) else {
+                    return
+                }
+                
+                if geometry.name == firstStep || geometry.name == firstMirrorStep {
                     guard let isLastStep = activeLevel?.adjacencyList?.isLastStep() else {
                         return
                     }
@@ -459,6 +466,14 @@ class GameViewController: UIViewController {
                 }
                 
                 if pathArray.count > 0 && !neighbours.contains(geoName) {
+                    return
+                }
+                
+                guard let mirrorName = self.activeLevel?.adjacencyList?.getMirrorNodeUID(id: node.geometry?.name) else {
+                    return
+                }
+                
+                if mirrorArray.count > 0 && !mirrorNeighbours.contains("\(mirrorName)") {
                     return
                 }
             case .planar:
@@ -523,6 +538,12 @@ class GameViewController: UIViewController {
                         return
                     }
                     mirrorArray.append(mirrorName)
+                
+                    if firstMirrorStep == "" {
+                        firstMirrorStep = "\(mirrorName)"
+                    }
+                    
+                    mirrorStep = "\(mirrorName)"
                 }
             }
             
@@ -626,7 +647,7 @@ class GameViewController: UIViewController {
             return
         }
         
-        if ((graphType == .hamiltonian) && firstStep == currentStep) || !(graphType == .hamiltonian) {
+        if ((graphType == .hamiltonian) && (firstStep == currentStep || firstMirrorStep == currentStep)) || !(graphType == .hamiltonian) {
             
             var planarReset: Bool = false
             
@@ -926,6 +947,12 @@ class GameViewController: UIViewController {
         if let newStep = pathArray.last {
             currentStep = "\(newStep)"
         }
+        
+        if isMirror {
+            if let newStep = mirrorArray.last {
+                mirrorStep = "\(newStep)"
+            }
+        }
     }
     
     @objc func cleanScene() {
@@ -937,7 +964,9 @@ class GameViewController: UIViewController {
         simArray.removeAll()
         simPath.removeAll()
         currentStep = ""
+        mirrorStep = ""
         firstStep = ""
+        firstMirrorStep = ""
         solved = false
         completedText.text = "COMPLETE"
         countdownLabel.isHidden = true
@@ -1212,6 +1241,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
                             }
                             if pathArray.count == 0 {
                                 firstStep = ""
+                                firstMirrorStep = ""
+                                mirrorStep = ""
                                 currentStep = ""
                             }
                         }
