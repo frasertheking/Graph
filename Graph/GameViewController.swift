@@ -49,6 +49,8 @@ class GameViewController: UIViewController {
     var planar_x_active: Bool = false
     var planar_y_active: Bool = false
     var levelFailed: Bool = false
+    var selectedNode: SCNNode!
+    var selectedMirrorNode: SCNNode?
     
     // DEBUG
     var debug = false
@@ -59,7 +61,6 @@ class GameViewController: UIViewController {
     var axisPanGestureRecognizer: UIPanGestureRecognizer!
     var debugNodes: SCNNode!
     var selectedAxis = axis.none
-    var selectedNode: SCNNode!
     
     // UI
     @IBOutlet var skView: SKView!
@@ -490,14 +491,24 @@ class GameViewController: UIViewController {
                 
                 if selectedNode == node {
                     selectedNode = nil
+                    selectedMirrorNode = nil
                     axisPanGestureRecognizer?.isEnabled = false
                 } else {
                     selectedNode = node
                     
-                    guard let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: selectedNode.geometry?.name) else {
-                        return
+                    if isMirror {
+                        if let mirrorName = self.activeLevel?.adjacencyList?.getMirrorNodeUID(id: node.geometry?.name) {
+                            if let mirrorNode = getNodeFromID(id: "\(mirrorName)") {
+                                selectedMirrorNode = mirrorNode
+                                selectNode(node: mirrorNode, graphType: graphType, activeColor: activeColor)
+                            }
+                        }
                     }
-                    activeLevel?.adjacencyList?.updateNeighbourColors(level: activeLevel, neighbours: neighbours, vertexNodes: vertexNodes)
+                    
+//                    guard let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: selectedNode.geometry?.name) else {
+//                        return
+//                    }
+                    //activeLevel?.adjacencyList?.updateNeighbourColors(level: activeLevel, neighbours: neighbours, vertexNodes: vertexNodes)
                     
                     axisPanGestureRecognizer?.isEnabled = true
                     geometry.materials.first?.diffuse.contents = activeColor
@@ -745,6 +756,15 @@ class GameViewController: UIViewController {
         }
     }
     
+    func getNodeFromID(id: String) -> SCNNode? {
+        for node in vertexNodes.childNodes {
+            if node.geometry?.name == id {
+                return node
+            }
+        }
+        return nil
+    }
+    
     func selectMirrorNode(node: SCNNode, graphType: GraphType, activeColor: UIColor) {
         for childNode in vertexNodes.childNodes {
             guard let geoName = childNode.geometry?.name else {
@@ -865,35 +885,57 @@ class GameViewController: UIViewController {
     
     @objc func panGesturePlanarMove(gestureRecognize: UIPanGestureRecognizer) {
         if gestureRecognize.state == .changed {
+            
             guard let recognizerView = gestureRecognize.view else {
                 return
             }
             
-            let translation = gestureRecognize.translation(in: recognizerView)
-            var position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 75), y:selectedNode.position.y - Float(translation.y / 75), z:selectedNode.position.z)
+           updateNodePosition(node: selectedNode, gestureRecognize: gestureRecognize, direction: 1)
             
-            if planar_x_active {
-                position = SCNVector3(x:selectedNode.position.x, y:selectedNode.position.y - Float(translation.y / 75), z:selectedNode.position.z + Float(translation.x / 75))
-            } else if planar_y_active {
-                position = SCNVector3(x:selectedNode.position.x + Float(translation.x / 75), y:selectedNode.position.y, z:selectedNode.position.z - Float(translation.y / 75))
+            if let mirrorNode = selectedMirrorNode {
+                updateNodePosition(node: mirrorNode, gestureRecognize: gestureRecognize, direction: -1)
             }
-            
-            if abs(position.x) > GameConstants.kPlanarMaxMagnitude || abs(position.y) > GameConstants.kPlanarMaxMagnitude || abs(position.z) > GameConstants.kPlanarMaxMagnitude {
-                return
-            }
-            
-            selectedNode.position = position
             
             gestureRecognize.setTranslation(CGPoint.zero, in: recognizerView)
-            
-            activeLevel?.adjacencyList?.updateNodePosition(id: selectedNode.geometry?.name, newPosition: position)
-            
+
             redrawEdges()
             
         } else if gestureRecognize.state == .ended {
             activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: self.mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
             checkIfSolved()
         }
+    }
+    
+    func updateNodePosition(node: SCNNode, gestureRecognize: UIPanGestureRecognizer, direction: Float) {
+        guard let recognizerView = gestureRecognize.view else {
+            return
+        }
+        
+        let translation = gestureRecognize.translation(in: recognizerView)
+        let offsetX = direction * Float(translation.x / 75)
+        let offsetY = direction * Float(translation.y / 75)
+        
+        var position = SCNVector3(x: node.position.x + offsetX,
+                                  y: node.position.y - offsetY,
+                                  z: node.position.z)
+        
+        if planar_x_active {
+            position = SCNVector3(x: node.position.x,
+                                  y: node.position.y - offsetY,
+                                  z: node.position.z + offsetX)
+        } else if planar_y_active {
+            position = SCNVector3(x: node.position.x + offsetX,
+                                  y: node.position.y,
+                                  z: node.position.z - offsetY)
+        }
+        
+        if abs(position.x) > GameConstants.kPlanarMaxMagnitude || abs(position.y) > GameConstants.kPlanarMaxMagnitude || abs(position.z) > GameConstants.kPlanarMaxMagnitude {
+            return
+        }
+        
+        node.position = position
+        
+        activeLevel?.adjacencyList?.updateNodePosition(id: node.geometry?.name, newPosition: position)
     }
     
     func redrawEdges() {
@@ -977,6 +1019,8 @@ class GameViewController: UIViewController {
         simPlayerNodeCount = 0
         simBarView.applyGradient(withColours: [.black, .black])
         timerBackgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        selectedNode = nil
+        selectedMirrorNode = nil
         
         currentLevel += 1
         refreshColorsInCollectionView()
