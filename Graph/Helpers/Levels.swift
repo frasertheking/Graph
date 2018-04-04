@@ -43,6 +43,10 @@ class Levels: NSObject, NSCopying {
                 continue
             }
             
+            guard let graphTypeInt: Int = levelDict["graph_type"] as? Int else {
+                continue
+            }
+            
             // Unpack graph nodes
             for node in levelArray {
                 guard let nodeDict: Dictionary = node as? Dictionary<String, Any> else {
@@ -65,7 +69,13 @@ class Levels: NSObject, NSCopying {
                     mirrorUID = nodeDict["mirror"] as? Int
                 }
                 
-                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: scaleFactor*Float(x), y: scaleFactor*Float(y), z: scaleFactor*Float(z)), uid: uid, color: .white, mirrorUID: mirrorUID))
+                var Zfuzz: Float = 0
+                
+                if graphTypeInt == 2 {
+                    Zfuzz = (Float(arc4random()) / Float(UINT32_MAX) / 2) - 1
+                }
+                
+                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: scaleFactor*Float(x), y: scaleFactor*Float(y), z: (scaleFactor*Float(z) + Zfuzz)), uid: uid, color: .white, mirrorUID: mirrorUID))
                 vertexBin.append(newNode)
             }
                         
@@ -86,10 +96,6 @@ class Levels: NSObject, NSCopying {
                     
                     adjacencyList.add(.undirected, from: vertexBin[from_pos - 1], to: vertexBin[to_pos - 1])
                 }
-            }
-            
-            guard let graphTypeInt: Int = levelDict["graph_type"] as? Int else {
-                continue
             }
             
             guard let timed: Bool = levelDict["timed"] as? Bool else {
@@ -129,6 +135,10 @@ class Levels: NSObject, NSCopying {
         let length = Int64(range.upperBound - range.lowerBound + 1)
         let value = Int64(arc4random()) % length + Int64(range.lowerBound)
         return T(value)
+    }
+    
+    func randomBetweenFloats(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
+        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
     
     // TODO: Improve this generation and abstract to other graph types
