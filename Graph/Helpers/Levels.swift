@@ -59,7 +59,7 @@ class Levels: NSObject, NSCopying {
                 
                 // @Cleanup: Why is this here again?... Likely shouldn't be :/
                 var scaleFactor: Float = 1
-                if levelDict["name"] as? String == "Icosian" {
+                if levelDict["name"] as? String == "Icosian" || levelDict["name"] as? String == "pyritohedron" {
                     scaleFactor = 3
                 }
                 
@@ -75,7 +75,19 @@ class Levels: NSObject, NSCopying {
                     Zfuzz = (Float(arc4random()) / Float(UINT32_MAX) / 2) - 1
                 }
                 
-                let newNode = adjacencyList.createVertex(data: Node(position: SCNVector3(x: scaleFactor*Float(x), y: scaleFactor*Float(y), z: (scaleFactor*Float(z) + Zfuzz)), uid: uid, color: .white, mirrorUID: mirrorUID))
+                var posVector = SCNVector3(x: Float(x), y: Float(y), z: Float(z))
+                
+                if levelDict["name"] as? String == "pyritohedron" {
+                    //let h: Float = 0
+                    //let h: Float = -((sqrt(5) + 1) / 2)
+                    //let h: Float = ((sqrt(5) - 1) / 2)
+                    let h: Float = 1
+                    posVector = Levels.getPyritohedronCoordinate(for: uid, h: h)
+                }
+                
+                posVector = SCNVector3(x: posVector.x * scaleFactor, y: posVector.y * scaleFactor, z: (posVector.z * scaleFactor) + Zfuzz)
+                
+                let newNode = adjacencyList.createVertex(data: Node(position: posVector, uid: uid, color: .white, mirrorUID: mirrorUID))
                 vertexBin.append(newNode)
             }
                         
@@ -94,7 +106,9 @@ class Levels: NSObject, NSCopying {
                         continue
                     }
                     
-                    adjacencyList.add(.undirected, from: vertexBin[from_pos - 1], to: vertexBin[to_pos - 1])
+                    if vertexBin.count > from_pos-1 && vertexBin.count > to_pos-1 {
+                        adjacencyList.add(.undirected, from: vertexBin[from_pos - 1], to: vertexBin[to_pos - 1])
+                    }
                 }
             }
             
@@ -113,6 +127,51 @@ class Levels: NSObject, NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = type(of: self).init()
         return copy
+    }
+    
+    static func getPyritohedronCoordinate(for id: Int, h: Float) -> SCNVector3 {
+        switch id {
+        case 1:
+            return SCNVector3(x: -1, y: 1, z: 1)
+        case 2:
+            return SCNVector3(x: 0, y: (1 + h), z: (1 - pow(h, 2)))
+        case 3:
+            return SCNVector3(x: 1, y: 1, z: 1)
+        case 4:
+            return SCNVector3(x: (1 - pow(h, 2)), y: 0, z: (1 + h))
+        case 5:
+            return SCNVector3(x: 1, y: -1, z: 1)
+        case 6:
+            return SCNVector3(x: 0, y: -(1 + h ), z: (1 - pow(h, 2)))
+        case 7:
+            return SCNVector3(x: 0, y: -(1 + h), z: -(1 - pow(h, 2)))
+        case 8:
+            return SCNVector3(x: -1, y: -1, z: -1)
+        case 9:
+            return SCNVector3(x: -(1 + h), y: -(1 - pow(h, 2)), z: 0)
+        case 10:
+            return SCNVector3(x: -1, y: -1, z: 1)
+        case 11:
+            return SCNVector3(x: -(1 - pow(h, 2)), y: 0, z: (1 + h))
+        case 12:
+            return SCNVector3(x: -(1 - pow(h, 2)), y: 0, z: -(1 + h))
+        case 13:
+            return SCNVector3(x: (1 - pow(h, 2)), y: 0, z: -(1 + h))
+        case 14:
+            return SCNVector3(x: 1, y: -1, z: -1)
+        case 15:
+            return SCNVector3(x: (1 + h), y: -(1 - pow(h, 2)), z: 0)
+        case 16:
+            return SCNVector3(x: (1 + h), y: (1 - pow(h, 2)), z: 0)
+        case 17:
+            return SCNVector3(x: 1, y: 1, z: -1)
+        case 18:
+            return SCNVector3(x: 0, y: (1 + h), z: -(1 - pow(h, 2)))
+        case 19:
+            return SCNVector3(x: -1, y: 1, z: -1)
+        default:
+            return SCNVector3(x: -(1 + h), y: (1 - pow(h, 2)), z: 0)
+        }
     }
     
     static func createLevel(index: Int) -> Level? {
@@ -135,10 +194,6 @@ class Levels: NSObject, NSCopying {
         let length = Int64(range.upperBound - range.lowerBound + 1)
         let value = Int64(arc4random()) % length + Int64(range.lowerBound)
         return T(value)
-    }
-    
-    func randomBetweenFloats(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
-        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
     
     // TODO: Improve this generation and abstract to other graph types

@@ -10,7 +10,7 @@
 		<key>num_colors</key>
 		<integer>1</integer>
 		<key>name</key>
-		<string>Icosian</string>
+		<string>pyritohedron</string>
 		<key>is_mirror</key>
 		<true/>
 		<key>nodes</key>

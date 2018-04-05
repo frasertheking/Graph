@@ -51,6 +51,7 @@ class GameViewController: UIViewController {
     var levelFailed: Bool = false
     var selectedNode: SCNNode!
     var selectedMirrorNode: SCNNode?
+    var h: Float = 1
     
     // DEBUG
     var debug = false
@@ -1083,13 +1084,24 @@ class GameViewController: UIViewController {
             print(child.position)
         }
     }
+
+    func animateNodePositions(h: Float) {
+        for vertex in vertexNodes.childNodes {
+            var newPos = Levels.getPyritohedronCoordinate(for: Int((vertex.geometry?.name)!)!, h: h)
+            newPos = SCNVector3(x: newPos.x * 3, y: newPos.y * 3, z: newPos.z * 3)
+            vertex.position = newPos
+            activeLevel?.adjacencyList?.updateNodePosition(id: vertex.geometry?.name, newPosition: newPos)
+        }
+        redrawEdges()
+        GraphAnimation.swellGraphObject(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
+    }
     
     @IBAction func nextLevel() {
-        GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
-        self.completedViewBottomConstraint.constant = -450
-        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        })
+//        GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
+//        self.completedViewBottomConstraint.constant = -450
+//        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
+//            self.view.layoutIfNeeded()
+//        })
     }
     
     @IBAction func repeatLevel() {
@@ -1140,9 +1152,10 @@ class GameViewController: UIViewController {
 
 // Draw Loop
 extension GameViewController: SCNSceneRendererDelegate {
-//    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-//
-//    }
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        h = h - 0.05
+        animateNodePositions(h: h)
+    }
 }
 
 // UICollectionView / UI Elements
