@@ -6,9 +6,9 @@
 		<key>timed</key>
 		<false/>
 		<key>graph_type</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>num_colors</key>
-		<integer>1</integer>
+		<integer>3</integer>
 		<key>name</key>
 		<string>pyritohedron</string>
 		<key>is_mirror</key>

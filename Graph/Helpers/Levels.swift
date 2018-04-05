@@ -80,8 +80,8 @@ class Levels: NSObject, NSCopying {
                 if levelDict["name"] as? String == "pyritohedron" {
                     //let h: Float = 0
                     //let h: Float = -((sqrt(5) + 1) / 2)
-                    //let h: Float = ((sqrt(5) - 1) / 2)
-                    let h: Float = 1
+                    let h: Float = ((sqrt(5) - 1) / 2)
+                    //let h: Float = 1
                     posVector = Levels.getPyritohedronCoordinate(for: uid, h: h)
                 }
                 
