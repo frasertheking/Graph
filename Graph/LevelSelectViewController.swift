@@ -250,7 +250,7 @@ class LevelSelectViewController: UIViewController {
         
         for (key, value) in adjacencyDict {
             // Create nodes
-            Shapes.spawnShape(type: .Custom, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
+            Shapes.spawnShape(type: .Hexagon, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
             
             // Create edges
             for edge in value {

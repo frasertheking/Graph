@@ -8,6 +8,76 @@
 		<key>graph_type</key>
 		<integer>0</integer>
 		<key>num_colors</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>Level Select</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>3</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>-3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>-3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>0</integer>
+		<key>num_colors</key>
 		<integer>3</integer>
 		<key>name</key>
 		<string>pyritohedron</string>
