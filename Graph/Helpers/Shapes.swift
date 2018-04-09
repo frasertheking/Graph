@@ -21,8 +21,8 @@ public enum Shapes:Int {
         static let sphereRadius: CGFloat = 0.5
         static let cylinderRadius: CGFloat = 0.1
         static let cylinderHeight: CGFloat = 3.1
-        static let customShapeName = "hexagon.dae"
-        static let hexagonName = "hexagon.dae"
+        static let customShapeName = "node.dae"
+        static let hexagonName = "hexagon_checkmark.dae"
         static let primaryMaterialColor = UIColor.defaultVertexColor()
         static let secondaryMaterialColor = UIColor.white
     }

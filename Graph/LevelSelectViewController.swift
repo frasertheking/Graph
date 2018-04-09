@@ -154,16 +154,16 @@ class LevelSelectViewController: UIViewController {
         createObjects()
         GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
 
-        GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
-            GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
-            guard let graphType = self.activeLevel?.graphType else {
-                return
-            }
-        
-            if graphType != .planar {
-                GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
-            }
-        }
+//        GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
+//            GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+//            guard let graphType = self.activeLevel?.graphType else {
+//                return
+//            }
+//        
+//            if graphType != .planar {
+//                GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+//            }
+//        }
     }
     
     func setupInteractions() {
