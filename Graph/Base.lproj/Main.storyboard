@@ -44,9 +44,6 @@
                                 <state key="normal" title="Play">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
-                                <connections>
-                                    <segue destination="EcQ-vt-J7h" kind="show" id="ZQ4-Aw-rIE"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.098647684010152337" green="0.098647684010152337" blue="0.098647684010152337" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -80,14 +77,11 @@
         <!--Game View Controller-->
         <scene sceneID="UDS-PD-cZ1">
             <objects>
-                <viewController id="EcQ-vt-J7h" customClass="GameViewController" customModule="Graph" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overCurrentContext" id="EcQ-vt-J7h" customClass="GameViewController" customModule="Graph" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ipS-Cf-T8m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <skView contentMode="scaleToFill" sceneName="scene" translatesAutoresizingMaskIntoConstraints="NO" id="UDE-42-eyU">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </skView>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="scene" translatesAutoresizingMaskIntoConstraints="NO" id="vYt-dz-Sce">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </sceneKitView>
@@ -416,16 +410,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fuf-7S-6ho">
+                                <rect key="frame" x="24" y="20" width="30" height="30"/>
+                                <state key="normal" title="BAK">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="exitLevel" destination="EcQ-vt-J7h" eventType="touchUpInside" id="HDy-rH-SaS"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="82e-M2-jU7" firstAttribute="leading" secondItem="zCJ-Dq-VgM" secondAttribute="trailing" constant="50" id="3Hd-An-950"/>
                             <constraint firstItem="k1x-2a-Zqn" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="7aU-sb-aP1"/>
                             <constraint firstItem="zCJ-Dq-VgM" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" constant="63" id="90y-Zp-QDy"/>
                             <constraint firstItem="7q1-cd-kdY" firstAttribute="centerY" secondItem="3fy-dg-lHv" secondAttribute="centerY" constant="7" id="95o-vI-0Fl"/>
-                            <constraint firstAttribute="bottom" secondItem="UDE-42-eyU" secondAttribute="bottom" id="9DA-Of-8tY"/>
+                            <constraint firstItem="Fuf-7S-6ho" firstAttribute="top" secondItem="D3R-0S-508" secondAttribute="top" id="CGO-Uw-gmd"/>
                             <constraint firstAttribute="bottomMargin" secondItem="UUX-un-aJT" secondAttribute="bottom" constant="-450" id="EFa-0d-cvQ"/>
-                            <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="UDE-42-eyU" secondAttribute="trailing" id="GKE-8f-Way"/>
+                            <constraint firstItem="Fuf-7S-6ho" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" constant="24" id="EKe-YS-fJg"/>
                             <constraint firstItem="vYt-dz-Sce" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="Idl-6u-hdf"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="vYt-dz-Sce" secondAttribute="trailing" id="Qd0-67-PSc"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="7q1-cd-kdY" secondAttribute="trailing" constant="24" id="QvP-X8-6ob"/>
@@ -442,9 +445,7 @@
                             <constraint firstItem="k1x-2a-Zqn" firstAttribute="top" secondItem="82e-M2-jU7" secondAttribute="bottom" constant="16" id="gOH-ks-xrU"/>
                             <constraint firstItem="D3R-0S-508" firstAttribute="trailing" secondItem="UUX-un-aJT" secondAttribute="trailing" constant="24" id="knz-jc-vFi"/>
                             <constraint firstItem="UUX-un-aJT" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" constant="24" id="nBs-TB-cJL"/>
-                            <constraint firstItem="UDE-42-eyU" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" id="ogh-Fo-ERn"/>
                             <constraint firstItem="2UE-dl-Ejm" firstAttribute="centerY" secondItem="82e-M2-jU7" secondAttribute="centerY" id="qOA-9u-Hhh"/>
-                            <constraint firstItem="UDE-42-eyU" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" id="qaV-lE-gc0"/>
                             <constraint firstItem="7q1-cd-kdY" firstAttribute="leading" secondItem="D3R-0S-508" secondAttribute="leading" constant="24" id="tS8-jy-iU6"/>
                             <constraint firstItem="8Ct-nq-dMJ" firstAttribute="top" secondItem="ipS-Cf-T8m" secondAttribute="top" constant="75" id="uZI-Ab-MuJ"/>
                             <constraint firstItem="82e-M2-jU7" firstAttribute="centerX" secondItem="ipS-Cf-T8m" secondAttribute="centerX" id="ugw-tP-SuJ"/>
@@ -453,6 +454,7 @@
                         <viewLayoutGuide key="safeArea" id="D3R-0S-508"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="Fuf-7S-6ho" id="AoA-vx-Ibb"/>
                         <outlet property="collectionViewBottomConstraint" destination="cN3-Vm-Fsb" id="DEN-14-yAs"/>
                         <outlet property="completedText" destination="7Ge-cL-CJY" id="Eik-Yg-8In"/>
                         <outlet property="completedView" destination="UUX-un-aJT" id="TgG-2n-eTh"/>
@@ -469,17 +471,18 @@
                         <outlet property="rightSphere" destination="ZeV-Yv-MnS" id="zHP-OA-tiv"/>
                         <outlet property="scnView" destination="vYt-dz-Sce" id="fgv-wB-KRi"/>
                         <outlet property="simBarView" destination="3fy-dg-lHv" id="xiQ-zi-38s"/>
-                        <outlet property="skView" destination="UDE-42-eyU" id="98S-F5-Xv0"/>
                         <outlet property="spawnButton" destination="k1x-2a-Zqn" id="at1-Dw-dxp"/>
                         <outlet property="timerBackgroundView" destination="8Ct-nq-dMJ" id="zIn-Bv-Rus"/>
                         <outlet property="xAxisButton" destination="zCJ-Dq-VgM" id="wwU-x1-NBf"/>
                         <outlet property="yAxisButton" destination="82e-M2-jU7" id="25x-LR-GI4"/>
                         <outlet property="zAxisButton" destination="2UE-dl-Ejm" id="Aaa-ig-a4X"/>
+                        <segue destination="eCN-qh-3bC" kind="unwind" identifier="unwindToLevelSelect" animates="NO" unwindAction="unwindToLevelSelectWithSegue:" id="qrc-ix-M9G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFC-0A-SIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="eCN-qh-3bC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1326" y="-54"/>
+            <point key="canvasLocation" x="354" y="-54"/>
         </scene>
         <!--Level Select View Controller-->
         <scene sceneID="5FJ-Xf-36h">
@@ -512,6 +515,7 @@
                     <connections>
                         <outlet property="scnView" destination="c0p-fo-dYZ" id="Imb-vc-XHP"/>
                         <outlet property="skView" destination="Oy5-u8-0UJ" id="ZHZ-cD-v2A"/>
+                        <segue destination="EcQ-vt-J7h" kind="presentation" identifier="gameSegue" animates="NO" id="VCh-uC-T95"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kV3-UD-E5I" userLabel="First Responder" sceneMemberID="firstResponder"/>

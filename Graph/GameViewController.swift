@@ -64,7 +64,6 @@ class GameViewController: UIViewController {
     var selectedAxis = axis.none
     
     // UI
-    @IBOutlet var skView: SKView!
     @IBOutlet var paintColorCollectionView: UICollectionView!
     @IBOutlet var collectionViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var completedView: UIView!
@@ -81,6 +80,7 @@ class GameViewController: UIViewController {
     @IBOutlet var rightSphere: UIImageView!
     @IBOutlet var leftSeparator: UIView!
     @IBOutlet var rightSeparator: UIView!
+    @IBOutlet var backButton: UIButton!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -174,32 +174,24 @@ class GameViewController: UIViewController {
         scnScene.background.contents = UIColor.clear
         
         lightLayerFront = CALayer()
-        lightLayerFront.frame = skView.frame
+        lightLayerFront.frame = self.view.frame
         straylightViewFront = UIView()
-        straylightViewFront.frame = skView.frame
+        straylightViewFront.frame = self.view.frame
         straylightViewFront.backgroundColor = .clear
         straylightViewFront.layer.addSublayer(lightLayerFront)
         straylightViewFront.addParallaxToView(amount: 25)
         straylightViewFront.isUserInteractionEnabled = false
         
         lightLayerBack = CALayer()
-        lightLayerBack.frame = skView.frame
+        lightLayerBack.frame = self.view.frame
         straylightViewBack = UIView()
-        straylightViewBack.frame = skView.frame
+        straylightViewBack.frame = self.view.frame
         straylightViewBack.backgroundColor = .clear
         straylightViewBack.layer.addSublayer(lightLayerBack)
         straylightViewBack.addParallaxToView(amount: 10)
         
-        skView.addSubview(straylightViewBack)
+        scnView.addSubview(straylightViewBack)
         scnView.addSubview(straylightViewFront)
-        
-        let gradientLayer:CAGradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = self.view.frame.size
-        gradientLayer.colors = [UIColor.white.cgColor, UIColor.clear] //Use diffrent colors
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
-        gradientLayer.opacity = 0.5
-        view.layer.insertSublayer(gradientLayer, at: 0)
 
         simBarView.backgroundColor = UIColor.black
         simBarView.layer.borderWidth = 2
@@ -312,8 +304,6 @@ class GameViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
-        
-        UIColor.setupBackgrounds(view: view, skView: skView)
     }
     
     func setupStraylights() {
@@ -1111,6 +1101,21 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         })
+    }
+    
+    @IBAction func exitLevel() {
+        GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: exit)
+        self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
+        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+            self.backButton.alpha = 0
+            self.straylightViewBack.alpha = 0
+            self.straylightViewFront.alpha = 0
+        })
+    }
+    
+    func exit() {
+        performSegue(withIdentifier: "unwindToLevelSelect", sender: self)
     }
     
     func editModeActivate() {
