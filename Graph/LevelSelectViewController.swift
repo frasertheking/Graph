@@ -28,6 +28,7 @@ class LevelSelectViewController: UIViewController {
     // GLOBAL VARS
     var activeLevel: Level?
     var currentLevel: Int = 0
+    var selectedLevel: Int = 1
     var h: Float = 1
     var axisPanGestureRecognizer: UIPanGestureRecognizer!
 
@@ -172,10 +173,10 @@ class LevelSelectViewController: UIViewController {
         guard let geometry = node.geometry else {
             return
         }
-//
-//        guard let geoName = geometry.name else {
-//            return
-//        }
+
+        guard let geoName = geometry.name else {
+            return
+        }
 //
 //        guard let graphType: GraphType = activeLevel?.graphType else {
 //            return
@@ -186,7 +187,8 @@ class LevelSelectViewController: UIViewController {
 //        }
         
         // First check for legal moves - return early if illegal
-        if geometry.name != "edge" {
+        if geoName != "edge" {
+            selectedLevel = Int(geoName)!
             GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
         }
     }
@@ -227,6 +229,13 @@ class LevelSelectViewController: UIViewController {
                                               z: edgeNodes.position.z)
             
             gestureRecognize.setTranslation(CGPoint.zero, in: recognizerView)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gameSegue" {
+            let viewController: GameViewController = segue.destination as! GameViewController
+            viewController.currentLevel = selectedLevel
         }
     }
     

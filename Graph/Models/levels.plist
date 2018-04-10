@@ -10,7 +10,7 @@
 		<key>num_colors</key>
 		<integer>1</integer>
 		<key>name</key>
-		<string>Level Select</string>
+		<string>Select</string>
 		<key>is_mirror</key>
 		<false/>
 		<key>nodes</key>
