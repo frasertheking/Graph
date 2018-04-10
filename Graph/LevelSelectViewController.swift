@@ -231,8 +231,10 @@ class LevelSelectViewController: UIViewController {
     }
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {
-        setupLevel()
-        GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
+        GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
+            self.setupLevel()
+            GraphAnimation.explodeGraph(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+        }
     }
 }
 

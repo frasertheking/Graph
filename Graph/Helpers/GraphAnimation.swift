@@ -36,6 +36,40 @@ struct GraphAnimation {
         edgeNodes.addAnimation(scale, forKey: "scale up")
     }
     
+    static func chunkInGraph(vertexNodes: SCNNode, edgeNodes: SCNNode) {
+        let scale = CABasicAnimation(keyPath: "scale")
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 5, y: 5, z: 5, w: 0))
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
+        scale.duration = 0.5
+        scale.repeatCount = 0
+        scale.autoreverses = false
+        scale.timingFunction = easeInOut
+        scale.fillMode = kCAFillModeForwards
+        scale.isRemovedOnCompletion = false
+        vertexNodes.addAnimation(scale, forKey: "explode")
+        edgeNodes.addAnimation(scale, forKey: "explode")
+    }
+    
+    static func chunkOutGraph(vertexNodes: SCNNode, edgeNodes: SCNNode, clean: @escaping () -> ()) {
+        let scale = CABasicAnimation(keyPath: "position")
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: 0, y: 0, z: 35, w: 0))
+        scale.duration = 0.5
+        scale.repeatCount = 0
+        scale.autoreverses = false
+        scale.timingFunction = easeInOut
+        scale.fillMode = kCAFillModeForwards
+        scale.isRemovedOnCompletion = false
+        vertexNodes.addAnimation(scale, forKey: "explode")
+        edgeNodes.addAnimation(scale, forKey: "explode")
+        
+        GraphAnimation.delayWithSeconds(0.5) {
+            clean()
+        }
+    }
+    
     static func explodeGraph(vertexNodes: SCNNode, edgeNodes: SCNNode) {
         let scale = CABasicAnimation(keyPath: "scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
@@ -45,6 +79,8 @@ struct GraphAnimation {
         scale.repeatCount = 0
         scale.autoreverses = false
         scale.timingFunction = easeInOut
+        scale.fillMode = kCAFillModeForwards
+        scale.isRemovedOnCompletion = false
         vertexNodes.addAnimation(scale, forKey: "explode")
         edgeNodes.addAnimation(scale, forKey: "explode")
     }
@@ -56,8 +92,10 @@ struct GraphAnimation {
         scale.toValue = NSValue(scnVector4: SCNVector4(x: 0, y: 0, z: 0, w: 0))
         scale.duration = 0.5
         scale.repeatCount = 0
-        scale.autoreverses = true
+        scale.autoreverses = false
         scale.timingFunction = easeInOut
+        scale.fillMode = kCAFillModeForwards
+        scale.isRemovedOnCompletion = false
         vertexNodes.addAnimation(scale, forKey: "implode")
         edgeNodes.addAnimation(scale, forKey: "implode")
         

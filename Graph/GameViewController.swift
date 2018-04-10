@@ -28,7 +28,7 @@ class GameViewController: UIViewController {
     // GLOBAL VARS
     var paintColor: UIColor = .customRed()
     var activeLevel: Level?
-    var currentLevel: Int = 0
+    var currentLevel: Int = 1
     var walkColor: UIColor = .goldColor()
     var selectedColorIndex: Int = 0
     var pathArray: [Int] = []
@@ -220,7 +220,7 @@ class GameViewController: UIViewController {
         
         setupStraylights()
         createObjects()
-        GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
+        GraphAnimation.chunkInGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
 
         GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
             GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
@@ -411,6 +411,9 @@ class GameViewController: UIViewController {
         if graphType == .planar {
             activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
         }
+        
+        vertexNodes.scale = SCNVector3(x: 0, y: 0, z: 0)
+        edgeNodes.scale = SCNVector3(x: 0, y: 0, z: 0)
     }
     
     func handleTouchFor(node: SCNNode) {
@@ -1104,7 +1107,10 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func exitLevel() {
-        GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: exit)
+        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0))
+        scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0))
+        
+        GraphAnimation.chunkOutGraph(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, clean: self.exit)
         self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
