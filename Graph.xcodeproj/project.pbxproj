@@ -31,6 +31,7 @@
 		43860BD31FB8ED1B0076B0CF /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BD21FB8ED1B0076B0CF /* Level.swift */; };
 		43860BD51FB8EDCE0076B0CF /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BD41FB8EDCD0076B0CF /* Levels.swift */; };
 		43A018F31FC10B28005FF276 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A018F21FC10B28005FF276 /* Node.swift */; };
+		43A1B90520802BBC00C9A065 /* UserDefaultsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B90420802BBC00C9A065 /* UserDefaultsInteractor.swift */; };
 		43A6E29820310662009C072D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A6E29720310662009C072D /* Array+Extensions.swift */; };
 		43A71C56207A870A008D3104 /* LevelSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A71C55207A870A008D3104 /* LevelSelectViewController.swift */; };
 		43A71C5E207A936B008D3104 /* hexagon.dae in Resources */ = {isa = PBXBuildFile; fileRef = 43A71C5D207A936B008D3104 /* hexagon.dae */; };
@@ -77,6 +78,7 @@
 		43860BD21FB8ED1B0076B0CF /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		43860BD41FB8EDCD0076B0CF /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		43A018F21FC10B28005FF276 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		43A1B90420802BBC00C9A065 /* UserDefaultsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsInteractor.swift; sourceTree = "<group>"; };
 		43A6E29720310662009C072D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		43A71C55207A870A008D3104 /* LevelSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectViewController.swift; sourceTree = "<group>"; };
 		43A71C5D207A936B008D3104 /* hexagon.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hexagon.dae; sourceTree = "<group>"; };
@@ -163,6 +165,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		43A1B90320802B9E00C9A065 /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+				43A1B90420802BBC00C9A065 /* UserDefaultsInteractor.swift */,
+			);
+			path = Interactors;
+			sourceTree = "<group>";
+		};
 		43B012791FD62DBF00F017A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +229,7 @@
 				43860BD81FB8F4830076B0CF /* Helpers */,
 				43860BD11FB8ECD20076B0CF /* AdjacencyListComponents */,
 				43860BD01FB8ECC50076B0CF /* Extensions */,
+				43A1B90320802B9E00C9A065 /* Interactors */,
 				43A71C55207A870A008D3104 /* LevelSelectViewController.swift */,
 				43CA8FDC1FB6919900B962D9 /* GameViewController.swift */,
 				4375FA0B203CD68F0073AE32 /* LandingViewController.swift */,
@@ -405,6 +416,7 @@
 				43CA8FFE1FB762D300B962D9 /* SCNAction+Extensions.swift in Sources */,
 				43B0E6B020374CBD00D444B0 /* CALayer+Extensions.swift in Sources */,
 				43860BCD1FB7E2C60076B0CF /* AdjacencyList.swift in Sources */,
+				43A1B90520802BBC00C9A065 /* UserDefaultsInteractor.swift in Sources */,
 				43CA8FDD1FB6919900B962D9 /* GameViewController.swift in Sources */,
 				43860BC91FB7E1DA0076B0CF /* Edges.swift in Sources */,
 				43860BC71FB7E17C0076B0CF /* Vertex.swift in Sources */,

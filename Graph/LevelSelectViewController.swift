@@ -142,6 +142,7 @@ class LevelSelectViewController: UIViewController {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
         let edgeColor = UIColor.defaultVertexColor()
+        let completedLevels = UserDefaultsInteractor.getCompletedLevels()
         
         guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
             return
@@ -150,8 +151,12 @@ class LevelSelectViewController: UIViewController {
         edgeArray = []
         
         for (key, value) in adjacencyDict {
-            // Create nodes
-            Shapes.spawnShape(type: .Hexagon, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
+            var nodeType: Shapes = .Hexagon
+            if completedLevels.contains(key.data.uid) {
+                nodeType = .HexagonComplete
+            }
+            
+            Shapes.spawnShape(type: nodeType, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
             
             // Create edges
             for edge in value {

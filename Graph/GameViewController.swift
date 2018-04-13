@@ -712,6 +712,9 @@ class GameViewController: UIViewController {
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
         if !levelFailed {
+            
+            UserDefaultsInteractor.updateCompletedLevelsWithLevel(level: currentLevel)
+            
             GraphAnimation.delayWithSeconds(0.5, completion: {
                 GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
                 GraphAnimation.delayWithSeconds(0.5, completion: {

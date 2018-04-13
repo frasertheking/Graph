@@ -14,6 +14,7 @@ import SceneKit.ModelIO
 public enum Shapes:Int {
     
     case Sphere = 0
+    case HexagonComplete
     case Hexagon
     case Custom
     
@@ -22,7 +23,8 @@ public enum Shapes:Int {
         static let cylinderRadius: CGFloat = 0.1
         static let cylinderHeight: CGFloat = 3.1
         static let customShapeName = "node.dae"
-        static let hexagonName = "hexagon_checkmark.dae"
+        static let hexagonName = "hexagon.dae"
+        static let hexagonCompleteName = "hexagon_checkmark.dae"
         static let primaryMaterialColor = UIColor.defaultVertexColor()
         static let secondaryMaterialColor = UIColor.white
     }
@@ -39,6 +41,12 @@ public enum Shapes:Int {
                 return
             }
             geometry = geom
+        case .HexagonComplete:
+            let geoScene = SCNScene(named: ShapeConstants.hexagonCompleteName)
+            guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
+                return
+            }
+            geometry = geom
         default:
             let geoScene = SCNScene(named: ShapeConstants.customShapeName)
             guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
@@ -50,19 +58,19 @@ public enum Shapes:Int {
         geometry.materials.first?.diffuse.contents = ShapeConstants.primaryMaterialColor
         geometry.materials[1].diffuse.contents = ShapeConstants.secondaryMaterialColor
         
-        if type == .Hexagon {
+        if type == .Hexagon || type == .HexagonComplete {
             geometry.materials.first?.diffuse.contents = UIColor.white
             geometry.materials[1].diffuse.contents = UIColor.red
         }
         
-        if type == .Custom || type == .Hexagon {
+        if type == .Custom || type == .Hexagon || type == .HexagonComplete {
             geometry.name = "\(id)"
         }
         
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.position = position
         
-        if type == .Hexagon {
+        if type == .Hexagon || type == .HexagonComplete {
             geometryNode.rotation = SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2))
             geometryNode.position = SCNVector3(x: position.x, y: position.y, z: position.z + 0.1)
         } else {
