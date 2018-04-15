@@ -142,7 +142,7 @@ class LevelSelectViewController: UIViewController {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
         let edgeColor = UIColor.defaultVertexColor()
-        let completedLevels = UserDefaultsInteractor.getCompletedLevels()
+        let levelStates = UserDefaultsInteractor.getLevelStates()
         
         guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
             return
@@ -152,8 +152,10 @@ class LevelSelectViewController: UIViewController {
         
         for (key, value) in adjacencyDict {
             var nodeType: Shapes = .Hexagon
-            if completedLevels.contains(key.data.uid) {
+            if levelStates[key.data.uid] == LevelState.completed.rawValue {
                 nodeType = .HexagonComplete
+            } else if levelStates[key.data.uid] == LevelState.locked.rawValue {
+                nodeType = .HexagonLocked
             }
             
             Shapes.spawnShape(type: nodeType, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
@@ -193,9 +195,22 @@ class LevelSelectViewController: UIViewController {
         
         // First check for legal moves - return early if illegal
         if geoName != "edge" {
-            selectedLevel = Int(geoName)!
-            GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
+            if checkIfAvailable(level: Int(geoName)!) {
+                selectedLevel = Int(geoName)!
+                GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
+            }
         }
+    }
+    
+    func checkIfAvailable(level: Int) -> Bool {
+        let levelStates = UserDefaultsInteractor.getLevelStates()
+        let levelState = levelStates[level]
+        
+        if levelState == LevelState.locked.rawValue {
+            return false
+        }
+        
+        return true
     }
     
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {

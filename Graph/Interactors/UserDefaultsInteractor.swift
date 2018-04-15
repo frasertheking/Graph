@@ -8,44 +8,48 @@
 
 import Foundation
 
+public enum LevelState: Int {
+    case base = 0
+    case completed
+    case locked
+    case random
+}
+
 struct UserDefaultsInteractor {
     private init() {}
     
-    fileprivate static let completedLevelsKey: String = "completedLevels"
+    fileprivate static let levelStateKey: String = "levelStates"
     
-    fileprivate static func setCompletedLevels(completedLevels: [Int]) {
-        UserDefaults.standard.set(completedLevels, forKey: completedLevelsKey)
+    fileprivate static func setLevelStates(levels: [Int]) {
+        UserDefaults.standard.set(levels, forKey: levelStateKey)
     }
     
-    static func getCompletedLevels() -> [Int] {
-        if isKeyPresentInUserDefaults(key: completedLevelsKey) {
-            guard let levelArray = UserDefaults.standard.object(forKey: completedLevelsKey) as? [Int] else {
-                return [0]
+    static func getLevelStates() -> [Int] {
+        let baseLevels: [Int] = [Int](repeatElement(0, count: 64))
+
+        if isKeyPresentInUserDefaults(key: levelStateKey) {
+            guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
+                return baseLevels
             }
             return levelArray
         }
         
         // Initialize default value if key is not yet set (level 0 is complete by default)
-        UserDefaults.standard.set([0], forKey: completedLevelsKey)
-        return [0]
+        UserDefaults.standard.set(baseLevels, forKey: levelStateKey)
+        return baseLevels
     }
     
-    static func updateCompletedLevelsWithLevel(level: Int) {
-        let completedLevels: [Int] = getCompletedLevels()
-        
-        if !completedLevels.contains(level) {
-            var newLevels: [Int] = completedLevels
-            newLevels.append(level)
-            setCompletedLevels(completedLevels: newLevels)
-        }
+    static func updateLevelsWithState(position: Int, newState: LevelState) {
+        var levels: [Int] = getLevelStates()
+        levels[position] = newState.rawValue
+        setLevelStates(levels: levels)
     }
     
-    static func clearCompletedLevels() {
-        UserDefaults.standard.set(nil, forKey: completedLevelsKey)
+    static func clearLevelStates() {
+        UserDefaults.standard.set(nil, forKey: levelStateKey)
     }
     
     fileprivate static func isKeyPresentInUserDefaults(key: String) -> Bool {
         return UserDefaults.standard.object(forKey: key) != nil
     }
-    
 }

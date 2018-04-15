@@ -713,7 +713,8 @@ class GameViewController: UIViewController {
         
         if !levelFailed {
             
-            UserDefaultsInteractor.updateCompletedLevelsWithLevel(level: currentLevel)
+            // Update completed level state
+            UserDefaultsInteractor.updateLevelsWithState(position: currentLevel, newState: .completed)
             
             GraphAnimation.delayWithSeconds(0.5, completion: {
                 GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
