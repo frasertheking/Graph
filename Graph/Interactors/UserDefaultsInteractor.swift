@@ -13,6 +13,7 @@ public enum LevelState: Int {
     case completed
     case locked
     case random
+    case emitter
 }
 
 struct UserDefaultsInteractor {
@@ -25,8 +26,12 @@ struct UserDefaultsInteractor {
     }
     
     static func getLevelStates() -> [Int] {
-        let baseLevels: [Int] = [Int](repeatElement(0, count: 64))
-
+        var baseLevels: [Int] = [Int](repeatElement(0, count: 64))
+        
+        // Setup basic level states
+        baseLevels[1] = LevelState.emitter.rawValue
+        baseLevels[3] = LevelState.locked.rawValue
+        
         if isKeyPresentInUserDefaults(key: levelStateKey) {
             guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
                 return baseLevels

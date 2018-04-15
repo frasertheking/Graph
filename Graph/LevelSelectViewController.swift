@@ -156,6 +156,8 @@ class LevelSelectViewController: UIViewController {
                 nodeType = .HexagonComplete
             } else if levelStates[key.data.uid] == LevelState.locked.rawValue {
                 nodeType = .HexagonLocked
+            } else if levelStates[key.data.uid] == LevelState.emitter.rawValue {
+                nodeType = .Emitter
             }
             
             Shapes.spawnShape(type: nodeType, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
@@ -206,7 +208,7 @@ class LevelSelectViewController: UIViewController {
         let levelStates = UserDefaultsInteractor.getLevelStates()
         let levelState = levelStates[level]
         
-        if levelState == LevelState.locked.rawValue {
+        if levelState == LevelState.locked.rawValue || levelState == LevelState.emitter.rawValue {
             return false
         }
         

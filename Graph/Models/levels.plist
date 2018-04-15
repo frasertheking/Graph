@@ -19,22 +19,24 @@
 				<key>uid</key>
 				<integer>1</integer>
 				<key>x</key>
-				<integer>-3</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>3</integer>
+				<integer>0</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
 					<integer>2</integer>
+					<integer>3</integer>
 					<integer>4</integer>
+					<integer>5</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>2</integer>
 				<key>x</key>
-				<integer>3</integer>
+				<integer>-3</integer>
 				<key>y</key>
 				<integer>3</integer>
 				<key>z</key>
@@ -50,17 +52,27 @@
 				<key>x</key>
 				<integer>3</integer>
 				<key>y</key>
-				<integer>-3</integer>
+				<integer>3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array>
-					<integer>4</integer>
-				</array>
+				<array/>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>4</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>-3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
 				<key>x</key>
 				<integer>-3</integer>
 				<key>y</key>

@@ -17,6 +17,7 @@ public enum Shapes:Int {
     case HexagonComplete
     case Hexagon
     case HexagonLocked
+    case Emitter
     case Custom
     
     struct ShapeConstants {
@@ -55,6 +56,12 @@ public enum Shapes:Int {
                 return
             }
             geometry = geom
+        case .Emitter:
+            let geoScene = SCNScene(named: ShapeConstants.customShapeName)
+            guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
+                return
+            }
+            geometry = geom
         default:
             let geoScene = SCNScene(named: ShapeConstants.customShapeName)
             guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
@@ -66,14 +73,12 @@ public enum Shapes:Int {
         geometry.materials.first?.diffuse.contents = ShapeConstants.primaryMaterialColor
         geometry.materials[1].diffuse.contents = ShapeConstants.secondaryMaterialColor
         
-        if type == .Hexagon || type == .HexagonComplete || type == .HexagonLocked {
+        if type == .Hexagon || type == .HexagonComplete || type == .HexagonLocked || type == .Emitter {
             geometry.materials.first?.diffuse.contents = UIColor.white
             geometry.materials[1].diffuse.contents = UIColor.red
         }
         
-        if type == .Custom || type == .Hexagon || type == .HexagonComplete || type == .HexagonLocked {
-            geometry.name = "\(id)"
-        }
+        geometry.name = "\(id)"
         
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.position = position
@@ -81,7 +86,7 @@ public enum Shapes:Int {
         if type == .Hexagon || type == .HexagonComplete || type == .HexagonLocked {
             geometryNode.rotation = SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2))
             geometryNode.position = SCNVector3(x: position.x, y: position.y, z: position.z + 0.1)
-        } else {
+        } else if type != .Emitter {
             geometryNode.rotation = SCNVector4(x: 0, y: 1, z: 0, w: Float(Double.pi/2))
             geometryNode.scale = SCNVector3(ShapeConstants.sphereRadius, ShapeConstants.sphereRadius, ShapeConstants.sphereRadius)
         }

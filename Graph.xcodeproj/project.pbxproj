@@ -23,8 +23,8 @@
 		435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 435BACC91FD7584400DFAF6B /* Trail.scnp */; };
 		4375FA0C203CD68F0073AE32 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4375FA0B203CD68F0073AE32 /* LandingViewController.swift */; };
 		437C90C81FB7B1BF0017A454 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */; };
-		437DDE3F208198C5000A616D /* center.dae in Resources */ = {isa = PBXBuildFile; fileRef = 437DDE3E208198C4000A616D /* center.dae */; };
 		437DDE4F2083D30B000A616D /* hexagon_lock.dae in Resources */ = {isa = PBXBuildFile; fileRef = 437DDE4E2083D30B000A616D /* hexagon_lock.dae */; };
+		437DDE512083EA32000A616D /* hexagon_checkmark.dae in Resources */ = {isa = PBXBuildFile; fileRef = 437DDE502083EA32000A616D /* hexagon_checkmark.dae */; };
 		43860BC71FB7E17C0076B0CF /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BC61FB7E17C0076B0CF /* Vertex.swift */; };
 		43860BC91FB7E1DA0076B0CF /* Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BC81FB7E1DA0076B0CF /* Edges.swift */; };
 		43860BCB1FB7E2880076B0CF /* Graphable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BCA1FB7E2880076B0CF /* Graphable.swift */; };
@@ -37,7 +37,6 @@
 		43A6E29820310662009C072D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A6E29720310662009C072D /* Array+Extensions.swift */; };
 		43A71C56207A870A008D3104 /* LevelSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A71C55207A870A008D3104 /* LevelSelectViewController.swift */; };
 		43A71C5E207A936B008D3104 /* hexagon.dae in Resources */ = {isa = PBXBuildFile; fileRef = 43A71C5D207A936B008D3104 /* hexagon.dae */; };
-		43A71C64207C2D6E008D3104 /* hexagon_checkmark.dae in Resources */ = {isa = PBXBuildFile; fileRef = 43A71C63207C2D6E008D3104 /* hexagon_checkmark.dae */; };
 		43B012761FD62BA500F017A6 /* icosahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 43B012751FD62BA500F017A6 /* icosahedron.obj */; };
 		43B0E6B020374CBD00D444B0 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0E6AF20374CBD00D444B0 /* CALayer+Extensions.swift */; };
 		43B0E6B220387F4700D444B0 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0E6B120387F4700D444B0 /* UIView+Extensions.swift */; };
@@ -72,8 +71,8 @@
 		435BACC91FD7584400DFAF6B /* Trail.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Trail.scnp; sourceTree = "<group>"; };
 		4375FA0B203CD68F0073AE32 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
-		437DDE3E208198C4000A616D /* center.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = center.dae; sourceTree = "<group>"; };
 		437DDE4E2083D30B000A616D /* hexagon_lock.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hexagon_lock.dae; sourceTree = "<group>"; };
+		437DDE502083EA32000A616D /* hexagon_checkmark.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hexagon_checkmark.dae; sourceTree = "<group>"; };
 		43860BC61FB7E17C0076B0CF /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		43860BC81FB7E1DA0076B0CF /* Edges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edges.swift; sourceTree = "<group>"; };
 		43860BCA1FB7E2880076B0CF /* Graphable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphable.swift; sourceTree = "<group>"; };
@@ -86,7 +85,6 @@
 		43A6E29720310662009C072D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		43A71C55207A870A008D3104 /* LevelSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectViewController.swift; sourceTree = "<group>"; };
 		43A71C5D207A936B008D3104 /* hexagon.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hexagon.dae; sourceTree = "<group>"; };
-		43A71C63207C2D6E008D3104 /* hexagon_checkmark.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hexagon_checkmark.dae; sourceTree = "<group>"; };
 		43B012751FD62BA500F017A6 /* icosahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icosahedron.obj; sourceTree = "<group>"; };
 		43B0E6AF20374CBD00D444B0 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		43B0E6B120387F4700D444B0 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -257,9 +255,8 @@
 				43270DA520279CEE00BBF1CF /* Crystal14.png */,
 				432617641FED71A70031EA1E /* node.dae */,
 				43A71C5D207A936B008D3104 /* hexagon.dae */,
-				43A71C63207C2D6E008D3104 /* hexagon_checkmark.dae */,
 				437DDE4E2083D30B000A616D /* hexagon_lock.dae */,
-				437DDE3E208198C4000A616D /* center.dae */,
+				437DDE502083EA32000A616D /* hexagon_checkmark.dae */,
 			);
 			path = old;
 			sourceTree = "<group>";
@@ -343,10 +340,9 @@
 				43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */,
 				43C581851FE4481B00D344B0 /* ColorButtonCollectionViewCell.xib in Resources */,
 				432617651FED71A70031EA1E /* node.dae in Resources */,
-				43A71C64207C2D6E008D3104 /* hexagon_checkmark.dae in Resources */,
 				437DDE4F2083D30B000A616D /* hexagon_lock.dae in Resources */,
 				434A574F1FDB109400FD172B /* levels.plist in Resources */,
-				437DDE3F208198C5000A616D /* center.dae in Resources */,
+				437DDE512083EA32000A616D /* hexagon_checkmark.dae in Resources */,
 				43270DA620279CEE00BBF1CF /* Crystal14.png in Resources */,
 				43270DAC2027A17700BBF1CF /* Crystal14_2.png in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,
