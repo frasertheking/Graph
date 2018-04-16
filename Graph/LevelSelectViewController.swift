@@ -74,6 +74,8 @@ class LevelSelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UserDefaultsInteractor.clearLevelSelectPosition()
+        
         setupView()
         setupScene()
         setupCamera()
@@ -129,6 +131,10 @@ class LevelSelectViewController: UIViewController {
         
         createObjects()
         GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
+        
+        // Set the levels to the correct position they were last left at
+        edgeNodes.position = UserDefaultsInteractor.getLevelSelectPosition()
+        vertexNodes.position = UserDefaultsInteractor.getLevelSelectPosition()
     }
     
     func setupInteractions() {
@@ -250,6 +256,7 @@ class LevelSelectViewController: UIViewController {
                                               y: edgeNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
                                               z: edgeNodes.position.z)
             
+            UserDefaultsInteractor.setLevelSelectPosition(pos: [edgeNodes.position.x, edgeNodes.position.y])
             gestureRecognize.setTranslation(CGPoint.zero, in: recognizerView)
         }
     }

@@ -162,7 +162,6 @@ class GameViewController: UIViewController {
         countdownLabel.isHidden = true
         timerBackgroundView.isHidden = true
         
-        menuButton.isEnabled = false
         leftSeparator.layer.borderColor = UIColor.glowColor().cgColor
         rightSeparator.layer.borderColor = UIColor.glowColor().cgColor
     }
@@ -210,6 +209,7 @@ class GameViewController: UIViewController {
         scnView.isUserInteractionEnabled = true
         nextLevelButton.isEnabled = true
         countdownLabel.countdownDelegate = self
+        backButton.alpha = 1
         activeLevel = Levels.createLevel(index: currentLevel)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
@@ -722,6 +722,7 @@ class GameViewController: UIViewController {
                     GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
                     self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
                     self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 235
+                    self.backButton.alpha = 0
                     
                     if graphType != .sim {
                         self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
@@ -1108,6 +1109,17 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         })
+    }
+    
+    @IBAction func backToLevelSelect() {
+        self.completedViewBottomConstraint.constant = -450
+        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        })
+        
+        GraphAnimation.delayWithSeconds(0.75) {
+            self.exitLevel()
+        }
     }
     
     @IBAction func exitLevel() {

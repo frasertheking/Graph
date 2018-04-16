@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SceneKit
 
 public enum LevelState: Int {
     case base = 0
@@ -20,7 +21,35 @@ struct UserDefaultsInteractor {
     private init() {}
     
     fileprivate static let levelStateKey: String = "levelStates"
+    fileprivate static let levelSelectPosition: String = "levelPosition"
+
+    // Level select scrolled position
+    // The positions array is action as a vector to track the x and y position of the level select graph
+    // It was always be len = 2 with pos[0] = x and pos[1] = y
+    static func setLevelSelectPosition(pos: [Float]) {
+        UserDefaults.standard.set(pos, forKey: levelSelectPosition)
+    }
     
+    static func getLevelSelectPosition() -> SCNVector3 {
+        let basePosition = SCNVector3(x: 0, y: 0, z: 0)
+        
+        if isKeyPresentInUserDefaults(key: levelSelectPosition) {
+            guard let position = UserDefaults.standard.object(forKey: levelSelectPosition) as? [Float] else {
+                return basePosition
+            }
+            return SCNVector3(x: position[0], y: position[1], z: 0)
+        }
+        
+        // Initialize default value to 0 0 if key is not yet set
+        UserDefaults.standard.set([0.0, 0.0], forKey: levelSelectPosition)
+        return basePosition
+    }
+    
+    static func clearLevelSelectPosition() {
+        UserDefaults.standard.set(nil, forKey: levelSelectPosition)
+    }
+    
+    // Level States Interaction
     fileprivate static func setLevelStates(levels: [Int]) {
         UserDefaults.standard.set(levels, forKey: levelStateKey)
     }
