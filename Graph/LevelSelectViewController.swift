@@ -162,6 +162,8 @@ class LevelSelectViewController: UIViewController {
                 nodeType = .HexagonComplete
             } else if levelStates[key.data.uid] == LevelState.locked.rawValue {
                 nodeType = .HexagonLocked
+            } else if levelStates[key.data.uid] == LevelState.question.rawValue {
+                nodeType = .HexagonQuestion
             } else if levelStates[key.data.uid] == LevelState.emitter.rawValue {
                 nodeType = .Emitter
             }

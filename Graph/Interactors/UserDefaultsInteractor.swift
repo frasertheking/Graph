@@ -13,7 +13,7 @@ public enum LevelState: Int {
     case base = 0
     case completed
     case locked
-    case random
+    case question
     case emitter
 }
 
@@ -59,6 +59,7 @@ struct UserDefaultsInteractor {
         
         // Setup basic level states
         baseLevels[1] = LevelState.emitter.rawValue
+        baseLevels[2] = LevelState.question.rawValue
         baseLevels[3] = LevelState.locked.rawValue
         
         if isKeyPresentInUserDefaults(key: levelStateKey) {
