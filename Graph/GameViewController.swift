@@ -289,7 +289,7 @@ class GameViewController: UIViewController {
         spawnButton.isHidden = false
         
         selectedNode = SCNNode()
-        Shapes.spawnShape(type: .Custom, position: SCNVector3(x: 0, y: 0, z: 0), color: UIColor.white, id: 0, node: selectedNode)
+        Shape.spawnShape(type: .Node, position: SCNVector3(x: 0, y: 0, z: 0), color: UIColor.white, id: 0, node: selectedNode)
         debugNodes.addChildNode(selectedNode)
         scnScene.rootNode.addChildNode(debugNodes)
     }
@@ -392,13 +392,13 @@ class GameViewController: UIViewController {
         
         for (key, value) in adjacencyDict {
             // Create nodes
-            Shapes.spawnShape(type: .Custom, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
+            Shape.spawnShape(type: .Node, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
             
             // Create edges
             for edge in value {
                 if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
                     let node = SCNNode()
-                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: edgeColor))
+                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shape.ShapeConstants.cylinderRadius, color: edgeColor))
                     
                     edgeArray.append(edge)
                 }
@@ -953,7 +953,7 @@ class GameViewController: UIViewController {
             for edge in value {
                 if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
                     let node = SCNNode()
-                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: edgeColor))
+                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shape.ShapeConstants.cylinderRadius, color: edgeColor))
                     
                     if solved {
                         node.geometry?.firstMaterial?.emission.contents = UIColor.glowColor
@@ -1072,7 +1072,7 @@ class GameViewController: UIViewController {
     
     @IBAction func spawnDebugNode() {
         selectedNode = SCNNode()
-        Shapes.spawnShape(type: .Custom, position: SCNVector3(x: 0, y: 0, z: 0), color: UIColor.white, id: 0, node: selectedNode)
+        Shape.spawnShape(type: .Node, position: SCNVector3(x: 0, y: 0, z: 0), color: UIColor.white, id: 0, node: selectedNode)
         debugNodes.addChildNode(selectedNode)
     }
     

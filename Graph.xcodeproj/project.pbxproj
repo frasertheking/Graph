@@ -21,15 +21,15 @@
 		4344E96B200269E0003FC234 /* GraphAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344E96A200269E0003FC234 /* GraphAnimation.swift */; };
 		434A574F1FDB109400FD172B /* levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 434A574E1FDB109400FD172B /* levels.plist */; };
 		435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 435BACC91FD7584400DFAF6B /* Trail.scnp */; };
-		436C7B0C2090F9370037342A /* kColor_lock.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B032090F9360037342A /* kColor_lock.dae */; };
-		436C7B0D2090F9370037342A /* planar_lock.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B042090F9360037342A /* planar_lock.dae */; };
-		436C7B0E2090F9370037342A /* hamiltonian_lock.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B052090F9370037342A /* hamiltonian_lock.dae */; };
-		436C7B0F2090F9370037342A /* hamiltonian_question.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B062090F9370037342A /* hamiltonian_question.dae */; };
-		436C7B102090F9370037342A /* kColor_question.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B072090F9370037342A /* kColor_question.dae */; };
-		436C7B112090F9370037342A /* kColor_check.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B082090F9370037342A /* kColor_check.dae */; };
-		436C7B122090F9370037342A /* hamiltonian_check.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B092090F9370037342A /* hamiltonian_check.dae */; };
-		436C7B132090F9370037342A /* planar_check.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B0A2090F9370037342A /* planar_check.dae */; };
-		436C7B142090F9370037342A /* planar_question.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B0B2090F9370037342A /* planar_question.dae */; };
+		436C7B0C2090F9370037342A /* kColor_locked.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B032090F9360037342A /* kColor_locked.dae */; };
+		436C7B0D2090F9370037342A /* planar_locked.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B042090F9360037342A /* planar_locked.dae */; };
+		436C7B0E2090F9370037342A /* hamiltonian_locked.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B052090F9370037342A /* hamiltonian_locked.dae */; };
+		436C7B0F2090F9370037342A /* hamiltonian_random.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B062090F9370037342A /* hamiltonian_random.dae */; };
+		436C7B102090F9370037342A /* kColor_random.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B072090F9370037342A /* kColor_random.dae */; };
+		436C7B112090F9370037342A /* kColor_complete.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B082090F9370037342A /* kColor_complete.dae */; };
+		436C7B122090F9370037342A /* hamiltonian_complete.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B092090F9370037342A /* hamiltonian_complete.dae */; };
+		436C7B132090F9370037342A /* planar_complete.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B0A2090F9370037342A /* planar_complete.dae */; };
+		436C7B142090F9370037342A /* planar_random.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B0B2090F9370037342A /* planar_random.dae */; };
 		436C7B182090FC570037342A /* kColor.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B152090FC560037342A /* kColor.dae */; };
 		436C7B192090FC570037342A /* hamiltonian.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B162090FC560037342A /* hamiltonian.dae */; };
 		436C7B1A2090FC570037342A /* planar.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B172090FC560037342A /* planar.dae */; };
@@ -79,15 +79,15 @@
 		4344E96A200269E0003FC234 /* GraphAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAnimation.swift; sourceTree = "<group>"; };
 		434A574E1FDB109400FD172B /* levels.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = levels.plist; sourceTree = "<group>"; };
 		435BACC91FD7584400DFAF6B /* Trail.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Trail.scnp; sourceTree = "<group>"; };
-		436C7B032090F9360037342A /* kColor_lock.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor_lock.dae; sourceTree = "<group>"; };
-		436C7B042090F9360037342A /* planar_lock.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_lock.dae; sourceTree = "<group>"; };
-		436C7B052090F9370037342A /* hamiltonian_lock.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian_lock.dae; sourceTree = "<group>"; };
-		436C7B062090F9370037342A /* hamiltonian_question.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian_question.dae; sourceTree = "<group>"; };
-		436C7B072090F9370037342A /* kColor_question.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor_question.dae; sourceTree = "<group>"; };
-		436C7B082090F9370037342A /* kColor_check.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor_check.dae; sourceTree = "<group>"; };
-		436C7B092090F9370037342A /* hamiltonian_check.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian_check.dae; sourceTree = "<group>"; };
-		436C7B0A2090F9370037342A /* planar_check.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_check.dae; sourceTree = "<group>"; };
-		436C7B0B2090F9370037342A /* planar_question.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_question.dae; sourceTree = "<group>"; };
+		436C7B032090F9360037342A /* kColor_locked.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor_locked.dae; sourceTree = "<group>"; };
+		436C7B042090F9360037342A /* planar_locked.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_locked.dae; sourceTree = "<group>"; };
+		436C7B052090F9370037342A /* hamiltonian_locked.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian_locked.dae; sourceTree = "<group>"; };
+		436C7B062090F9370037342A /* hamiltonian_random.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian_random.dae; sourceTree = "<group>"; };
+		436C7B072090F9370037342A /* kColor_random.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor_random.dae; sourceTree = "<group>"; };
+		436C7B082090F9370037342A /* kColor_complete.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor_complete.dae; sourceTree = "<group>"; };
+		436C7B092090F9370037342A /* hamiltonian_complete.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian_complete.dae; sourceTree = "<group>"; };
+		436C7B0A2090F9370037342A /* planar_complete.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_complete.dae; sourceTree = "<group>"; };
+		436C7B0B2090F9370037342A /* planar_random.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_random.dae; sourceTree = "<group>"; };
 		436C7B152090FC560037342A /* kColor.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor.dae; sourceTree = "<group>"; };
 		436C7B162090FC560037342A /* hamiltonian.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian.dae; sourceTree = "<group>"; };
 		436C7B172090FC560037342A /* planar.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar.dae; sourceTree = "<group>"; };
@@ -275,15 +275,15 @@
 				43270DA520279CEE00BBF1CF /* Crystal14.png */,
 				432617641FED71A70031EA1E /* node.dae */,
 				43A71C5D207A936B008D3104 /* hexagon.dae */,
-				436C7B092090F9370037342A /* hamiltonian_check.dae */,
-				436C7B052090F9370037342A /* hamiltonian_lock.dae */,
-				436C7B062090F9370037342A /* hamiltonian_question.dae */,
-				436C7B082090F9370037342A /* kColor_check.dae */,
-				436C7B032090F9360037342A /* kColor_lock.dae */,
-				436C7B072090F9370037342A /* kColor_question.dae */,
-				436C7B0A2090F9370037342A /* planar_check.dae */,
-				436C7B042090F9360037342A /* planar_lock.dae */,
-				436C7B0B2090F9370037342A /* planar_question.dae */,
+				436C7B092090F9370037342A /* hamiltonian_complete.dae */,
+				436C7B052090F9370037342A /* hamiltonian_locked.dae */,
+				436C7B062090F9370037342A /* hamiltonian_random.dae */,
+				436C7B082090F9370037342A /* kColor_complete.dae */,
+				436C7B032090F9360037342A /* kColor_locked.dae */,
+				436C7B072090F9370037342A /* kColor_random.dae */,
+				436C7B0A2090F9370037342A /* planar_complete.dae */,
+				436C7B042090F9360037342A /* planar_locked.dae */,
+				436C7B0B2090F9370037342A /* planar_random.dae */,
 				436C7B162090FC560037342A /* hamiltonian.dae */,
 				436C7B152090FC560037342A /* kColor.dae */,
 				436C7B172090FC560037342A /* planar.dae */,
@@ -364,31 +364,31 @@
 				435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */,
 				43CA8FE51FB6919900B962D9 /* LaunchScreen.storyboard in Resources */,
 				43270DAB2027A17700BBF1CF /* Crystal14_1.png in Resources */,
-				436C7B0F2090F9370037342A /* hamiltonian_question.dae in Resources */,
+				436C7B0F2090F9370037342A /* hamiltonian_random.dae in Resources */,
 				436C7B1A2090FC570037342A /* planar.dae in Resources */,
-				436C7B102090F9370037342A /* kColor_question.dae in Resources */,
+				436C7B102090F9370037342A /* kColor_random.dae in Resources */,
 				43B012761FD62BA500F017A6 /* icosahedron.obj in Resources */,
-				436C7B142090F9370037342A /* planar_question.dae in Resources */,
+				436C7B142090F9370037342A /* planar_random.dae in Resources */,
 				43270DB02027A3F000BBF1CF /* crystal.dae in Resources */,
 				433512C61FDE26070078DB5F /* Glow.scnp in Resources */,
 				43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */,
-				436C7B0D2090F9370037342A /* planar_lock.dae in Resources */,
-				436C7B0E2090F9370037342A /* hamiltonian_lock.dae in Resources */,
-				436C7B132090F9370037342A /* planar_check.dae in Resources */,
+				436C7B0D2090F9370037342A /* planar_locked.dae in Resources */,
+				436C7B0E2090F9370037342A /* hamiltonian_locked.dae in Resources */,
+				436C7B132090F9370037342A /* planar_complete.dae in Resources */,
 				43C581851FE4481B00D344B0 /* ColorButtonCollectionViewCell.xib in Resources */,
 				432617651FED71A70031EA1E /* node.dae in Resources */,
 				434A574F1FDB109400FD172B /* levels.plist in Resources */,
 				43270DA620279CEE00BBF1CF /* Crystal14.png in Resources */,
-				436C7B0C2090F9370037342A /* kColor_lock.dae in Resources */,
+				436C7B0C2090F9370037342A /* kColor_locked.dae in Resources */,
 				43270DAC2027A17700BBF1CF /* Crystal14_2.png in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,
 				43C581811FE356AF00D344B0 /* Background.sks in Resources */,
 				43A71C5E207A936B008D3104 /* hexagon.dae in Resources */,
 				436C7B182090FC570037342A /* kColor.dae in Resources */,
 				436C7B192090FC570037342A /* hamiltonian.dae in Resources */,
-				436C7B112090F9370037342A /* kColor_check.dae in Resources */,
+				436C7B112090F9370037342A /* kColor_complete.dae in Resources */,
 				432EC2A5201E3FBC0075B477 /* Assets.xcassets in Resources */,
-				436C7B122090F9370037342A /* hamiltonian_check.dae in Resources */,
+				436C7B122090F9370037342A /* hamiltonian_complete.dae in Resources */,
 				432110542014D67900E1A24B /* Explode.scnp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

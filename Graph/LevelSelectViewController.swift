@@ -148,7 +148,6 @@ class LevelSelectViewController: UIViewController {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
         let edgeColor = UIColor.defaultVertexColor()
-        let levelStates = UserDefaultsInteractor.getLevelStates()
         
         guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
             return
@@ -157,24 +156,19 @@ class LevelSelectViewController: UIViewController {
         edgeArray = []
         
         for (key, value) in adjacencyDict {
-            var nodeType: Shapes = .Hexagon
-            if levelStates[key.data.uid] == LevelState.completed.rawValue {
-                nodeType = .HexagonComplete
-            } else if levelStates[key.data.uid] == LevelState.locked.rawValue {
-                nodeType = .HexagonLocked
-            } else if levelStates[key.data.uid] == LevelState.question.rawValue {
-                nodeType = .HexagonQuestion
-            } else if levelStates[key.data.uid] == LevelState.emitter.rawValue {
-                nodeType = .Emitter
+            var shapeType: Shape = .Node
+
+            if let shape = getShapeTypeForLevel(level: key.data.uid) {
+                shapeType = shape
             }
             
-            Shapes.spawnShape(type: nodeType, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
+            Shape.spawnShape(type: shapeType, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
             
             // Create edges
             for edge in value {
                 if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
                     let node = SCNNode()
-                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shapes.ShapeConstants.cylinderRadius, color: edgeColor))
+                    edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shape.ShapeConstants.cylinderRadius, color: edgeColor))
                     
                     edgeArray.append(edge)
                 }
@@ -183,6 +177,56 @@ class LevelSelectViewController: UIViewController {
         
         scnScene.rootNode.addChildNode(vertexNodes)
         scnScene.rootNode.addChildNode(edgeNodes)
+    }
+    
+    func getShapeTypeForLevel(level: Int) -> Shape? {
+        let levelStates = UserDefaultsInteractor.getLevelStates()
+        
+        guard let levelType: GraphType = Levels.sharedInstance.gameLevels[level].graphType else {
+            return nil
+        }
+        
+        guard let levelState: LevelState = LevelState(rawValue: levelStates[level]) else {
+            return nil
+        }
+        
+        if levelState == .emitter {
+            return Shape.Emitter
+        }
+        
+        if levelType == .hamiltonian {
+            if levelState == .base {
+                return Shape.Hamiltonian
+            } else if levelState == .completed {
+                return Shape.HamiltonianComplete
+            } else if levelState == .locked {
+                return Shape.HamiltonianLocked
+            } else if levelState == .random {
+                return Shape.HamiltonianRandom
+            }
+        } else if levelType == .planar {
+            if levelState == .base {
+                return Shape.Planar
+            } else if levelState == .completed {
+                return Shape.PlanarComplete
+            } else if levelState == .locked {
+                return Shape.PlanarLocked
+            } else if levelState == .random {
+                return Shape.PlanarRandom
+            }
+        } else if levelType == .kColor {
+            if levelState == .base {
+                return Shape.kColor
+            } else if levelState == .completed {
+                return Shape.kColorComplete
+            } else if levelState == .locked {
+                return Shape.kColorLocked
+            } else if levelState == .random {
+                return Shape.kColorRandom
+            }
+        }
+        
+        return nil
     }
     
     func handleTouchFor(node: SCNNode) {

@@ -1,5 +1,5 @@
 //
-//  Shapes.swift
+//  Shape.swift
 //  Graph
 //
 //  Created by Fraser King on 2017-11-10.
@@ -11,77 +11,55 @@ import SceneKit
 import ModelIO
 import SceneKit.ModelIO
 
-public enum Shapes:Int {
+public enum Shape: Int {
     
-    case Sphere = 0
-    case HexagonComplete
-    case HexagonLocked
-    case HexagonQuestion
-    case Hexagon
+    case Node = 0
+    case Hamiltonian
+    case HamiltonianComplete
+    case HamiltonianRandom
+    case HamiltonianLocked
+    case Planar
+    case PlanarComplete
+    case PlanarRandom
+    case PlanarLocked
+    case kColor
+    case kColorComplete
+    case kColorRandom
+    case kColorLocked
     case Emitter
-    case Custom
     
     struct ShapeConstants {
         static let sphereRadius: CGFloat = 0.5
         static let cylinderRadius: CGFloat = 0.1
         static let cylinderHeight: CGFloat = 3.1
-        static let customShapeName = "node.dae"
-        static let hexagonName = "hamiltonian.dae"
-        static let hexagonCompleteName = "planar_check.dae"
-        static let hexagonLockName = "kColor_lock.dae"
-        static let hexagonQuestionName = "kColor_question.dae"
         static let primaryMaterialColor = UIColor.defaultVertexColor()
         static let secondaryMaterialColor = UIColor.white
     }
     
-    static func spawnShape(type: Shapes, position: SCNVector3, color: UIColor, id: Int, node: SCNNode) {
-        var geometry:SCNGeometry
-        
-        switch type {
-        case .Sphere:
-            geometry = SCNSphere(radius: ShapeConstants.sphereRadius)
-        case .Hexagon:
-            let geoScene = SCNScene(named: ShapeConstants.hexagonName)
-            guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
-                return
-            }
-            geometry = geom
-        case .HexagonComplete:
-            let geoScene = SCNScene(named: ShapeConstants.hexagonCompleteName)
-            guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
-                return
-            }
-            geometry = geom
-        case .HexagonLocked:
-            let geoScene = SCNScene(named: ShapeConstants.hexagonLockName)
-            guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
-                return
-            }
-            geometry = geom
-        case .HexagonQuestion:
-            let geoScene = SCNScene(named: ShapeConstants.hexagonQuestionName)
-            guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
-                return
-            }
-            geometry = geom
-        case .Emitter:
-            let geoScene = SCNScene(named: ShapeConstants.customShapeName)
-            guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
-                return
-            }
-            geometry = geom
-        default:
-            let geoScene = SCNScene(named: ShapeConstants.customShapeName)
-            guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
-                return
-            }
-            geometry = geom
+    static let shapeNames = ["node",
+                             "hamiltonian",
+                             "hamiltonian_complete",
+                             "hamiltonian_random",
+                             "hamiltonian_locked",
+                             "planar",
+                             "planar_complete",
+                             "planar_random",
+                             "planar_locked",
+                             "kColor",
+                             "kColor_complete",
+                             "kColor_random",
+                             "kColor_locked",
+                             "node"]
+    
+    static func spawnShape(type: Shape, position: SCNVector3, color: UIColor, id: Int, node: SCNNode) {
+        guard let geometry: SCNGeometry = createNodeOfType(type: type) else {
+            return
         }
         
         geometry.materials.first?.diffuse.contents = ShapeConstants.primaryMaterialColor
         geometry.materials[1].diffuse.contents = ShapeConstants.secondaryMaterialColor
         
-        if type == .Hexagon || type == .HexagonComplete || type == .HexagonLocked || type == .HexagonQuestion || type == .Emitter {
+        if type.rawValue > 0  {
             geometry.materials.first?.diffuse.contents = UIColor.white
             geometry.materials[1].diffuse.contents = UIColor.red
         }
@@ -91,10 +69,10 @@ public enum Shapes:Int {
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.position = position
         
-        if type == .Hexagon || type == .HexagonComplete || type == .HexagonLocked || type == .HexagonQuestion {
+        if type != .Node && type != .Emitter {
             geometryNode.rotation = SCNVector4(x: 1, y: 0, z: 0, w: Float(Double.pi/2))
             geometryNode.position = SCNVector3(x: position.x, y: position.y, z: position.z + 0.1)
-        } else if type != .Emitter {
+        } else if type == .Node {
             geometryNode.rotation = SCNVector4(x: 0, y: 1, z: 0, w: Float(Double.pi/2))
             geometryNode.scale = SCNVector3(ShapeConstants.sphereRadius, ShapeConstants.sphereRadius, ShapeConstants.sphereRadius)
         }
@@ -102,7 +80,15 @@ public enum Shapes:Int {
         node.addChildNode(geometryNode)
     }
     
-    static func randomCGFloat() -> Float {
-        return Float(arc4random()) /  Float(UInt32.max)
+    private static func createNodeOfType(type: Shape) -> SCNGeometry? {
+        let geoScene = SCNScene(named: shapeNames[type.rawValue])
+        guard let geom = geoScene?.rootNode.childNode(withName: "node", recursively: true)?.geometry else {
+            return nil
+        }
+        return geom
     }
+    
+//    static func randomCGFloat() -> Float {
+//        return Float(arc4random()) /  Float(UInt32.max)
+//    }
 }
