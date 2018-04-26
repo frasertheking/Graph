@@ -105,20 +105,30 @@ struct GraphAnimation {
     }
     
     static func swellGraphObject(vertexNodes: SCNNode, edgeNodes: SCNNode) {
-        GraphAnimation.swellNode(node: vertexNodes)
-        GraphAnimation.swellNode(node: edgeNodes)
+        GraphAnimation.swellNode(node: vertexNodes, scaleAmount: 1.08, delta: 2)
+        GraphAnimation.swellNode(node: edgeNodes, scaleAmount: 1.08, delta: 2)
     }
     
-    static func swellNode(node: SCNNode) {
+    static func swellNode(node: SCNNode, scaleAmount: Float, delta: Double) {
         let scale = CABasicAnimation(keyPath: "scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         scale.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 1, z: 1, w: 0))
-        scale.toValue = NSValue(scnVector4: SCNVector4(x: 1.08, y: 1.08, z: 1.08, w: 0))
-        scale.duration = 2
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: scaleAmount, y: scaleAmount, z: scaleAmount, w: 0))
+        scale.duration = delta
         scale.repeatCount = .infinity
         scale.autoreverses = true
         scale.timingFunction = easeInOut
         node.addAnimation(scale, forKey: "swell")
+    }
+    
+    static func rotateNode(node: SCNNode, delta: Double) {
+        let spin = CABasicAnimation(keyPath: "rotation")
+        spin.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 0, z: 0, w: 0))
+        spin.toValue = NSValue(scnVector4: SCNVector4(x: 1, y: 0, z: 0, w: Float(CGFloat(Double.pi*2))))
+        spin.duration = delta
+        spin.repeatCount = .infinity
+        spin.autoreverses = false
+        node.addAnimation(spin, forKey: "spin around")
     }
     
     static func animateInCollectionView(view: UIView, collectionViewBottomConstraint: NSLayoutConstraint, completion: @escaping () -> Void) {

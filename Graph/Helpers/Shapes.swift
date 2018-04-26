@@ -87,8 +87,4 @@ public enum Shape: Int {
         }
         return geom
     }
-    
-//    static func randomCGFloat() -> Float {
-//        return Float(arc4random()) /  Float(UInt32.max)
-//    }
 }

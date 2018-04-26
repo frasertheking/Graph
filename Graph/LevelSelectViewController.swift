@@ -24,6 +24,7 @@ class LevelSelectViewController: UIViewController {
     var vertexNodes: SCNNode!
     var lightNodes: SCNNode!
     var colorSelectNodes: SCNNode!
+    var emitterNode: SCNNode!
 
     // GLOBAL VARS
     var activeLevel: Level?
@@ -119,22 +120,34 @@ class LevelSelectViewController: UIViewController {
     func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ - 5)
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
     @objc func setupLevel() {
         scnView.isUserInteractionEnabled = true
         activeLevel = Levels.createLevel(index: currentLevel)
-        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
+        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ - 5), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
         createObjects()
         GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
         
+        GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
+            GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+        }
+        
         // Set the levels to the correct position they were last left at
         edgeNodes.position = UserDefaultsInteractor.getLevelSelectPosition()
         vertexNodes.position = UserDefaultsInteractor.getLevelSelectPosition()
+        
+        // TODO: move this??
+        GraphAnimation.delayWithSeconds(0.25) {
+            if let trail = ParticleGeneration.createTrail(color: UIColor.red, geometry: self.emitterNode.geometry!) {
+                self.emitterNode.removeAllParticleSystems()
+                self.emitterNode.addParticleSystem(trail)
+            }
+        }
     }
     
     func setupInteractions() {
@@ -163,6 +176,13 @@ class LevelSelectViewController: UIViewController {
             }
             
             Shape.spawnShape(type: shapeType, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
+            
+            if shapeType == .Emitter {
+                if let node = vertexNodes.childNodes.last {
+                    emitterNode = node
+                    GraphAnimation.rotateNode(node: node, delta: 20)
+                }
+            }
             
             // Create edges
             for edge in value {
@@ -250,8 +270,25 @@ class LevelSelectViewController: UIViewController {
         // First check for legal moves - return early if illegal
         if geoName != "edge" {
             if checkIfAvailable(level: Int(geoName)!) {
-                selectedLevel = Int(geoName)!
-                GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
+                
+                let scaleUpAction = SCNAction.scale(by: GameConstants.kScaleGrow, duration: GameConstants.kVeryShortTimeDelay)
+                scaleUpAction.timingMode = .easeInEaseOut
+                let scaleDownAction = SCNAction.scale(by: GameConstants.kScaleShrink, duration: GameConstants.kVeryShortTimeDelay)
+                scaleDownAction.timingMode = .easeInEaseOut
+                
+                node.runAction(scaleUpAction) {
+                    node.runAction(scaleDownAction) {}
+                }
+                
+                if let explode = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
+                    node.removeAllParticleSystems()
+                    node.addParticleSystem(explode)
+                }
+                
+                GraphAnimation.delayWithSeconds(0.3) {
+                    self.selectedLevel = Int(geoName)!
+                    GraphAnimation.implodeGraph(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, clean: self.cleanScene)
+                }
             }
         }
     }
