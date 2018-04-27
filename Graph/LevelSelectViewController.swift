@@ -143,7 +143,7 @@ class LevelSelectViewController: UIViewController {
         
         // TODO: move this??
         GraphAnimation.delayWithSeconds(0.25) {
-            if let trail = ParticleGeneration.createTrail(color: UIColor.red, geometry: self.emitterNode.geometry!) {
+            if let trail = ParticleGeneration.createTrail(color: UIColor.black, geometry: self.emitterNode.geometry!) {
                 self.emitterNode.removeAllParticleSystems()
                 self.emitterNode.addParticleSystem(trail)
             }
@@ -161,7 +161,8 @@ class LevelSelectViewController: UIViewController {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
         let edgeColor = UIColor.defaultVertexColor()
-        
+        let levelStates = UserDefaultsInteractor.getLevelStates()
+
         guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
             return
         }
@@ -175,7 +176,11 @@ class LevelSelectViewController: UIViewController {
                 shapeType = shape
             }
             
-            Shape.spawnShape(type: shapeType, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
+            Shape.spawnShape(type: shapeType,
+                             position: key.data.position,
+                             color: getColorForLevelState(level: key.data.uid),
+                             id: key.data.uid,
+                             node: vertexNodes)
             
             if shapeType == .Emitter {
                 if let node = vertexNodes.childNodes.last {
@@ -187,9 +192,19 @@ class LevelSelectViewController: UIViewController {
             // Create edges
             for edge in value {
                 if edgeArray.filter({ el in (el.destination.data.position.equal(b: edge.source.data.position) && el.source.data.position.equal(b: edge.destination.data.position)) }).count == 0 {
+                    
                     let node = SCNNode()
                     edgeNodes.addChildNode(node.buildLineInTwoPointsWithRotation(from: edge.source.data.position, to: edge.destination.data.position, radius: Shape.ShapeConstants.cylinderRadius, color: edgeColor))
                     
+                    if let levelStateSource: LevelState = LevelState(rawValue: levelStates[edge.source.data.uid]) {
+                        if let levelStateDestination: LevelState = LevelState(rawValue: levelStates[edge.destination.data.uid]) {
+                            if levelStateSource == LevelState.emitter || levelStateDestination == LevelState.emitter ||
+                               levelStateSource == LevelState.completed || levelStateDestination == LevelState.completed {
+                                node.geometry?.firstMaterial?.diffuse.contents = UIColor.white
+                                node.geometry?.firstMaterial?.emission.contents = UIColor.goldColor()
+                            }
+                        }
+                    }
                     edgeArray.append(edge)
                 }
             }
@@ -249,6 +264,26 @@ class LevelSelectViewController: UIViewController {
         return nil
     }
     
+    func getColorForLevelState(level: Int) -> UIColor {
+        let levelStates = UserDefaultsInteractor.getLevelStates()
+
+        guard let levelState: LevelState = LevelState(rawValue: levelStates[level]) else {
+            return .black
+        }
+        
+        if levelState == .base {
+            return .black
+        } else if levelState == .completed {
+            return .customGreen()
+        } else if levelState == .locked {
+            return .customBlue()
+        } else if levelState == .random {
+            return .customRed()
+        }
+        
+        return .black
+    }
+
     func handleTouchFor(node: SCNNode) {
         
         guard let geometry = node.geometry else {

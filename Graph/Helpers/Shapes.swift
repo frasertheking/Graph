@@ -14,6 +14,7 @@ import SceneKit.ModelIO
 public enum Shape: Int {
     
     case Node = 0
+    case Emitter
     case Hamiltonian
     case HamiltonianComplete
     case HamiltonianRandom
@@ -26,7 +27,6 @@ public enum Shape: Int {
     case kColorComplete
     case kColorRandom
     case kColorLocked
-    case Emitter
     
     struct ShapeConstants {
         static let sphereRadius: CGFloat = 0.5
@@ -37,6 +37,7 @@ public enum Shape: Int {
     }
     
     static let shapeNames = ["node",
+                             "node",
                              "hamiltonian",
                              "hamiltonian_complete",
                              "hamiltonian_random",
@@ -48,8 +49,7 @@ public enum Shape: Int {
                              "kColor",
                              "kColor_complete",
                              "kColor_random",
-                             "kColor_locked",
-                             "node"]
+                             "kColor_locked"]
     
     static func spawnShape(type: Shape, position: SCNVector3, color: UIColor, id: Int, node: SCNNode) {
         guard let geometry: SCNGeometry = createNodeOfType(type: type) else {
@@ -59,9 +59,12 @@ public enum Shape: Int {
         geometry.materials.first?.diffuse.contents = ShapeConstants.primaryMaterialColor
         geometry.materials[1].diffuse.contents = ShapeConstants.secondaryMaterialColor
         
-        if type.rawValue > 0  {
+        if type.rawValue > 1  {
             geometry.materials.first?.diffuse.contents = UIColor.white
-            geometry.materials[1].diffuse.contents = UIColor.red
+            geometry.materials[1].diffuse.contents = color
+        } else if type.rawValue == 1 {
+            geometry.materials.first?.diffuse.contents = UIColor.black
+            geometry.materials[1].diffuse.contents = UIColor.white
         }
         
         geometry.name = "\(id)"
