@@ -716,6 +716,14 @@ class GameViewController: UIViewController {
             // Update completed level state
             UserDefaultsInteractor.updateLevelsWithState(position: currentLevel, newState: .completed)
             
+            if let neighbours = Levels.sharedInstance.gameLevels[0].adjacencyList?.getNeighbours(for: "\(currentLevel)") {
+                for neighbour in neighbours {
+                    if UserDefaultsInteractor.getLevelState(position: Int(neighbour)!) == LevelState.locked.rawValue {
+                        UserDefaultsInteractor.updateLevelsWithState(position: Int(neighbour)!, newState: .base)
+                    }
+                }
+            }
+            
             GraphAnimation.delayWithSeconds(0.5, completion: {
                 GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
                 GraphAnimation.delayWithSeconds(0.5, completion: {

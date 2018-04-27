@@ -336,8 +336,25 @@ class LevelSelectViewController: UIViewController {
             return false
         }
         
-        return true
+        var isAvailable = false
+        for edge in edgeArray {
+            if edge.source.data.uid == level {
+                if levelStates[edge.destination.data.uid] == LevelState.completed.rawValue ||
+                   levelStates[edge.destination.data.uid] == LevelState.emitter.rawValue {
+                    isAvailable = true
+                }
+            } else if edge.destination.data.uid == level {
+                if levelStates[edge.source.data.uid] == LevelState.completed.rawValue ||
+                   levelStates[edge.source.data.uid] == LevelState.emitter.rawValue {
+                    isAvailable = true
+                }
+            }
+        }
+                
+        return isAvailable
     }
+    
+    
     
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         let location = gestureRecognize.location(in: scnView)
@@ -369,7 +386,7 @@ class LevelSelectViewController: UIViewController {
             vertexNodes.position = SCNVector3(x: vertexNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
                                                     y: vertexNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
                                                     z: vertexNodes.position.z)
-        
+            
             edgeNodes.position = SCNVector3(x: edgeNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
                                               y: edgeNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
                                               z: edgeNodes.position.z)

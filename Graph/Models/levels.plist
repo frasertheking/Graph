@@ -56,7 +56,9 @@
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array/>
+				<array>
+					<integer>7</integer>
+				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
@@ -68,7 +70,9 @@
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array/>
+				<array>
+					<integer>6</integer>
+				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
@@ -77,6 +81,30 @@
 				<integer>-3</integer>
 				<key>y</key>
 				<integer>-3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>6</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>-6</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>7</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>6</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>

@@ -55,12 +55,14 @@ struct UserDefaultsInteractor {
     }
     
     static func getLevelStates() -> [Int] {
-        var baseLevels: [Int] = [Int](repeatElement(0, count: 64))
+        var baseLevels: [Int] = [Int](repeatElement(LevelState.locked.rawValue, count: 64))
         
         // Setup basic level states
         baseLevels[1] = LevelState.emitter.rawValue
         baseLevels[2] = LevelState.random.rawValue
-        baseLevels[3] = LevelState.locked.rawValue
+        baseLevels[3] = LevelState.base.rawValue
+        baseLevels[4] = LevelState.base.rawValue
+        baseLevels[5] = LevelState.base.rawValue
         
         if isKeyPresentInUserDefaults(key: levelStateKey) {
             guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
@@ -72,6 +74,28 @@ struct UserDefaultsInteractor {
         // Initialize default value if key is not yet set (level 0 is complete by default)
         UserDefaults.standard.set(baseLevels, forKey: levelStateKey)
         return baseLevels
+    }
+    
+    static func getLevelState(position: Int) -> Int {
+        var baseLevels: [Int] = [Int](repeatElement(LevelState.locked.rawValue, count: 64))
+        
+        // Setup basic level states
+        baseLevels[1] = LevelState.emitter.rawValue
+        baseLevels[2] = LevelState.random.rawValue
+        baseLevels[3] = LevelState.base.rawValue
+        baseLevels[4] = LevelState.base.rawValue
+        baseLevels[5] = LevelState.base.rawValue
+        
+        if isKeyPresentInUserDefaults(key: levelStateKey) {
+            guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
+                return baseLevels[position]
+            }
+            return levelArray[position]
+        }
+        
+        // Initialize default value if key is not yet set (level 0 is complete by default)
+        UserDefaults.standard.set(baseLevels, forKey: levelStateKey)
+        return baseLevels[position]
     }
     
     static func updateLevelsWithState(position: Int, newState: LevelState) {
