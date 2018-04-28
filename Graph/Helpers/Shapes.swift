@@ -19,14 +19,18 @@ public enum Shape: Int {
     case HamiltonianComplete
     case HamiltonianRandom
     case HamiltonianLocked
+    case HamiltonianTimed
     case Planar
     case PlanarComplete
     case PlanarRandom
     case PlanarLocked
+    case PlanarTimed
     case kColor
     case kColorComplete
     case kColorRandom
     case kColorLocked
+    case kColorTimed
+    case Spiral
     
     struct ShapeConstants {
         static let sphereRadius: CGFloat = 0.5
@@ -42,14 +46,18 @@ public enum Shape: Int {
                              "hamiltonian_complete",
                              "hamiltonian_random",
                              "hamiltonian_locked",
+                             "hamiltonian_timed",
                              "planar",
                              "planar_complete",
                              "planar_random",
                              "planar_locked",
+                             "planar_timed",
                              "kColor",
                              "kColor_complete",
                              "kColor_random",
-                             "kColor_locked"]
+                             "kColor_locked",
+                             "kColor_timed",
+                             "spiral"]
     
     static func spawnShape(type: Shape, position: SCNVector3, color: UIColor, id: Int, node: SCNNode) {
         guard let geometry: SCNGeometry = createNodeOfType(type: type) else {

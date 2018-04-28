@@ -76,6 +76,7 @@ class LevelSelectViewController: UIViewController {
         super.viewDidLoad()
         
         UserDefaultsInteractor.clearLevelSelectPosition()
+        //UserDefaultsInteractor.clearLevelStates()
         
         setupView()
         setupScene()
@@ -238,6 +239,8 @@ class LevelSelectViewController: UIViewController {
                 return Shape.HamiltonianLocked
             } else if levelState == .random {
                 return Shape.HamiltonianRandom
+            } else if levelState == .timed {
+                return Shape.HamiltonianTimed
             }
         } else if levelType == .planar {
             if levelState == .base {
@@ -248,6 +251,8 @@ class LevelSelectViewController: UIViewController {
                 return Shape.PlanarLocked
             } else if levelState == .random {
                 return Shape.PlanarRandom
+            } else if levelState == .timed {
+                return Shape.PlanarTimed
             }
         } else if levelType == .kColor {
             if levelState == .base {
@@ -258,6 +263,8 @@ class LevelSelectViewController: UIViewController {
                 return Shape.kColorLocked
             } else if levelState == .random {
                 return Shape.kColorRandom
+            } else if levelState == .timed {
+                return Shape.kColorTimed
             }
         }
         
@@ -279,6 +286,8 @@ class LevelSelectViewController: UIViewController {
             return .customBlue()
         } else if levelState == .random {
             return .customRed()
+        } else if levelState == .timed {
+            return .orange
         }
         
         return .black

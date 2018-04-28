@@ -30,9 +30,13 @@
 		436C7B122090F9370037342A /* hamiltonian_complete.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B092090F9370037342A /* hamiltonian_complete.dae */; };
 		436C7B132090F9370037342A /* planar_complete.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B0A2090F9370037342A /* planar_complete.dae */; };
 		436C7B142090F9370037342A /* planar_random.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B0B2090F9370037342A /* planar_random.dae */; };
-		436C7B182090FC570037342A /* kColor.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B152090FC560037342A /* kColor.dae */; };
 		436C7B192090FC570037342A /* hamiltonian.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B162090FC560037342A /* hamiltonian.dae */; };
 		436C7B1A2090FC570037342A /* planar.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B172090FC560037342A /* planar.dae */; };
+		436C7B20209407EF0037342A /* hamiltonian_timed.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B1D209407EF0037342A /* hamiltonian_timed.dae */; };
+		436C7B21209407EF0037342A /* kColor_timed.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B1E209407EF0037342A /* kColor_timed.dae */; };
+		436C7B22209407EF0037342A /* planar_timed.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B1F209407EF0037342A /* planar_timed.dae */; };
+		436C7B2A20940C080037342A /* spiral.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B2920940C080037342A /* spiral.dae */; };
+		436C7B2C20940E440037342A /* kColor.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B2B20940E440037342A /* kColor.dae */; };
 		4375FA0C203CD68F0073AE32 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4375FA0B203CD68F0073AE32 /* LandingViewController.swift */; };
 		437C90C81FB7B1BF0017A454 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */; };
 		43860BC71FB7E17C0076B0CF /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BC61FB7E17C0076B0CF /* Vertex.swift */; };
@@ -88,9 +92,13 @@
 		436C7B092090F9370037342A /* hamiltonian_complete.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian_complete.dae; sourceTree = "<group>"; };
 		436C7B0A2090F9370037342A /* planar_complete.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_complete.dae; sourceTree = "<group>"; };
 		436C7B0B2090F9370037342A /* planar_random.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_random.dae; sourceTree = "<group>"; };
-		436C7B152090FC560037342A /* kColor.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor.dae; sourceTree = "<group>"; };
 		436C7B162090FC560037342A /* hamiltonian.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian.dae; sourceTree = "<group>"; };
 		436C7B172090FC560037342A /* planar.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar.dae; sourceTree = "<group>"; };
+		436C7B1D209407EF0037342A /* hamiltonian_timed.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian_timed.dae; sourceTree = "<group>"; };
+		436C7B1E209407EF0037342A /* kColor_timed.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor_timed.dae; sourceTree = "<group>"; };
+		436C7B1F209407EF0037342A /* planar_timed.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_timed.dae; sourceTree = "<group>"; };
+		436C7B2920940C080037342A /* spiral.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = spiral.dae; sourceTree = "<group>"; };
+		436C7B2B20940E440037342A /* kColor.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor.dae; sourceTree = "<group>"; };
 		4375FA0B203CD68F0073AE32 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		437C90C71FB7B1BF0017A454 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 		43860BC61FB7E17C0076B0CF /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
@@ -198,7 +206,7 @@
 		43B012791FD62DBF00F017A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				43D732F7206484E300AA0EFB /* old */,
+				43D732F7206484E300AA0EFB /* dae */,
 				434A574E1FDB109400FD172B /* levels.plist */,
 			);
 			path = Models;
@@ -265,7 +273,7 @@
 			path = Graph;
 			sourceTree = "<group>";
 		};
-		43D732F7206484E300AA0EFB /* old */ = {
+		43D732F7206484E300AA0EFB /* dae */ = {
 			isa = PBXGroup;
 			children = (
 				43B012751FD62BA500F017A6 /* icosahedron.obj */,
@@ -275,20 +283,24 @@
 				43270DA520279CEE00BBF1CF /* Crystal14.png */,
 				432617641FED71A70031EA1E /* node.dae */,
 				43A71C5D207A936B008D3104 /* hexagon.dae */,
+				436C7B162090FC560037342A /* hamiltonian.dae */,
 				436C7B092090F9370037342A /* hamiltonian_complete.dae */,
 				436C7B052090F9370037342A /* hamiltonian_locked.dae */,
 				436C7B062090F9370037342A /* hamiltonian_random.dae */,
+				436C7B1D209407EF0037342A /* hamiltonian_timed.dae */,
+				436C7B2B20940E440037342A /* kColor.dae */,
 				436C7B082090F9370037342A /* kColor_complete.dae */,
 				436C7B032090F9360037342A /* kColor_locked.dae */,
 				436C7B072090F9370037342A /* kColor_random.dae */,
+				436C7B1E209407EF0037342A /* kColor_timed.dae */,
+				436C7B172090FC560037342A /* planar.dae */,
 				436C7B0A2090F9370037342A /* planar_complete.dae */,
 				436C7B042090F9360037342A /* planar_locked.dae */,
 				436C7B0B2090F9370037342A /* planar_random.dae */,
-				436C7B162090FC560037342A /* hamiltonian.dae */,
-				436C7B152090FC560037342A /* kColor.dae */,
-				436C7B172090FC560037342A /* planar.dae */,
+				436C7B1F209407EF0037342A /* planar_timed.dae */,
+				436C7B2920940C080037342A /* spiral.dae */,
 			);
-			path = old;
+			path = dae;
 			sourceTree = "<group>";
 		};
 		D2BDD0E822987D36EEED68DF /* Frameworks */ = {
@@ -363,7 +375,10 @@
 			files = (
 				435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */,
 				43CA8FE51FB6919900B962D9 /* LaunchScreen.storyboard in Resources */,
+				436C7B20209407EF0037342A /* hamiltonian_timed.dae in Resources */,
 				43270DAB2027A17700BBF1CF /* Crystal14_1.png in Resources */,
+				436C7B2A20940C080037342A /* spiral.dae in Resources */,
+				436C7B21209407EF0037342A /* kColor_timed.dae in Resources */,
 				436C7B0F2090F9370037342A /* hamiltonian_random.dae in Resources */,
 				436C7B1A2090FC570037342A /* planar.dae in Resources */,
 				436C7B102090F9370037342A /* kColor_random.dae in Resources */,
@@ -371,6 +386,7 @@
 				436C7B142090F9370037342A /* planar_random.dae in Resources */,
 				43270DB02027A3F000BBF1CF /* crystal.dae in Resources */,
 				433512C61FDE26070078DB5F /* Glow.scnp in Resources */,
+				436C7B2C20940E440037342A /* kColor.dae in Resources */,
 				43CA8FF11FB6961C00B962D9 /* Graph.scnassets in Resources */,
 				436C7B0D2090F9370037342A /* planar_locked.dae in Resources */,
 				436C7B0E2090F9370037342A /* hamiltonian_locked.dae in Resources */,
@@ -380,11 +396,11 @@
 				434A574F1FDB109400FD172B /* levels.plist in Resources */,
 				43270DA620279CEE00BBF1CF /* Crystal14.png in Resources */,
 				436C7B0C2090F9370037342A /* kColor_locked.dae in Resources */,
+				436C7B22209407EF0037342A /* planar_timed.dae in Resources */,
 				43270DAC2027A17700BBF1CF /* Crystal14_2.png in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,
 				43C581811FE356AF00D344B0 /* Background.sks in Resources */,
 				43A71C5E207A936B008D3104 /* hexagon.dae in Resources */,
-				436C7B182090FC570037342A /* kColor.dae in Resources */,
 				436C7B192090FC570037342A /* hamiltonian.dae in Resources */,
 				436C7B112090F9370037342A /* kColor_complete.dae in Resources */,
 				432EC2A5201E3FBC0075B477 /* Assets.xcassets in Resources */,
