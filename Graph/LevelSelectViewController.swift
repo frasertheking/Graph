@@ -47,6 +47,7 @@ class LevelSelectViewController: UIViewController {
         static let kScaleShrink: CGFloat = 0.8
         static let kScaleGrow: CGFloat = 1.25
         static let kPanTranslationScaleFactor: CGFloat = 25
+        static let kPanVelocityFactor: CGFloat = 40
         static let kPlanarMaxMagnitude: Float = 7
         
         // Timing Constants
@@ -404,14 +405,18 @@ class LevelSelectViewController: UIViewController {
         performSegue(withIdentifier: "gameSegue", sender: nil)
     }
     
-    @objc func panGesture(gestureRecognize: UIPanGestureRecognizer){
-        if gestureRecognize.state == .changed {
-            guard let recognizerView = gestureRecognize.view else {
-                return
-            }
-            
-            let translation = gestureRecognize.translation(in: recognizerView)
-            
+    @objc func panGesture(gestureRecognize: UIPanGestureRecognizer) {
+        guard let recognizerView = gestureRecognize.view else {
+            return
+        }
+        
+        let translation = gestureRecognize.translation(in: recognizerView)
+        let velocity = gestureRecognize.velocity(in: recognizerView)
+
+        if gestureRecognize.state == .began {
+            vertexNodes.removeAllActions()
+            edgeNodes.removeAllActions()
+        } else if gestureRecognize.state == .changed {
             vertexNodes.position = SCNVector3(x: vertexNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
                                                     y: vertexNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
                                                     z: vertexNodes.position.z)
@@ -422,6 +427,20 @@ class LevelSelectViewController: UIViewController {
             
             UserDefaultsInteractor.setLevelSelectPosition(pos: [edgeNodes.position.x, edgeNodes.position.y])
             gestureRecognize.setTranslation(CGPoint.zero, in: recognizerView)
+        } else if gestureRecognize.state == .ended {
+            if abs(velocity.x) > 200 || abs(velocity.y) > 200 {
+                let newX: Float = vertexNodes.position.x + (Float(velocity.x*0.4)) / Float(GameConstants.kPanVelocityFactor)
+                let newY: Float = vertexNodes.position.y - (Float(velocity.y*0.4)) / Float(GameConstants.kPanVelocityFactor)
+                
+                let newPosition: SCNVector3 = SCNVector3(x: newX, y: newY, z: vertexNodes.position.z)
+                let moveAction = SCNAction.move(to: newPosition, duration: 0.4)
+                moveAction.timingMode = .easeOut
+                
+                vertexNodes.runAction(moveAction)
+                edgeNodes.runAction(moveAction)
+                
+                UserDefaultsInteractor.setLevelSelectPosition(pos: [newX, newY])
+            }
         }
     }
     
