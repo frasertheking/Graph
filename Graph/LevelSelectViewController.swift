@@ -77,7 +77,7 @@ class LevelSelectViewController: UIViewController {
         super.viewDidLoad()
         
         UserDefaultsInteractor.clearLevelSelectPosition()
-        UserDefaultsInteractor.clearLevelStates()
+        //UserDefaultsInteractor.clearLevelStates()
         
         setupView()
         setupScene()
@@ -152,7 +152,7 @@ class LevelSelectViewController: UIViewController {
             }
             
             for node in self.simNodes {
-                if let spiral = ParticleGeneration.createSpiral(color: UIColor.black, geometry: node.geometry!) {
+                if let spiral = ParticleGeneration.createSpiral(color: self.getColorForLevelState(level: Int((node.geometry?.name)!)), geometry: node.geometry!) {
                     node.removeAllParticleSystems()
                     node.addParticleSystem(spiral)
                 }
@@ -287,7 +287,11 @@ class LevelSelectViewController: UIViewController {
         return nil
     }
     
-    func getColorForLevelState(level: Int) -> UIColor {
+    func getColorForLevelState(level: Int?) -> UIColor {
+        guard let level = level else {
+            return .black
+        }
+        
         let levelStates = UserDefaultsInteractor.getLevelStates()
 
         guard let levelState: LevelState = LevelState(rawValue: levelStates[level]) else {

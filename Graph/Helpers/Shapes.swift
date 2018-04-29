@@ -79,7 +79,7 @@ public enum Shape: Int {
         }
         
         geometry.name = "\(id)"
-        
+
         let geometryNode = SCNNode(geometry: geometry)
         geometryNode.position = position
         
