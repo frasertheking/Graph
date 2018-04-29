@@ -67,7 +67,10 @@ public enum Shape: Int {
         geometry.materials.first?.diffuse.contents = ShapeConstants.primaryMaterialColor
         geometry.materials[1].diffuse.contents = ShapeConstants.secondaryMaterialColor
         
-        if type.rawValue > 1  {
+        if type.rawValue == 17 { // SPIRAL
+            geometry.materials.first?.diffuse.contents = UIColor.white
+            geometry.materials[1].diffuse.contents = UIColor.black
+        } else if type.rawValue > 1  {
             geometry.materials.first?.diffuse.contents = UIColor.white
             geometry.materials[1].diffuse.contents = color
         } else if type.rawValue == 1 {

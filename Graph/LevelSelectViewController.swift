@@ -25,6 +25,7 @@ class LevelSelectViewController: UIViewController {
     var lightNodes: SCNNode!
     var colorSelectNodes: SCNNode!
     var emitterNode: SCNNode!
+    var simNodes: [SCNNode]!
 
     // GLOBAL VARS
     var activeLevel: Level?
@@ -76,7 +77,7 @@ class LevelSelectViewController: UIViewController {
         super.viewDidLoad()
         
         UserDefaultsInteractor.clearLevelSelectPosition()
-        //UserDefaultsInteractor.clearLevelStates()
+        UserDefaultsInteractor.clearLevelStates()
         
         setupView()
         setupScene()
@@ -108,6 +109,7 @@ class LevelSelectViewController: UIViewController {
         scnView.scene = scnScene
         scnView.backgroundColor = UIColor.clear
         scnScene.background.contents = UIColor.clear
+        simNodes = []
         
         let gradientLayer:CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = self.view.frame.size
@@ -144,9 +146,16 @@ class LevelSelectViewController: UIViewController {
         
         // TODO: move this??
         GraphAnimation.delayWithSeconds(0.25) {
-            if let trail = ParticleGeneration.createTrail(color: UIColor.black, geometry: self.emitterNode.geometry!) {
+            if let trail = ParticleGeneration.createTrail(color: UIColor.white, geometry: self.emitterNode.geometry!) {
                 self.emitterNode.removeAllParticleSystems()
                 self.emitterNode.addParticleSystem(trail)
+            }
+            
+            for node in self.simNodes {
+                if let spiral = ParticleGeneration.createSpiral(color: UIColor.black, geometry: node.geometry!) {
+                    node.removeAllParticleSystems()
+                    node.addParticleSystem(spiral)
+                }
             }
         }
     }
@@ -186,7 +195,12 @@ class LevelSelectViewController: UIViewController {
             if shapeType == .Emitter {
                 if let node = vertexNodes.childNodes.last {
                     emitterNode = node
-                    GraphAnimation.rotateNode(node: node, delta: 20)
+                    GraphAnimation.rotateNodeX(node: node, delta: 20)
+                }
+            } else if shapeType == .Spiral {
+                if let node = vertexNodes.childNodes.last {
+                    simNodes.append(node)
+                    GraphAnimation.rotateNodeZ(node: node, delta: 5)
                 }
             }
             
@@ -266,6 +280,8 @@ class LevelSelectViewController: UIViewController {
             } else if levelState == .timed {
                 return Shape.kColorTimed
             }
+        } else if levelType == .sim {
+            return Shape.Spiral
         }
         
         return nil

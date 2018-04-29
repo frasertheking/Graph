@@ -121,10 +121,20 @@ struct GraphAnimation {
         node.addAnimation(scale, forKey: "swell")
     }
     
-    static func rotateNode(node: SCNNode, delta: Double) {
+    static func rotateNodeX(node: SCNNode, delta: Double) {
         let spin = CABasicAnimation(keyPath: "rotation")
         spin.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 0, z: 0, w: 0))
         spin.toValue = NSValue(scnVector4: SCNVector4(x: 1, y: 0, z: 0, w: Float(CGFloat(Double.pi*2))))
+        spin.duration = delta
+        spin.repeatCount = .infinity
+        spin.autoreverses = false
+        node.addAnimation(spin, forKey: "spin around")
+    }
+    
+    static func rotateNodeZ(node: SCNNode, delta: Double) {
+        let spin = CABasicAnimation(keyPath: "rotation")
+        spin.fromValue = NSValue(scnVector4: SCNVector4(x: 0, y: 0, z: 1, w: 0))
+        spin.toValue = NSValue(scnVector4: SCNVector4(x: 0, y: 0, z: 1, w: Float(CGFloat(Double.pi*2))))
         spin.duration = delta
         spin.repeatCount = .infinity
         spin.autoreverses = false
