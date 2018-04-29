@@ -427,6 +427,33 @@ class LevelSelectViewController: UIViewController {
             
             UserDefaultsInteractor.setLevelSelectPosition(pos: [edgeNodes.position.x, edgeNodes.position.y])
             gestureRecognize.setTranslation(CGPoint.zero, in: recognizerView)
+            
+            
+            var directionX: CGFloat = 1
+            var directionY: CGFloat = 1
+
+            if velocity.x < 0 {
+                directionX = -1
+            }
+            if velocity.y < 0 {
+                directionY = -1
+            }
+            
+            if abs(velocity.x) > abs(velocity.y) {
+                if abs(velocity.x) < 50 {
+                    directionX = 0
+                }
+                directionY = 0
+            } else {
+                if abs(velocity.y) < 50 {
+                    directionY = 0
+                }
+                directionX = 0
+            }
+            
+            let rotateAction: SCNAction = SCNAction.rotateTo(x: directionY * CGFloat.pi/12, y: directionX * CGFloat.pi/12, z: 0, duration: 0.2)
+            vertexNodes.runAction(rotateAction)
+            edgeNodes.runAction(rotateAction)
         } else if gestureRecognize.state == .ended {
             if abs(velocity.x) > 200 || abs(velocity.y) > 200 {
                 let newX: Float = vertexNodes.position.x + (Float(velocity.x*0.4)) / Float(GameConstants.kPanVelocityFactor)
@@ -441,6 +468,10 @@ class LevelSelectViewController: UIViewController {
                 
                 UserDefaultsInteractor.setLevelSelectPosition(pos: [newX, newY])
             }
+            
+            let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
+            vertexNodes.runAction(rotateAction)
+            edgeNodes.runAction(rotateAction)
         }
     }
     
