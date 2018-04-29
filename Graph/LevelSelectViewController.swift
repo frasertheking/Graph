@@ -33,6 +33,8 @@ class LevelSelectViewController: UIViewController {
     var selectedLevel: Int = 1
     var h: Float = 1
     var axisPanGestureRecognizer: UIPanGestureRecognizer!
+    var zoomPinchGestureRecognizer: UIPinchGestureRecognizer!
+    var resetTapGestureRecognizer: UITapGestureRecognizer!
 
     // UI
     @IBOutlet var skView: SKView!
@@ -43,7 +45,7 @@ class LevelSelectViewController: UIViewController {
     let camera = SCNCamera()
     
     struct GameConstants {
-        static let kCameraZ: Float = 25
+        static let kCameraZ: Float = 20
         static let kScaleShrink: CGFloat = 0.8
         static let kScaleGrow: CGFloat = 1.25
         static let kPanTranslationScaleFactor: CGFloat = 25
@@ -93,9 +95,15 @@ class LevelSelectViewController: UIViewController {
             return
         }
         
-        axisPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture(gestureRecognize:)))
+        axisPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture(gestureRecognizer:)))
+        zoomPinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchGesture(gestureRecognizer:)))
+        resetTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesture(gestureRecognizer:)))
+
         scnView.addGestureRecognizer(axisPanGestureRecognizer)
-        
+        scnView.addGestureRecognizer(zoomPinchGestureRecognizer)
+        scnView.addGestureRecognizer(resetTapGestureRecognizer)
+        resetTapGestureRecognizer.numberOfTapsRequired = 2
+
         scnView = sceneView
         scnView.showsStatistics = false
         scnView.allowsCameraControl = false
@@ -124,14 +132,14 @@ class LevelSelectViewController: UIViewController {
     func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ - 5)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ)
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
     @objc func setupLevel() {
         scnView.isUserInteractionEnabled = true
         activeLevel = Levels.createLevel(index: currentLevel)
-        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ - 5), duration: 0.5))
+        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
         createObjects()
@@ -405,18 +413,18 @@ class LevelSelectViewController: UIViewController {
         performSegue(withIdentifier: "gameSegue", sender: nil)
     }
     
-    @objc func panGesture(gestureRecognize: UIPanGestureRecognizer) {
-        guard let recognizerView = gestureRecognize.view else {
+    @objc func panGesture(gestureRecognizer: UIPanGestureRecognizer) {
+        guard let recognizerView = gestureRecognizer.view else {
             return
         }
         
-        let translation = gestureRecognize.translation(in: recognizerView)
-        let velocity = gestureRecognize.velocity(in: recognizerView)
+        let translation = gestureRecognizer.translation(in: recognizerView)
+        let velocity = gestureRecognizer.velocity(in: recognizerView)
 
-        if gestureRecognize.state == .began {
+        if gestureRecognizer.state == .began {
             vertexNodes.removeAllActions()
             edgeNodes.removeAllActions()
-        } else if gestureRecognize.state == .changed {
+        } else if gestureRecognizer.state == .changed {
             vertexNodes.position = SCNVector3(x: vertexNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
                                                     y: vertexNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
                                                     z: vertexNodes.position.z)
@@ -426,7 +434,7 @@ class LevelSelectViewController: UIViewController {
                                               z: edgeNodes.position.z)
             
             UserDefaultsInteractor.setLevelSelectPosition(pos: [edgeNodes.position.x, edgeNodes.position.y])
-            gestureRecognize.setTranslation(CGPoint.zero, in: recognizerView)
+            gestureRecognizer.setTranslation(CGPoint.zero, in: recognizerView)
             
             
             var directionX: CGFloat = 1
@@ -440,12 +448,12 @@ class LevelSelectViewController: UIViewController {
             }
             
             if abs(velocity.x) > abs(velocity.y) {
-                if abs(velocity.x) < 50 {
+                if abs(velocity.x) < 100 {
                     directionX = 0
                 }
                 directionY = 0
             } else {
-                if abs(velocity.y) < 50 {
+                if abs(velocity.y) < 100 {
                     directionY = 0
                 }
                 directionX = 0
@@ -454,7 +462,7 @@ class LevelSelectViewController: UIViewController {
             let rotateAction: SCNAction = SCNAction.rotateTo(x: directionY * CGFloat.pi/12, y: directionX * CGFloat.pi/12, z: 0, duration: 0.2)
             vertexNodes.runAction(rotateAction)
             edgeNodes.runAction(rotateAction)
-        } else if gestureRecognize.state == .ended {
+        } else if gestureRecognizer.state == .ended {
             if abs(velocity.x) > 200 || abs(velocity.y) > 200 {
                 let newX: Float = vertexNodes.position.x + (Float(velocity.x*0.4)) / Float(GameConstants.kPanVelocityFactor)
                 let newY: Float = vertexNodes.position.y - (Float(velocity.y*0.4)) / Float(GameConstants.kPanVelocityFactor)
@@ -473,6 +481,37 @@ class LevelSelectViewController: UIViewController {
             vertexNodes.runAction(rotateAction)
             edgeNodes.runAction(rotateAction)
         }
+    }
+    
+    @objc func pinchGesture(gestureRecognizer: UIPinchGestureRecognizer) { guard gestureRecognizer.view != nil else { return }
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            if abs(1 - gestureRecognizer.scale) > 0.01 {
+                if gestureRecognizer.scale > 1 {
+                    if cameraNode.position.z > 12 {
+                        cameraNode.position = SCNVector3(x: cameraNode.position.x, y: cameraNode.position.y, z: (cameraNode.position.z - 0.5))
+                    }
+                } else if cameraNode.position.z < 35 {
+                    cameraNode.position = SCNVector3(x: cameraNode.position.x, y: cameraNode.position.y, z: (cameraNode.position.z + 0.5))
+                }
+            }
+            gestureRecognizer.scale = 1.0
+        }
+    }
+    
+    @objc func tapGesture(gestureRecognizer: UITapGestureRecognizer) { guard gestureRecognizer.view != nil else { return }
+        vertexNodes.removeAllActions()
+        edgeNodes.removeAllActions()
+        
+        let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
+        let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: 0), duration: 0.4)
+        let zoomAction: SCNAction = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.4)
+        
+        vertexNodes.runAction(rotateAction)
+        vertexNodes.runAction(moveAction)
+        edgeNodes.runAction(rotateAction)
+        edgeNodes.runAction(moveAction)
+        cameraNode.runAction(zoomAction)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
