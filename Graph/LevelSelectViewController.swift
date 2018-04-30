@@ -35,6 +35,7 @@ class LevelSelectViewController: UIViewController {
     var axisPanGestureRecognizer: UIPanGestureRecognizer!
     var zoomPinchGestureRecognizer: UIPinchGestureRecognizer!
     var resetTapGestureRecognizer: UITapGestureRecognizer!
+    var previousDirection: String = ""
 
     // UI
     @IBOutlet var skView: SKView!
@@ -410,8 +411,10 @@ class LevelSelectViewController: UIViewController {
     }
     
     @objc func cleanSceneAndSegue() {
-        cleanScene()
-        performSegue(withIdentifier: "gameSegue", sender: nil)
+        GraphAnimation.delayWithSeconds(1) {
+            self.cleanScene()
+            self.performSegue(withIdentifier: "gameSegue", sender: nil)
+        }
     }
     
     @objc func cleanScene() {
@@ -447,27 +450,39 @@ class LevelSelectViewController: UIViewController {
             UserDefaultsInteractor.setLevelSelectPosition(pos: [edgeNodes.position.x, edgeNodes.position.y])
             gestureRecognizer.setTranslation(CGPoint.zero, in: recognizerView)
             
+            var directionX: CGFloat = 0
+            var directionY: CGFloat = 0
             
-            var directionX: CGFloat = 1
-            var directionY: CGFloat = 1
-
-            if velocity.x < 0 {
+            if abs(velocity.x) > 50 && velocity.x > 0 {
+                directionX = 1
+            }
+            if abs(velocity.y) > 50 && velocity.y > 0 {
+                directionY = 1
+            }
+            
+            if abs(velocity.x) > 50 && velocity.x < 0 {
                 directionX = -1
             }
-            if velocity.y < 0 {
+            if abs(velocity.y) > 50 && velocity.y < 0 {
                 directionY = -1
             }
             
             if abs(velocity.x) > abs(velocity.y) {
-                if abs(velocity.x) < 10 {
-                    directionX = 0
-                }
-                directionY = 0
-            } else {
-                if abs(velocity.y) < 10 {
+                if previousDirection == "y" && abs(velocity.x) > 100 {
+                    previousDirection = "x"
+                    directionY = 0
+                } else if previousDirection == "" || previousDirection == "x" {
+                    previousDirection = "x"
                     directionY = 0
                 }
-                directionX = 0
+            } else {
+                if previousDirection == "x" && abs(velocity.y) > 100 {
+                    previousDirection = "y"
+                    directionX = 0
+                } else if previousDirection == "" || previousDirection == "y" {
+                    previousDirection = "y"
+                    directionX = 0
+                }
             }
             
             let zoomFactor: CGFloat = 2*(CGFloat(44 - cameraNode.position.z))
@@ -492,6 +507,7 @@ class LevelSelectViewController: UIViewController {
             let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
             vertexNodes.runAction(rotateAction)
             edgeNodes.runAction(rotateAction)
+            previousDirection = ""
         }
     }
     
