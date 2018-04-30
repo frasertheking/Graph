@@ -80,7 +80,7 @@ class LevelSelectViewController: UIViewController {
         super.viewDidLoad()
         
         UserDefaultsInteractor.clearLevelSelectPosition()
-        //UserDefaultsInteractor.clearLevelStates()
+        UserDefaultsInteractor.clearLevelStates()
         
         setupView()
         setupScene()
@@ -455,18 +455,18 @@ class LevelSelectViewController: UIViewController {
             }
             
             if abs(velocity.x) > abs(velocity.y) {
-                if abs(velocity.x) < 100 {
+                if abs(velocity.x) < 10 {
                     directionX = 0
                 }
                 directionY = 0
             } else {
-                if abs(velocity.y) < 100 {
+                if abs(velocity.y) < 10 {
                     directionY = 0
                 }
                 directionX = 0
             }
             
-            let rotateAction: SCNAction = SCNAction.rotateTo(x: directionY * CGFloat.pi/12, y: directionX * CGFloat.pi/12, z: 0, duration: 0.2)
+            let rotateAction: SCNAction = SCNAction.rotateTo(x: directionY * CGFloat.pi/18, y: directionX * CGFloat.pi/18, z: 0, duration: 0.2)
             vertexNodes.runAction(rotateAction)
             edgeNodes.runAction(rotateAction)
         } else if gestureRecognizer.state == .ended {

@@ -23,6 +23,7 @@ struct UserDefaultsInteractor {
     
     fileprivate static let levelStateKey: String = "levelStates"
     fileprivate static let levelSelectPosition: String = "levelPosition"
+    fileprivate static let levelZoomFactor: String = "levelZoom"
 
     // Level select scrolled position
     // The positions array is action as a vector to track the x and y position of the level select graph
@@ -64,6 +65,8 @@ struct UserDefaultsInteractor {
         baseLevels[3] = LevelState.base.rawValue
         baseLevels[4] = LevelState.base.rawValue
         baseLevels[5] = LevelState.base.rawValue
+        baseLevels[25] = LevelState.base.rawValue
+        baseLevels[31] = LevelState.emitter.rawValue
         
         if isKeyPresentInUserDefaults(key: levelStateKey) {
             guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
@@ -86,6 +89,8 @@ struct UserDefaultsInteractor {
         baseLevels[3] = LevelState.base.rawValue
         baseLevels[4] = LevelState.base.rawValue
         baseLevels[5] = LevelState.base.rawValue
+        baseLevels[25] = LevelState.base.rawValue
+        baseLevels[31] = LevelState.emitter.rawValue
         
         if isKeyPresentInUserDefaults(key: levelStateKey) {
             guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
