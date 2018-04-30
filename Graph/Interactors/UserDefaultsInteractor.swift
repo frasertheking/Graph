@@ -51,6 +51,32 @@ struct UserDefaultsInteractor {
         UserDefaults.standard.set(nil, forKey: levelSelectPosition)
     }
     
+    // Level select zoomed level
+    // This is a Float between 14 and 36 where 25 represents no zoom,
+    // 14 represents zoomed in max and 36 represents zoomed out max
+    static func setZoomFactor(pos: Float) {
+        UserDefaults.standard.set(pos, forKey: levelZoomFactor)
+    }
+    
+    static func getZoomFactor() -> Float {
+        let baseFactor: Float = 25
+        
+        if isKeyPresentInUserDefaults(key: levelZoomFactor) {
+            guard let factor = UserDefaults.standard.object(forKey: levelZoomFactor) as? Float else {
+                return baseFactor
+            }
+            return factor
+        }
+        
+        // Initialize default value to 0 0 if key is not yet set
+        UserDefaults.standard.set(25, forKey: levelZoomFactor)
+        return baseFactor
+    }
+    
+    static func clearZoomFactor() {
+        UserDefaults.standard.set(nil, forKey: levelZoomFactor)
+    }
+    
     // Level States Interaction
     fileprivate static func setLevelStates(levels: [Int]) {
         UserDefaults.standard.set(levels, forKey: levelStateKey)

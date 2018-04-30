@@ -24,7 +24,7 @@ class LevelSelectViewController: UIViewController {
     var vertexNodes: SCNNode!
     var lightNodes: SCNNode!
     var colorSelectNodes: SCNNode!
-    var emitterNode: SCNNode!
+    var emitterNodes: [SCNNode]!
     var simNodes: [SCNNode]!
 
     // GLOBAL VARS
@@ -80,7 +80,8 @@ class LevelSelectViewController: UIViewController {
         super.viewDidLoad()
         
         UserDefaultsInteractor.clearLevelSelectPosition()
-        UserDefaultsInteractor.clearLevelStates()
+        UserDefaultsInteractor.clearZoomFactor()
+        //UserDefaultsInteractor.clearLevelStates()
         
         setupView()
         setupScene()
@@ -116,6 +117,7 @@ class LevelSelectViewController: UIViewController {
         scnView.backgroundColor = UIColor.clear
         scnScene.background.contents = UIColor.clear
         simNodes = []
+        emitterNodes = []
         
         let gradientLayer:CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = self.view.frame.size
@@ -129,7 +131,7 @@ class LevelSelectViewController: UIViewController {
     func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: UserDefaultsInteractor.getZoomFactor())
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
@@ -139,7 +141,7 @@ class LevelSelectViewController: UIViewController {
         scnView.addGestureRecognizer(resetTapGestureRecognizer)
         
         activeLevel = Levels.createLevel(index: 0)
-        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
+        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: UserDefaultsInteractor.getZoomFactor()), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
         createObjects()
@@ -155,9 +157,11 @@ class LevelSelectViewController: UIViewController {
         
         // TODO: move this??
         GraphAnimation.delayWithSeconds(0.25) {
-            if let trail = ParticleGeneration.createTrail(color: UIColor.white, geometry: self.emitterNode.geometry!) {
-                self.emitterNode.removeAllParticleSystems()
-                self.emitterNode.addParticleSystem(trail)
+            for node in self.emitterNodes {
+                if let trail = ParticleGeneration.createTrail(color: UIColor.white, geometry: node.geometry!) {
+                    node.removeAllParticleSystems()
+                    node.addParticleSystem(trail)
+                }
             }
             
             for node in self.simNodes {
@@ -203,7 +207,7 @@ class LevelSelectViewController: UIViewController {
             
             if shapeType == .Emitter {
                 if let node = vertexNodes.childNodes.last {
-                    emitterNode = node
+                    emitterNodes.append(node)
                     GraphAnimation.rotateNodeX(node: node, delta: 20)
                 }
             } else if shapeType == .Spiral {
@@ -466,7 +470,8 @@ class LevelSelectViewController: UIViewController {
                 directionX = 0
             }
             
-            let rotateAction: SCNAction = SCNAction.rotateTo(x: directionY * CGFloat.pi/18, y: directionX * CGFloat.pi/18, z: 0, duration: 0.2)
+            let zoomFactor: CGFloat = 2*(CGFloat(44 - cameraNode.position.z))
+            let rotateAction: SCNAction = SCNAction.rotateTo(x: directionY * CGFloat.pi/zoomFactor, y: directionX * CGFloat.pi/zoomFactor, z: 0, duration: 0.2)
             vertexNodes.runAction(rotateAction)
             edgeNodes.runAction(rotateAction)
         } else if gestureRecognizer.state == .ended {
@@ -492,14 +497,15 @@ class LevelSelectViewController: UIViewController {
     
     @objc func pinchGesture(gestureRecognizer: UIPinchGestureRecognizer) { guard gestureRecognizer.view != nil else { return }
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-            if abs(1 - gestureRecognizer.scale) > 0.01 {
+            if abs(1 - gestureRecognizer.scale) > 0.001 {
                 if gestureRecognizer.scale > 1 {
-                    if cameraNode.position.z > 12 {
+                    if cameraNode.position.z > 14 {
                         cameraNode.position = SCNVector3(x: cameraNode.position.x, y: cameraNode.position.y, z: (cameraNode.position.z - 0.5))
                     }
-                } else if cameraNode.position.z < 35 {
+                } else if cameraNode.position.z < 36 {
                     cameraNode.position = SCNVector3(x: cameraNode.position.x, y: cameraNode.position.y, z: (cameraNode.position.z + 0.5))
                 }
+                UserDefaultsInteractor.setZoomFactor(pos: cameraNode.position.z)
             }
             gestureRecognizer.scale = 1.0
         }
