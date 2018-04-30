@@ -90,10 +90,6 @@ class LevelSelectViewController: UIViewController {
         setupInteractions()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        print("Asd")
-    }
-    
     func setupView() {
         guard let sceneView = scnView else {
             return
