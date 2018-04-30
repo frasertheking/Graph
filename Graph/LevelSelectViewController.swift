@@ -90,6 +90,10 @@ class LevelSelectViewController: UIViewController {
         setupInteractions()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("Asd")
+    }
+    
     func setupView() {
         guard let sceneView = scnView else {
             return
@@ -98,10 +102,6 @@ class LevelSelectViewController: UIViewController {
         axisPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture(gestureRecognizer:)))
         zoomPinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchGesture(gestureRecognizer:)))
         resetTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesture(gestureRecognizer:)))
-
-        scnView.addGestureRecognizer(axisPanGestureRecognizer)
-        scnView.addGestureRecognizer(zoomPinchGestureRecognizer)
-        scnView.addGestureRecognizer(resetTapGestureRecognizer)
         resetTapGestureRecognizer.numberOfTapsRequired = 2
 
         scnView = sceneView
@@ -111,6 +111,7 @@ class LevelSelectViewController: UIViewController {
         scnView.antialiasingMode = .multisampling4X
         scnView.delegate = self
         scnView.isPlaying = true
+        scnView.preferredFramesPerSecond = 60
     }
     
     func setupScene() {
@@ -137,8 +138,11 @@ class LevelSelectViewController: UIViewController {
     }
     
     @objc func setupLevel() {
-        scnView.isUserInteractionEnabled = true
-        activeLevel = Levels.createLevel(index: currentLevel)
+        scnView.addGestureRecognizer(axisPanGestureRecognizer)
+        scnView.addGestureRecognizer(zoomPinchGestureRecognizer)
+        scnView.addGestureRecognizer(resetTapGestureRecognizer)
+        
+        activeLevel = Levels.createLevel(index: 0)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
@@ -360,7 +364,7 @@ class LevelSelectViewController: UIViewController {
                 
                 GraphAnimation.delayWithSeconds(0.3) {
                     self.selectedLevel = Int(geoName)!
-                    GraphAnimation.implodeGraph(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, clean: self.cleanScene)
+                    GraphAnimation.implodeGraph(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, clean: self.cleanSceneAndSegue)
                 }
             }
         }
@@ -405,12 +409,19 @@ class LevelSelectViewController: UIViewController {
         }
     }
     
+    @objc func cleanSceneAndSegue() {
+        cleanScene()
+        performSegue(withIdentifier: "gameSegue", sender: nil)
+    }
+    
     @objc func cleanScene() {
         vertexNodes.removeFromParentNode()
         edgeNodes.removeFromParentNode()
         simPath.removeAll()
         
-        performSegue(withIdentifier: "gameSegue", sender: nil)
+        scnView.removeGestureRecognizer(axisPanGestureRecognizer)
+        scnView.removeGestureRecognizer(zoomPinchGestureRecognizer)
+        scnView.removeGestureRecognizer(resetTapGestureRecognizer)
     }
     
     @objc func panGesture(gestureRecognizer: UIPanGestureRecognizer) {
