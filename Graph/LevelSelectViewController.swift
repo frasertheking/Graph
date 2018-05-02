@@ -146,7 +146,8 @@ class LevelSelectViewController: UIViewController {
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
         createObjects()
-        GraphAnimation.explodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
+        GraphAnimation.emergeGraph(vertexNodes: vertexNodes)
+        GraphAnimation.emergeGraph(edgeNodes: edgeNodes)
         
         GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
             GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
@@ -157,7 +158,7 @@ class LevelSelectViewController: UIViewController {
         vertexNodes.position = UserDefaultsInteractor.getLevelSelectPosition()
         
         // TODO: move this??
-        GraphAnimation.delayWithSeconds(0.25) {
+        GraphAnimation.delayWithSeconds(0.75) {
             for node in self.emitterNodes {
                 if let trail = ParticleGeneration.createTrail(color: UIColor.white, geometry: node.geometry!) {
                     node.removeAllParticleSystems()
@@ -365,7 +366,8 @@ class LevelSelectViewController: UIViewController {
                 
                 GraphAnimation.delayWithSeconds(0.3) {
                     self.selectedLevel = Int(geoName)!
-                    GraphAnimation.implodeGraph(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, clean: self.cleanSceneAndSegue)
+                    GraphAnimation.dissolveGraph(vertexNodes: self.vertexNodes, clean: self.cleanSceneAndSegue)
+                    GraphAnimation.dissolveGraph(edgeNodes: self.edgeNodes)
                 }
             }
         }
@@ -411,7 +413,7 @@ class LevelSelectViewController: UIViewController {
     }
     
     @objc func cleanSceneAndSegue() {
-        GraphAnimation.delayWithSeconds(1) {
+        GraphAnimation.delayWithSeconds(0.25) {
             self.cleanScene()
             self.performSegue(withIdentifier: "gameSegue", sender: nil)
         }
@@ -553,7 +555,6 @@ class LevelSelectViewController: UIViewController {
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {
         GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
             self.setupLevel()
-            GraphAnimation.explodeGraph(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
         }
     }
 }

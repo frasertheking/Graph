@@ -85,6 +85,58 @@ struct GraphAnimation {
         edgeNodes.addAnimation(scale, forKey: "explode")
     }
     
+    static func emergeGraph(vertexNodes: SCNNode) {
+        for node in vertexNodes.childNodes {
+            node.position.z = -100
+            node.scale = SCNVector3(x: 0, y: 0, z: 0)
+            GraphAnimation.delayWithSeconds(Double.random(min: 0.1, max: 0.75)) {
+                let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: node.position.x, y: node.position.y, z: 0), duration: 0.75)
+                let scaleAction: SCNAction = SCNAction.scale(to: 1, duration: 0.75)
+                moveAction.timingMode = .easeInEaseOut
+                scaleAction.timingMode = .easeInEaseOut
+                node.runAction(moveAction)
+                node.runAction(scaleAction)
+            }
+        }
+    }
+    
+    static func dissolveGraph(vertexNodes: SCNNode, clean: @escaping () -> ()) {
+        for node in vertexNodes.childNodes {
+            GraphAnimation.delayWithSeconds(Double.random(min: 0.4, max: 0.8)) {
+                let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: node.position.x, y: node.position.y, z: -100), duration: 0.45)
+                let scaleAction: SCNAction = SCNAction.scale(to: 0, duration: 0.45)
+                moveAction.timingMode = .easeInEaseOut
+                scaleAction.timingMode = .easeInEaseOut
+                node.runAction(moveAction)
+                node.runAction(scaleAction)
+            }
+        }
+        
+        GraphAnimation.delayWithSeconds(1) {
+            clean()
+        }        
+    }
+    
+    static func emergeGraph(edgeNodes: SCNNode) {
+        for node in edgeNodes.childNodes {
+            node.opacity = 0
+            
+            GraphAnimation.delayWithSeconds(1.5) {
+                let fadeInAction: SCNAction = SCNAction.fadeIn(duration: 1)
+                fadeInAction.timingMode = .easeInEaseOut
+                node.runAction(fadeInAction)
+            }
+        }
+    }
+
+    static func dissolveGraph(edgeNodes: SCNNode) {
+        for node in edgeNodes.childNodes {
+            let fadeInAction: SCNAction = SCNAction.fadeOut(duration: 0.4)
+            fadeInAction.timingMode = .easeInEaseOut
+            node.runAction(fadeInAction)
+        }
+    }
+    
     static func implodeGraph(vertexNodes: SCNNode, edgeNodes: SCNNode, clean: @escaping () -> ()) {
         let scale = CABasicAnimation(keyPath: "scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
