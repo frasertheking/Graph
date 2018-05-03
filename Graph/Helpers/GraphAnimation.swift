@@ -85,6 +85,20 @@ struct GraphAnimation {
         edgeNodes.addAnimation(scale, forKey: "explode")
     }
     
+    static func explodeEmitter(emitter: SCNNode) {
+        let scale = CABasicAnimation(keyPath: "scale")
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 0, y: 0, z: 0, w: 0))
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: 4, y: 4, z: 4, w: 0))
+        scale.duration = 0.5
+        scale.repeatCount = 0
+        scale.autoreverses = false
+        scale.timingFunction = easeInOut
+        scale.fillMode = kCAFillModeForwards
+        scale.isRemovedOnCompletion = false
+        emitter.addAnimation(scale, forKey: "explode")
+    }
+    
     static func emergeGraph(vertexNodes: SCNNode) {
         for node in vertexNodes.childNodes {
             node.position.z = -100
@@ -177,6 +191,18 @@ struct GraphAnimation {
         let scale = CABasicAnimation(keyPath: "scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         scale.fromValue = NSValue(scnVector4: SCNVector4(x: 4, y: 4, z: 4, w: 0))
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: scaleAmount, y: scaleAmount, z: scaleAmount, w: 0))
+        scale.duration = delta
+        scale.repeatCount = .infinity
+        scale.autoreverses = true
+        scale.timingFunction = easeInOut
+        node.addAnimation(scale, forKey: "swell")
+    }
+    
+    static func swellTitleNode(node: SCNNode, scaleAmount: Float, delta: Double) {
+        let scale = CABasicAnimation(keyPath: "scale")
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 2, y: 2, z: 2, w: 0))
         scale.toValue = NSValue(scnVector4: SCNVector4(x: scaleAmount, y: scaleAmount, z: scaleAmount, w: 0))
         scale.duration = delta
         scale.repeatCount = .infinity

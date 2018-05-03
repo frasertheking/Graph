@@ -31,6 +31,7 @@ public enum Shape: Int {
     case kColorLocked
     case kColorTimed
     case Spiral
+    case Title
     
     struct ShapeConstants {
         static let sphereRadius: CGFloat = 0.5
@@ -57,25 +58,28 @@ public enum Shape: Int {
                              "kColor_random",
                              "kColor_locked",
                              "kColor_timed",
-                             "spiral"]
+                             "spiral",
+                             "title"]
     
     static func spawnShape(type: Shape, position: SCNVector3, color: UIColor, id: Int, node: SCNNode) {
         guard let geometry: SCNGeometry = createNodeOfType(type: type) else {
             return
         }
         
-        geometry.materials.first?.diffuse.contents = ShapeConstants.primaryMaterialColor
-        geometry.materials[1].diffuse.contents = ShapeConstants.secondaryMaterialColor
-        
         if type.rawValue == 17 { // SPIRAL
             geometry.materials.first?.diffuse.contents = UIColor.white
             geometry.materials[1].diffuse.contents = UIColor.black
+        } else if type.rawValue == 18 { // TITLE
+            geometry.materials.first?.diffuse.contents = color
         } else if type.rawValue > 1  {
             geometry.materials.first?.diffuse.contents = UIColor.white
             geometry.materials[1].diffuse.contents = color
         } else if type.rawValue == 1 {
             geometry.materials.first?.diffuse.contents = UIColor.black
             geometry.materials[1].diffuse.contents = UIColor.white
+        } else {
+            geometry.materials.first?.diffuse.contents = ShapeConstants.primaryMaterialColor
+            geometry.materials[1].diffuse.contents = ShapeConstants.secondaryMaterialColor
         }
         
         geometry.name = "\(id)"

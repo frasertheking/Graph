@@ -41,8 +41,9 @@ class LevelSelectViewController: UIViewController {
     // LANDING SCREEN VARS
     var currentlyAtLanding: Bool = true
     var landingEmitter: SCNNode!
-    var emitter1: SCNParticleSystem!
-    var emitter2: SCNParticleSystem!
+    var landingTitle: SCNNode!
+    var emitter1: SCNParticleSystem?
+    var emitter2: SCNParticleSystem?
 
     // UI
     @IBOutlet var skView: SKView!
@@ -186,6 +187,7 @@ class LevelSelectViewController: UIViewController {
     
     func setupLanding() {
         landingEmitter = SCNNode()
+        landingTitle = SCNNode()
         
         Shape.spawnShape(type: .Emitter,
                          position: SCNVector3(x: 0, y: 0, z: 0),
@@ -193,36 +195,59 @@ class LevelSelectViewController: UIViewController {
                          id: -1,
                          node: landingEmitter)
         
-        landingEmitter.scale = SCNVector3(x: 4, y: 4, z: 4)
-        GraphAnimation.swellEmitterNode(node: landingEmitter, scaleAmount: 4.15, delta: 1)
-        GraphAnimation.rotateNodeX(node: landingEmitter, delta: 20)
+        Shape.spawnShape(type: .Title,
+                         position: SCNVector3(x: 0, y: 4, z: 0),
+                         color: UIColor.white,
+                         id: -1,
+                         node: landingTitle)
+        
         
         scnScene.rootNode.addChildNode(landingEmitter)
+        scnScene.rootNode.addChildNode(landingTitle)
+        
+        var rotateAction: SCNAction = SCNAction.rotateTo(x: -CGFloat(Double.pi/2), y: 0, z: 0, duration: 0)
+        self.landingTitle.runAction(rotateAction)
+        self.landingTitle.scale = SCNVector3(x: 0, y: 0, z: 0)
+        
+        GraphAnimation.explodeEmitter(emitter: landingEmitter)
+        
+        self.landingTitle.scale = SCNVector3(x: 0, y: 0, z: 0)
+        GraphAnimation.rotateNodeX(node: self.landingEmitter, delta: 20)
         
         let seedColor1: UIColor = RandomFlatColorWithShade(.light)
         let seedColor2: UIColor = RandomFlatColorWithShade(.light)
         
-        if let firstEmitter = ParticleGeneration.createEmitter(color: seedColor1, geometry: self.landingEmitter.childNodes[0].geometry!) {
-            if let secondEmitter = ParticleGeneration.createEmitter(color: seedColor2, geometry: self.landingEmitter.childNodes[0].geometry!) {
-                self.landingEmitter.removeAllParticleSystems()
-                
-                emitter1 = firstEmitter
-                emitter2 = secondEmitter
-                
-                self.landingEmitter.addParticleSystem(emitter1)
-                self.landingEmitter.addParticleSystem(emitter2)
+        self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor1, material: self.landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 2)
+        self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor2, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 2)
+        
+        GraphAnimation.delayWithSeconds(0.5) {
+            self.landingTitle.scale = SCNVector3(x: 2, y: 2, z: 2)
+            rotateAction = SCNAction.rotateTo(x: CGFloat(Double.pi/7), y: 0, z: 0, duration: 0.5)
+            rotateAction.timingMode = .easeInEaseOut
+            self.landingTitle.runAction(rotateAction)
+            
+            GraphAnimation.swellEmitterNode(node: self.landingEmitter, scaleAmount: 4.15, delta: 1)
+            GraphAnimation.swellTitleNode(node: self.landingTitle, scaleAmount: 2.1, delta: 1)
+            
+            if let firstEmitter = ParticleGeneration.createEmitter(color: seedColor1, geometry: self.landingEmitter.childNodes[0].geometry!) {
+                if let secondEmitter = ParticleGeneration.createEmitter(color: seedColor2, geometry: self.landingEmitter.childNodes[0].geometry!) {
+                    self.landingEmitter.removeAllParticleSystems()
+                    
+                    self.emitter1 = firstEmitter
+                    self.emitter2 = secondEmitter
+                    
+                    self.landingEmitter.addParticleSystem(self.emitter1!)
+                    self.landingEmitter.addParticleSystem(self.emitter2!)
+                }
             }
         }
-        
-        runNodeColorAnimations(node: landingEmitter, oldColor: seedColor1, material: landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 2)
-        runNodeColorAnimations(node: landingEmitter, oldColor: seedColor2, material: landingEmitter.childNodes[0].geometry?.materials[1], duration: 2)
     }
     
     func runNodeColorAnimations(node: SCNNode, oldColor: UIColor, material: SCNMaterial?, duration: TimeInterval) {
         let newColor: UIColor = RandomFlatColorWithShade(.light)
         
-        emitter1.particleColor = oldColor
-        emitter2.particleColor = newColor
+        emitter1?.particleColor = oldColor
+        emitter2?.particleColor = newColor
         
         let changeColor = SCNAction.customAction(duration: duration) { (node, elapsedTime) -> () in
             let percentage = elapsedTime / CGFloat(duration)
