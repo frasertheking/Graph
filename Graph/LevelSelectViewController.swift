@@ -41,8 +41,8 @@ class LevelSelectViewController: UIViewController {
     // LANDING SCREEN VARS
     var currentlyAtLanding: Bool = true
     var landingEmitter: SCNNode!
-    var oldPrimaryColor: UIColor = RandomFlatColorWithShade(.light)
-    var oldSecondaryColor: UIColor = RandomFlatColorWithShade(.light)
+    var emitter1: SCNParticleSystem!
+    var emitter2: SCNParticleSystem!
 
     // UI
     @IBOutlet var skView: SKView!
@@ -199,20 +199,30 @@ class LevelSelectViewController: UIViewController {
         
         scnScene.rootNode.addChildNode(landingEmitter)
         
-        if let emitter1 = ParticleGeneration.createEmitter(color: UIColor.black, geometry: self.landingEmitter.childNodes[0].geometry!) {
-            if let emitter2 = ParticleGeneration.createEmitter(color: UIColor.white, geometry: self.landingEmitter.childNodes[0].geometry!) {
+        let seedColor1: UIColor = RandomFlatColorWithShade(.light)
+        let seedColor2: UIColor = RandomFlatColorWithShade(.light)
+        
+        if let firstEmitter = ParticleGeneration.createEmitter(color: seedColor1, geometry: self.landingEmitter.childNodes[0].geometry!) {
+            if let secondEmitter = ParticleGeneration.createEmitter(color: seedColor2, geometry: self.landingEmitter.childNodes[0].geometry!) {
                 self.landingEmitter.removeAllParticleSystems()
+                
+                emitter1 = firstEmitter
+                emitter2 = secondEmitter
+                
                 self.landingEmitter.addParticleSystem(emitter1)
                 self.landingEmitter.addParticleSystem(emitter2)
             }
         }
         
-        runNodeColorAnimations(node: landingEmitter, oldColor: oldPrimaryColor, material: landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 2)
-        runNodeColorAnimations(node: landingEmitter, oldColor: oldSecondaryColor, material: landingEmitter.childNodes[0].geometry?.materials[1], duration: 3)
+        runNodeColorAnimations(node: landingEmitter, oldColor: seedColor1, material: landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 2)
+        runNodeColorAnimations(node: landingEmitter, oldColor: seedColor2, material: landingEmitter.childNodes[0].geometry?.materials[1], duration: 2)
     }
     
     func runNodeColorAnimations(node: SCNNode, oldColor: UIColor, material: SCNMaterial?, duration: TimeInterval) {
         let newColor: UIColor = RandomFlatColorWithShade(.light)
+        
+        emitter1.particleColor = oldColor
+        emitter2.particleColor = newColor
         
         let changeColor = SCNAction.customAction(duration: duration) { (node, elapsedTime) -> () in
             let percentage = elapsedTime / CGFloat(duration)
