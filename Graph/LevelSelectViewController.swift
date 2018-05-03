@@ -36,14 +36,19 @@ class LevelSelectViewController: UIViewController {
     var axisPanGestureRecognizer: UIPanGestureRecognizer!
     var zoomPinchGestureRecognizer: UIPinchGestureRecognizer!
     var resetTapGestureRecognizer: UITapGestureRecognizer!
+    var landingPanGestureRecognizer: UIPanGestureRecognizer!
     var previousDirection: String = ""
     
     // LANDING SCREEN VARS
     var currentlyAtLanding: Bool = true
     var landingEmitter: SCNNode!
     var landingTitle: SCNNode!
+    var landingPlayButton: SCNNode!
     var emitter1: SCNParticleSystem?
     var emitter2: SCNParticleSystem?
+    var panDirection: String?
+    var currentAngleY: Float = 0.0
+    var currentAngleX: Float = 0.0
 
     // UI
     @IBOutlet var skView: SKView!
@@ -110,13 +115,14 @@ class LevelSelectViewController: UIViewController {
         }
         
         axisPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture(gestureRecognizer:)))
+        landingPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(landingPanGesture(gesture:)))
         zoomPinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchGesture(gestureRecognizer:)))
         resetTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesture(gestureRecognizer:)))
         resetTapGestureRecognizer.numberOfTapsRequired = 2
 
         scnView = sceneView
         scnView.showsStatistics = false
-        scnView.allowsCameraControl = currentlyAtLanding ? true : false
+        scnView.allowsCameraControl = false
         scnView.autoenablesDefaultLighting = true
         scnView.antialiasingMode = .multisampling4X
         scnView.delegate = self
@@ -188,46 +194,62 @@ class LevelSelectViewController: UIViewController {
     func setupLanding() {
         landingEmitter = SCNNode()
         landingTitle = SCNNode()
+        landingPlayButton = SCNNode()
         
         Shape.spawnShape(type: .Emitter,
-                         position: SCNVector3(x: 0, y: 0, z: 0),
+                         position: SCNVector3(x: 0, y: -0.25, z: 0),
                          color: UIColor.cyan,
                          id: -1,
                          node: landingEmitter)
         
         Shape.spawnShape(type: .Title,
-                         position: SCNVector3(x: 0, y: 4, z: 0),
+                         position: SCNVector3(x: 0, y: 3.9, z: 0),
                          color: UIColor.white,
                          id: -1,
                          node: landingTitle)
         
+        Shape.spawnShape(type: .Play,
+                         position: SCNVector3(x: 0, y: -12, z: 0),
+                         color: UIColor.white,
+                         id: -1,
+                         node: landingPlayButton)
         
         scnScene.rootNode.addChildNode(landingEmitter)
         scnScene.rootNode.addChildNode(landingTitle)
+        scnScene.rootNode.addChildNode(landingPlayButton)
         
         var rotateAction: SCNAction = SCNAction.rotateTo(x: -CGFloat(Double.pi/2), y: 0, z: 0, duration: 0)
+        var rotateAction2: SCNAction = SCNAction.rotateTo(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0)
         self.landingTitle.runAction(rotateAction)
+        self.landingPlayButton.runAction(rotateAction2)
         self.landingTitle.scale = SCNVector3(x: 0, y: 0, z: 0)
+        self.landingPlayButton.scale = SCNVector3(x: 0, y: 0, z: 0)
         
         GraphAnimation.explodeEmitter(emitter: landingEmitter)
         
-        self.landingTitle.scale = SCNVector3(x: 0, y: 0, z: 0)
-        GraphAnimation.rotateNodeX(node: self.landingEmitter, delta: 20)
+        GraphAnimation.rotateNodeX(node: self.landingEmitter.childNodes[0], delta: 20)
         
         let seedColor1: UIColor = RandomFlatColorWithShade(.light)
         let seedColor2: UIColor = RandomFlatColorWithShade(.light)
+        let seedColor3: UIColor = RandomFlatColorWithShade(.light)
         
         self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor1, material: self.landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 2)
         self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor2, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 2)
-        
+        self.runNodeColorAnimations(node: self.landingPlayButton, oldColor: seedColor3, material: self.landingPlayButton.childNodes[0].geometry?.firstMaterial, duration: 2)
+
         GraphAnimation.delayWithSeconds(0.5) {
             self.landingTitle.scale = SCNVector3(x: 2, y: 2, z: 2)
-            rotateAction = SCNAction.rotateTo(x: CGFloat(Double.pi/7), y: 0, z: 0, duration: 0.5)
+            self.landingPlayButton.scale = SCNVector3(x: 0.7, y: 0.7, z: 0.7)
+            rotateAction = SCNAction.rotateTo(x: CGFloat(Double.pi/7), y: 0, z: 0, duration: 0.75)
             rotateAction.timingMode = .easeInEaseOut
+            rotateAction2 = SCNAction.rotateTo(x: -CGFloat(Double.pi/10), y: 0, z: 0, duration: 0.75)
+            rotateAction2.timingMode = .easeInEaseOut
             self.landingTitle.runAction(rotateAction)
+            self.landingPlayButton.runAction(rotateAction2)
             
-            GraphAnimation.swellEmitterNode(node: self.landingEmitter, scaleAmount: 4.15, delta: 1)
-            GraphAnimation.swellTitleNode(node: self.landingTitle, scaleAmount: 2.1, delta: 1)
+            GraphAnimation.swellNodeCustom(node: self.landingEmitter, from: 4.0, scaleAmount: 4.2, delta: 1)
+            GraphAnimation.swellNodeCustom(node: self.landingTitle, from: 2, scaleAmount: 2.2, delta: 2)
+            GraphAnimation.swellNodeCustom(node: self.landingPlayButton, from: 0.7, scaleAmount: 0.8, delta: 2)
             
             if let firstEmitter = ParticleGeneration.createEmitter(color: seedColor1, geometry: self.landingEmitter.childNodes[0].geometry!) {
                 if let secondEmitter = ParticleGeneration.createEmitter(color: seedColor2, geometry: self.landingEmitter.childNodes[0].geometry!) {
@@ -236,11 +258,21 @@ class LevelSelectViewController: UIViewController {
                     self.emitter1 = firstEmitter
                     self.emitter2 = secondEmitter
                     
-                    self.landingEmitter.addParticleSystem(self.emitter1!)
-                    self.landingEmitter.addParticleSystem(self.emitter2!)
+                    self.landingEmitter.childNodes[0].addParticleSystem(self.emitter1!)
+                    self.landingEmitter.childNodes[0].addParticleSystem(self.emitter2!)
                 }
             }
+            
+            GraphAnimation.delayWithSeconds(0.75, completion: {
+                let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.2)
+                rotateAction.timingMode = .easeInEaseOut
+                self.landingTitle.runAction(rotateAction)
+                self.landingPlayButton.runAction(rotateAction)
+            })
+            
         }
+        
+        scnView.addGestureRecognizer(landingPanGestureRecognizer)
     }
     
     func runNodeColorAnimations(node: SCNNode, oldColor: UIColor, material: SCNMaterial?, duration: TimeInterval) {
@@ -592,6 +624,64 @@ class LevelSelectViewController: UIViewController {
             let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
             vertexNodes.runAction(rotateAction)
             edgeNodes.runAction(rotateAction)
+            previousDirection = ""
+        }
+    }
+    
+    @objc func landingPanGesture(gesture: UIPanGestureRecognizer) {
+        guard let recognizerView = gesture.view else {
+            return
+        }
+        let velocity = gesture.velocity(in: recognizerView)
+        
+        if gesture.state == .began {
+            landingTitle.removeAllActions()
+            landingPlayButton.removeAllActions()
+        } else if gesture.state == .changed {
+            gesture.setTranslation(CGPoint.zero, in: recognizerView)
+            
+            var directionX: CGFloat = 0
+            var directionY: CGFloat = 0
+            
+            if abs(velocity.x) > 50 && velocity.x > 0 {
+                directionX = 1
+            }
+            if abs(velocity.y) > 50 && velocity.y > 0 {
+                directionY = 1
+            }
+            
+            if abs(velocity.x) > 50 && velocity.x < 0 {
+                directionX = -1
+            }
+            if abs(velocity.y) > 50 && velocity.y < 0 {
+                directionY = -1
+            }
+            
+            if abs(velocity.x) > abs(velocity.y) {
+                if previousDirection == "y" && abs(velocity.x) > 100 {
+                    previousDirection = "x"
+                    directionY = 0
+                } else if previousDirection == "" || previousDirection == "x" {
+                    previousDirection = "x"
+                    directionY = 0
+                }
+            } else {
+                if previousDirection == "x" && abs(velocity.y) > 100 {
+                    previousDirection = "y"
+                    directionX = 0
+                } else if previousDirection == "" || previousDirection == "y" {
+                    previousDirection = "y"
+                    directionX = 0
+                }
+            }
+            
+            let rotateAction: SCNAction = SCNAction.rotateTo(x: directionY * CGFloat.pi / 10, y: directionX * CGFloat.pi / 10, z: 0, duration: 0.2)
+            landingTitle.runAction(rotateAction)
+            landingPlayButton.runAction(rotateAction)
+        } else if gesture.state == .ended {
+            let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
+            landingTitle.runAction(rotateAction)
+            landingPlayButton.runAction(rotateAction)
             previousDirection = ""
         }
     }

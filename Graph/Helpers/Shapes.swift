@@ -32,6 +32,7 @@ public enum Shape: Int {
     case kColorTimed
     case Spiral
     case Title
+    case Play
     
     struct ShapeConstants {
         static let sphereRadius: CGFloat = 0.5
@@ -59,7 +60,8 @@ public enum Shape: Int {
                              "kColor_locked",
                              "kColor_timed",
                              "spiral",
-                             "title"]
+                             "title",
+                             "play"]
     
     static func spawnShape(type: Shape, position: SCNVector3, color: UIColor, id: Int, node: SCNNode) {
         guard let geometry: SCNGeometry = createNodeOfType(type: type) else {
@@ -71,6 +73,9 @@ public enum Shape: Int {
             geometry.materials[1].diffuse.contents = UIColor.black
         } else if type.rawValue == 18 { // TITLE
             geometry.materials.first?.diffuse.contents = color
+        } else if type.rawValue == 19 { // PLAY
+            geometry.materials.first?.diffuse.contents = UIColor.red
+            geometry.materials[1].diffuse.contents = color
         } else if type.rawValue > 1  {
             geometry.materials.first?.diffuse.contents = UIColor.white
             geometry.materials[1].diffuse.contents = color

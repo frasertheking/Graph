@@ -58,6 +58,7 @@
 		43B0E6B220387F4700D444B0 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0E6B120387F4700D444B0 /* UIView+Extensions.swift */; };
 		43B0E6B5203A00A100D444B0 /* SCNGeometry+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B0E6B4203A00A100D444B0 /* SCNGeometry+Extensions.swift */; };
 		43BF188E209B501900E637D1 /* title.dae in Resources */ = {isa = PBXBuildFile; fileRef = 43BF188D209B501800E637D1 /* title.dae */; };
+		43BF1892209B975100E637D1 /* play.dae in Resources */ = {isa = PBXBuildFile; fileRef = 43BF1891209B975100E637D1 /* play.dae */; };
 		43C581811FE356AF00D344B0 /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = 43C5817F1FE356AF00D344B0 /* Background.sks */; };
 		43C581851FE4481B00D344B0 /* ColorButtonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43C581841FE4481B00D344B0 /* ColorButtonCollectionViewCell.xib */; };
 		43C581891FE4488300D344B0 /* ColorButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C581881FE4488300D344B0 /* ColorButtonCollectionViewCell.swift */; };
@@ -123,6 +124,7 @@
 		43B0E6B120387F4700D444B0 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		43B0E6B4203A00A100D444B0 /* SCNGeometry+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNGeometry+Extensions.swift"; sourceTree = "<group>"; };
 		43BF188D209B501800E637D1 /* title.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = title.dae; sourceTree = "<group>"; };
+		43BF1891209B975100E637D1 /* play.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = play.dae; sourceTree = "<group>"; };
 		43C5817F1FE356AF00D344B0 /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
 		43C581841FE4481B00D344B0 /* ColorButtonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorButtonCollectionViewCell.xib; sourceTree = "<group>"; };
 		43C581881FE4488300D344B0 /* ColorButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButtonCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				436C7B1F209407EF0037342A /* planar_timed.dae */,
 				436C7B3920961DE40037342A /* spiral.dae */,
 				43BF188D209B501800E637D1 /* title.dae */,
+				43BF1891209B975100E637D1 /* play.dae */,
 			);
 			path = dae;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				43A71C5E207A936B008D3104 /* hexagon.dae in Resources */,
 				436C7B192090FC570037342A /* hamiltonian.dae in Resources */,
 				436C7B112090F9370037342A /* kColor_complete.dae in Resources */,
+				43BF1892209B975100E637D1 /* play.dae in Resources */,
 				432EC2A5201E3FBC0075B477 /* Assets.xcassets in Resources */,
 				436C7B122090F9370037342A /* hamiltonian_complete.dae in Resources */,
 				432110542014D67900E1A24B /* Explode.scnp in Resources */,
