@@ -41,8 +41,8 @@ class LevelSelectViewController: UIViewController {
     // LANDING SCREEN VARS
     var currentlyAtLanding: Bool = true
     var landingEmitter: SCNNode!
-    var oldPrimaryColor: UIColor = RandomFlatColor()
-    var oldSecondaryColor: UIColor = RandomFlatColor()
+    var oldPrimaryColor: UIColor = RandomFlatColorWithShade(.light)
+    var oldSecondaryColor: UIColor = RandomFlatColorWithShade(.light)
 
     // UI
     @IBOutlet var skView: SKView!
@@ -194,25 +194,25 @@ class LevelSelectViewController: UIViewController {
                          node: landingEmitter)
         
         landingEmitter.scale = SCNVector3(x: 4, y: 4, z: 4)
-        GraphAnimation.swellEmitterNode(node: landingEmitter, scaleAmount: 4.25, delta: 1)
+        GraphAnimation.swellEmitterNode(node: landingEmitter, scaleAmount: 4.15, delta: 1)
         GraphAnimation.rotateNodeX(node: landingEmitter, delta: 20)
         
         scnScene.rootNode.addChildNode(landingEmitter)
+        
+        if let emitter1 = ParticleGeneration.createEmitter(color: UIColor.black, geometry: self.landingEmitter.childNodes[0].geometry!) {
+            if let emitter2 = ParticleGeneration.createEmitter(color: UIColor.white, geometry: self.landingEmitter.childNodes[0].geometry!) {
+                self.landingEmitter.removeAllParticleSystems()
+                self.landingEmitter.addParticleSystem(emitter1)
+                self.landingEmitter.addParticleSystem(emitter2)
+            }
+        }
         
         runNodeColorAnimations(node: landingEmitter, oldColor: oldPrimaryColor, material: landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 2)
         runNodeColorAnimations(node: landingEmitter, oldColor: oldSecondaryColor, material: landingEmitter.childNodes[0].geometry?.materials[1], duration: 3)
     }
     
     func runNodeColorAnimations(node: SCNNode, oldColor: UIColor, material: SCNMaterial?, duration: TimeInterval) {
-        let newColor: UIColor = RandomFlatColor()
-        
-        if let trail1 = ParticleGeneration.createTrail(color: oldColor, geometry: self.landingEmitter.childNodes[0].geometry!) {
-            if let trail2 = ParticleGeneration.createTrail(color: newColor, geometry: self.landingEmitter.childNodes[0].geometry!) {
-                self.landingEmitter.removeAllParticleSystems()
-                self.landingEmitter.addParticleSystem(trail1)
-                self.landingEmitter.addParticleSystem(trail2)
-            }
-        }
+        let newColor: UIColor = RandomFlatColorWithShade(.light)
         
         let changeColor = SCNAction.customAction(duration: duration) { (node, elapsedTime) -> () in
             let percentage = elapsedTime / CGFloat(duration)

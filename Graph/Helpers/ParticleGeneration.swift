@@ -57,4 +57,15 @@ public enum ParticleGeneration: Int {
         explosion.emitterShape = geometry
         return explosion
     }
+    
+    static func createEmitter(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem? {
+        guard let particles = SCNParticleSystem(named: "Emitter.scnp", inDirectory: nil) else {
+            return nil
+        }
+        
+        let emitter = particles
+        emitter.particleColor = color
+        emitter.emitterShape = geometry
+        return emitter
+    }
 }

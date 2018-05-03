@@ -9,6 +9,7 @@
 import SceneKit
 import SpriteKit
 import Pastel
+import ChameleonFramework
 
 let UIColorList:[UIColor] = [
     UIColor.black,
@@ -141,14 +142,25 @@ extension UIColor {
         pastelView.animationDuration = 10.0
         
         // Custom Color
-        pastelView.setColors([ UIColor(red: 255/255, green: 0/255, blue: 204/255, alpha: 1.0),
-                               UIColor(red: 51/255, green: 51/255, blue: 153/255, alpha: 1.0),
-                               UIColor(red: 252/255, green: 74/255, blue: 26/255, alpha: 1.0),
-                               UIColor(red: 247/255, green: 183/255, blue: 51/255, alpha: 1.0),
-                               UIColor(red: 98/255, green: 221/255, blue: 189/255, alpha: 1.0),
-                               UIColor(red: 53/255, green: 187/255, blue: 155/255, alpha: 1.0),
-                               UIColor(red: 115/255, green: 177/255, blue: 244/255, alpha: 1.0),
-                               UIColor(red: 75/255, green: 137/255, blue: 218/255, alpha: 1.0)])
+//        pastelView.setColors([ UIColor(red: 255/255, green: 0/255, blue: 204/255, alpha: 1.0),
+//                               UIColor(red: 51/255, green: 51/255, blue: 153/255, alpha: 1.0),
+//                               UIColor(red: 252/255, green: 74/255, blue: 26/255, alpha: 1.0),
+//                               UIColor(red: 247/255, green: 183/255, blue: 51/255, alpha: 1.0),
+//                               UIColor(red: 98/255, green: 221/255, blue: 189/255, alpha: 1.0),
+//                               UIColor(red: 53/255, green: 187/255, blue: 155/255, alpha: 1.0),
+//                               UIColor(red: 115/255, green: 177/255, blue: 244/255, alpha: 1.0),
+//                               UIColor(red: 75/255, green: 137/255, blue: 218/255, alpha: 1.0)])
+        
+        pastelView.setColors([RandomFlatColorWithShade(.light),
+                              RandomFlatColorWithShade(.light),
+                              RandomFlatColorWithShade(.light),
+                              RandomFlatColorWithShade(.light),
+                              RandomFlatColorWithShade(.light),
+                              RandomFlatColorWithShade(.light),
+                              RandomFlatColorWithShade(.light),
+                              RandomFlatColorWithShade(.light),
+                              RandomFlatColorWithShade(.light),
+                              RandomFlatColorWithShade(.light)])
         
         pastelView.startAnimation()
         
