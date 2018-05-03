@@ -13,6 +13,7 @@ import SpriteKit
 import Pastel
 import M13Checkbox
 import CountdownLabel
+import ChameleonFramework
 
 class LevelSelectViewController: UIViewController {
 
@@ -36,6 +37,12 @@ class LevelSelectViewController: UIViewController {
     var zoomPinchGestureRecognizer: UIPinchGestureRecognizer!
     var resetTapGestureRecognizer: UITapGestureRecognizer!
     var previousDirection: String = ""
+    
+    // LANDING SCREEN VARS
+    var currentlyAtLanding: Bool = true
+    var landingEmitter: SCNNode!
+    var oldPrimaryColor: UIColor = RandomFlatColor()
+    var oldSecondaryColor: UIColor = RandomFlatColor()
 
     // UI
     @IBOutlet var skView: SKView!
@@ -88,8 +95,12 @@ class LevelSelectViewController: UIViewController {
         setupScene()
         setupCamera()
         
-        setupLevel()
-        setupInteractions()
+        if !currentlyAtLanding {
+            setupLevelSelect()
+            setupInteractions()
+        } else {
+            setupLanding()
+        }
     }
     
     func setupView() {
@@ -104,7 +115,7 @@ class LevelSelectViewController: UIViewController {
 
         scnView = sceneView
         scnView.showsStatistics = false
-        scnView.allowsCameraControl = false
+        scnView.allowsCameraControl = currentlyAtLanding ? true : false
         scnView.autoenablesDefaultLighting = true
         scnView.antialiasingMode = .multisampling4X
         scnView.delegate = self
@@ -127,6 +138,8 @@ class LevelSelectViewController: UIViewController {
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         gradientLayer.opacity = 0.5
         view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        UIColor.setupBackgrounds(view: view, skView: skView)
     }
     
     func setupCamera() {
@@ -136,11 +149,7 @@ class LevelSelectViewController: UIViewController {
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
-    @objc func setupLevel() {
-        scnView.addGestureRecognizer(axisPanGestureRecognizer)
-        scnView.addGestureRecognizer(zoomPinchGestureRecognizer)
-        scnView.addGestureRecognizer(resetTapGestureRecognizer)
-        
+    @objc func setupLevelSelect() {
         activeLevel = Levels.createLevel(index: 0)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: UserDefaultsInteractor.getZoomFactor()), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
@@ -175,11 +184,52 @@ class LevelSelectViewController: UIViewController {
         }
     }
     
+    func setupLanding() {
+        landingEmitter = SCNNode()
+        
+        Shape.spawnShape(type: .Emitter,
+                         position: SCNVector3(x: 0, y: 0, z: 0),
+                         color: UIColor.cyan,
+                         id: -1,
+                         node: landingEmitter)
+        
+        landingEmitter.scale = SCNVector3(x: 4, y: 4, z: 4)
+        GraphAnimation.swellEmitterNode(node: landingEmitter, scaleAmount: 4.25, delta: 1)
+        GraphAnimation.rotateNodeX(node: landingEmitter, delta: 20)
+        
+        scnScene.rootNode.addChildNode(landingEmitter)
+        
+        runNodeColorAnimations(node: landingEmitter, oldColor: oldPrimaryColor, material: landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 2)
+        runNodeColorAnimations(node: landingEmitter, oldColor: oldSecondaryColor, material: landingEmitter.childNodes[0].geometry?.materials[1], duration: 3)
+    }
+    
+    func runNodeColorAnimations(node: SCNNode, oldColor: UIColor, material: SCNMaterial?, duration: TimeInterval) {
+        let newColor: UIColor = RandomFlatColor()
+        
+        if let trail1 = ParticleGeneration.createTrail(color: oldColor, geometry: self.landingEmitter.childNodes[0].geometry!) {
+            if let trail2 = ParticleGeneration.createTrail(color: newColor, geometry: self.landingEmitter.childNodes[0].geometry!) {
+                self.landingEmitter.removeAllParticleSystems()
+                self.landingEmitter.addParticleSystem(trail1)
+                self.landingEmitter.addParticleSystem(trail2)
+            }
+        }
+        
+        let changeColor = SCNAction.customAction(duration: duration) { (node, elapsedTime) -> () in
+            let percentage = elapsedTime / CGFloat(duration)
+            material?.diffuse.contents = UIColor.aniColor(from: oldColor, to: newColor, percentage: percentage)
+        }
+        
+        node.runAction(changeColor) {
+            self.runNodeColorAnimations(node: node, oldColor: newColor, material: material, duration: duration)
+        }
+    }
+    
     func setupInteractions() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
-        
-        UIColor.setupBackgrounds(view: view, skView: skView)
+        scnView.addGestureRecognizer(axisPanGestureRecognizer)
+        scnView.addGestureRecognizer(zoomPinchGestureRecognizer)
+        scnView.addGestureRecognizer(resetTapGestureRecognizer)
     }
     
     func createObjects() {
@@ -399,8 +449,6 @@ class LevelSelectViewController: UIViewController {
         return isAvailable
     }
     
-    
-    
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         let location = gestureRecognize.location(in: scnView)
         let hitResults = scnView.hitTest(location, options: nil)
@@ -554,7 +602,7 @@ class LevelSelectViewController: UIViewController {
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {
         GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
-            self.setupLevel()
+            self.setupLevelSelect()
         }
     }
 }

@@ -34,20 +34,6 @@ public enum ParticleGeneration: Int {
         trail.particleColor = color
         trail.emitterShape = geometry
         return trail
-        
-//        let exp = SCNParticleSystem()
-//        exp.loops = true
-//        exp.particleMass = 1
-//        exp.birthRate = 100
-//        exp.emissionDuration = 0.5
-//        exp.emitterShape = SCNSphere(radius: 0.25)
-//        exp.particleLifeSpan = 1
-//        exp.particleVelocity = 1.5
-//        exp.particleSize = 0.05
-//        exp.particleImage = UIImage(named: "CircleParticle")
-//        exp.particleColor = UIColor.white
-//        exp.isAffectedByPhysicsFields = true
-//        return exp
     }
     
     static func createSmoke(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem? {

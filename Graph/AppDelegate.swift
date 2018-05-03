@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         if let vc: LevelSelectViewController = self.window?.rootViewController as? LevelSelectViewController {
             if shouldRefresh {
-                vc.setupLevel()
+                vc.setupLevelSelect()
                 GraphAnimation.explodeGraph(vertexNodes: vc.vertexNodes, edgeNodes: vc.edgeNodes)
             }
         }

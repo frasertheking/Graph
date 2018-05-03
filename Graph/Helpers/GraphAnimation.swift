@@ -173,6 +173,18 @@ struct GraphAnimation {
         node.addAnimation(scale, forKey: "swell")
     }
     
+    static func swellEmitterNode(node: SCNNode, scaleAmount: Float, delta: Double) {
+        let scale = CABasicAnimation(keyPath: "scale")
+        let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        scale.fromValue = NSValue(scnVector4: SCNVector4(x: 4, y: 4, z: 4, w: 0))
+        scale.toValue = NSValue(scnVector4: SCNVector4(x: scaleAmount, y: scaleAmount, z: scaleAmount, w: 0))
+        scale.duration = delta
+        scale.repeatCount = .infinity
+        scale.autoreverses = true
+        scale.timingFunction = easeInOut
+        node.addAnimation(scale, forKey: "swell")
+    }
+    
     static func rotateNodeX(node: SCNNode, delta: Double) {
         let spin = CABasicAnimation(keyPath: "rotation")
         spin.fromValue = NSValue(scnVector4: SCNVector4(x: 1, y: 0, z: 0, w: 0))

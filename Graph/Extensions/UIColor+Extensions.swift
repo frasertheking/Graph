@@ -166,4 +166,33 @@ extension UIColor {
         skView.presentScene(skScene)
         skView.backgroundColor = UIColor.clear
     }
+    
+    public static func aniColor(from: UIColor, to: UIColor, percentage: CGFloat) -> UIColor {
+        let fromComponents = UIColor.rgb(from)
+        let toComponents = UIColor.rgb(to)
+        
+        let color = UIColor(red: (fromComponents()!.red + (toComponents()!.red - fromComponents()!.red) * percentage) / 255,
+                            green: (fromComponents()!.green + (toComponents()!.green - fromComponents()!.green) * percentage) / 255,
+                            blue: (fromComponents()!.blue + (toComponents()!.blue - fromComponents()!.blue) * percentage) / 255,
+                            alpha: 1)
+        return color
+    }
+    
+    public func rgb() -> (red:CGFloat, green:CGFloat, blue:CGFloat, alpha:CGFloat)? {
+        var fRed : CGFloat = 0
+        var fGreen : CGFloat = 0
+        var fBlue : CGFloat = 0
+        var fAlpha: CGFloat = 0
+        if self.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
+            let iRed = CGFloat(fRed * 255.0)
+            let iGreen = CGFloat(fGreen * 255.0)
+            let iBlue = CGFloat(fBlue * 255.0)
+            let iAlpha = CGFloat(fAlpha * 255.0)
+            
+            return (red:iRed, green:iGreen, blue:iBlue, alpha:iAlpha)
+        } else {
+            // Could not extract RGBA components:
+            return nil
+        }
+    }
 }
