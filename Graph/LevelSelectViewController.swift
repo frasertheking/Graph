@@ -250,7 +250,7 @@ class LevelSelectViewController: UIViewController {
 
         GraphAnimation.delayWithSeconds(0.5) {
             self.landingTitle.scale = SCNVector3(x: 2, y: 2, z: 2)
-            rotateAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 1)
+            rotateAction = SCNAction.rotateTo(x: CGFloat(Double.pi/12), y: 0, z: 0, duration: 0.75)
             rotateAction.timingMode = .easeInEaseOut
             self.landingTitle.runAction(rotateAction)
             

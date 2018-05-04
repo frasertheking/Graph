@@ -182,12 +182,13 @@ extension UIColor {
         pastelView.endPastelPoint = .bottomRight
         
         // Custom Duration
-        pastelView.animationDuration = 5.0
+        pastelView.animationDuration = 2.0
         
         // Custom Color
         pastelView.setColors([UIColor(red: 23/255, green: 234/255, blue: 217/255, alpha: 1.0),
                               UIColor(red: 24/255, green: 78/255, blue: 104/255, alpha: 1.0),
                               UIColor(red: 240/255, green: 47/255, blue: 194/255, alpha: 1.0),
+                              UIColor(red: 87/255, green: 217/255, blue: 10/255, alpha: 1.0),
                               UIColor(red: 255/255, green: 223/255, blue: 10/255, alpha: 1.0),
                               UIColor(red: 91/255, green: 36/255, blue: 122/255, alpha: 1.0),
                               UIColor(red: 59/255, green: 178/255, blue: 184/255, alpha: 1.0)])
