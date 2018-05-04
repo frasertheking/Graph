@@ -132,6 +132,22 @@ extension UIColor {
     }
     
     public static func setupBackgrounds(view: UIView, skView: SKView) {
+        insertGradient(for: view)
+        
+        // Add background particles
+        let skScene = SKScene(size: CGSize(width: view.frame.size.width, height: view.frame.size.height))
+        skScene.backgroundColor = UIColor.clear
+        let path = Bundle.main.path(forResource: "Background", ofType: "sks")
+        let backgroundParticle = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as! SKEmitterNode
+        backgroundParticle.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
+        backgroundParticle.targetNode = skScene.scene
+        backgroundParticle.particlePositionRange = CGVector(dx: view.frame.size.width, dy: view.frame.size.height)
+        skScene.scene?.addChild(backgroundParticle)
+        skView.presentScene(skScene)
+        skView.backgroundColor = UIColor.clear
+    }
+    
+    public static func insertGradient(for view: UIView) {
         let pastelView = PastelView(frame: view.bounds)
         
         // Custom Direction
@@ -142,15 +158,6 @@ extension UIColor {
         pastelView.animationDuration = 10.0
         
         // Custom Color
-//        pastelView.setColors([ UIColor(red: 255/255, green: 0/255, blue: 204/255, alpha: 1.0),
-//                               UIColor(red: 51/255, green: 51/255, blue: 153/255, alpha: 1.0),
-//                               UIColor(red: 252/255, green: 74/255, blue: 26/255, alpha: 1.0),
-//                               UIColor(red: 247/255, green: 183/255, blue: 51/255, alpha: 1.0),
-//                               UIColor(red: 98/255, green: 221/255, blue: 189/255, alpha: 1.0),
-//                               UIColor(red: 53/255, green: 187/255, blue: 155/255, alpha: 1.0),
-//                               UIColor(red: 115/255, green: 177/255, blue: 244/255, alpha: 1.0),
-//                               UIColor(red: 75/255, green: 137/255, blue: 218/255, alpha: 1.0)])
-        
         pastelView.setColors([RandomFlatColorWithShade(.light),
                               RandomFlatColorWithShade(.light),
                               RandomFlatColorWithShade(.light),
@@ -165,18 +172,29 @@ extension UIColor {
         pastelView.startAnimation()
         
         view.insertSubview(pastelView, at: 0)
+    }
+    
+    public static func insertButtonGradient(for view: UIView) {
+        let pastelView = PastelView(frame: view.bounds)
         
-        // Add background particles
-        let skScene = SKScene(size: CGSize(width: view.frame.size.width, height: view.frame.size.height))
-        skScene.backgroundColor = UIColor.clear
-        let path = Bundle.main.path(forResource: "Background", ofType: "sks")
-        let backgroundParticle = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as! SKEmitterNode
-        backgroundParticle.position = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
-        backgroundParticle.targetNode = skScene.scene
-        backgroundParticle.particlePositionRange = CGVector(dx: view.frame.size.width, dy: view.frame.size.height)
-        skScene.scene?.addChild(backgroundParticle)
-        skView.presentScene(skScene)
-        skView.backgroundColor = UIColor.clear
+        // Custom Direction
+        pastelView.startPastelPoint = .topLeft
+        pastelView.endPastelPoint = .bottomRight
+        
+        // Custom Duration
+        pastelView.animationDuration = 5.0
+        
+        // Custom Color
+        pastelView.setColors([UIColor(red: 23/255, green: 234/255, blue: 217/255, alpha: 1.0),
+                              UIColor(red: 24/255, green: 78/255, blue: 104/255, alpha: 1.0),
+                              UIColor(red: 240/255, green: 47/255, blue: 194/255, alpha: 1.0),
+                              UIColor(red: 255/255, green: 223/255, blue: 10/255, alpha: 1.0),
+                              UIColor(red: 91/255, green: 36/255, blue: 122/255, alpha: 1.0),
+                              UIColor(red: 59/255, green: 178/255, blue: 184/255, alpha: 1.0)])
+        
+        pastelView.startAnimation()
+        
+        view.insertSubview(pastelView, at: 0)
     }
     
     public static func aniColor(from: UIColor, to: UIColor, percentage: CGFloat) -> UIColor {

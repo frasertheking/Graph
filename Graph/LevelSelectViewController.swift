@@ -41,7 +41,7 @@ class LevelSelectViewController: UIViewController {
     
     // LANDING SCREEN VARS
     @IBOutlet var playButton: UIButton!
-    @IBOutlet var playButtonBackgroundView: UIView!
+    @IBOutlet var playButtonBackgroundView: UIVisualEffectView!
     @IBOutlet var playButtonBackgroundViewTopLayoutConstraint: NSLayoutConstraint!
     var currentlyAtLanding: Bool = true
     var landingEmitter: SCNNode!
@@ -106,19 +106,28 @@ class LevelSelectViewController: UIViewController {
         } else {
             setupLanding()
             
+            let maskView = UIView(frame: playButtonBackgroundView.bounds)
+            maskView.backgroundColor = .clear
+            maskView.layer.borderWidth = 3
+            maskView.layer.borderColor = UIColor.black.cgColor
+            maskView.layer.cornerRadius = 12
+            playButtonBackgroundView.contentView.mask = maskView
+            
             playButtonBackgroundView.alpha = 0
-            GraphAnimation.addPulse(to: playButton, duration: 1)
+            playButton.alpha = 0
+
+            UIColor.insertButtonGradient(for: playButtonBackgroundView.contentView)
+            playButtonBackgroundView.addParallaxToView(amount: 25)
+            playButton.addParallaxToView(amount: 25)
 
             GraphAnimation.delayWithSeconds(1) {                
                 self.playButtonBackgroundViewTopLayoutConstraint.constant = 260
                 UIView.animate(withDuration: 2, animations: {
                     self.view.layoutSubviews()
                     self.playButtonBackgroundView.alpha = 1
-                }, completion: { (finished) in
-                    self.playButtonBackgroundView.layer.shadowColor = UIColor.black.cgColor
-                    self.playButtonBackgroundView.layer.shadowOpacity = 1
-                    self.playButtonBackgroundView.layer.shadowOffset = CGSize.zero
-                    self.playButtonBackgroundView.layer.shadowRadius = 10
+                    self.playButton.alpha = 1
+                    GraphAnimation.addPulse(to: self.playButtonBackgroundView, duration: 2)
+                    GraphAnimation.addPulse(to: self.playButton, duration: 2)
                 })
             }
         }
@@ -241,7 +250,7 @@ class LevelSelectViewController: UIViewController {
 
         GraphAnimation.delayWithSeconds(0.5) {
             self.landingTitle.scale = SCNVector3(x: 2, y: 2, z: 2)
-            rotateAction = SCNAction.rotateTo(x: CGFloat(Double.pi/16), y: 0, z: 0, duration: 0.75)
+            rotateAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 1)
             rotateAction.timingMode = .easeInEaseOut
             self.landingTitle.runAction(rotateAction)
             
