@@ -501,21 +501,63 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="scene" translatesAutoresizingMaskIntoConstraints="NO" id="c0p-fo-dYZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </sceneKitView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7U-by-gpw">
+                                <rect key="frame" x="37.5" y="593.5" width="300" height="80"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EfO-t8-9pQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcG-ja-ZNA">
+                                            <rect key="frame" x="0.0" y="4" width="300" height="72"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                            <state key="normal" title="PLAY">
+                                                <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="playButtonPressed" destination="VML-Iw-7qS" eventType="touchUpInside" id="sy7-d5-k2X"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="xcG-ja-ZNA" firstAttribute="centerX" secondItem="EfO-t8-9pQ" secondAttribute="centerX" id="9VM-yU-SFb"/>
+                                        <constraint firstAttribute="trailing" secondItem="xcG-ja-ZNA" secondAttribute="trailing" id="Tyy-VG-kYo"/>
+                                        <constraint firstItem="xcG-ja-ZNA" firstAttribute="leading" secondItem="EfO-t8-9pQ" secondAttribute="leading" id="b30-dj-eKO"/>
+                                        <constraint firstItem="xcG-ja-ZNA" firstAttribute="centerY" secondItem="EfO-t8-9pQ" secondAttribute="centerY" id="sC5-nx-fkp"/>
+                                    </constraints>
+                                </view>
+                                <color key="backgroundColor" red="1" green="0.97208413637580404" blue="0.2628932133666193" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="ZuP-Rv-rMg"/>
+                                    <constraint firstAttribute="width" constant="300" id="keA-Pb-y1q"/>
+                                </constraints>
+                                <blurEffect style="light"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Oy5-u8-0UJ" firstAttribute="top" secondItem="XBw-OO-R0J" secondAttribute="top" id="7Cg-Dg-XHs"/>
                             <constraint firstItem="ca6-5t-SIY" firstAttribute="trailing" secondItem="c0p-fo-dYZ" secondAttribute="trailing" id="9Gi-Qv-gDG"/>
                             <constraint firstItem="ca6-5t-SIY" firstAttribute="trailing" secondItem="Oy5-u8-0UJ" secondAttribute="trailing" id="9Nz-fv-qHg"/>
+                            <constraint firstItem="O7U-by-gpw" firstAttribute="centerX" secondItem="XBw-OO-R0J" secondAttribute="centerX" id="MJq-8X-YuX"/>
                             <constraint firstItem="Oy5-u8-0UJ" firstAttribute="leading" secondItem="ca6-5t-SIY" secondAttribute="leading" id="TkA-3z-ptb"/>
                             <constraint firstAttribute="bottom" secondItem="Oy5-u8-0UJ" secondAttribute="bottom" id="YHD-hM-ocG"/>
                             <constraint firstItem="c0p-fo-dYZ" firstAttribute="leading" secondItem="ca6-5t-SIY" secondAttribute="leading" id="agG-9s-Me6"/>
                             <constraint firstAttribute="bottom" secondItem="c0p-fo-dYZ" secondAttribute="bottom" id="gTe-oA-SJa"/>
                             <constraint firstItem="c0p-fo-dYZ" firstAttribute="top" secondItem="XBw-OO-R0J" secondAttribute="top" id="qrN-pM-zbc"/>
+                            <constraint firstItem="O7U-by-gpw" firstAttribute="centerY" secondItem="XBw-OO-R0J" secondAttribute="centerY" constant="300" id="ywA-y1-KHh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ca6-5t-SIY"/>
                     </view>
                     <connections>
+                        <outlet property="playButton" destination="xcG-ja-ZNA" id="bke-bG-seE"/>
+                        <outlet property="playButtonBackgroundView" destination="O7U-by-gpw" id="Rhx-F9-zva"/>
+                        <outlet property="playButtonBackgroundViewTopLayoutConstraint" destination="ywA-y1-KHh" id="HWg-Nw-itf"/>
                         <outlet property="scnView" destination="c0p-fo-dYZ" id="Imb-vc-XHP"/>
                         <outlet property="skView" destination="Oy5-u8-0UJ" id="ZHZ-cD-v2A"/>
                         <segue destination="EcQ-vt-J7h" kind="presentation" identifier="gameSegue" animates="NO" id="VCh-uC-T95"/>

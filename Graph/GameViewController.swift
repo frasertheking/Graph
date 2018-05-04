@@ -214,9 +214,9 @@ class GameViewController: UIViewController {
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
-        GraphAnimation.addPulse(to: leftSphere)
-        GraphAnimation.addPulse(to: middleSphere)
-        GraphAnimation.addPulse(to: rightSphere)
+        GraphAnimation.addPulse(to: leftSphere, duration: 1)
+        GraphAnimation.addPulse(to: middleSphere, duration: 1)
+        GraphAnimation.addPulse(to: rightSphere, duration: 1)
         
         setupStraylights()
         createObjects()
@@ -1266,7 +1266,7 @@ extension GameViewController: UICollectionViewDataSource {
             cell.checkbox.setCheckState(.checked, animated: true)
             cell.layer.borderColor = UIColor.customWhite().cgColor
             GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
-                GraphAnimation.addPulse(to: cell)
+                GraphAnimation.addPulse(to: cell, duration: 0.75)
             }
         } else {
             cell.checkbox.setCheckState(.unchecked, animated: true)

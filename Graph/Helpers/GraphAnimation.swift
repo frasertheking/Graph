@@ -227,9 +227,9 @@ struct GraphAnimation {
         })
     }
     
-    static func addPulse(to: UIView) {
+    static func addPulse(to: UIView, duration: TimeInterval) {
         let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
-        pulseAnimation.duration = 0.75
+        pulseAnimation.duration = duration
         pulseAnimation.toValue = NSNumber(value: 1.1)
         pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         pulseAnimation.autoreverses = true

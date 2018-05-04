@@ -40,15 +40,14 @@ class LevelSelectViewController: UIViewController {
     var previousDirection: String = ""
     
     // LANDING SCREEN VARS
+    @IBOutlet var playButton: UIButton!
+    @IBOutlet var playButtonBackgroundView: UIView!
+    @IBOutlet var playButtonBackgroundViewTopLayoutConstraint: NSLayoutConstraint!
     var currentlyAtLanding: Bool = true
     var landingEmitter: SCNNode!
     var landingTitle: SCNNode!
-    var landingPlayButton: SCNNode!
     var emitter1: SCNParticleSystem?
     var emitter2: SCNParticleSystem?
-    var panDirection: String?
-    var currentAngleY: Float = 0.0
-    var currentAngleX: Float = 0.0
 
     // UI
     @IBOutlet var skView: SKView!
@@ -106,6 +105,22 @@ class LevelSelectViewController: UIViewController {
             setupInteractions()
         } else {
             setupLanding()
+            
+            playButtonBackgroundView.alpha = 0
+            GraphAnimation.addPulse(to: playButton, duration: 1)
+
+            GraphAnimation.delayWithSeconds(1) {                
+                self.playButtonBackgroundViewTopLayoutConstraint.constant = 260
+                UIView.animate(withDuration: 2, animations: {
+                    self.view.layoutSubviews()
+                    self.playButtonBackgroundView.alpha = 1
+                }, completion: { (finished) in
+                    self.playButtonBackgroundView.layer.shadowColor = UIColor.black.cgColor
+                    self.playButtonBackgroundView.layer.shadowOpacity = 1
+                    self.playButtonBackgroundView.layer.shadowOffset = CGSize.zero
+                    self.playButtonBackgroundView.layer.shadowRadius = 10
+                })
+            }
         }
     }
     
@@ -194,7 +209,6 @@ class LevelSelectViewController: UIViewController {
     func setupLanding() {
         landingEmitter = SCNNode()
         landingTitle = SCNNode()
-        landingPlayButton = SCNNode()
         
         Shape.spawnShape(type: .Emitter,
                          position: SCNVector3(x: 0, y: -0.25, z: 0),
@@ -208,22 +222,12 @@ class LevelSelectViewController: UIViewController {
                          id: -1,
                          node: landingTitle)
         
-        Shape.spawnShape(type: .Play,
-                         position: SCNVector3(x: 0, y: -12, z: 0),
-                         color: UIColor.white,
-                         id: -1,
-                         node: landingPlayButton)
-        
         scnScene.rootNode.addChildNode(landingEmitter)
         scnScene.rootNode.addChildNode(landingTitle)
-        scnScene.rootNode.addChildNode(landingPlayButton)
         
         var rotateAction: SCNAction = SCNAction.rotateTo(x: -CGFloat(Double.pi/2), y: 0, z: 0, duration: 0)
-        var rotateAction2: SCNAction = SCNAction.rotateTo(x: CGFloat(Double.pi/2), y: 0, z: 0, duration: 0)
         self.landingTitle.runAction(rotateAction)
-        self.landingPlayButton.runAction(rotateAction2)
         self.landingTitle.scale = SCNVector3(x: 0, y: 0, z: 0)
-        self.landingPlayButton.scale = SCNVector3(x: 0, y: 0, z: 0)
         
         GraphAnimation.explodeEmitter(emitter: landingEmitter)
         
@@ -231,25 +235,18 @@ class LevelSelectViewController: UIViewController {
         
         let seedColor1: UIColor = RandomFlatColorWithShade(.light)
         let seedColor2: UIColor = RandomFlatColorWithShade(.light)
-        let seedColor3: UIColor = RandomFlatColorWithShade(.light)
         
         self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor1, material: self.landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 2)
         self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor2, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 2)
-        self.runNodeColorAnimations(node: self.landingPlayButton, oldColor: seedColor3, material: self.landingPlayButton.childNodes[0].geometry?.firstMaterial, duration: 2)
 
         GraphAnimation.delayWithSeconds(0.5) {
             self.landingTitle.scale = SCNVector3(x: 2, y: 2, z: 2)
-            self.landingPlayButton.scale = SCNVector3(x: 0.7, y: 0.7, z: 0.7)
-            rotateAction = SCNAction.rotateTo(x: CGFloat(Double.pi/7), y: 0, z: 0, duration: 0.75)
+            rotateAction = SCNAction.rotateTo(x: CGFloat(Double.pi/16), y: 0, z: 0, duration: 0.75)
             rotateAction.timingMode = .easeInEaseOut
-            rotateAction2 = SCNAction.rotateTo(x: -CGFloat(Double.pi/10), y: 0, z: 0, duration: 0.75)
-            rotateAction2.timingMode = .easeInEaseOut
             self.landingTitle.runAction(rotateAction)
-            self.landingPlayButton.runAction(rotateAction2)
             
             GraphAnimation.swellNodeCustom(node: self.landingEmitter, from: 4.0, scaleAmount: 4.2, delta: 1)
             GraphAnimation.swellNodeCustom(node: self.landingTitle, from: 2, scaleAmount: 2.2, delta: 2)
-            GraphAnimation.swellNodeCustom(node: self.landingPlayButton, from: 0.7, scaleAmount: 0.8, delta: 2)
             
             if let firstEmitter = ParticleGeneration.createEmitter(color: seedColor1, geometry: self.landingEmitter.childNodes[0].geometry!) {
                 if let secondEmitter = ParticleGeneration.createEmitter(color: seedColor2, geometry: self.landingEmitter.childNodes[0].geometry!) {
@@ -267,7 +264,6 @@ class LevelSelectViewController: UIViewController {
                 let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.2)
                 rotateAction.timingMode = .easeInEaseOut
                 self.landingTitle.runAction(rotateAction)
-                self.landingPlayButton.runAction(rotateAction)
             })
             
         }
@@ -636,7 +632,6 @@ class LevelSelectViewController: UIViewController {
         
         if gesture.state == .began {
             landingTitle.removeAllActions()
-            landingPlayButton.removeAllActions()
         } else if gesture.state == .changed {
             gesture.setTranslation(CGPoint.zero, in: recognizerView)
             
@@ -677,11 +672,9 @@ class LevelSelectViewController: UIViewController {
             
             let rotateAction: SCNAction = SCNAction.rotateTo(x: directionY * CGFloat.pi / 10, y: directionX * CGFloat.pi / 10, z: 0, duration: 0.2)
             landingTitle.runAction(rotateAction)
-            landingPlayButton.runAction(rotateAction)
         } else if gesture.state == .ended {
             let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
             landingTitle.runAction(rotateAction)
-            landingPlayButton.runAction(rotateAction)
             previousDirection = ""
         }
     }
@@ -723,6 +716,10 @@ class LevelSelectViewController: UIViewController {
             let viewController: GameViewController = segue.destination as! GameViewController
             viewController.currentLevel = selectedLevel
         }
+    }
+    
+    @IBAction func playButtonPressed() {
+        print("pressed play")
     }
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {
