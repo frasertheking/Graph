@@ -502,7 +502,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </sceneKitView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7U-by-gpw">
-                                <rect key="frame" x="37.5" y="618.5" width="300" height="80"/>
+                                <rect key="frame" x="37.5" y="593.5" width="300" height="80"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EfO-t8-9pQ">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -521,7 +521,7 @@
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcG-ja-ZNA">
-                                <rect key="frame" x="37" y="618.5" width="300" height="80"/>
+                                <rect key="frame" x="37" y="593.5" width="300" height="80"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
                                 <state key="normal" title="START">
                                     <color key="titleColor" red="0.95495600702240335" green="0.95034269297881691" blue="0.9595693210659898" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -547,7 +547,7 @@
                             <constraint firstItem="c0p-fo-dYZ" firstAttribute="leading" secondItem="ca6-5t-SIY" secondAttribute="leading" id="agG-9s-Me6"/>
                             <constraint firstAttribute="bottom" secondItem="c0p-fo-dYZ" secondAttribute="bottom" id="gTe-oA-SJa"/>
                             <constraint firstItem="c0p-fo-dYZ" firstAttribute="top" secondItem="XBw-OO-R0J" secondAttribute="top" id="qrN-pM-zbc"/>
-                            <constraint firstItem="O7U-by-gpw" firstAttribute="centerY" secondItem="XBw-OO-R0J" secondAttribute="centerY" constant="325" id="ywA-y1-KHh"/>
+                            <constraint firstItem="O7U-by-gpw" firstAttribute="centerY" secondItem="XBw-OO-R0J" secondAttribute="centerY" constant="300" id="ywA-y1-KHh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ca6-5t-SIY"/>
                     </view>

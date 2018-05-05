@@ -108,7 +108,7 @@ class LevelSelectViewController: UIViewController {
             
             let maskView = UIView(frame: playButtonBackgroundView.bounds)
             maskView.backgroundColor = .clear
-            maskView.layer.borderWidth = 3
+            maskView.layer.borderWidth = 2
             maskView.layer.borderColor = UIColor.black.cgColor
             maskView.layer.cornerRadius = 12
             playButtonBackgroundView.contentView.mask = maskView
