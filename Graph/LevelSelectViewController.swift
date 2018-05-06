@@ -101,6 +101,8 @@ class LevelSelectViewController: UIViewController {
         setupScene()
         setupCamera()
         
+        skView.isPaused = true
+        
         if !currentlyAtLanding {
             setupLevelSelect()
             setupInteractions()
@@ -126,14 +128,15 @@ class LevelSelectViewController: UIViewController {
             playButtonBackgroundView.addParallaxToView(amount: 25)
             playButton.addParallaxToView(amount: 25)
 
-            GraphAnimation.delayWithSeconds(1) {                
+            GraphAnimation.delayWithSeconds(0.75) {
                 self.playButtonBackgroundViewTopLayoutConstraint.constant = 275
+                GraphAnimation.addPulse(to: self.playButtonBackgroundView, duration: 2)
+                GraphAnimation.addPulse(to: self.playButton, duration: 2)
+                
                 UIView.animate(withDuration: 2, animations: {
                     self.view.layoutSubviews()
                     self.playButtonBackgroundView.alpha = 1
                     self.playButton.alpha = 1
-                    GraphAnimation.addPulse(to: self.playButtonBackgroundView, duration: 2)
-                    GraphAnimation.addPulse(to: self.playButton, duration: 2)
                 })
             }
         }
@@ -204,7 +207,7 @@ class LevelSelectViewController: UIViewController {
         vertexNodes.position = UserDefaultsInteractor.getLevelSelectPosition()
         
         // TODO: move this??
-        GraphAnimation.delayWithSeconds(0.75) {
+        GraphAnimation.delayWithSeconds(1.5) {
             for node in self.emitterNodes {
                 if let trail = ParticleGeneration.createTrail(color: UIColor.white, geometry: node.geometry!) {
                     node.removeAllParticleSystems()
@@ -218,6 +221,8 @@ class LevelSelectViewController: UIViewController {
                     node.addParticleSystem(spiral)
                 }
             }
+            GraphAnimation.rotateNodeX(node: self.landingEmitter.childNodes[0], delta: 20)
+            self.skView.isPaused = false
         }
     }
     
@@ -313,11 +318,6 @@ class LevelSelectViewController: UIViewController {
         let changeColor = SCNAction.customAction(duration: duration) { (node, elapsedTime) -> () in
             let percentage = elapsedTime / CGFloat(duration)
             material?.diffuse.contents = UIColor.aniColor(from: oldColor, to: newColor, percentage: percentage)
-        }
-        
-        if let firstEmitter = ParticleGeneration.createEmitter(color: UIColor.white, geometry: self.landingEmitter.childNodes[0].geometry!) {
-            self.landingEmitter.childNodes[0].removeAllParticleSystems()
-            self.landingEmitter.childNodes[0].addParticleSystem(firstEmitter)
         }
         
         node.runAction(changeColor)
@@ -767,7 +767,14 @@ class LevelSelectViewController: UIViewController {
         GraphAnimation.addExplode(to: playButton)
         GraphAnimation.addExplode(to: playButtonBackgroundView)
         landingTitle.removeAllActions()
+        continueColorCycle = false
 
+        if let explode = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: landingEmitter.childNodes[0].geometry!) {
+            self.landingEmitter.childNodes[0].removeAllParticleSystems()
+            self.landingEmitter.childNodes[0].addParticleSystem(explode)
+            self.landingEmitter.childNodes[0].removeAnimation(forKey: "spin around")
+        }
+        
         GraphAnimation.delayWithSeconds(0.25) {
             self.playButtonBackgroundViewTopLayoutConstraint.constant = 400
             UIView.animate(withDuration: 0.5, animations: {
@@ -784,15 +791,14 @@ class LevelSelectViewController: UIViewController {
             
             self.landingEmitter.scale = SCNVector3(x: 4, y: 4, z: 4)
             self.landingEmitter.removeAllAnimations()
-            let scaleEmitterAction: SCNAction = SCNAction.scale(to: 1, duration: 2)
+            let scaleEmitterAction: SCNAction = SCNAction.scale(to: 1, duration: 1)
             scaleEmitterAction.timingMode = .easeInEaseOut
             self.landingEmitter.runAction(scaleEmitterAction)
             
-            self.continueColorCycle = false
-            
-            GraphAnimation.delayWithSeconds(2.25, completion: {
+            GraphAnimation.delayWithSeconds(1.5, completion: {
                 self.setupLevelSelect()
                 self.vertexNodes.addChildNode(self.landingEmitter)
+                self.emitterNodes.append(self.landingEmitter.childNodes[0])
                 self.setupInteractions()
                 self.currentlyAtLanding = false
                 self.view.removeGestureRecognizer(self.landingPanGestureRecognizer)

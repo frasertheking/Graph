@@ -205,6 +205,8 @@ struct GraphAnimation {
         spin.duration = delta
         spin.repeatCount = .infinity
         spin.autoreverses = false
+        spin.fillMode = kCAFillModeForwards
+        spin.isRemovedOnCompletion = false
         node.addAnimation(spin, forKey: "spin around")
     }
     
