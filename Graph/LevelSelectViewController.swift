@@ -108,7 +108,7 @@ class LevelSelectViewController: UIViewController {
             
             let maskView = UIView(frame: playButtonBackgroundView.bounds)
             maskView.backgroundColor = .clear
-            maskView.layer.borderWidth = 2
+            maskView.layer.borderWidth = 3
             maskView.layer.borderColor = UIColor.black.cgColor
             maskView.layer.cornerRadius = 40
             
@@ -733,7 +733,8 @@ class LevelSelectViewController: UIViewController {
     }
     
     @IBAction func playButtonPressed() {
-        print("pressed play")
+        GraphAnimation.addExplode(to: playButton)
+        GraphAnimation.addExplode(to: playButtonBackgroundView)
     }
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {
