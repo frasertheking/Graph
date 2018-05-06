@@ -225,7 +225,7 @@ class LevelSelectViewController: UIViewController {
         landingTitle = SCNNode()
         
         Shape.spawnShape(type: .Emitter,
-                         position: SCNVector3(x: 0, y: -0.33, z: 0),
+                         position: SCNVector3(x: 0, y: -0.35, z: 0),
                          color: UIColor.cyan,
                          id: -1,
                          node: landingEmitter)
