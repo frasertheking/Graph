@@ -515,7 +515,7 @@
                                 <blurEffect style="light"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="12"/>
+                                        <integer key="value" value="40"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -523,7 +523,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcG-ja-ZNA">
                                 <rect key="frame" x="37" y="593.5" width="300" height="80"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
-                                <state key="normal" title="START">
+                                <state key="normal">
                                     <color key="titleColor" red="0.95495600702240335" green="0.95034269297881691" blue="0.9595693210659898" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>

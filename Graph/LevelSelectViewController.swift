@@ -110,9 +110,14 @@ class LevelSelectViewController: UIViewController {
             maskView.backgroundColor = .clear
             maskView.layer.borderWidth = 2
             maskView.layer.borderColor = UIColor.black.cgColor
-            maskView.layer.cornerRadius = 12
-            playButtonBackgroundView.contentView.mask = maskView
+            maskView.layer.cornerRadius = 40
             
+            let labelMask = UILabel(frame: playButtonBackgroundView.bounds)
+            labelMask.text = "START"
+            labelMask.textAlignment = .center
+            labelMask.font = UIFont.systemFont(ofSize: 50, weight: .semibold)
+            maskView.addSubview(labelMask)
+            playButtonBackgroundView.contentView.mask = maskView
             playButtonBackgroundView.alpha = 0
             playButton.alpha = 0
 

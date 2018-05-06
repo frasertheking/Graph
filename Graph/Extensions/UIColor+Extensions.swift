@@ -177,24 +177,17 @@ extension UIColor {
     public static func insertButtonGradient(for view: UIView) {
         let pastelView = PastelView(frame: view.bounds)
         
-        // Custom Direction
         pastelView.startPastelPoint = .topLeft
         pastelView.endPastelPoint = .bottomRight
-        
-        // Custom Duration
         pastelView.animationDuration = 2.0
         
-        // Custom Color
-        pastelView.setColors([UIColor(red: 23/255, green: 234/255, blue: 217/255, alpha: 1.0),
-                              UIColor(red: 24/255, green: 78/255, blue: 104/255, alpha: 1.0),
-                              UIColor(red: 240/255, green: 47/255, blue: 194/255, alpha: 1.0),
-                              UIColor(red: 87/255, green: 217/255, blue: 10/255, alpha: 1.0),
-                              UIColor(red: 255/255, green: 223/255, blue: 10/255, alpha: 1.0),
-                              UIColor(red: 91/255, green: 36/255, blue: 122/255, alpha: 1.0),
-                              UIColor(red: 59/255, green: 178/255, blue: 184/255, alpha: 1.0)])
+        pastelView.setColors([UIColor(red: 13/255, green: 71/255, blue: 161/255, alpha: 1.0),
+                              UIColor(red: 27/255, green: 94/255, blue: 32/255, alpha: 1.0),
+                              UIColor(red: 230/255, green: 80/255, blue: 0/255, alpha: 1.0),
+                              UIColor(red: 49/255, green: 27/255, blue: 146/255, alpha: 1.0),
+                              UIColor(red: 183/255, green: 28/255, blue: 28/255, alpha: 1.0)])
         
         pastelView.startAnimation()
-        
         view.insertSubview(pastelView, at: 0)
     }
     
