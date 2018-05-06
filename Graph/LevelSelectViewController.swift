@@ -126,7 +126,7 @@ class LevelSelectViewController: UIViewController {
             playButton.addParallaxToView(amount: 25)
 
             GraphAnimation.delayWithSeconds(1) {                
-                self.playButtonBackgroundViewTopLayoutConstraint.constant = 260
+                self.playButtonBackgroundViewTopLayoutConstraint.constant = 275
                 UIView.animate(withDuration: 2, animations: {
                     self.view.layoutSubviews()
                     self.playButtonBackgroundView.alpha = 1
@@ -225,13 +225,13 @@ class LevelSelectViewController: UIViewController {
         landingTitle = SCNNode()
         
         Shape.spawnShape(type: .Emitter,
-                         position: SCNVector3(x: 0, y: -0.25, z: 0),
+                         position: SCNVector3(x: 0, y: -0.33, z: 0),
                          color: UIColor.cyan,
                          id: -1,
                          node: landingEmitter)
         
         Shape.spawnShape(type: .Title,
-                         position: SCNVector3(x: 0, y: 3.9, z: 0),
+                         position: SCNVector3(x: 0, y: 3.75, z: 0),
                          color: UIColor.white,
                          id: -1,
                          node: landingTitle)
