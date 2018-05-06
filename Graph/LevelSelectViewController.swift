@@ -48,6 +48,7 @@ class LevelSelectViewController: UIViewController {
     var landingTitle: SCNNode!
     var emitter1: SCNParticleSystem?
     var emitter2: SCNParticleSystem?
+    var continueColorCycle: Bool = true
 
     // UI
     @IBOutlet var skView: SKView!
@@ -224,6 +225,9 @@ class LevelSelectViewController: UIViewController {
         landingEmitter = SCNNode()
         landingTitle = SCNNode()
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        scnView.addGestureRecognizer(tapGesture)
+        
         Shape.spawnShape(type: .Emitter,
                          position: SCNVector3(x: 0, y: -0.35, z: 0),
                          color: UIColor.cyan,
@@ -233,7 +237,7 @@ class LevelSelectViewController: UIViewController {
         Shape.spawnShape(type: .Title,
                          position: SCNVector3(x: 0, y: 3.75, z: 0),
                          color: UIColor.white,
-                         id: -1,
+                         id: -2,
                          node: landingTitle)
         
         scnScene.rootNode.addChildNode(landingEmitter)
@@ -244,7 +248,6 @@ class LevelSelectViewController: UIViewController {
         self.landingTitle.scale = SCNVector3(x: 0, y: 0, z: 0)
         
         GraphAnimation.explodeEmitter(emitter: landingEmitter)
-        
         GraphAnimation.rotateNodeX(node: self.landingEmitter.childNodes[0], delta: 20)
         
         let seedColor1: UIColor = RandomFlatColorWithShade(.light)
@@ -297,8 +300,27 @@ class LevelSelectViewController: UIViewController {
         }
         
         node.runAction(changeColor) {
-            self.runNodeColorAnimations(node: node, oldColor: newColor, material: material, duration: duration)
+            if self.continueColorCycle {
+                self.runNodeColorAnimations(node: node, oldColor: newColor, material: material, duration: duration)
+            } else {
+                self.runFinalColorAnimation(node: self.landingEmitter, oldColor: self.landingEmitter.childNodes[0].geometry?.materials[0].diffuse.contents as! UIColor, newColor: UIColor.white, material: self.landingEmitter.childNodes[0].geometry?.materials[0], duration: 1)
+                self.runFinalColorAnimation(node: self.landingEmitter, oldColor: self.landingEmitter.childNodes[0].geometry?.materials[1].diffuse.contents as! UIColor, newColor: UIColor.black, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 1)
+            }
         }
+    }
+    
+    func runFinalColorAnimation(node: SCNNode, oldColor: UIColor, newColor: UIColor, material: SCNMaterial?, duration: TimeInterval) {
+        let changeColor = SCNAction.customAction(duration: duration) { (node, elapsedTime) -> () in
+            let percentage = elapsedTime / CGFloat(duration)
+            material?.diffuse.contents = UIColor.aniColor(from: oldColor, to: newColor, percentage: percentage)
+        }
+        
+        if let firstEmitter = ParticleGeneration.createEmitter(color: UIColor.white, geometry: self.landingEmitter.childNodes[0].geometry!) {
+            self.landingEmitter.childNodes[0].removeAllParticleSystems()
+            self.landingEmitter.childNodes[0].addParticleSystem(firstEmitter)
+        }
+        
+        node.runAction(changeColor)
     }
     
     func setupInteractions() {
@@ -323,9 +345,13 @@ class LevelSelectViewController: UIViewController {
         
         for (key, value) in adjacencyDict {
             var shapeType: Shape = .Node
-
+            
             if let shape = getShapeTypeForLevel(level: key.data.uid) {
                 shapeType = shape
+            }
+            
+            if shapeType == .Emitter && self.currentlyAtLanding {
+                continue
             }
             
             Shape.spawnShape(type: shapeType,
@@ -473,8 +499,13 @@ class LevelSelectViewController: UIViewController {
 //            return
 //        }
         
-        // First check for legal moves - return early if illegal
-        if geoName != "edge" {
+        if currentlyAtLanding {
+            if geoName == "\(-1)" {
+                if let explode = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: node.geometry!) {
+                    node.addParticleSystem(explode)
+                }
+            }
+        } else if geoName != "edge" && geoName != "\(-1)" {
             if checkIfAvailable(level: Int(geoName)!) {
                 
                 let scaleUpAction = SCNAction.scale(by: GameConstants.kScaleGrow, duration: GameConstants.kVeryShortTimeDelay)
@@ -735,11 +766,44 @@ class LevelSelectViewController: UIViewController {
     @IBAction func playButtonPressed() {
         GraphAnimation.addExplode(to: playButton)
         GraphAnimation.addExplode(to: playButtonBackgroundView)
+        landingTitle.removeAllActions()
+
+        GraphAnimation.delayWithSeconds(0.25) {
+            self.playButtonBackgroundViewTopLayoutConstraint.constant = 400
+            UIView.animate(withDuration: 0.5, animations: {
+                self.playButton.alpha = 0
+                self.playButtonBackgroundView.alpha = 0
+                self.view.layoutSubviews()
+            })
+            let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: 0, y: 7, z: 0), duration: 0.5)
+            let fadeAction: SCNAction = SCNAction.fadeOut(duration: 0.5)
+            moveAction.timingMode = .easeInEaseOut
+            fadeAction.timingMode = .easeInEaseOut
+            self.landingTitle.runAction(moveAction)
+            self.landingTitle.runAction(fadeAction)
+            
+            self.landingEmitter.scale = SCNVector3(x: 4, y: 4, z: 4)
+            self.landingEmitter.removeAllAnimations()
+            let scaleEmitterAction: SCNAction = SCNAction.scale(to: 1, duration: 2)
+            scaleEmitterAction.timingMode = .easeInEaseOut
+            self.landingEmitter.runAction(scaleEmitterAction)
+            
+            self.continueColorCycle = false
+            
+            GraphAnimation.delayWithSeconds(2.25, completion: {
+                self.setupLevelSelect()
+                self.vertexNodes.addChildNode(self.landingEmitter)
+                self.setupInteractions()
+                self.currentlyAtLanding = false
+                self.view.removeGestureRecognizer(self.landingPanGestureRecognizer)
+            })
+        }
     }
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {
         GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
             self.setupLevelSelect()
+            self.setupInteractions()
         }
     }
 }
