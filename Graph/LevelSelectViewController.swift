@@ -101,8 +101,6 @@ class LevelSelectViewController: UIViewController {
         setupScene()
         setupCamera()
         
-        skView.isPaused = true
-        
         if !currentlyAtLanding {
             setupLevelSelect()
             setupInteractions()
@@ -258,8 +256,8 @@ class LevelSelectViewController: UIViewController {
         let seedColor1: UIColor = RandomFlatColorWithShade(.light)
         let seedColor2: UIColor = RandomFlatColorWithShade(.light)
         
-        self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor1, material: self.landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 2)
-        self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor2, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 2)
+        self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor1, material: self.landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 1.5)
+        self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor2, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 1.5)
 
         GraphAnimation.delayWithSeconds(0.5) {
             self.landingTitle.scale = SCNVector3(x: 2, y: 2, z: 2)
@@ -308,8 +306,8 @@ class LevelSelectViewController: UIViewController {
             if self.continueColorCycle {
                 self.runNodeColorAnimations(node: node, oldColor: newColor, material: material, duration: duration)
             } else {
-                self.runFinalColorAnimation(node: self.landingEmitter, oldColor: self.landingEmitter.childNodes[0].geometry?.materials[0].diffuse.contents as! UIColor, newColor: UIColor.white, material: self.landingEmitter.childNodes[0].geometry?.materials[0], duration: 1)
-                self.runFinalColorAnimation(node: self.landingEmitter, oldColor: self.landingEmitter.childNodes[0].geometry?.materials[1].diffuse.contents as! UIColor, newColor: UIColor.black, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 1)
+                self.runFinalColorAnimation(node: self.landingEmitter, oldColor: self.landingEmitter.childNodes[0].geometry?.materials[0].diffuse.contents as! UIColor, newColor: UIColor.white, material: self.landingEmitter.childNodes[0].geometry?.materials[0], duration: 0.75)
+                self.runFinalColorAnimation(node: self.landingEmitter, oldColor: self.landingEmitter.childNodes[0].geometry?.materials[1].diffuse.contents as! UIColor, newColor: UIColor.black, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 0.75)
             }
         }
     }
@@ -764,6 +762,7 @@ class LevelSelectViewController: UIViewController {
     }
     
     @IBAction func playButtonPressed() {
+        skView.isPaused = true
         GraphAnimation.addExplode(to: playButton)
         GraphAnimation.addExplode(to: playButtonBackgroundView)
         landingTitle.removeAllActions()
@@ -791,7 +790,7 @@ class LevelSelectViewController: UIViewController {
             
             self.landingEmitter.scale = SCNVector3(x: 4, y: 4, z: 4)
             self.landingEmitter.removeAllAnimations()
-            let scaleEmitterAction: SCNAction = SCNAction.scale(to: 1, duration: 1)
+            let scaleEmitterAction: SCNAction = SCNAction.scale(to: 1, duration: 1.5)
             scaleEmitterAction.timingMode = .easeInEaseOut
             self.landingEmitter.runAction(scaleEmitterAction)
             
