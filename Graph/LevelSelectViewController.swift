@@ -106,37 +106,41 @@ class LevelSelectViewController: UIViewController {
             setupLevelSelect()
             setupInteractions()
         } else {
-            setupLanding()
             
-            let maskView = UIView(frame: playButtonBackgroundView.bounds)
-            maskView.backgroundColor = .clear
-            maskView.layer.borderWidth = 3
-            maskView.layer.borderColor = UIColor.black.cgColor
-            maskView.layer.cornerRadius = 40
+            self.playButtonBackgroundView.alpha = 0
+            self.playButton.alpha = 0
             
-            let labelMask = UILabel(frame: playButtonBackgroundView.bounds)
-            labelMask.text = "START"
-            labelMask.textAlignment = .center
-            labelMask.font = UIFont.systemFont(ofSize: 50, weight: .semibold)
-            maskView.addSubview(labelMask)
-            playButtonBackgroundView.contentView.mask = maskView
-            playButtonBackgroundView.alpha = 0
-            playButton.alpha = 0
-
-            UIColor.insertButtonGradient(for: playButtonBackgroundView.contentView)
-            playButtonBackgroundView.addParallaxToView(amount: 25)
-            playButton.addParallaxToView(amount: 25)
-
-            GraphAnimation.delayWithSeconds(0.75) {
-                self.playButtonBackgroundViewTopLayoutConstraint.constant = 275
-                GraphAnimation.addPulse(to: self.playButtonBackgroundView, duration: 2)
-                GraphAnimation.addPulse(to: self.playButton, duration: 2)
+            GraphAnimation.delayWithSeconds(1) {
+                self.setupLanding()
                 
-                UIView.animate(withDuration: 2, animations: {
-                    self.view.layoutSubviews()
-                    self.playButtonBackgroundView.alpha = 1
-                    self.playButton.alpha = 1
-                })
+                let maskView = UIView(frame: self.playButtonBackgroundView.bounds)
+                maskView.backgroundColor = .clear
+                maskView.layer.borderWidth = 3
+                maskView.layer.borderColor = UIColor.black.cgColor
+                maskView.layer.cornerRadius = 40
+                
+                let labelMask = UILabel(frame: self.playButtonBackgroundView.bounds)
+                labelMask.text = "START"
+                labelMask.textAlignment = .center
+                labelMask.font = UIFont.systemFont(ofSize: 50, weight: .semibold)
+                maskView.addSubview(labelMask)
+                self.playButtonBackgroundView.contentView.mask = maskView
+                
+                UIColor.insertButtonGradient(for: self.playButtonBackgroundView.contentView)
+                self.playButtonBackgroundView.addParallaxToView(amount: 25)
+                self.playButton.addParallaxToView(amount: 25)
+                
+                GraphAnimation.delayWithSeconds(0.75) {
+                    self.playButtonBackgroundViewTopLayoutConstraint.constant = 275
+                    GraphAnimation.addPulse(to: self.playButtonBackgroundView, duration: 2)
+                    GraphAnimation.addPulse(to: self.playButton, duration: 2)
+                    
+                    UIView.animate(withDuration: 2, animations: {
+                        self.view.layoutSubviews()
+                        self.playButtonBackgroundView.alpha = 1
+                        self.playButton.alpha = 1
+                    })
+                }
             }
         }
     }
@@ -263,12 +267,12 @@ class LevelSelectViewController: UIViewController {
         let seedColor1: UIColor = RandomFlatColorWithShade(.light)
         let seedColor2: UIColor = RandomFlatColorWithShade(.light)
         
-        self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor1, material: self.landingEmitter.childNodes[0].geometry?.firstMaterial, duration: 1.5)
-        self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor2, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 1.5)
+        self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor1, material: self.landingEmitter.childNodes[0].geometry?.firstMaterial, id: "color_change_1", duration: 2)
+        self.runNodeColorAnimations(node: self.landingEmitter, oldColor: seedColor2, material: self.landingEmitter.childNodes[0].geometry?.materials[1], id: "color_change_2", duration: 2)
 
         GraphAnimation.delayWithSeconds(0.5) {
             self.landingTitle.scale = SCNVector3(x: 2, y: 2, z: 2)
-            rotateAction = SCNAction.rotateTo(x: CGFloat(Double.pi/12), y: 0, z: 0, duration: 0.75)
+            rotateAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.75)
             rotateAction.timingMode = .easeInEaseOut
             self.landingTitle.runAction(rotateAction)
             
@@ -298,7 +302,7 @@ class LevelSelectViewController: UIViewController {
         scnView.addGestureRecognizer(landingPanGestureRecognizer)
     }
     
-    func runNodeColorAnimations(node: SCNNode, oldColor: UIColor, material: SCNMaterial?, duration: TimeInterval) {
+    func runNodeColorAnimations(node: SCNNode, oldColor: UIColor, material: SCNMaterial?, id: String, duration: TimeInterval) {
         let newColor: UIColor = RandomFlatColorWithShade(.light)
         
         emitter1?.particleColor = oldColor
@@ -309,13 +313,8 @@ class LevelSelectViewController: UIViewController {
             material?.diffuse.contents = UIColor.aniColor(from: oldColor, to: newColor, percentage: percentage)
         }
         
-        node.runAction(changeColor) {
-            if self.continueColorCycle {
-                self.runNodeColorAnimations(node: node, oldColor: newColor, material: material, duration: duration)
-            } else {
-                self.runFinalColorAnimation(node: self.landingEmitter, oldColor: self.landingEmitter.childNodes[0].geometry?.materials[0].diffuse.contents as! UIColor, newColor: UIColor.white, material: self.landingEmitter.childNodes[0].geometry?.materials[0], duration: 0.75)
-                self.runFinalColorAnimation(node: self.landingEmitter, oldColor: self.landingEmitter.childNodes[0].geometry?.materials[1].diffuse.contents as! UIColor, newColor: UIColor.black, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 0.75)
-            }
+        node.runAction(changeColor, forKey: id) {
+            self.runNodeColorAnimations(node: node, oldColor: newColor, material: material, id: id, duration: duration)
         }
     }
     
@@ -805,7 +804,11 @@ class LevelSelectViewController: UIViewController {
         GraphAnimation.addExplode(to: playButton)
         GraphAnimation.addExplode(to: playButtonBackgroundView)
         landingTitle.removeAllActions()
-        continueColorCycle = false
+       
+        landingEmitter.removeAction(forKey: "color_change_1")
+        landingEmitter.removeAction(forKey: "color_change_2")
+        self.runFinalColorAnimation(node: self.landingEmitter, oldColor: self.landingEmitter.childNodes[0].geometry?.materials[0].diffuse.contents as! UIColor, newColor: UIColor.white, material: self.landingEmitter.childNodes[0].geometry?.materials[0], duration: 1)
+        self.runFinalColorAnimation(node: self.landingEmitter, oldColor: self.landingEmitter.childNodes[0].geometry?.materials[1].diffuse.contents as! UIColor, newColor: UIColor.black, material: self.landingEmitter.childNodes[0].geometry?.materials[1], duration: 1)
 
         if let explode = ParticleGeneration.createExplosion(color: UIColor.glowColor(), geometry: landingEmitter.childNodes[0].geometry!) {
             self.landingEmitter.childNodes[0].removeAllParticleSystems()
@@ -829,11 +832,11 @@ class LevelSelectViewController: UIViewController {
             
             self.landingEmitter.scale = SCNVector3(x: 4, y: 4, z: 4)
             self.landingEmitter.removeAllAnimations()
-            let scaleEmitterAction: SCNAction = SCNAction.scale(to: 1, duration: 1.5)
+            let scaleEmitterAction: SCNAction = SCNAction.scale(to: 1, duration: 1)
             scaleEmitterAction.timingMode = .easeInEaseOut
             self.landingEmitter.runAction(scaleEmitterAction)
             
-            GraphAnimation.delayWithSeconds(1.5, completion: {
+            GraphAnimation.delayWithSeconds(1, completion: {
                 self.setupLevelSelect()
                 self.vertexNodes.addChildNode(self.landingEmitter)
                 self.emitterNodes.append(self.landingEmitter.childNodes[0])
