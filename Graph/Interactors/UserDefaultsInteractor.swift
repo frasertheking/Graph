@@ -91,6 +91,7 @@ struct UserDefaultsInteractor {
         baseLevels[3] = LevelState.base.rawValue
         baseLevels[4] = LevelState.base.rawValue
         baseLevels[5] = LevelState.base.rawValue
+        baseLevels[9] = LevelState.base.rawValue
         baseLevels[25] = LevelState.base.rawValue
         baseLevels[31] = LevelState.emitter.rawValue
         
@@ -115,6 +116,7 @@ struct UserDefaultsInteractor {
         baseLevels[3] = LevelState.base.rawValue
         baseLevels[4] = LevelState.base.rawValue
         baseLevels[5] = LevelState.base.rawValue
+        baseLevels[9] = LevelState.base.rawValue
         baseLevels[25] = LevelState.base.rawValue
         baseLevels[31] = LevelState.emitter.rawValue
         

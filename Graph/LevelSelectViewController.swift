@@ -416,7 +416,7 @@ class LevelSelectViewController: UIViewController {
         }
         
         scnScene.rootNode.addChildNode(gridLines)
-        gridLines.opacity = 0.075
+        gridLines.opacity = 0.1
         
     }
     
@@ -623,6 +623,12 @@ class LevelSelectViewController: UIViewController {
             edgeNodes.removeAllActions()
             gridLines.removeAllActions()
         } else if gestureRecognizer.state == .changed {
+            
+            if abs(vertexNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor)) > 25 ||
+               abs(vertexNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor)) > 25 {
+                return
+            }
+            
             vertexNodes.position = SCNVector3(x: vertexNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
                                                     y: vertexNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
                                                     z: vertexNodes.position.z)
@@ -680,8 +686,18 @@ class LevelSelectViewController: UIViewController {
             gridLines.runAction(rotateAction)
         } else if gestureRecognizer.state == .ended {
             if abs(velocity.x) > 200 || abs(velocity.y) > 200 {
-                let newX: Float = vertexNodes.position.x + (Float(velocity.x*0.4)) / Float(GameConstants.kPanVelocityFactor)
-                let newY: Float = vertexNodes.position.y - (Float(velocity.y*0.4)) / Float(GameConstants.kPanVelocityFactor)
+                var newX: Float = vertexNodes.position.x + (Float(velocity.x*0.4)) / Float(GameConstants.kPanVelocityFactor)
+                var newY: Float = vertexNodes.position.y - (Float(velocity.y*0.4)) / Float(GameConstants.kPanVelocityFactor)
+                
+                if newX > 25 {
+                    newX = 25
+                } else if newX < -25 {
+                    newX = -25
+                } else if newY > 25 {
+                    newY = 25
+                } else if newY < -25 {
+                    newY = -25
+                }
                 
                 let newPosition: SCNVector3 = SCNVector3(x: newX, y: newY, z: vertexNodes.position.z)
                 let moveAction = SCNAction.move(to: newPosition, duration: 0.4)
