@@ -21,6 +21,7 @@ class LevelSelectViewController: UIViewController {
     @IBOutlet var scnView: SCNView!
     var scnScene: SCNScene!
     var edgeNodes: SCNNode!
+    var gridLines: SCNNode!
     var edgeArray: [Edge<Node>]!
     var vertexNodes: SCNNode!
     var lightNodes: SCNNode!
@@ -188,13 +189,18 @@ class LevelSelectViewController: UIViewController {
     }
     
     @objc func setupLevelSelect() {
+        setupInteractions()
+        view.removeGestureRecognizer(self.landingPanGestureRecognizer)
+        
         activeLevel = Levels.createLevel(index: 0)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: UserDefaultsInteractor.getZoomFactor()), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
         createObjects()
+        setupGrid()
         GraphAnimation.emergeGraph(vertexNodes: vertexNodes)
         GraphAnimation.emergeGraph(edgeNodes: edgeNodes)
+        GraphAnimation.emergeGraph(edgeNodes: gridLines)
         
         GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
             GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
@@ -202,6 +208,7 @@ class LevelSelectViewController: UIViewController {
         
         // Set the levels to the correct position they were last left at
         edgeNodes.position = UserDefaultsInteractor.getLevelSelectPosition()
+        gridLines.position = UserDefaultsInteractor.getLevelSelectPosition()
         vertexNodes.position = UserDefaultsInteractor.getLevelSelectPosition()
         
         // TODO: move this??
@@ -332,6 +339,7 @@ class LevelSelectViewController: UIViewController {
     func createObjects() {
         edgeNodes = SCNNode()
         vertexNodes = SCNNode()
+        
         let edgeColor = UIColor.defaultVertexColor()
         let levelStates = UserDefaultsInteractor.getLevelStates()
 
@@ -393,6 +401,24 @@ class LevelSelectViewController: UIViewController {
         
         scnScene.rootNode.addChildNode(vertexNodes)
         scnScene.rootNode.addChildNode(edgeNodes)
+    }
+    
+    func setupGrid() {
+        gridLines = SCNNode()
+        
+        for y in -25...25 {
+            let node = SCNNode()
+            gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: -25, y: Float(y), z: 0), to: SCNVector3(x: 25, y: Float(y), z: 0), radius: 0.01, color: .black))
+        }
+        
+        for x in -25...25 {
+            let node = SCNNode()
+            gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(x), y: -25, z: 0), to: SCNVector3(x: Float(x), y: 25, z: 0), radius: 0.01, color: .black))
+        }
+        
+        scnScene.rootNode.addChildNode(gridLines)
+        gridLines.opacity = 0.075
+        
     }
     
     func getShapeTypeForLevel(level: Int) -> Shape? {
@@ -524,6 +550,7 @@ class LevelSelectViewController: UIViewController {
                     self.selectedLevel = Int(geoName)!
                     GraphAnimation.dissolveGraph(vertexNodes: self.vertexNodes, clean: self.cleanSceneAndSegue)
                     GraphAnimation.dissolveGraph(edgeNodes: self.edgeNodes)
+                    GraphAnimation.dissolveGraph(edgeNodes: self.gridLines)
                 }
             }
         }
@@ -576,6 +603,7 @@ class LevelSelectViewController: UIViewController {
     @objc func cleanScene() {
         vertexNodes.removeFromParentNode()
         edgeNodes.removeFromParentNode()
+        gridLines.removeFromParentNode()
         simPath.removeAll()
         
         scnView.removeGestureRecognizer(axisPanGestureRecognizer)
@@ -594,6 +622,7 @@ class LevelSelectViewController: UIViewController {
         if gestureRecognizer.state == .began {
             vertexNodes.removeAllActions()
             edgeNodes.removeAllActions()
+            gridLines.removeAllActions()
         } else if gestureRecognizer.state == .changed {
             vertexNodes.position = SCNVector3(x: vertexNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
                                                     y: vertexNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
@@ -602,6 +631,10 @@ class LevelSelectViewController: UIViewController {
             edgeNodes.position = SCNVector3(x: edgeNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
                                               y: edgeNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
                                               z: edgeNodes.position.z)
+            
+            gridLines.position = SCNVector3(x: gridLines.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
+                                            y: gridLines.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
+                                            z: gridLines.position.z)
             
             UserDefaultsInteractor.setLevelSelectPosition(pos: [edgeNodes.position.x, edgeNodes.position.y])
             gestureRecognizer.setTranslation(CGPoint.zero, in: recognizerView)
@@ -645,6 +678,7 @@ class LevelSelectViewController: UIViewController {
             let rotateAction: SCNAction = SCNAction.rotateTo(x: directionY * CGFloat.pi/zoomFactor, y: directionX * CGFloat.pi/zoomFactor, z: 0, duration: 0.2)
             vertexNodes.runAction(rotateAction)
             edgeNodes.runAction(rotateAction)
+            gridLines.runAction(rotateAction)
         } else if gestureRecognizer.state == .ended {
             if abs(velocity.x) > 200 || abs(velocity.y) > 200 {
                 let newX: Float = vertexNodes.position.x + (Float(velocity.x*0.4)) / Float(GameConstants.kPanVelocityFactor)
@@ -656,6 +690,7 @@ class LevelSelectViewController: UIViewController {
                 
                 vertexNodes.runAction(moveAction)
                 edgeNodes.runAction(moveAction)
+                gridLines.runAction(moveAction)
                 
                 UserDefaultsInteractor.setLevelSelectPosition(pos: [newX, newY])
             }
@@ -663,6 +698,7 @@ class LevelSelectViewController: UIViewController {
             let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
             vertexNodes.runAction(rotateAction)
             edgeNodes.runAction(rotateAction)
+            gridLines.runAction(rotateAction)
             previousDirection = ""
         }
     }
@@ -741,6 +777,7 @@ class LevelSelectViewController: UIViewController {
     @objc func tapGesture(gestureRecognizer: UITapGestureRecognizer) { guard gestureRecognizer.view != nil else { return }
         vertexNodes.removeAllActions()
         edgeNodes.removeAllActions()
+        gridLines.removeAllActions()
         
         let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
         let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: 0), duration: 0.4)
@@ -750,6 +787,8 @@ class LevelSelectViewController: UIViewController {
         vertexNodes.runAction(moveAction)
         edgeNodes.runAction(rotateAction)
         edgeNodes.runAction(moveAction)
+        gridLines.runAction(rotateAction)
+        gridLines.runAction(moveAction)
         cameraNode.runAction(zoomAction)
         
     }
@@ -798,9 +837,7 @@ class LevelSelectViewController: UIViewController {
                 self.setupLevelSelect()
                 self.vertexNodes.addChildNode(self.landingEmitter)
                 self.emitterNodes.append(self.landingEmitter.childNodes[0])
-                self.setupInteractions()
                 self.currentlyAtLanding = false
-                self.view.removeGestureRecognizer(self.landingPanGestureRecognizer)
             })
         }
     }

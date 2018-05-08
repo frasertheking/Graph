@@ -145,9 +145,9 @@ struct GraphAnimation {
 
     static func dissolveGraph(edgeNodes: SCNNode) {
         for node in edgeNodes.childNodes {
-            let fadeInAction: SCNAction = SCNAction.fadeOut(duration: 0.4)
-            fadeInAction.timingMode = .easeInEaseOut
-            node.runAction(fadeInAction)
+            let fadeOutAction: SCNAction = SCNAction.fadeOut(duration: 0.4)
+            fadeOutAction.timingMode = .easeInEaseOut
+            node.runAction(fadeOutAction)
         }
     }
     
