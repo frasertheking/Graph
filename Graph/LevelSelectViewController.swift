@@ -39,6 +39,7 @@ class LevelSelectViewController: UIViewController {
     var resetTapGestureRecognizer: UITapGestureRecognizer!
     var landingPanGestureRecognizer: UIPanGestureRecognizer!
     var previousDirection: String = ""
+    var showingModalView: Bool = false
     
     // LANDING SCREEN VARS
     @IBOutlet var playButton: UIButton!
@@ -596,6 +597,7 @@ class LevelSelectViewController: UIViewController {
         GraphAnimation.delayWithSeconds(0.25) {
             self.cleanScene()
             self.performSegue(withIdentifier: "gameSegue", sender: nil)
+            self.showingModalView = true
         }
     }
     
@@ -869,6 +871,7 @@ class LevelSelectViewController: UIViewController {
     }
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {
+        showingModalView = false
         GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
             self.setupLevelSelect()
             self.setupInteractions()
