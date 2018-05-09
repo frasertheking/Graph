@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,16 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="straylight_logo" translatesAutoresizingMaskIntoConstraints="NO" id="wAW-d5-KIP">
-                                <rect key="frame" x="0.0" y="-666.5" width="375" height="2000"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_node" translatesAutoresizingMaskIntoConstraints="NO" id="umf-fd-FH0">
+                                <rect key="frame" x="62" y="225" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="Q1o-V2-Jej"/>
+                                    <constraint firstAttribute="height" constant="250" id="WzT-NI-U0C"/>
+                                </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.14075798561963099" green="0.14007799535093712" blue="0.14143797588832485" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.95495600700000005" green="0.95034269299999996" blue="0.95956932110000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="wAW-d5-KIP" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="RGb-Cf-tnp"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wAW-d5-KIP" secondAttribute="trailing" id="RJN-xq-15l"/>
-                            <constraint firstItem="wAW-d5-KIP" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="fmI-ju-mWm"/>
-                            <constraint firstItem="wAW-d5-KIP" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="xFq-Gj-cYd"/>
+                            <constraint firstItem="umf-fd-FH0" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="1.05" id="18H-S2-cLY"/>
+                            <constraint firstItem="umf-fd-FH0" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="kBW-Rp-h5n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -37,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="straylight_logo" width="2000" height="2000"/>
+        <image name="loading_node" width="594" height="598"/>
     </resources>
 </document>

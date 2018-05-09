@@ -623,22 +623,29 @@ class LevelSelectViewController: UIViewController {
             edgeNodes.removeAllActions()
             gridLines.removeAllActions()
         } else if gestureRecognizer.state == .changed {
+            var newX: Float = vertexNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor)
+            var newY: Float = vertexNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor)
             
-            if abs(vertexNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor)) > 25 ||
-               abs(vertexNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor)) > 25 {
-                return
+            if newX > 25 {
+                newX = 25
+            } else if newY > 25 {
+                newY = 25
+            } else if newX < -25 {
+                newX = -25
+            } else if newY < -25 {
+                newY = -25
             }
             
-            vertexNodes.position = SCNVector3(x: vertexNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
-                                                    y: vertexNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
-                                                    z: vertexNodes.position.z)
+            vertexNodes.position = SCNVector3(x: newX,
+                                              y: newY,
+                                              z: vertexNodes.position.z)
             
-            edgeNodes.position = SCNVector3(x: edgeNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
-                                              y: edgeNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
+            edgeNodes.position = SCNVector3(x: newX,
+                                              y: newY,
                                               z: edgeNodes.position.z)
             
-            gridLines.position = SCNVector3(x: gridLines.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor),
-                                            y: gridLines.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor),
+            gridLines.position = SCNVector3(x: newX,
+                                            y: newY,
                                             z: gridLines.position.z)
             
             UserDefaultsInteractor.setLevelSelectPosition(pos: [edgeNodes.position.x, edgeNodes.position.y])
