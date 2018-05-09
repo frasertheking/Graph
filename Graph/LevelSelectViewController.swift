@@ -132,7 +132,7 @@ class LevelSelectViewController: UIViewController {
                 self.playButton.addParallaxToView(amount: 25)
                 
                 GraphAnimation.delayWithSeconds(0.75) {
-                    self.playButtonBackgroundViewTopLayoutConstraint.constant = 275
+                    self.playButtonBackgroundViewTopLayoutConstraint.constant = CGFloat(1/Float.pi * Float(self.view.frame.size.height))
                     GraphAnimation.addPulse(to: self.playButtonBackgroundView, duration: 2)
                     GraphAnimation.addPulse(to: self.playButton, duration: 2)
                     
