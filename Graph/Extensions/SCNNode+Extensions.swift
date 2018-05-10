@@ -85,7 +85,6 @@ extension SCNNode {
         return self
     }
     
-    
     func triangleFrom(vector1: SCNVector3, vector2: SCNVector3, vector3: SCNVector3) -> SCNNode {
         let indices: [Int32] = [0, 1, 2]
         
@@ -94,6 +93,22 @@ extension SCNNode {
         let element = SCNGeometryElement(indices: indices, primitiveType: .triangles)
         
         return SCNNode(geometry: SCNGeometry(sources: [source], elements: [element]))
+    }
+    
+    func findEmitterNodeInChildren() -> SCNNode? {
+        for child in self.childNodes {
+            if child.geometry?.name == "\(1)" {
+                return child
+            }
+        }
+        return nil
+    }
+    
+    func isNodeAnEmitter() -> Bool {
+        if self.geometry?.name == "\(1)" {
+            return true
+        }
+        return false
     }
 }
 

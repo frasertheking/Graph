@@ -546,9 +546,12 @@ class LevelSelectViewController: UIViewController {
                     node.addParticleSystem(explode)
                 }
                 
-                GraphAnimation.delayWithSeconds(0.3) {
+                moveToNode(node: node)
+                
+                GraphAnimation.delayWithSeconds(0.4) {
+                    UserDefaultsInteractor.setLevelSelectPosition(pos: [-node.position.x, -node.position.y])
                     self.selectedLevel = Int(geoName)!
-                    GraphAnimation.dissolveGraph(vertexNodes: self.vertexNodes, clean: self.cleanSceneAndSegue)
+                    GraphAnimation.dissolveGraph(vertexNodes: self.vertexNodes, lingerNode: node, clean: self.cleanSceneAndSegue)
                     GraphAnimation.dissolveGraph(edgeNodes: self.edgeNodes)
                     GraphAnimation.dissolveGraph(edgeNodes: self.gridLines)
                 }
@@ -799,12 +802,19 @@ class LevelSelectViewController: UIViewController {
     }
     
     @objc func tapGesture(gestureRecognizer: UITapGestureRecognizer) { guard gestureRecognizer.view != nil else { return }
+        moveToNode(node: emitterNodes.first)
+    }
+    
+    func moveToNode(node: SCNNode?) {
+        guard let node = node else {
+            return
+        }
         vertexNodes.removeAllActions()
         edgeNodes.removeAllActions()
         gridLines.removeAllActions()
         
         let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
-        let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: 0), duration: 0.4)
+        let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: -node.position.x, y: -node.position.y, z: 0), duration: 0.4)
         let zoomAction: SCNAction = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.4)
         
         vertexNodes.runAction(rotateAction)
@@ -814,7 +824,6 @@ class LevelSelectViewController: UIViewController {
         gridLines.runAction(rotateAction)
         gridLines.runAction(moveAction)
         cameraNode.runAction(zoomAction)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

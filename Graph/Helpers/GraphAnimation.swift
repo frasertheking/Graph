@@ -100,7 +100,19 @@ struct GraphAnimation {
     }
     
     static func emergeGraph(vertexNodes: SCNNode) {
+        if let emitter: SCNNode = vertexNodes.findEmitterNodeInChildren() {
+            emitter.position.z = -100
+            emitter.scale = SCNVector3(x: 0, y: 0, z: 0)
+            let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: emitter.position.x, y: emitter.position.y, z: 0), duration: 0.75)
+            let scaleAction: SCNAction = SCNAction.scale(to: 1, duration: 0.75)
+            moveAction.timingMode = .easeInEaseOut
+            scaleAction.timingMode = .easeInEaseOut
+            emitter.runAction(moveAction)
+            emitter.runAction(scaleAction)
+        }
+        
         for node in vertexNodes.childNodes {
+            if node.isNodeAnEmitter() { continue }
             node.position.z = -100
             node.scale = SCNVector3(x: 0, y: 0, z: 0)
             GraphAnimation.delayWithSeconds(Double.random(min: 0.1, max: 0.75)) {
@@ -114,8 +126,23 @@ struct GraphAnimation {
         }
     }
     
-    static func dissolveGraph(vertexNodes: SCNNode, clean: @escaping () -> ()) {
+    static func dissolveGraph(vertexNodes: SCNNode, lingerNode: SCNNode, clean: @escaping () -> ()) {
+        let name: String = (lingerNode.geometry?.name)!
+        
+        GraphAnimation.delayWithSeconds(Double.random(min: 1, max: 1.25)) {
+            let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: lingerNode.position.x, y: lingerNode.position.y, z: -100), duration: 0.45)
+            let scaleAction: SCNAction = SCNAction.scale(to: 0, duration: 0.45)
+            moveAction.timingMode = .easeInEaseOut
+            scaleAction.timingMode = .easeInEaseOut
+            lingerNode.runAction(moveAction)
+            lingerNode.runAction(scaleAction)
+        }
+        
         for node in vertexNodes.childNodes {
+            if node.geometry?.name == name {
+                continue
+            }
+            
             GraphAnimation.delayWithSeconds(Double.random(min: 0.4, max: 0.8)) {
                 let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: node.position.x, y: node.position.y, z: -100), duration: 0.45)
                 let scaleAction: SCNAction = SCNAction.scale(to: 0, duration: 0.45)
@@ -126,7 +153,7 @@ struct GraphAnimation {
             }
         }
         
-        GraphAnimation.delayWithSeconds(1) {
+        GraphAnimation.delayWithSeconds(1.5) {
             clean()
         }        
     }
