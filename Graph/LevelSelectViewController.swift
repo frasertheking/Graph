@@ -226,7 +226,7 @@ class LevelSelectViewController: UIViewController {
         GraphAnimation.emergeGraph(edgeNodes: edgeNodes)
         GraphAnimation.emergeGraph(edgeNodes: gridLines)
         
-        GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
+        GraphAnimation.delayWithSeconds(1.5) {
             GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
         }
         
