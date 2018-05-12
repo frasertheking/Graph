@@ -839,7 +839,7 @@ class LevelSelectViewController: UIViewController {
         
         let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
         let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: -node.position.x, y: -node.position.y, z: 0), duration: 0.4)
-        let zoomAction: SCNAction = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.4)
+        let zoomAction: SCNAction = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ-10), duration: 0.4)
         
         vertexNodes.runAction(rotateAction)
         vertexNodes.runAction(moveAction)
