@@ -217,9 +217,8 @@ class LevelSelectViewController: UIViewController {
         }
         settingsButton.isUserInteractionEnabled = true
         
+        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: -UserDefaultsInteractor.getLevelSelectPosition().x, y: -UserDefaultsInteractor.getLevelSelectPosition().y, z: UserDefaultsInteractor.getZoomFactor()), duration: 0))
         activeLevel = Levels.createLevel(index: 0)
-        scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: UserDefaultsInteractor.getZoomFactor()), duration: 0.5))
-        scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
         createObjects()
         setupGrid()
@@ -230,11 +229,6 @@ class LevelSelectViewController: UIViewController {
         GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
             GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
         }
-        
-        // Set the levels to the correct position they were last left at
-        edgeNodes.position = UserDefaultsInteractor.getLevelSelectPosition()
-        gridLines.position = UserDefaultsInteractor.getLevelSelectPosition()
-        vertexNodes.position = UserDefaultsInteractor.getLevelSelectPosition()
         
         // TODO: move this??
         GraphAnimation.delayWithSeconds(1.5) {
@@ -679,7 +673,7 @@ class LevelSelectViewController: UIViewController {
                                             y: newY,
                                             z: gridLines.position.z)
             
-            UserDefaultsInteractor.setLevelSelectPosition(pos: [edgeNodes.position.x, edgeNodes.position.y])
+            UserDefaultsInteractor.setLevelSelectPosition(pos: [0, 0])
             gestureRecognizer.setTranslation(CGPoint.zero, in: recognizerView)
             
             var directionX: CGFloat = 0
@@ -847,17 +841,10 @@ class LevelSelectViewController: UIViewController {
         edgeNodes.removeAllActions()
         gridLines.removeAllActions()
         
-        let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
-        let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: -node.position.x, y: -node.position.y, z: 0), duration: 0.4)
-        let zoomAction: SCNAction = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: cameraZ), duration: 0.4)
-        
-        vertexNodes.runAction(rotateAction)
-        vertexNodes.runAction(moveAction)
-        edgeNodes.runAction(rotateAction)
-        edgeNodes.runAction(moveAction)
-        gridLines.runAction(rotateAction)
-        gridLines.runAction(moveAction)
-        cameraNode.runAction(zoomAction)
+        let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: node.position.x + (node.parent?.position.x)!,
+                                                                  y: node.position.y + (node.parent?.position.y)!, z: cameraZ), duration: 0.4)
+        cameraNode.runAction(moveAction)
+        UserDefaultsInteractor.setLevelSelectPosition(pos: [node.position.x, node.position.y])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
