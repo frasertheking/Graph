@@ -378,7 +378,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JzG-le-mY3">
                                 <rect key="frame" x="24" y="50" width="55" height="55"/>
                                 <connections>
-                                    <action selector="backToLevelSelect" destination="EcQ-vt-J7h" eventType="touchUpInside" id="pS0-fX-CfO"/>
+                                    <action selector="exitLevel" destination="EcQ-vt-J7h" eventType="touchUpInside" id="8xy-oM-DSg"/>
                                 </connections>
                             </button>
                         </subviews>
