@@ -43,7 +43,9 @@ class LevelSelectViewController: UIViewController {
     
     // LANDING SCREEN VARS
     @IBOutlet var playButton: UIButton!
+    @IBOutlet var settingsButton: UIButton!
     @IBOutlet var playButtonBackgroundView: UIVisualEffectView!
+    @IBOutlet var settingsButtonBackgroundView: UIView!
     @IBOutlet var playButtonBackgroundViewTopLayoutConstraint: NSLayoutConstraint!
     var currentlyAtLanding: Bool = true
     var landingEmitter: SCNNode!
@@ -103,6 +105,18 @@ class LevelSelectViewController: UIViewController {
         setupScene()
         setupCamera()
         
+        settingsButtonBackgroundView.alpha = 0
+        settingsButton.isUserInteractionEnabled = false
+        let maskView2 = UIView(frame: self.settingsButtonBackgroundView.bounds)
+        maskView2.backgroundColor = .clear
+        
+        let settingsMask = UIImageView(image: UIImage(named: "settings"))
+        settingsMask.frame = self.settingsButtonBackgroundView.bounds
+        
+        maskView2.addSubview(settingsMask)
+        self.settingsButtonBackgroundView.backgroundColor = .clear
+        self.settingsButtonBackgroundView.mask = maskView2
+        
         if !currentlyAtLanding {
             setupLevelSelect()
             setupInteractions()
@@ -119,7 +133,7 @@ class LevelSelectViewController: UIViewController {
                 maskView.layer.borderWidth = 3
                 maskView.layer.borderColor = UIColor.black.cgColor
                 maskView.layer.cornerRadius = 40
-                
+
                 let labelMask = UILabel(frame: self.playButtonBackgroundView.bounds)
                 labelMask.text = "START"
                 labelMask.textAlignment = .center
@@ -196,6 +210,12 @@ class LevelSelectViewController: UIViewController {
     @objc func setupLevelSelect() {
         setupInteractions()
         view.removeGestureRecognizer(self.landingPanGestureRecognizer)
+        
+        // TODO MOVE THIS
+        UIView.animate(withDuration: 1) {
+            self.settingsButtonBackgroundView.alpha = 1
+        }
+        settingsButton.isUserInteractionEnabled = true
         
         activeLevel = Levels.createLevel(index: 0)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: UserDefaultsInteractor.getZoomFactor()), duration: 0.5))
@@ -610,6 +630,10 @@ class LevelSelectViewController: UIViewController {
         gridLines.removeFromParentNode()
         simPath.removeAll()
         
+        UIView.animate(withDuration: 0.2) {
+            self.settingsButtonBackgroundView.alpha = 0
+        }
+        
         scnView.removeGestureRecognizer(axisPanGestureRecognizer)
         scnView.removeGestureRecognizer(zoomPinchGestureRecognizer)
         scnView.removeGestureRecognizer(resetTapGestureRecognizer)
@@ -877,6 +901,14 @@ class LevelSelectViewController: UIViewController {
                 self.currentlyAtLanding = false
             })
         }
+    }
+    
+    @IBAction func settingsButtonPressed() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.settingsButtonBackgroundView.transform = CGAffineTransform(rotationAngle: 0.999*CGFloat.pi)
+        }, completion: { (finished) in
+            self.settingsButtonBackgroundView.transform = CGAffineTransform.identity
+        })
     }
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {

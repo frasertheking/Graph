@@ -80,7 +80,7 @@ class GameViewController: UIViewController {
     @IBOutlet var rightSphere: UIImageView!
     @IBOutlet var leftSeparator: UIView!
     @IBOutlet var rightSeparator: UIView!
-    @IBOutlet var backButton: UIButton!
+    @IBOutlet var backButtonView: UIView!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -164,6 +164,15 @@ class GameViewController: UIViewController {
         
         leftSeparator.layer.borderColor = UIColor.glowColor().cgColor
         rightSeparator.layer.borderColor = UIColor.glowColor().cgColor
+        
+        // Setting up back button
+        let maskView = UIView(frame: self.backButtonView.bounds)
+        maskView.backgroundColor = .clear
+        let backMask = UIImageView(image: UIImage(named: "close"))
+        backMask.frame = self.backButtonView.bounds
+        maskView.addSubview(backMask)
+        self.backButtonView.backgroundColor = .clear
+        self.backButtonView.mask = maskView
     }
     
     func setupScene() {
@@ -209,7 +218,7 @@ class GameViewController: UIViewController {
         scnView.isUserInteractionEnabled = true
         nextLevelButton.isEnabled = true
         countdownLabel.countdownDelegate = self
-        backButton.alpha = 1
+        backButtonView.alpha = 1
         activeLevel = Levels.createLevel(index: currentLevel)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
@@ -735,7 +744,7 @@ class GameViewController: UIViewController {
                     GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2.5, y: 2.5, z: 2.5, w: 0))
                     self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
                     self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 235
-                    self.backButton.alpha = 0
+                    self.backButtonView.alpha = 0
                     
                     if graphType != .sim {
                         self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
@@ -1143,7 +1152,7 @@ class GameViewController: UIViewController {
         self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
-            self.backButton.alpha = 0
+            self.backButtonView.alpha = 0
             self.straylightViewBack.alpha = 0
             self.straylightViewFront.alpha = 0
         })
