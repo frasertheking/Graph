@@ -46,6 +46,8 @@ class LevelSelectViewController: UIViewController {
     @IBOutlet var settingsButton: UIButton!
     @IBOutlet var playButtonBackgroundView: UIVisualEffectView!
     @IBOutlet var settingsButtonBackgroundView: UIView!
+    @IBOutlet var settingsButtonBorderView: UIView!
+    @IBOutlet var settingsButtonBorderBackgroundView: UIView!
     @IBOutlet var playButtonBackgroundViewTopLayoutConstraint: NSLayoutConstraint!
     var currentlyAtLanding: Bool = true
     var landingEmitter: SCNNode!
@@ -117,6 +119,20 @@ class LevelSelectViewController: UIViewController {
         self.settingsButtonBackgroundView.backgroundColor = .clear
         self.settingsButtonBackgroundView.mask = maskView2
         
+        
+        // BORDER
+        settingsButtonBorderView.alpha = 0
+        let maskView3 = UIView(frame: self.settingsButtonBorderView.bounds)
+        maskView3.backgroundColor = .clear
+        
+        let settingsBorderMask = UIImageView(image: UIImage(named: "settings_border"))
+        settingsBorderMask.frame = self.settingsButtonBorderView.bounds
+        
+        maskView3.addSubview(settingsBorderMask)
+        self.settingsButtonBorderView.backgroundColor = .clear
+        self.settingsButtonBorderView.mask = maskView3
+        UIColor.insertModalButtonGradient(for: self.settingsButtonBorderBackgroundView)
+
         if !currentlyAtLanding {
             setupLevelSelect()
             setupInteractions()
@@ -214,6 +230,7 @@ class LevelSelectViewController: UIViewController {
         // TODO MOVE THIS
         UIView.animate(withDuration: 1) {
             self.settingsButtonBackgroundView.alpha = 1
+            self.settingsButtonBorderView.alpha = 1
         }
         settingsButton.isUserInteractionEnabled = true
         
@@ -628,6 +645,7 @@ class LevelSelectViewController: UIViewController {
         
         UIView.animate(withDuration: 0.2) {
             self.settingsButtonBackgroundView.alpha = 0
+            self.settingsButtonBorderView.alpha = 0
         }
         
         scnView.removeGestureRecognizer(axisPanGestureRecognizer)
@@ -647,9 +665,10 @@ class LevelSelectViewController: UIViewController {
             vertexNodes.removeAllActions()
             edgeNodes.removeAllActions()
             gridLines.removeAllActions()
+            cameraNode.removeAllActions()
         } else if gestureRecognizer.state == .changed {
-            var newX: Float = vertexNodes.position.x + Float(translation.x / GameConstants.kPanTranslationScaleFactor)
-            var newY: Float = vertexNodes.position.y - Float(translation.y / GameConstants.kPanTranslationScaleFactor)
+            var newX: Float = cameraNode.position.x - Float(translation.x / GameConstants.kPanTranslationScaleFactor)
+            var newY: Float = cameraNode.position.y + Float(translation.y / GameConstants.kPanTranslationScaleFactor)
             
             if newX > 25 {
                 newX = 25
@@ -661,17 +680,9 @@ class LevelSelectViewController: UIViewController {
                 newY = -25
             }
             
-            vertexNodes.position = SCNVector3(x: newX,
+            cameraNode.position = SCNVector3(x: newX,
                                               y: newY,
-                                              z: vertexNodes.position.z)
-            
-            edgeNodes.position = SCNVector3(x: newX,
-                                              y: newY,
-                                              z: edgeNodes.position.z)
-            
-            gridLines.position = SCNVector3(x: newX,
-                                            y: newY,
-                                            z: gridLines.position.z)
+                                              z: cameraNode.position.z)
             
             UserDefaultsInteractor.setLevelSelectPosition(pos: [0, 0])
             gestureRecognizer.setTranslation(CGPoint.zero, in: recognizerView)
@@ -718,8 +729,8 @@ class LevelSelectViewController: UIViewController {
             gridLines.runAction(rotateAction)
         } else if gestureRecognizer.state == .ended {
             if abs(velocity.x) > 200 || abs(velocity.y) > 200 {
-                var newX: Float = vertexNodes.position.x + (Float(velocity.x*0.4)) / Float(GameConstants.kPanVelocityFactor)
-                var newY: Float = vertexNodes.position.y - (Float(velocity.y*0.4)) / Float(GameConstants.kPanVelocityFactor)
+                var newX: Float = cameraNode.position.x - (Float(velocity.x*0.4)) / Float(GameConstants.kPanVelocityFactor)
+                var newY: Float = cameraNode.position.y + (Float(velocity.y*0.4)) / Float(GameConstants.kPanVelocityFactor)
                 
                 if newX > 25 {
                     newX = 25
@@ -731,14 +742,11 @@ class LevelSelectViewController: UIViewController {
                     newY = -25
                 }
                 
-                let newPosition: SCNVector3 = SCNVector3(x: newX, y: newY, z: vertexNodes.position.z)
+                let newPosition: SCNVector3 = SCNVector3(x: newX, y: newY, z: cameraNode.position.z)
                 let moveAction = SCNAction.move(to: newPosition, duration: 0.4)
                 moveAction.timingMode = .easeOut
                 
-                vertexNodes.runAction(moveAction)
-                edgeNodes.runAction(moveAction)
-                gridLines.runAction(moveAction)
-                
+                cameraNode.runAction(moveAction)
                 UserDefaultsInteractor.setLevelSelectPosition(pos: [newX, newY])
             }
             
@@ -903,8 +911,10 @@ class LevelSelectViewController: UIViewController {
     @IBAction func settingsButtonPressed() {
         UIView.animate(withDuration: 0.2, animations: {
             self.settingsButtonBackgroundView.transform = CGAffineTransform(rotationAngle: 0.999*CGFloat.pi)
+            self.settingsButtonBorderView.transform = CGAffineTransform(rotationAngle: 0.999*CGFloat.pi)
         }, completion: { (finished) in
             self.settingsButtonBackgroundView.transform = CGAffineTransform.identity
+            self.settingsButtonBorderView.transform = CGAffineTransform.identity
         })
     }
     

@@ -191,6 +191,24 @@ extension UIColor {
         view.insertSubview(pastelView, at: 0)
     }
     
+    public static func insertModalButtonGradient(for view: UIView) {
+        let pastelView = PastelView(frame: view.bounds)
+        
+        pastelView.startPastelPoint = .topLeft
+        pastelView.endPastelPoint = .bottomRight
+        pastelView.animationDuration = 2.0
+        
+        pastelView.setColors([UIColor(red: 255/255, green: 51/255, blue: 51/255, alpha: 1.0),
+                              UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 1.0),
+                              UIColor(red: 51/255, green: 255/255, blue: 255/255, alpha: 1.0),
+                              UIColor(red: 51/255, green: 153/255, blue: 255/255, alpha: 1.0),
+                              UIColor(red: 153/255, green: 51/255, blue: 255/255, alpha: 1.0),
+                              UIColor(red: 255/255, green: 51/255, blue: 153/255, alpha: 1.0)])
+        
+        pastelView.startAnimation()
+        view.insertSubview(pastelView, at: 0)
+    }
+    
     public static func aniColor(from: UIColor, to: UIColor, percentage: CGFloat) -> UIColor {
         let fromComponents = UIColor.rgb(from)
         let toComponents = UIColor.rgb(to)
