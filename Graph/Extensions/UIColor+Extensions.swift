@@ -196,7 +196,7 @@ extension UIColor {
         
         pastelView.startPastelPoint = .topLeft
         pastelView.endPastelPoint = .bottomRight
-        pastelView.animationDuration = 2.0
+        pastelView.animationDuration = 1
         
         pastelView.setColors([UIColor(red: 255/255, green: 51/255, blue: 51/255, alpha: 1.0),
                               UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 1.0),

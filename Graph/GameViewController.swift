@@ -81,6 +81,8 @@ class GameViewController: UIViewController {
     @IBOutlet var leftSeparator: UIView!
     @IBOutlet var rightSeparator: UIView!
     @IBOutlet var backButtonView: UIView!
+    @IBOutlet var backButtonBorderView: UIView!
+    @IBOutlet var backButtonBorderBackgroundView: UIView!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -133,12 +135,37 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         
+        // Setting up back button
+        let maskView = UIView(frame: self.backButtonView.bounds)
+        maskView.backgroundColor = .clear
+        let backMask = UIImageView(image: UIImage(named: "close"))
+        backMask.frame = self.backButtonView.bounds
+        maskView.addSubview(backMask)
+        self.backButtonView.backgroundColor = .clear
+        self.backButtonView.mask = maskView
+        
+        // BORDER
+        backButtonBorderView.alpha = 0
+        let maskView3 = UIView(frame: backButtonBorderView.bounds)
+        maskView3.backgroundColor = .clear
+        
+        let backButtonBorderMask = UIImageView(image: UIImage(named: "close_border"))
+        backButtonBorderMask.frame = self.backButtonBorderView.bounds
+        
+        maskView3.addSubview(backButtonBorderMask)
+        self.backButtonBorderView.backgroundColor = .clear
+        self.backButtonBorderView.mask = maskView3
+        
         if debug {
             setupDebug()
         } else {
             setupLevel()
         }
         setupInteractions()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        UIColor.insertModalButtonGradient(for: self.backButtonBorderBackgroundView)
     }
     
     func setupView() {
@@ -164,15 +191,6 @@ class GameViewController: UIViewController {
         
         leftSeparator.layer.borderColor = UIColor.glowColor().cgColor
         rightSeparator.layer.borderColor = UIColor.glowColor().cgColor
-        
-        // Setting up back button
-        let maskView = UIView(frame: self.backButtonView.bounds)
-        maskView.backgroundColor = .clear
-        let backMask = UIImageView(image: UIImage(named: "close"))
-        backMask.frame = self.backButtonView.bounds
-        maskView.addSubview(backMask)
-        self.backButtonView.backgroundColor = .clear
-        self.backButtonView.mask = maskView
     }
     
     func setupScene() {
@@ -219,6 +237,7 @@ class GameViewController: UIViewController {
         nextLevelButton.isEnabled = true
         countdownLabel.countdownDelegate = self
         backButtonView.alpha = 1
+        backButtonBorderView.alpha = 1
         activeLevel = Levels.createLevel(index: currentLevel)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
@@ -745,6 +764,7 @@ class GameViewController: UIViewController {
                     self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
                     self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 235
                     self.backButtonView.alpha = 0
+                    self.backButtonBorderView.alpha = 0
                     
                     if graphType != .sim {
                         self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
@@ -1153,6 +1173,7 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
             self.backButtonView.alpha = 0
+            self.backButtonBorderView.alpha = 0
             self.straylightViewBack.alpha = 0
             self.straylightViewFront.alpha = 0
         })

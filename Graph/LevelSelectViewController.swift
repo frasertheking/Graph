@@ -119,7 +119,6 @@ class LevelSelectViewController: UIViewController {
         self.settingsButtonBackgroundView.backgroundColor = .clear
         self.settingsButtonBackgroundView.mask = maskView2
         
-        
         // BORDER
         settingsButtonBorderView.alpha = 0
         let maskView3 = UIView(frame: self.settingsButtonBorderView.bounds)
