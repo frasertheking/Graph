@@ -447,9 +447,17 @@ class LevelSelectViewController: UIViewController {
             gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(x), y: -25, z: 0), to: SCNVector3(x: Float(x), y: 25, z: 0), radius: 0.01, color: .black))
         }
         
-        scnScene.rootNode.addChildNode(gridLines)
-        gridLines.opacity = 0.1
+        for x in -25...25 {
+            for y in -25...25 {
+                let node = Shape.getSphereNode()
+                node.position = SCNVector3(x: Float(x), y: Float(y), z: 0)
+                gridLines.addChildNode(node)
+                
+            }
+        }
         
+        scnScene.rootNode.addChildNode(gridLines)
+        gridLines.opacity = 0.05
     }
     
     func getShapeTypeForLevel(level: Int) -> Shape? {
