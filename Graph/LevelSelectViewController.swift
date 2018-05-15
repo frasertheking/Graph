@@ -650,10 +650,8 @@ class LevelSelectViewController: UIViewController {
         gridLines.removeFromParentNode()
         simPath.removeAll()
         
-        UIView.animate(withDuration: 0.2) {
-            self.settingsButtonBackgroundView.alpha = 0
-            self.settingsButtonBorderView.alpha = 0
-        }
+        settingsButtonBackgroundView.alpha = 0
+        settingsButtonBorderView.alpha = 0
         
         scnView.removeGestureRecognizer(axisPanGestureRecognizer)
         scnView.removeGestureRecognizer(zoomPinchGestureRecognizer)
