@@ -130,7 +130,6 @@ class LevelSelectViewController: UIViewController {
         maskView3.addSubview(settingsBorderMask)
         self.settingsButtonBorderView.backgroundColor = .clear
         self.settingsButtonBorderView.mask = maskView3
-        UIColor.insertModalButtonGradient(for: self.settingsButtonBorderBackgroundView)
 
         if !currentlyAtLanding {
             setupLevelSelect()
@@ -230,6 +229,10 @@ class LevelSelectViewController: UIViewController {
         UIView.animate(withDuration: 1) {
             self.settingsButtonBackgroundView.alpha = 1
             self.settingsButtonBorderView.alpha = 1
+            for view in self.settingsButtonBorderBackgroundView.subviews {
+                view.removeFromSuperview()
+            }
+            UIColor.insertModalButtonGradient(for: self.settingsButtonBorderBackgroundView)
         }
         settingsButton.isUserInteractionEnabled = true
         
