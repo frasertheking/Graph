@@ -99,20 +99,28 @@ struct GraphAnimation {
         emitter.addAnimation(scale, forKey: "explode")
     }
     
-    static func emergeGraph(vertexNodes: SCNNode) {
-        if let emitter: SCNNode = vertexNodes.findEmitterNodeInChildren() {
-            emitter.position.z = -100
-            emitter.scale = SCNVector3(x: 0, y: 0, z: 0)
-            let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: emitter.position.x, y: emitter.position.y, z: 0), duration: 0.75)
-            let scaleAction: SCNAction = SCNAction.scale(to: 1, duration: 0.75)
-            moveAction.timingMode = .easeInEaseOut
-            scaleAction.timingMode = .easeInEaseOut
-            emitter.runAction(moveAction)
-            emitter.runAction(scaleAction)
+    static func emergeGraph(vertexNodes: SCNNode, findNode: SCNNode?) {
+        var skipNode: SCNNode? = nil
+        
+        if let findNode = findNode {
+            if let emitter: SCNNode = vertexNodes.findNodeInChildren(node: findNode) {
+                emitter.position.z = -100
+                emitter.scale = SCNVector3(x: 0, y: 0, z: 0)
+                let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: emitter.position.x, y: emitter.position.y, z: 0), duration: 0.75)
+                let scaleAction: SCNAction = SCNAction.scale(to: 1, duration: 0.75)
+                moveAction.timingMode = .easeInEaseOut
+                scaleAction.timingMode = .easeInEaseOut
+                emitter.runAction(moveAction)
+                emitter.runAction(scaleAction)
+                skipNode = emitter
+            }
         }
         
-        for node in vertexNodes.childNodes {
-            if node.isNodeAnEmitter() { continue }
+        for node in vertexNodes.childNodes {            
+            if node.geometry?.name == skipNode?.geometry?.name {
+                continue
+            }
+            
             node.position.z = -100
             node.scale = SCNVector3(x: 0, y: 0, z: 0)
             GraphAnimation.delayWithSeconds(Double.random(min: 0.1, max: 0.75)) {

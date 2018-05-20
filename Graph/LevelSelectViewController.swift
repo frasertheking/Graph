@@ -55,6 +55,7 @@ class LevelSelectViewController: UIViewController {
     var emitter1: SCNParticleSystem?
     var emitter2: SCNParticleSystem?
     var continueColorCycle: Bool = true
+    var findNode: SCNNode?
 
     // UI
     @IBOutlet var skView: SKView!
@@ -241,16 +242,14 @@ class LevelSelectViewController: UIViewController {
         
         createObjects()
         setupGrid()
-        GraphAnimation.emergeGraph(vertexNodes: vertexNodes)
-        GraphAnimation.emergeGraph(edgeNodes: edgeNodes)
-        GraphAnimation.emergeGraph(edgeNodes: gridLines)
         
-        GraphAnimation.delayWithSeconds(1.5) {
-            GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
-        }
+        GraphAnimation.emergeGraph(vertexNodes: self.vertexNodes, findNode: self.findNode)
+        GraphAnimation.emergeGraph(edgeNodes: self.edgeNodes)
+        GraphAnimation.emergeGraph(edgeNodes: self.gridLines)
         
         // TODO: move this??
         GraphAnimation.delayWithSeconds(1.5) {
+            GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             for node in self.emitterNodes {
                 if let trail = ParticleGeneration.createTrail(color: UIColor.white, geometry: node.geometry!) {
                     node.removeAllParticleSystems()
@@ -588,15 +587,21 @@ class LevelSelectViewController: UIViewController {
                     node.addParticleSystem(explode)
                 }
                 
+                findNode = node
                 moveToNode(node: node, zoom: true)
                 view.isUserInteractionEnabled = false
                 
                 GraphAnimation.delayWithSeconds(0.4) {
                     UserDefaultsInteractor.setLevelSelectPosition(pos: [-node.position.x, -node.position.y])
+                    UserDefaultsInteractor.setZoomFactor(pos: self.cameraNode.position.z)
                     self.selectedLevel = Int(geoName)!
                     GraphAnimation.dissolveGraph(vertexNodes: self.vertexNodes, lingerNode: node, clean: self.cleanSceneAndSegue)
                     GraphAnimation.dissolveGraph(edgeNodes: self.edgeNodes)
                     GraphAnimation.dissolveGraph(edgeNodes: self.gridLines)
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.settingsButtonBorderView.alpha = 0
+                        self.settingsButtonBackgroundView.alpha = 0
+                    })
                 }
             }
         }
@@ -849,7 +854,7 @@ class LevelSelectViewController: UIViewController {
         var cameraZ = GameConstants.kCameraZ
         
         if zoom {
-            cameraZ -= 10
+            cameraZ = 14
             vertexNodes.removeAllAnimations()
         }
         

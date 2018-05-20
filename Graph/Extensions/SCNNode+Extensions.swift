@@ -95,6 +95,15 @@ extension SCNNode {
         return SCNNode(geometry: SCNGeometry(sources: [source], elements: [element]))
     }
     
+    func findNodeInChildren(node: SCNNode) -> SCNNode? {
+        for child in self.childNodes {
+            if child.geometry?.name == node.geometry?.name {
+                return child
+            }
+        }
+        return nil
+    }
+    
     func findEmitterNodeInChildren() -> SCNNode? {
         for child in self.childNodes {
             if child.geometry?.name == "\(1)" {
