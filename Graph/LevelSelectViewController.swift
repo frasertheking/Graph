@@ -445,7 +445,7 @@ class LevelSelectViewController: UIViewController {
             if abs(y) % 2 == 1 {
                 let node = SCNNode()
                 node.opacity = 0.05
-                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: -25, y: Float(y), z: 0), to: SCNVector3(x: 25, y: Float(y), z: 0), radius: 0.01, color: .black))
+                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: -25, y: Float(y), z: -0.15), to: SCNVector3(x: 25, y: Float(y), z: -0.15), radius: 0.01, color: .black))
             }
         }
         
@@ -453,7 +453,7 @@ class LevelSelectViewController: UIViewController {
             if abs(x) % 2 == 1 {
                 let node = SCNNode()
                 node.opacity = 0.05
-                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(x), y: -25, z: 0), to: SCNVector3(x: Float(x), y: 25, z: 0), radius: 0.01, color: .black))
+                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(x), y: -25, z: -0.15), to: SCNVector3(x: Float(x), y: 25, z: -0.15), radius: 0.01, color: .black))
             }
         }
         
@@ -461,8 +461,8 @@ class LevelSelectViewController: UIViewController {
             for y in -25...25 {
                 if abs(x) % 2 == 1 && abs(y) % 2 == 1 {
                     let node = Shape.getSphereNode()
-                    node.opacity = 0.15
-                    node.position = SCNVector3(x: Float(x), y: Float(y), z: 0)
+                    node.opacity = 0.1
+                    node.position = SCNVector3(x: Float(x), y: Float(y), z: -0.15)
                     gridNodes.addChildNode(node)
                 }
             }

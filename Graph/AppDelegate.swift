@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let vc: LevelSelectViewController = self.window?.rootViewController as? LevelSelectViewController {
             if !vc.showingModalView && !vc.currentlyAtLanding {
                 shouldRefresh = true
+                vc.findNode = nil
                 vc.cleanScene()
             }
         }
