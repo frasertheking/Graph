@@ -112,7 +112,7 @@ public enum Shape: Int {
     }
     
     static func getSphereNode() -> SCNNode {
-        let sphere = SCNSphere(radius: 0.075)
+        let sphere = SCNSphere(radius: 0.1)
         sphere.firstMaterial!.diffuse.contents = UIColor.black
         return SCNNode(geometry: sphere)
     }

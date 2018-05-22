@@ -21,7 +21,7 @@ class LevelSelectViewController: UIViewController {
     @IBOutlet var scnView: SCNView!
     var scnScene: SCNScene!
     var edgeNodes: SCNNode!
-    var gridLines: SCNNode!
+    var gridRoot: SCNNode!
     var edgeArray: [Edge<Node>]!
     var vertexNodes: SCNNode!
     var lightNodes: SCNNode!
@@ -245,7 +245,7 @@ class LevelSelectViewController: UIViewController {
         
         GraphAnimation.emergeGraph(vertexNodes: self.vertexNodes, findNode: self.findNode)
         GraphAnimation.emergeGraph(edgeNodes: self.edgeNodes)
-        GraphAnimation.emergeGraph(edgeNodes: self.gridLines)
+        GraphAnimation.emergeGraph(edgeNodes: self.gridRoot)
         
         // TODO: move this??
         GraphAnimation.delayWithSeconds(1.5) {
@@ -437,29 +437,41 @@ class LevelSelectViewController: UIViewController {
     }
     
     func setupGrid() {
-        gridLines = SCNNode()
+        gridRoot = SCNNode()
+        let gridLines = SCNNode()
+        let gridNodes = SCNNode()
         
         for y in -25...25 {
-            let node = SCNNode()
-            gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: -25, y: Float(y), z: 0), to: SCNVector3(x: 25, y: Float(y), z: 0), radius: 0.01, color: .black))
+            if abs(y) % 2 == 1 {
+                let node = SCNNode()
+                node.opacity = 0.05
+                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: -25, y: Float(y), z: 0), to: SCNVector3(x: 25, y: Float(y), z: 0), radius: 0.01, color: .black))
+            }
         }
         
         for x in -25...25 {
-            let node = SCNNode()
-            gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(x), y: -25, z: 0), to: SCNVector3(x: Float(x), y: 25, z: 0), radius: 0.01, color: .black))
+            if abs(x) % 2 == 1 {
+                let node = SCNNode()
+                node.opacity = 0.05
+                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(x), y: -25, z: 0), to: SCNVector3(x: Float(x), y: 25, z: 0), radius: 0.01, color: .black))
+            }
         }
         
         for x in -25...25 {
             for y in -25...25 {
-                let node = Shape.getSphereNode()
-                node.position = SCNVector3(x: Float(x), y: Float(y), z: 0)
-                gridLines.addChildNode(node)
-                
+                if abs(x) % 2 == 1 && abs(y) % 2 == 1 {
+                    let node = Shape.getSphereNode()
+                    node.opacity = 0.15
+                    node.position = SCNVector3(x: Float(x), y: Float(y), z: 0)
+                    gridNodes.addChildNode(node)
+                }
             }
         }
         
-        scnScene.rootNode.addChildNode(gridLines)
-        gridLines.opacity = 0.05
+        gridRoot.addChildNode(gridLines)
+        gridRoot.addChildNode(gridNodes)
+        
+        scnScene.rootNode.addChildNode(gridRoot)
     }
     
     func getShapeTypeForLevel(level: Int) -> Shape? {
@@ -591,13 +603,16 @@ class LevelSelectViewController: UIViewController {
                 moveToNode(node: node, zoom: true)
                 view.isUserInteractionEnabled = false
                 
+                
+                vertexNodes.removeAllAnimations()
+                edgeNodes.removeAllAnimations()
                 GraphAnimation.delayWithSeconds(0.4) {
                     UserDefaultsInteractor.setLevelSelectPosition(pos: [-node.position.x, -node.position.y])
                     UserDefaultsInteractor.setZoomFactor(pos: self.cameraNode.position.z)
                     self.selectedLevel = Int(geoName)!
                     GraphAnimation.dissolveGraph(vertexNodes: self.vertexNodes, lingerNode: node, clean: self.cleanSceneAndSegue)
                     GraphAnimation.dissolveGraph(edgeNodes: self.edgeNodes)
-                    GraphAnimation.dissolveGraph(edgeNodes: self.gridLines)
+                    GraphAnimation.dissolveGraph(edgeNodes: self.gridRoot)
                     UIView.animate(withDuration: 0.2, animations: {
                         self.settingsButtonBorderView.alpha = 0
                         self.settingsButtonBackgroundView.alpha = 0
@@ -655,7 +670,7 @@ class LevelSelectViewController: UIViewController {
     @objc func cleanScene() {
         vertexNodes.removeFromParentNode()
         edgeNodes.removeFromParentNode()
-        gridLines.removeFromParentNode()
+        gridRoot.removeFromParentNode()
         simPath.removeAll()
         
         settingsButtonBackgroundView.alpha = 0
@@ -677,7 +692,7 @@ class LevelSelectViewController: UIViewController {
         if gestureRecognizer.state == .began {
             vertexNodes.removeAllActions()
             edgeNodes.removeAllActions()
-            gridLines.removeAllActions()
+            gridRoot.removeAllActions()
             cameraNode.removeAllActions()
         } else if gestureRecognizer.state == .changed {
             var newX: Float = cameraNode.position.x - Float(translation.x / GameConstants.kPanTranslationScaleFactor)
@@ -739,7 +754,7 @@ class LevelSelectViewController: UIViewController {
             let rotateAction: SCNAction = SCNAction.rotateTo(x: directionY * CGFloat.pi/zoomFactor, y: directionX * CGFloat.pi/zoomFactor, z: 0, duration: 0.2)
             vertexNodes.runAction(rotateAction)
             edgeNodes.runAction(rotateAction)
-            gridLines.runAction(rotateAction)
+            gridRoot.runAction(rotateAction)
         } else if gestureRecognizer.state == .ended {
             if abs(velocity.x) > 200 || abs(velocity.y) > 200 {
                 var newX: Float = cameraNode.position.x - (Float(velocity.x*0.4)) / Float(GameConstants.kPanVelocityFactor)
@@ -766,7 +781,7 @@ class LevelSelectViewController: UIViewController {
             let rotateAction: SCNAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.4)
             vertexNodes.runAction(rotateAction)
             edgeNodes.runAction(rotateAction)
-            gridLines.runAction(rotateAction)
+            gridRoot.runAction(rotateAction)
             previousDirection = ""
         }
     }
@@ -860,7 +875,7 @@ class LevelSelectViewController: UIViewController {
         
         vertexNodes.removeAllActions()
         edgeNodes.removeAllActions()
-        gridLines.removeAllActions()
+        gridRoot.removeAllActions()
         
         let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: node.position.x + (node.parent?.position.x)!,
                                                                   y: node.position.y + (node.parent?.position.y)!, z: cameraZ), duration: 0.4)
@@ -933,7 +948,7 @@ class LevelSelectViewController: UIViewController {
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {
         showingModalView = false
-        GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
+        GraphAnimation.delayWithSeconds(0.2) {
             self.setupLevelSelect()
             self.setupInteractions()
         }

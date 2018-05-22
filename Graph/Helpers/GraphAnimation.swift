@@ -104,14 +104,16 @@ struct GraphAnimation {
         
         if let findNode = findNode {
             if let emitter: SCNNode = vertexNodes.findNodeInChildren(node: findNode) {
-                emitter.position.z = -100
-                emitter.scale = SCNVector3(x: 0, y: 0, z: 0)
+                emitter.position.z = -50
+                emitter.opacity = 0
                 let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: emitter.position.x, y: emitter.position.y, z: 0), duration: 0.75)
                 let scaleAction: SCNAction = SCNAction.scale(to: 1, duration: 0.75)
+                let fadeAction: SCNAction = SCNAction.fadeOpacity(to: 1, duration: 0.75)
                 moveAction.timingMode = .easeInEaseOut
                 scaleAction.timingMode = .easeInEaseOut
+                fadeAction.timingMode = .easeInEaseOut
                 emitter.runAction(moveAction)
-                emitter.runAction(scaleAction)
+                emitter.runAction(fadeAction)
                 skipNode = emitter
             }
         }
@@ -121,15 +123,17 @@ struct GraphAnimation {
                 continue
             }
             
-            node.position.z = -100
-            node.scale = SCNVector3(x: 0, y: 0, z: 0)
-            GraphAnimation.delayWithSeconds(Double.random(min: 0.1, max: 0.75)) {
+            node.position.z = -50
+            node.opacity = 0
+            GraphAnimation.delayWithSeconds(Double.random(min: 0.75, max: 1)) {
                 let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: node.position.x, y: node.position.y, z: 0), duration: 0.75)
                 let scaleAction: SCNAction = SCNAction.scale(to: 1, duration: 0.75)
+                let fadeAction: SCNAction = SCNAction.fadeOpacity(to: 1, duration: 0.75)
                 moveAction.timingMode = .easeInEaseOut
                 scaleAction.timingMode = .easeInEaseOut
+                fadeAction.timingMode = .easeInEaseOut
                 node.runAction(moveAction)
-                node.runAction(scaleAction)
+                node.runAction(fadeAction)
             }
         }
     }
@@ -137,13 +141,13 @@ struct GraphAnimation {
     static func dissolveGraph(vertexNodes: SCNNode, lingerNode: SCNNode, clean: @escaping () -> ()) {
         let name: String = (lingerNode.geometry?.name)!
         
-        GraphAnimation.delayWithSeconds(Double.random(min: 1, max: 1.25)) {
-            let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: lingerNode.position.x, y: lingerNode.position.y, z: -100), duration: 0.45)
-            let scaleAction: SCNAction = SCNAction.scale(to: 0, duration: 0.45)
+        GraphAnimation.delayWithSeconds(Double.random(min: 1.25, max: 1.5)) {
+            let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: lingerNode.position.x, y: lingerNode.position.y, z: -50), duration: 0.45)
+            let fadeAction: SCNAction = SCNAction.fadeOpacity(to: 0, duration: 0.4)
             moveAction.timingMode = .easeInEaseOut
-            scaleAction.timingMode = .easeInEaseOut
+            fadeAction.timingMode = .easeInEaseOut
             lingerNode.runAction(moveAction)
-            lingerNode.runAction(scaleAction)
+            lingerNode.runAction(fadeAction)
         }
         
         for node in vertexNodes.childNodes {
@@ -152,16 +156,16 @@ struct GraphAnimation {
             }
             
             GraphAnimation.delayWithSeconds(Double.random(min: 0.4, max: 0.8)) {
-                let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: node.position.x, y: node.position.y, z: -100), duration: 0.45)
-                let scaleAction: SCNAction = SCNAction.scale(to: 0, duration: 0.45)
+                let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: node.position.x, y: node.position.y, z: -50), duration: 0.45)
+                let fadeAction: SCNAction = SCNAction.fadeOpacity(to: 0, duration: 0.4)
                 moveAction.timingMode = .easeInEaseOut
-                scaleAction.timingMode = .easeInEaseOut
+                fadeAction.timingMode = .easeInEaseOut
                 node.runAction(moveAction)
-                node.runAction(scaleAction)
+                node.runAction(fadeAction)
             }
         }
         
-        GraphAnimation.delayWithSeconds(1.5) {
+        GraphAnimation.delayWithSeconds(2) {
             clean()
         }        
     }
