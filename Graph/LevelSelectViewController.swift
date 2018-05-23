@@ -603,12 +603,11 @@ class LevelSelectViewController: UIViewController {
                 moveToNode(node: node, zoom: true)
                 view.isUserInteractionEnabled = false
                 
-                
                 vertexNodes.removeAllAnimations()
                 edgeNodes.removeAllAnimations()
                 GraphAnimation.delayWithSeconds(0.4) {
                     UserDefaultsInteractor.setLevelSelectPosition(pos: [-node.position.x, -node.position.y])
-                    UserDefaultsInteractor.setZoomFactor(pos: self.cameraNode.position.z)
+                    UserDefaultsInteractor.setZoomFactor(pos: self.cameraNode.position.z + 5)
                     self.selectedLevel = Int(geoName)!
                     GraphAnimation.dissolveGraph(vertexNodes: self.vertexNodes, lingerNode: node, clean: self.cleanSceneAndSegue)
                     GraphAnimation.dissolveGraph(edgeNodes: self.edgeNodes)
