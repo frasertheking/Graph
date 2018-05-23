@@ -245,7 +245,6 @@ class LevelSelectViewController: UIViewController {
         
         GraphAnimation.emergeGraph(vertexNodes: self.vertexNodes, findNode: self.findNode)
         GraphAnimation.emergeGraph(edgeNodes: self.edgeNodes)
-        GraphAnimation.emergeGraph(edgeNodes: self.gridRoot)
         
         // TODO: move this??
         GraphAnimation.delayWithSeconds(1.5) {
@@ -266,6 +265,10 @@ class LevelSelectViewController: UIViewController {
             GraphAnimation.rotateNodeX(node: self.landingEmitter.childNodes[0], delta: 20)
             self.skView.isPaused = false
             self.setupInteractions()
+        }
+        
+        GraphAnimation.delayWithSeconds(0.5) {
+            GraphAnimation.emergeGraph(edgeNodes: self.gridRoot)
         }
     }
     
@@ -470,6 +473,8 @@ class LevelSelectViewController: UIViewController {
         
         gridRoot.addChildNode(gridLines)
         gridRoot.addChildNode(gridNodes)
+        gridLines.opacity = 0
+        gridNodes.opacity = 0
         
         scnScene.rootNode.addChildNode(gridRoot)
     }

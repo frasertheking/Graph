@@ -65,6 +65,7 @@ class GameViewController: UIViewController {
     
     // UI
     @IBOutlet var paintColorCollectionView: UICollectionView!
+    @IBOutlet var completedBackgroundView: UIVisualEffectView!
     @IBOutlet var collectionViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var completedView: UIView!
     @IBOutlet var completedText: UILabel!
@@ -72,14 +73,8 @@ class GameViewController: UIViewController {
     @IBOutlet var countdownLabel: CountdownLabel!
     @IBOutlet var timerBackgroundView: UIView!
     @IBOutlet var simBarView: UIView!
-    @IBOutlet var nextLevelButton: UIButton!
     @IBOutlet var repeatLevelButton: UIButton!
     @IBOutlet var menuButton: UIButton!
-    @IBOutlet var leftSphere: UIImageView!
-    @IBOutlet var middleSphere: UIImageView!
-    @IBOutlet var rightSphere: UIImageView!
-    @IBOutlet var leftSeparator: UIView!
-    @IBOutlet var rightSeparator: UIView!
     @IBOutlet var backButtonView: UIView!
     @IBOutlet var backButtonBorderView: UIView!
     @IBOutlet var backButtonBorderBackgroundView: UIView!
@@ -135,6 +130,19 @@ class GameViewController: UIViewController {
         setupScene()
         setupCamera()
         
+        let maskViewCompleted = UIView(frame: self.completedBackgroundView.bounds)
+        maskViewCompleted.backgroundColor = .clear
+        maskViewCompleted.layer.borderWidth = 3
+        maskViewCompleted.layer.borderColor = UIColor.black.cgColor
+        maskViewCompleted.layer.cornerRadius = 14
+        
+        let topView: UIView = UIView(frame: self.completedBackgroundView.bounds)
+        topView.backgroundColor = .white
+        topView.frame.size.height = 75
+        maskViewCompleted.addSubview(topView)
+        
+        self.completedBackgroundView.contentView.mask = maskViewCompleted
+
         // Setting up back button
         let maskView = UIView(frame: self.backButtonView.bounds)
         maskView.backgroundColor = .clear
@@ -165,6 +173,7 @@ class GameViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        UIColor.insertModalButtonGradient(for: self.completedBackgroundView.contentView)
         UIColor.insertModalButtonGradient(for: self.backButtonBorderBackgroundView)
     }
     
@@ -188,9 +197,6 @@ class GameViewController: UIViewController {
         countdownLabel.timeFormat = "s"
         countdownLabel.isHidden = true
         timerBackgroundView.isHidden = true
-        
-        leftSeparator.layer.borderColor = UIColor.glowColor().cgColor
-        rightSeparator.layer.borderColor = UIColor.glowColor().cgColor
     }
     
     func setupScene() {
@@ -223,6 +229,9 @@ class GameViewController: UIViewController {
         simBarView.layer.borderWidth = 2
         simBarView.layer.borderColor = UIColor.customWhite().cgColor
         simBarView.isHidden = true
+        
+        menuButton.alpha = 0
+        repeatLevelButton.alpha = 0
     }
     
     func setupCamera() {
@@ -234,18 +243,13 @@ class GameViewController: UIViewController {
     
     @objc func setupLevel() {
         scnView.isUserInteractionEnabled = true
-        nextLevelButton.isEnabled = true
         countdownLabel.countdownDelegate = self
         backButtonView.alpha = 1
         backButtonBorderView.alpha = 1
         activeLevel = Levels.createLevel(index: currentLevel)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
-        
-        GraphAnimation.addPulse(to: leftSphere, duration: 1)
-        GraphAnimation.addPulse(to: middleSphere, duration: 1)
-        GraphAnimation.addPulse(to: rightSphere, duration: 1)
-        
+
         setupStraylights()
         createObjects()
         GraphAnimation.chunkInGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
@@ -632,7 +636,6 @@ class GameViewController: UIViewController {
                 checkIfSolved()
                 if solved {
                     completedText.text = "YOU LOST"
-                    nextLevelButton.isEnabled = false
                     return
                 } else {
                     completedText.text = "YOU WON"
@@ -784,6 +787,11 @@ class GameViewController: UIViewController {
                     
                     UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
                         self.view.layoutIfNeeded()
+                    }, completion: { (finished) in
+                        UIView.animate(withDuration: 0.2, animations: {
+                            self.menuButton.alpha = 1
+                            self.repeatLevelButton.alpha = 1
+                        })
                     })
                 })
             })
@@ -793,6 +801,11 @@ class GameViewController: UIViewController {
             
             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
+            }, completion: { (finished) in
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.menuButton.alpha = 1
+                    self.repeatLevelButton.alpha = 1
+                })
             })
         }
     }
@@ -1136,20 +1149,19 @@ class GameViewController: UIViewController {
 //        GraphAnimation.swellGraphObject(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
 //    }
     
-    @IBAction func nextLevel() {
-        GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
-        self.completedViewBottomConstraint.constant = -450
-        UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        })
-    }
-    
     @IBAction func repeatLevel() {
         currentLevel -= 1
         GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
         self.completedViewBottomConstraint.constant = -450
+
+        self.completedViewBottomConstraint.constant = -450
         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
+        })
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.menuButton.alpha = 0
+            self.repeatLevelButton.alpha = 0
         })
     }
     
@@ -1159,7 +1171,12 @@ class GameViewController: UIViewController {
             self.view.layoutIfNeeded()
         })
         
-        GraphAnimation.delayWithSeconds(0.75) {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.menuButton.alpha = 0
+            self.repeatLevelButton.alpha = 0
+        })
+        
+        GraphAnimation.delayWithSeconds(1.5) {
             self.exitLevel()
         }
     }
@@ -1433,7 +1450,6 @@ extension GameViewController: CountdownLabelDelegate {
         timerBackgroundView.backgroundColor = .red
         countdownLabel.countdownDelegate = nil
         completedText.text = "TIMES UP"
-        nextLevelButton.isEnabled = false
         levelFailed = true
         endLevel()
     }
