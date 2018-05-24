@@ -102,7 +102,7 @@ class LevelSelectViewController: UIViewController {
         
         UserDefaultsInteractor.clearLevelSelectPosition()
         UserDefaultsInteractor.clearZoomFactor()
-        UserDefaultsInteractor.clearLevelStates()
+        //UserDefaultsInteractor.clearLevelStates()
         
         setupView()
         setupScene()
