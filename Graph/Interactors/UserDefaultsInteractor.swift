@@ -88,12 +88,8 @@ struct UserDefaultsInteractor {
         // Setup basic level states
         baseLevels[1] = LevelState.emitter.rawValue
         baseLevels[2] = LevelState.base.rawValue
-        baseLevels[3] = LevelState.base.rawValue
-        baseLevels[4] = LevelState.base.rawValue
-        baseLevels[5] = LevelState.base.rawValue
-        baseLevels[9] = LevelState.base.rawValue
-        baseLevels[25] = LevelState.base.rawValue
-        baseLevels[31] = LevelState.emitter.rawValue
+        baseLevels[22] = LevelState.base.rawValue
+        baseLevels[13] = LevelState.base.rawValue
         
         if isKeyPresentInUserDefaults(key: levelStateKey) {
             guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
@@ -113,12 +109,8 @@ struct UserDefaultsInteractor {
         // Setup basic level states
         baseLevels[1] = LevelState.emitter.rawValue
         baseLevels[2] = LevelState.base.rawValue
-        baseLevels[3] = LevelState.base.rawValue
-        baseLevels[4] = LevelState.base.rawValue
-        baseLevels[5] = LevelState.base.rawValue
-        baseLevels[9] = LevelState.base.rawValue
-        baseLevels[25] = LevelState.base.rawValue
-        baseLevels[31] = LevelState.emitter.rawValue
+        baseLevels[22] = LevelState.base.rawValue
+        baseLevels[13] = LevelState.base.rawValue
         
         if isKeyPresentInUserDefaults(key: levelStateKey) {
             guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {

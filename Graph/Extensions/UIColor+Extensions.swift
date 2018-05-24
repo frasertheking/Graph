@@ -218,7 +218,7 @@ extension UIColor {
                               UIColor(red: 51/255, green: 153/255, blue: 255/255, alpha: 1.0),
                               UIColor(red: 153/255, green: 51/255, blue: 255/255, alpha: 1.0),
                               UIColor.hexStringToUIColor(hex: "#00537E"),
-                              UIColor.hexStringToUIColor(hex: "#009E00"),
+                              UIColor.hexStringToUIColor(hex: "#009E00"),   
                               UIColor(red: 255/255, green: 51/255, blue: 153/255, alpha: 1.0)])
         
         pastelView.startAnimation()
