@@ -158,17 +158,31 @@ extension UIColor {
         pastelView.animationDuration = 10.0
         
         // Custom Color
-        pastelView.setColors([RandomFlatColorWithShade(.light),
-                              RandomFlatColorWithShade(.light),
-                              RandomFlatColorWithShade(.light),
-                              RandomFlatColorWithShade(.light),
-                              RandomFlatColorWithShade(.light),
-                              RandomFlatColorWithShade(.light),
-                              RandomFlatColorWithShade(.light),
-                              RandomFlatColorWithShade(.light),
-                              RandomFlatColorWithShade(.light),
-                              RandomFlatColorWithShade(.light)])
-        
+        pastelView.setColors([UIColor.hexStringToUIColor(hex: "#4F00BC"),
+                            UIColor.hexStringToUIColor(hex: "#29ABE2"),
+                            UIColor.hexStringToUIColor(hex: "#00FFA1"),
+                            UIColor.hexStringToUIColor(hex: "#00FFFF"),
+                            UIColor.hexStringToUIColor(hex: "#2E3192"),
+                            UIColor.hexStringToUIColor(hex: "#1BFFFF"),
+                            UIColor.hexStringToUIColor(hex: "#D4145A"),
+                            UIColor.hexStringToUIColor(hex: "#FBB03B"),
+                            UIColor.hexStringToUIColor(hex: "#009245"),
+                            UIColor.hexStringToUIColor(hex: "#FCEE21"),
+                            UIColor.hexStringToUIColor(hex: "#333333"),
+                            UIColor.hexStringToUIColor(hex: "#5A5454"),
+                            UIColor.hexStringToUIColor(hex: "#662D8C"),
+                            UIColor.hexStringToUIColor(hex: "#ED1E79"),
+                            UIColor.hexStringToUIColor(hex: "#B066FE"),
+                            UIColor.hexStringToUIColor(hex: "#63E2FF"),
+                            UIColor.hexStringToUIColor(hex: "#FCA5F1"),
+                            UIColor.hexStringToUIColor(hex: "#B5FFFF"),
+                            UIColor.hexStringToUIColor(hex: "#8E78FF"),
+                            UIColor.hexStringToUIColor(hex: "#FC7D7B"),
+                            UIColor.hexStringToUIColor(hex: "#00537E"),
+                            UIColor.hexStringToUIColor(hex: "#3AA17E"),
+                            UIColor.hexStringToUIColor(hex: "#F24645"),
+                            UIColor.hexStringToUIColor(hex: "#EBC08D")])
+
         pastelView.startAnimation()
         
         view.insertSubview(pastelView, at: 0)
@@ -198,11 +212,13 @@ extension UIColor {
         pastelView.endPastelPoint = .bottomRight
         pastelView.animationDuration = 1
         
-        pastelView.setColors([UIColor(red: 255/255, green: 51/255, blue: 51/255, alpha: 1.0),
+        pastelView.setColors([UIColor.hexStringToUIColor(hex: "#f6d600"),
+                              UIColor(red: 255/255, green: 51/255, blue: 51/255, alpha: 1.0),
                               UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 1.0),
-                              UIColor(red: 51/255, green: 255/255, blue: 255/255, alpha: 1.0),
                               UIColor(red: 51/255, green: 153/255, blue: 255/255, alpha: 1.0),
                               UIColor(red: 153/255, green: 51/255, blue: 255/255, alpha: 1.0),
+                              UIColor.hexStringToUIColor(hex: "#00537E"),
+                              UIColor.hexStringToUIColor(hex: "#009E00"),
                               UIColor(red: 255/255, green: 51/255, blue: 153/255, alpha: 1.0)])
         
         pastelView.startAnimation()
@@ -236,5 +252,27 @@ extension UIColor {
             // Could not extract RGBA components:
             return nil
         }
+    }
+    
+    public static func hexStringToUIColor(hex: String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
 }

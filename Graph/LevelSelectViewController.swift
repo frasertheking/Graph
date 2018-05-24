@@ -247,7 +247,9 @@ class LevelSelectViewController: UIViewController {
             }
             self.settingsButton.isUserInteractionEnabled = true
             
-            GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+            GraphAnimation.delayWithSeconds(1, completion: {
+                GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+            })
             self.view.isUserInteractionEnabled = true
             for node in self.emitterNodes {
                 if let trail = ParticleGeneration.createTrail(color: UIColor.white, geometry: node.geometry!) {
