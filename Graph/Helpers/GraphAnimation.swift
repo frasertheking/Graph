@@ -174,7 +174,7 @@ struct GraphAnimation {
         for node in edgeNodes.childNodes {
             node.opacity = 0
             
-            GraphAnimation.delayWithSeconds(1.5) {
+            GraphAnimation.delayWithSeconds(2) {
                 let fadeInAction: SCNAction = SCNAction.fadeIn(duration: 1)
                 fadeInAction.timingMode = .easeInEaseOut
                 node.runAction(fadeInAction)

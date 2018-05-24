@@ -156,7 +156,6 @@ class LevelSelectViewController: UIViewController {
                 maskView.addSubview(labelMask)
                 self.playButtonBackgroundView.contentView.mask = maskView
                 
-                UIColor.insertButtonGradient(for: self.playButtonBackgroundView.contentView)
                 self.playButtonBackgroundView.addParallaxToView(amount: 25)
                 self.playButton.addParallaxToView(amount: 25)
                 
@@ -173,6 +172,10 @@ class LevelSelectViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        UIColor.insertModalButtonGradient(for: self.playButtonBackgroundView.contentView)
     }
     
     func setupView() {
@@ -223,20 +226,6 @@ class LevelSelectViewController: UIViewController {
     }
     
     @objc func setupLevelSelect() {
-        view.removeGestureRecognizer(self.landingPanGestureRecognizer)
-        view.isUserInteractionEnabled = true
-        
-        // TODO MOVE THIS
-        UIView.animate(withDuration: 1) {
-            self.settingsButtonBackgroundView.alpha = 1
-            self.settingsButtonBorderView.alpha = 1
-            for view in self.settingsButtonBorderBackgroundView.subviews {
-                view.removeFromSuperview()
-            }
-            UIColor.insertModalButtonGradient(for: self.settingsButtonBorderBackgroundView)
-        }
-        settingsButton.isUserInteractionEnabled = true
-        
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: -UserDefaultsInteractor.getLevelSelectPosition().x, y: -UserDefaultsInteractor.getLevelSelectPosition().y, z: UserDefaultsInteractor.getZoomFactor()), duration: 0))
         activeLevel = Levels.createLevel(index: 0)
         
@@ -248,7 +237,18 @@ class LevelSelectViewController: UIViewController {
         
         // TODO: move this??
         GraphAnimation.delayWithSeconds(1.5) {
+            UIView.animate(withDuration: 1) {
+                self.settingsButtonBackgroundView.alpha = 1
+                self.settingsButtonBorderView.alpha = 1
+                for view in self.settingsButtonBorderBackgroundView.subviews {
+                    view.removeFromSuperview()
+                }
+                UIColor.insertModalButtonGradient(for: self.settingsButtonBorderBackgroundView)
+            }
+            self.settingsButton.isUserInteractionEnabled = true
+            
             GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+            self.view.isUserInteractionEnabled = true
             for node in self.emitterNodes {
                 if let trail = ParticleGeneration.createTrail(color: UIColor.white, geometry: node.geometry!) {
                     node.removeAllParticleSystems()
@@ -267,7 +267,7 @@ class LevelSelectViewController: UIViewController {
             self.setupInteractions()
         }
         
-        GraphAnimation.delayWithSeconds(0.5) {
+        GraphAnimation.delayWithSeconds(0.25) {
             GraphAnimation.emergeGraph(edgeNodes: self.gridRoot)
         }
     }
@@ -896,6 +896,8 @@ class LevelSelectViewController: UIViewController {
     
     @IBAction func playButtonPressed() {
         skView.isPaused = true
+        scnView.removeGestureRecognizer(self.landingPanGestureRecognizer)
+
         GraphAnimation.addExplode(to: playButton)
         GraphAnimation.addExplode(to: playButtonBackgroundView)
         landingTitle.removeAllActions()
@@ -948,6 +950,7 @@ class LevelSelectViewController: UIViewController {
             self.settingsButtonBackgroundView.transform = CGAffineTransform.identity
             self.settingsButtonBorderView.transform = CGAffineTransform.identity
         })
+        print("pressed")
     }
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {

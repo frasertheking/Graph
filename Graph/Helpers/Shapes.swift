@@ -70,7 +70,7 @@ public enum Shape: Int {
         
         if type.rawValue == 17 { // SPIRAL
             geometry.materials.first?.diffuse.contents = UIColor.white
-            geometry.materials[1].diffuse.contents = UIColor.black
+            geometry.materials[1].diffuse.contents = color
         } else if type.rawValue == 18 { // TITLE
             geometry.materials.first?.diffuse.contents = color
         } else if type.rawValue == 19 { // PLAY
