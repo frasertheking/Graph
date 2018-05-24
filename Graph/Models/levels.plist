@@ -17,9 +17,25 @@
 		<array>
 			<dict>
 				<key>uid</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>x</key>
 				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>1</integer>
+					<integer>12</integer>
+					<integer>21</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>3</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>z</key>
@@ -27,15 +43,13 @@
 				<key>edges</key>
 				<array>
 					<integer>2</integer>
-					<integer>13</integer>
-					<integer>22</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>2</integer>
 				<key>x</key>
-				<integer>4</integer>
+				<integer>6</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>z</key>
@@ -43,20 +57,20 @@
 				<key>edges</key>
 				<array>
 					<integer>3</integer>
+					<integer>4</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>3</integer>
 				<key>x</key>
-				<integer>8</integer>
+				<integer>9</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>4</integer>
 					<integer>5</integer>
 				</array>
 			</dict>
@@ -64,9 +78,9 @@
 				<key>uid</key>
 				<integer>4</integer>
 				<key>x</key>
-				<integer>12</integer>
+				<integer>9</integer>
 				<key>y</key>
-				<integer>4</integer>
+				<integer>-3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -80,91 +94,92 @@
 				<key>x</key>
 				<integer>12</integer>
 				<key>y</key>
-				<integer>-4</integer>
+				<integer>3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>7</integer>
+					<integer>9</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>6</integer>
 				<key>x</key>
-				<integer>16</integer>
+				<integer>12</integer>
 				<key>y</key>
-				<integer>4</integer>
+				<integer>-3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>10</integer>
+					<integer>7</integer>
+					<integer>9</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>7</integer>
 				<key>x</key>
-				<integer>16</integer>
+				<integer>12</integer>
 				<key>y</key>
-				<integer>-4</integer>
+				<integer>-6</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>8</integer>
-					<integer>10</integer>
+					<integer>31</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>8</integer>
 				<key>x</key>
-				<integer>16</integer>
+				<integer>15</integer>
 				<key>y</key>
-				<integer>-8</integer>
+				<integer>6</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array/>
+				<array>
+					<integer>10</integer>
+				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>9</integer>
 				<key>x</key>
-				<integer>20</integer>
+				<integer>15</integer>
 				<key>y</key>
-				<integer>8</integer>
+				<integer>0</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
+					<integer>8</integer>
 					<integer>11</integer>
+					<integer>31</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>10</integer>
 				<key>x</key>
-				<integer>20</integer>
+				<integer>18</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>6</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array>
-					<integer>9</integer>
-					<integer>12</integer>
-				</array>
+				<array/>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>11</integer>
 				<key>x</key>
-				<integer>24</integer>
+				<integer>18</integer>
 				<key>y</key>
-				<integer>8</integer>
+				<integer>0</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -174,64 +189,97 @@
 				<key>uid</key>
 				<integer>12</integer>
 				<key>x</key>
-				<integer>24</integer>
-				<key>y</key>
 				<integer>0</integer>
+				<key>y</key>
+				<integer>-3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array/>
+				<array>
+					<integer>13</integer>
+					<integer>14</integer>
+				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>13</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>-3</integer>
 				<key>y</key>
-				<integer>-4</integer>
+				<integer>-6</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>14</integer>
-					<integer>15</integer>
+					<integer>16</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>14</integer>
 				<key>x</key>
-				<integer>-4</integer>
+				<integer>3</integer>
 				<key>y</key>
-				<integer>-8</integer>
+				<integer>-6</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>17</integer>
+					<integer>16</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>15</integer>
 				<key>x</key>
-				<integer>4</integer>
+				<integer>-6</integer>
 				<key>y</key>
-				<integer>-8</integer>
+				<integer>-9</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>17</integer>
+					<integer>30</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>16</integer>
 				<key>x</key>
-				<integer>-8</integer>
+				<integer>0</integer>
 				<key>y</key>
-				<integer>-12</integer>
+				<integer>-9</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>15</integer>
+					<integer>17</integer>
+					<integer>19</integer>
+					<integer>20</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>17</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>-9</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>18</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>18</integer>
+				<key>x</key>
+				<integer>9</integer>
+				<key>y</key>
+				<integer>-9</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -239,40 +287,9 @@
 			</dict>
 			<dict>
 				<key>uid</key>
-				<integer>17</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>-12</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>16</integer>
-					<integer>18</integer>
-					<integer>20</integer>
-					<integer>21</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>18</integer>
-				<key>x</key>
-				<integer>3</integer>
-				<key>y</key>
-				<integer>-12</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>19</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
 				<integer>19</integer>
 				<key>x</key>
-				<integer>12</integer>
+				<integer>0</integer>
 				<key>y</key>
 				<integer>-12</integer>
 				<key>z</key>
@@ -286,7 +303,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>-16</integer>
+				<integer>-6</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -296,19 +313,21 @@
 				<key>uid</key>
 				<integer>21</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>-3</integer>
 				<key>y</key>
-				<integer>-8</integer>
+				<integer>0</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array/>
+				<array>
+					<integer>22</integer>
+				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>22</integer>
 				<key>x</key>
-				<integer>-4</integer>
+				<integer>-6</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>z</key>
@@ -322,7 +341,7 @@
 				<key>uid</key>
 				<integer>23</integer>
 				<key>x</key>
-				<integer>-8</integer>
+				<integer>-9</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>z</key>
@@ -330,20 +349,20 @@
 				<key>edges</key>
 				<array>
 					<integer>24</integer>
+					<integer>25</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>24</integer>
 				<key>x</key>
-				<integer>-12</integer>
+				<integer>-9</integer>
 				<key>y</key>
-				<integer>0</integer>
+				<integer>3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>25</integer>
 					<integer>26</integer>
 				</array>
 			</dict>
@@ -351,14 +370,15 @@
 				<key>uid</key>
 				<integer>25</integer>
 				<key>x</key>
-				<integer>-12</integer>
+				<integer>-9</integer>
 				<key>y</key>
-				<integer>4</integer>
+				<integer>-3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
 					<integer>27</integer>
+					<integer>28</integer>
 				</array>
 			</dict>
 			<dict>
@@ -367,22 +387,7 @@
 				<key>x</key>
 				<integer>-12</integer>
 				<key>y</key>
-				<integer>-4</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>28</integer>
-					<integer>29</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>27</integer>
-				<key>x</key>
-				<integer>-16</integer>
-				<key>y</key>
-				<integer>4</integer>
+				<integer>3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -390,16 +395,30 @@
 			</dict>
 			<dict>
 				<key>uid</key>
-				<integer>28</integer>
+				<integer>27</integer>
 				<key>x</key>
-				<integer>-16</integer>
+				<integer>-12</integer>
 				<key>y</key>
-				<integer>-4</integer>
+				<integer>-3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>30</integer>
+					<integer>29</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>28</integer>
+				<key>x</key>
+				<integer>-11</integer>
+				<key>y</key>
+				<integer>-6</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>29</integer>
 				</array>
 			</dict>
 			<dict>
@@ -408,21 +427,31 @@
 				<key>x</key>
 				<integer>-14</integer>
 				<key>y</key>
-				<integer>-8</integer>
+				<integer>-6</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array>
-					<integer>30</integer>
-				</array>
+				<array/>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>30</integer>
 				<key>x</key>
-				<integer>-18</integer>
+				<integer>-6</integer>
 				<key>y</key>
-				<integer>-8</integer>
+				<integer>-3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>31</integer>
+				<key>x</key>
+				<integer>15</integer>
+				<key>y</key>
+				<integer>-3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -436,9 +465,9 @@
 		<key>graph_type</key>
 		<integer>0</integer>
 		<key>num_colors</key>
-		<integer>0</integer>
+		<integer>2</integer>
 		<key>name</key>
-		<string>emitter</string>
+		<string>base</string>
 		<key>is_mirror</key>
 		<false/>
 		<key>nodes</key>
@@ -447,327 +476,62 @@
 				<key>uid</key>
 				<integer>1</integer>
 				<key>x</key>
-				<integer>-1</integer>
+				<integer>3</integer>
 				<key>y</key>
-				<integer>1</integer>
+				<integer>-3</integer>
 				<key>z</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>mirror</key>
-				<integer>14</integer>
+				<integer>0</integer>
 				<key>edges</key>
 				<array>
 					<integer>2</integer>
-					<integer>11</integer>
-					<integer>20</integer>
+					<integer>4</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>2</integer>
 				<key>x</key>
-				<integer>0</integer>
+				<integer>3</integer>
 				<key>y</key>
-				<integer>1</integer>
+				<integer>3</integer>
 				<key>z</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>mirror</key>
-				<integer>7</integer>
+				<integer>0</integer>
 				<key>edges</key>
 				<array>
 					<integer>3</integer>
-					<integer>18</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>3</integer>
 				<key>x</key>
-				<integer>1</integer>
+				<integer>-3</integer>
 				<key>y</key>
-				<integer>1</integer>
+				<integer>3</integer>
 				<key>z</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>mirror</key>
-				<integer>8</integer>
+				<integer>0</integer>
 				<key>edges</key>
 				<array>
 					<integer>4</integer>
-					<integer>16</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>4</integer>
 				<key>x</key>
-				<integer>1</integer>
+				<integer>-3</integer>
 				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>mirror</key>
-				<integer>12</integer>
-				<key>edges</key>
-				<array>
-					<integer>5</integer>
-					<integer>11</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>mirror</key>
-				<integer>19</integer>
-				<key>edges</key>
-				<array>
-					<integer>6</integer>
-					<integer>15</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>6</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>mirror</key>
-				<integer>18</integer>
-				<key>edges</key>
-				<array>
-					<integer>7</integer>
-					<integer>10</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>7</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>mirror</key>
-				<integer>2</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-					<integer>14</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>8</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>mirror</key>
-				<integer>3</integer>
-				<key>edges</key>
-				<array>
-					<integer>9</integer>
-					<integer>12</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>9</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>-1</integer>
+				<integer>-3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>mirror</key>
-				<integer>16</integer>
-				<key>edges</key>
-				<array>
-					<integer>10</integer>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>10</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>mirror</key>
-				<integer>17</integer>
-				<key>edges</key>
-				<array>
-					<integer>11</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>11</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
 				<integer>0</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>mirror</key>
-				<integer>13</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>12</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>mirror</key>
-				<integer>4</integer>
-				<key>edges</key>
-				<array>
-					<integer>13</integer>
-					<integer>19</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>13</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>mirror</key>
-				<integer>11</integer>
-				<key>edges</key>
-				<array>
-					<integer>14</integer>
-					<integer>17</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>14</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>mirror</key>
-				<integer>1</integer>
-				<key>edges</key>
-				<array>
-					<integer>15</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>15</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>mirror</key>
-				<integer>20</integer>
-				<key>edges</key>
-				<array>
-					<integer>16</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>16</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>mirror</key>
-				<integer>9</integer>
-				<key>edges</key>
-				<array>
-					<integer>17</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>17</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>mirror</key>
-				<integer>10</integer>
-				<key>edges</key>
-				<array>
-					<integer>18</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>18</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>mirror</key>
-				<integer>6</integer>
-				<key>edges</key>
-				<array>
-					<integer>19</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>19</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>mirror</key>
-				<integer>5</integer>
-				<key>edges</key>
-				<array>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>20</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>mirror</key>
-				<integer>15</integer>
 				<key>edges</key>
 				<array/>
 			</dict>
@@ -1265,13 +1029,13 @@
 		<key>timed</key>
 		<false/>
 		<key>graph_type</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>num_colors</key>
-		<integer>1</integer>
+		<integer>3</integer>
 		<key>name</key>
-		<string>Hamiltonian Mirror</string>
+		<string>Icosian</string>
 		<key>is_mirror</key>
-		<true/>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -1282,125 +1046,291 @@
 				<key>y</key>
 				<integer>1</integer>
 				<key>z</key>
-				<integer>0</integer>
-				<key>mirror</key>
-				<integer>3</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
 				<integer>1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>mirror</key>
-				<integer>4</integer>
 				<key>edges</key>
 				<array>
+					<integer>2</integer>
 					<integer>3</integer>
-					<integer>7</integer>
+					<integer>5</integer>
+					<integer>13</integer>
+					<integer>17</integer>
+					<integer>9</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>1</integer>
+				<key>y</key>
+				<integer>1</integer>
+				<key>z</key>
+				<integer>-1</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+					<integer>6</integer>
+					<integer>11</integer>
+					<integer>14</integer>
+					<integer>17</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>3</integer>
 				<key>x</key>
-				<integer>-1</integer>
+				<integer>1</integer>
 				<key>y</key>
 				<integer>-1</integer>
 				<key>z</key>
-				<integer>0</integer>
-				<key>mirror</key>
 				<integer>1</integer>
 				<key>edges</key>
 				<array>
 					<integer>4</integer>
-					<integer>8</integer>
+					<integer>7</integer>
+					<integer>10</integer>
+					<integer>13</integer>
+					<integer>19</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>4</integer>
 				<key>x</key>
+				<integer>1</integer>
+				<key>y</key>
+				<integer>-1</integer>
+				<key>z</key>
+				<integer>-1</integer>
+				<key>edges</key>
+				<array>
+					<integer>8</integer>
+					<integer>12</integer>
+					<integer>19</integer>
+					<integer>14</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>x</key>
 				<integer>-1</integer>
 				<key>y</key>
 				<integer>1</integer>
 				<key>z</key>
-				<integer>0</integer>
-				<key>mirror</key>
-				<integer>2</integer>
-				<key>edges</key>
-				<array>
-					<integer>5</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<integer>-3</integer>
-				<key>y</key>
-				<integer>3</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>mirror</key>
-				<integer>7</integer>
+				<integer>1</integer>
 				<key>edges</key>
 				<array>
 					<integer>6</integer>
-					<integer>8</integer>
+					<integer>7</integer>
+					<integer>9</integer>
+					<integer>15</integer>
+					<integer>18</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>6</integer>
 				<key>x</key>
-				<integer>3</integer>
+				<integer>-1</integer>
 				<key>y</key>
-				<integer>3</integer>
+				<integer>1</integer>
 				<key>z</key>
-				<integer>0</integer>
-				<key>mirror</key>
-				<integer>8</integer>
+				<integer>-1</integer>
 				<key>edges</key>
 				<array>
-					<integer>7</integer>
+					<integer>8</integer>
+					<integer>11</integer>
+					<integer>16</integer>
+					<integer>18</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>7</integer>
 				<key>x</key>
-				<integer>3</integer>
+				<integer>-1</integer>
 				<key>y</key>
-				<integer>-3</integer>
+				<integer>-1</integer>
 				<key>z</key>
-				<integer>0</integer>
-				<key>mirror</key>
-				<integer>5</integer>
+				<integer>1</integer>
 				<key>edges</key>
 				<array>
 					<integer>8</integer>
+					<integer>10</integer>
+					<integer>15</integer>
+					<integer>20</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>8</integer>
 				<key>x</key>
-				<integer>-3</integer>
+				<integer>-1</integer>
 				<key>y</key>
-				<integer>-3</integer>
+				<integer>-1</integer>
+				<key>z</key>
+				<integer>-1</integer>
+				<key>edges</key>
+				<array>
+					<integer>12</integer>
+					<integer>16</integer>
+					<integer>20</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>9</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>1.618</real>
+				<key>z</key>
+				<real>0.618</real>
+				<key>edges</key>
+				<array>
+					<integer>11</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>10</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>-1.618</real>
+				<key>z</key>
+				<real>0.618</real>
+				<key>edges</key>
+				<array>
+					<integer>12</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>11</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>1.618</real>
+				<key>z</key>
+				<real>-0.618</real>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>12</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>-1.618</real>
+				<key>z</key>
+				<real>-0.618</real>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>13</integer>
+				<key>x</key>
+				<real>0.618</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<real>1.618</real>
+				<key>edges</key>
+				<array>
+					<integer>15</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>14</integer>
+				<key>x</key>
+				<real>0.618</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<real>-1.618</real>
+				<key>edges</key>
+				<array>
+					<integer>16</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>15</integer>
+				<key>x</key>
+				<real>-0.618</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<real>1.618</real>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>16</integer>
+				<key>x</key>
+				<real>-0.618</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<real>-1.618</real>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>17</integer>
+				<key>x</key>
+				<real>1.618</real>
+				<key>y</key>
+				<real>0.618</real>
 				<key>z</key>
 				<integer>0</integer>
-				<key>mirror</key>
-				<integer>6</integer>
+				<key>edges</key>
+				<array>
+					<integer>19</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>18</integer>
+				<key>x</key>
+				<real>-1.618</real>
+				<key>y</key>
+				<real>0.618</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>20</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>19</integer>
+				<key>x</key>
+				<real>1.618</real>
+				<key>y</key>
+				<real>-0.618</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>20</integer>
+				<key>x</key>
+				<real>-1.618</real>
+				<key>y</key>
+				<real>-0.618</real>
+				<key>z</key>
+				<integer>0</integer>
 				<key>edges</key>
 				<array/>
 			</dict>
@@ -1410,11 +1340,627 @@
 		<key>timed</key>
 		<false/>
 		<key>graph_type</key>
-		<integer>2</integer>
+		<integer>0</integer>
+		<key>num_colors</key>
+		<integer>3</integer>
+		<key>name</key>
+		<string>Triangle</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>-2</integer>
+				<key>y</key>
+				<real>-1.5</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>2</integer>
+				<key>y</key>
+				<real>-1.5</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>1.5</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>1</integer>
+					<integer>2</integer>
+				</array>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>0</integer>
 		<key>num_colors</key>
 		<integer>2</integer>
 		<key>name</key>
-		<string>Planar Mirror</string>
+		<string>Cube</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>2</integer>
+				<key>y</key>
+				<integer>2</integer>
+				<key>z</key>
+				<integer>2</integer>
+				<key>edges</key>
+				<array>
+					<integer>5</integer>
+					<integer>3</integer>
+					<integer>2</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>2</integer>
+				<key>y</key>
+				<integer>2</integer>
+				<key>z</key>
+				<integer>-2</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>2</integer>
+				<key>y</key>
+				<integer>-2</integer>
+				<key>z</key>
+				<integer>2</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<integer>2</integer>
+				<key>y</key>
+				<integer>-2</integer>
+				<key>z</key>
+				<integer>-2</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>8</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>x</key>
+				<integer>-2</integer>
+				<key>y</key>
+				<integer>2</integer>
+				<key>z</key>
+				<integer>2</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>6</integer>
+				<key>x</key>
+				<integer>-2</integer>
+				<key>y</key>
+				<integer>2</integer>
+				<key>z</key>
+				<integer>-2</integer>
+				<key>edges</key>
+				<array>
+					<integer>5</integer>
+					<integer>8</integer>
+					<integer>2</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>7</integer>
+				<key>x</key>
+				<integer>-2</integer>
+				<key>y</key>
+				<integer>-2</integer>
+				<key>z</key>
+				<integer>2</integer>
+				<key>edges</key>
+				<array>
+					<integer>8</integer>
+					<integer>3</integer>
+					<integer>5</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>8</integer>
+				<key>x</key>
+				<integer>-2</integer>
+				<key>y</key>
+				<integer>-2</integer>
+				<key>z</key>
+				<integer>-2</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>0</integer>
+		<key>num_colors</key>
+		<integer>3</integer>
+		<key>name</key>
+		<string>complex</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<real>-3.8</real>
+				<key>y</key>
+				<real>2.1</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>7</integer>
+					<integer>10</integer>
+					<integer>2</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<real>-3.7</real>
+				<key>y</key>
+				<real>-1.7</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>10</integer>
+					<integer>3</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<real>-1.2</real>
+				<key>y</key>
+				<real>-4.8</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>11</integer>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<real>2.7</real>
+				<key>y</key>
+				<real>-3.7</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>11</integer>
+					<integer>5</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>x</key>
+				<integer>4</integer>
+				<key>y</key>
+				<real>-0.2</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>12</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>6</integer>
+				<key>x</key>
+				<real>2.3</real>
+				<key>y</key>
+				<real>3.2</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>12</integer>
+					<integer>7</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>7</integer>
+				<key>x</key>
+				<real>-1.3</real>
+				<key>y</key>
+				<real>4.1</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>8</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>8</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>1.1</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>9</integer>
+					<integer>12</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>9</integer>
+				<key>x</key>
+				<real>-0.3</real>
+				<key>y</key>
+				<real>-0.7</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>10</integer>
+					<integer>11</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>10</integer>
+				<key>x</key>
+				<real>-2.2</real>
+				<key>y</key>
+				<real>0.3</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>11</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>-2.8</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>12</integer>
+				<key>x</key>
+				<real>1.7</real>
+				<key>y</key>
+				<real>-0.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>0</integer>
+		<key>num_colors</key>
+		<integer>4</integer>
+		<key>name</key>
+		<string>Four</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>4</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>-4</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>3</integer>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>-4</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>4</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>0</integer>
+		<key>num_colors</key>
+		<integer>2</integer>
+		<key>name</key>
+		<string>Practice</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>-2</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>2</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>0</integer>
+		<key>num_colors</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>Welcome</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>3</integer>
+		<key>num_colors</key>
+		<integer>2</integer>
+		<key>name</key>
+		<string>SIM</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>-3</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>3</integer>
+				<key>edges</key>
+				<array>
+					<integer>3</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>-3</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+					<integer>5</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>3</integer>
+				<key>edges</key>
+				<array>
+					<integer>5</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>6</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>6</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>-6</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>1</integer>
+		<key>num_colors</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>Hamiltonian Mirror</string>
 		<key>is_mirror</key>
 		<true/>
 		<key>nodes</key>
@@ -2014,190 +2560,13 @@
 		<key>timed</key>
 		<false/>
 		<key>graph_type</key>
-		<integer>3</integer>
-		<key>num_colors</key>
-		<integer>2</integer>
-		<key>name</key>
-		<string>SIM</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<real>-2.1</real>
-				<key>y</key>
-				<real>4.1</real>
-				<key>z</key>
-				<integer>-2</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>4</integer>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<real>2.1</real>
-				<key>y</key>
-				<real>4.1</real>
-				<key>z</key>
-				<integer>2</integer>
-				<key>edges</key>
-				<array>
-					<integer>3</integer>
-					<integer>4</integer>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<real>-4.6</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<real>-1.7</real>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<real>4.6</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>edges</key>
-				<array>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<real>-2.1</real>
-				<key>y</key>
-				<real>-4.1</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>6</integer>
-				<key>x</key>
-				<real>2.1</real>
-				<key>y</key>
-				<real>-4.1</real>
-				<key>z</key>
-				<real>-0.5</real>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<true/>
-		<key>graph_type</key>
-		<integer>2</integer>
-		<key>num_colors</key>
-		<integer>1</integer>
-		<key>name</key>
-		<string>Planar</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>3</integer>
-				<key>y</key>
-				<integer>3</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<real>-3.2</real>
-				<key>y</key>
-				<real>3.4</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>3</integer>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<real>-3.2</real>
-				<key>y</key>
-				<real>-3.4</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<real>3.4</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
 		<integer>1</integer>
 		<key>num_colors</key>
 		<integer>1</integer>
 		<key>name</key>
 		<string>hard hamiltonian</string>
+		<key>is_mirror</key>
+		<false/>
 		<key>nodes</key>
 		<array>
 			<dict>
@@ -2367,6 +2736,1147 @@
 		<key>timed</key>
 		<false/>
 		<key>graph_type</key>
+		<integer>1</integer>
+		<key>num_colors</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>Icosian</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>1</integer>
+				<key>y</key>
+				<integer>1</integer>
+				<key>z</key>
+				<integer>1</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>5</integer>
+					<integer>13</integer>
+					<integer>17</integer>
+					<integer>9</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>1</integer>
+				<key>y</key>
+				<integer>1</integer>
+				<key>z</key>
+				<integer>-1</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+					<integer>6</integer>
+					<integer>11</integer>
+					<integer>14</integer>
+					<integer>17</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>1</integer>
+				<key>y</key>
+				<integer>-1</integer>
+				<key>z</key>
+				<integer>1</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+					<integer>7</integer>
+					<integer>10</integer>
+					<integer>13</integer>
+					<integer>19</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<integer>1</integer>
+				<key>y</key>
+				<integer>-1</integer>
+				<key>z</key>
+				<integer>-1</integer>
+				<key>edges</key>
+				<array>
+					<integer>8</integer>
+					<integer>12</integer>
+					<integer>19</integer>
+					<integer>14</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>x</key>
+				<integer>-1</integer>
+				<key>y</key>
+				<integer>1</integer>
+				<key>z</key>
+				<integer>1</integer>
+				<key>edges</key>
+				<array>
+					<integer>6</integer>
+					<integer>7</integer>
+					<integer>9</integer>
+					<integer>15</integer>
+					<integer>18</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>6</integer>
+				<key>x</key>
+				<integer>-1</integer>
+				<key>y</key>
+				<integer>1</integer>
+				<key>z</key>
+				<integer>-1</integer>
+				<key>edges</key>
+				<array>
+					<integer>8</integer>
+					<integer>11</integer>
+					<integer>16</integer>
+					<integer>18</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>7</integer>
+				<key>x</key>
+				<integer>-1</integer>
+				<key>y</key>
+				<integer>-1</integer>
+				<key>z</key>
+				<integer>1</integer>
+				<key>edges</key>
+				<array>
+					<integer>8</integer>
+					<integer>10</integer>
+					<integer>15</integer>
+					<integer>20</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>8</integer>
+				<key>x</key>
+				<integer>-1</integer>
+				<key>y</key>
+				<integer>-1</integer>
+				<key>z</key>
+				<integer>-1</integer>
+				<key>edges</key>
+				<array>
+					<integer>12</integer>
+					<integer>16</integer>
+					<integer>20</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>9</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>1.618</real>
+				<key>z</key>
+				<real>0.618</real>
+				<key>edges</key>
+				<array>
+					<integer>11</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>10</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>-1.618</real>
+				<key>z</key>
+				<real>0.618</real>
+				<key>edges</key>
+				<array>
+					<integer>12</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>11</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>1.618</real>
+				<key>z</key>
+				<real>-0.618</real>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>12</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>-1.618</real>
+				<key>z</key>
+				<real>-0.618</real>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>13</integer>
+				<key>x</key>
+				<real>0.618</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<real>1.618</real>
+				<key>edges</key>
+				<array>
+					<integer>15</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>14</integer>
+				<key>x</key>
+				<real>0.618</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<real>-1.618</real>
+				<key>edges</key>
+				<array>
+					<integer>16</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>15</integer>
+				<key>x</key>
+				<real>-0.618</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<real>1.618</real>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>16</integer>
+				<key>x</key>
+				<real>-0.618</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<real>-1.618</real>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>17</integer>
+				<key>x</key>
+				<real>1.618</real>
+				<key>y</key>
+				<real>0.618</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>19</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>18</integer>
+				<key>x</key>
+				<real>-1.618</real>
+				<key>y</key>
+				<real>0.618</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>20</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>19</integer>
+				<key>x</key>
+				<real>1.618</real>
+				<key>y</key>
+				<real>-0.618</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>20</integer>
+				<key>x</key>
+				<real>-1.618</real>
+				<key>y</key>
+				<real>-0.618</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>1</integer>
+		<key>num_colors</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>Walk it out</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<real>-0.4</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<real>-3.2</real>
+				<key>y</key>
+				<real>3.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>3</integer>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<real>-3.2</real>
+				<key>y</key>
+				<real>-3.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<real>3.4</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>1</integer>
+		<key>num_colors</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>branching</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>-4</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>7</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<real>-1.8</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+					<integer>8</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>4</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+					<integer>5</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>1.8</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>x</key>
+				<integer>4</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>7</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>6</integer>
+				<key>x</key>
+				<real>1.8</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>8</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>7</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>-4</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>8</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>8</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>-1.8</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>1</integer>
+		<key>num_colors</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>tough</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>6.3</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>9</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>4</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>11</integer>
+					<integer>13</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>6</integer>
+				<key>y</key>
+				<real>2.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+					<integer>5</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<real>4.3</real>
+				<key>y</key>
+				<real>1.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>13</integer>
+					<integer>15</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>x</key>
+				<real>4.6</real>
+				<key>y</key>
+				<real>-6.5</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>6</integer>
+					<integer>7</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>6</integer>
+				<key>x</key>
+				<real>3.1</real>
+				<key>y</key>
+				<real>-4.5</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>15</integer>
+					<integer>19</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>7</integer>
+				<key>x</key>
+				<real>-4.6</real>
+				<key>y</key>
+				<real>-6.5</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>8</integer>
+					<integer>9</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>8</integer>
+				<key>x</key>
+				<real>-3.1</real>
+				<key>y</key>
+				<real>-4.5</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>17</integer>
+					<integer>19</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>9</integer>
+				<key>x</key>
+				<integer>-6</integer>
+				<key>y</key>
+				<real>2.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>10</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>10</integer>
+				<key>x</key>
+				<real>-4.3</real>
+				<key>y</key>
+				<real>1.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>11</integer>
+					<integer>17</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>11</integer>
+				<key>x</key>
+				<real>-2.2</real>
+				<key>y</key>
+				<real>2.7</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>12</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>12</integer>
+				<key>x</key>
+				<real>-1.1</real>
+				<key>y</key>
+				<real>1.3</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>14</integer>
+					<integer>18</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>13</integer>
+				<key>x</key>
+				<real>2.2</real>
+				<key>y</key>
+				<real>2.7</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>14</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>14</integer>
+				<key>x</key>
+				<real>1.1</real>
+				<key>y</key>
+				<real>1.3</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>16</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>15</integer>
+				<key>x</key>
+				<real>3.7</real>
+				<key>y</key>
+				<real>-1.6</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>16</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>16</integer>
+				<key>x</key>
+				<real>1.9</real>
+				<key>y</key>
+				<real>-1.2</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>20</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>17</integer>
+				<key>x</key>
+				<real>-3.7</real>
+				<key>y</key>
+				<real>-1.6</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>18</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>18</integer>
+				<key>x</key>
+				<real>-1.9</real>
+				<key>y</key>
+				<real>-1.2</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>20</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>19</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>-4.5</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>20</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>20</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<real>-2.6</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>3</integer>
+		<key>num_colors</key>
+		<integer>2</integer>
+		<key>name</key>
+		<string>SIM</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>3</integer>
+				<key>z</key>
+				<integer>-2</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>3</integer>
+				<key>z</key>
+				<integer>2</integer>
+				<key>edges</key>
+				<array>
+					<integer>3</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>3</integer>
+				<key>z</key>
+				<integer>-2</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+					<integer>5</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>-3</integer>
+				<key>z</key>
+				<integer>2</integer>
+				<key>edges</key>
+				<array>
+					<integer>5</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>-3</integer>
+				<key>z</key>
+				<integer>-2</integer>
+				<key>edges</key>
+				<array>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>6</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>-3</integer>
+				<key>z</key>
+				<integer>2</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>2</integer>
+		<key>num_colors</key>
+		<integer>2</integer>
+		<key>name</key>
+		<string>Planar Mirror</string>
+		<key>is_mirror</key>
+		<true/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>1</integer>
+				<key>y</key>
+				<integer>1</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>mirror</key>
+				<integer>3</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+					<integer>6</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>1</integer>
+				<key>y</key>
+				<integer>-1</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>mirror</key>
+				<integer>4</integer>
+				<key>edges</key>
+				<array>
+					<integer>3</integer>
+					<integer>7</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>-1</integer>
+				<key>y</key>
+				<integer>-1</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>mirror</key>
+				<integer>1</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+					<integer>8</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<integer>-1</integer>
+				<key>y</key>
+				<integer>1</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>mirror</key>
+				<integer>2</integer>
+				<key>edges</key>
+				<array>
+					<integer>5</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>mirror</key>
+				<integer>7</integer>
+				<key>edges</key>
+				<array>
+					<integer>6</integer>
+					<integer>8</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>6</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>mirror</key>
+				<integer>8</integer>
+				<key>edges</key>
+				<array>
+					<integer>7</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>7</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>-3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>mirror</key>
+				<integer>5</integer>
+				<key>edges</key>
+				<array>
+					<integer>8</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>8</integer>
+				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>-3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>mirror</key>
+				<integer>6</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<true/>
+		<key>graph_type</key>
+		<integer>2</integer>
+		<key>num_colors</key>
+		<integer>1</integer>
+		<key>name</key>
+		<string>Planar</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<real>-3.2</real>
+				<key>y</key>
+				<real>3.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>3</integer>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<real>-3.2</real>
+				<key>y</key>
+				<real>-3.4</real>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>4</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<real>3.4</real>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
 		<integer>2</integer>
@@ -2485,628 +3995,6 @@
 				<real>0.1</real>
 				<key>z</key>
 				<integer>-2</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
-		<integer>0</integer>
-		<key>num_colors</key>
-		<integer>3</integer>
-		<key>name</key>
-		<string>Icosian</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>5</integer>
-					<integer>13</integer>
-					<integer>17</integer>
-					<integer>9</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-					<integer>6</integer>
-					<integer>11</integer>
-					<integer>14</integer>
-					<integer>17</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-					<integer>7</integer>
-					<integer>10</integer>
-					<integer>13</integer>
-					<integer>19</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-					<integer>12</integer>
-					<integer>19</integer>
-					<integer>14</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>edges</key>
-				<array>
-					<integer>6</integer>
-					<integer>7</integer>
-					<integer>9</integer>
-					<integer>15</integer>
-					<integer>18</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>6</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-					<integer>11</integer>
-					<integer>16</integer>
-					<integer>18</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>7</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-					<integer>10</integer>
-					<integer>15</integer>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>8</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>edges</key>
-				<array>
-					<integer>12</integer>
-					<integer>16</integer>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>9</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>1.618</real>
-				<key>z</key>
-				<real>0.618</real>
-				<key>edges</key>
-				<array>
-					<integer>11</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>10</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>-1.618</real>
-				<key>z</key>
-				<real>0.618</real>
-				<key>edges</key>
-				<array>
-					<integer>12</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>11</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>1.618</real>
-				<key>z</key>
-				<real>-0.618</real>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>12</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>-1.618</real>
-				<key>z</key>
-				<real>-0.618</real>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>13</integer>
-				<key>x</key>
-				<real>0.618</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<real>1.618</real>
-				<key>edges</key>
-				<array>
-					<integer>15</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>14</integer>
-				<key>x</key>
-				<real>0.618</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<real>-1.618</real>
-				<key>edges</key>
-				<array>
-					<integer>16</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>15</integer>
-				<key>x</key>
-				<real>-0.618</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<real>1.618</real>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>16</integer>
-				<key>x</key>
-				<real>-0.618</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<real>-1.618</real>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>17</integer>
-				<key>x</key>
-				<real>1.618</real>
-				<key>y</key>
-				<real>0.618</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>19</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>18</integer>
-				<key>x</key>
-				<real>-1.618</real>
-				<key>y</key>
-				<real>0.618</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>19</integer>
-				<key>x</key>
-				<real>1.618</real>
-				<key>y</key>
-				<real>-0.618</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>20</integer>
-				<key>x</key>
-				<real>-1.618</real>
-				<key>y</key>
-				<real>-0.618</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
-		<integer>1</integer>
-		<key>num_colors</key>
-		<integer>1</integer>
-		<key>name</key>
-		<string>Icosian</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>5</integer>
-					<integer>13</integer>
-					<integer>17</integer>
-					<integer>9</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-					<integer>6</integer>
-					<integer>11</integer>
-					<integer>14</integer>
-					<integer>17</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-					<integer>7</integer>
-					<integer>10</integer>
-					<integer>13</integer>
-					<integer>19</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<integer>1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-					<integer>12</integer>
-					<integer>19</integer>
-					<integer>14</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>edges</key>
-				<array>
-					<integer>6</integer>
-					<integer>7</integer>
-					<integer>9</integer>
-					<integer>15</integer>
-					<integer>18</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>6</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-					<integer>11</integer>
-					<integer>16</integer>
-					<integer>18</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>7</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>1</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-					<integer>10</integer>
-					<integer>15</integer>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>8</integer>
-				<key>x</key>
-				<integer>-1</integer>
-				<key>y</key>
-				<integer>-1</integer>
-				<key>z</key>
-				<integer>-1</integer>
-				<key>edges</key>
-				<array>
-					<integer>12</integer>
-					<integer>16</integer>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>9</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>1.618</real>
-				<key>z</key>
-				<real>0.618</real>
-				<key>edges</key>
-				<array>
-					<integer>11</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>10</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>-1.618</real>
-				<key>z</key>
-				<real>0.618</real>
-				<key>edges</key>
-				<array>
-					<integer>12</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>11</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>1.618</real>
-				<key>z</key>
-				<real>-0.618</real>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>12</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>-1.618</real>
-				<key>z</key>
-				<real>-0.618</real>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>13</integer>
-				<key>x</key>
-				<real>0.618</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<real>1.618</real>
-				<key>edges</key>
-				<array>
-					<integer>15</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>14</integer>
-				<key>x</key>
-				<real>0.618</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<real>-1.618</real>
-				<key>edges</key>
-				<array>
-					<integer>16</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>15</integer>
-				<key>x</key>
-				<real>-0.618</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<real>1.618</real>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>16</integer>
-				<key>x</key>
-				<real>-0.618</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<real>-1.618</real>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>17</integer>
-				<key>x</key>
-				<real>1.618</real>
-				<key>y</key>
-				<real>0.618</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>19</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>18</integer>
-				<key>x</key>
-				<real>-1.618</real>
-				<key>y</key>
-				<real>0.618</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>19</integer>
-				<key>x</key>
-				<real>1.618</real>
-				<key>y</key>
-				<real>-0.618</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>20</integer>
-				<key>x</key>
-				<real>-1.618</real>
-				<key>y</key>
-				<real>-0.618</real>
-				<key>z</key>
-				<integer>0</integer>
 				<key>edges</key>
 				<array/>
 			</dict>
@@ -3685,113 +4573,6 @@
 		<key>timed</key>
 		<false/>
 		<key>graph_type</key>
-		<integer>3</integer>
-		<key>num_colors</key>
-		<integer>2</integer>
-		<key>name</key>
-		<string>SIM</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>-3</integer>
-				<key>y</key>
-				<integer>3</integer>
-				<key>z</key>
-				<integer>-2</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>4</integer>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>3</integer>
-				<key>z</key>
-				<integer>2</integer>
-				<key>edges</key>
-				<array>
-					<integer>3</integer>
-					<integer>4</integer>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<integer>3</integer>
-				<key>y</key>
-				<integer>3</integer>
-				<key>z</key>
-				<integer>-2</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<integer>-3</integer>
-				<key>y</key>
-				<integer>-3</integer>
-				<key>z</key>
-				<integer>2</integer>
-				<key>edges</key>
-				<array>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>-3</integer>
-				<key>z</key>
-				<integer>-2</integer>
-				<key>edges</key>
-				<array>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>6</integer>
-				<key>x</key>
-				<integer>3</integer>
-				<key>y</key>
-				<integer>-3</integer>
-				<key>z</key>
-				<integer>2</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
 		<integer>2</integer>
 		<key>num_colors</key>
 		<integer>0</integer>
@@ -4177,78 +4958,6 @@
 		<key>timed</key>
 		<false/>
 		<key>graph_type</key>
-		<integer>1</integer>
-		<key>num_colors</key>
-		<integer>1</integer>
-		<key>name</key>
-		<string>Walk it out</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<real>-0.4</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<real>-3.2</real>
-				<key>y</key>
-				<real>3.4</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>3</integer>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<real>-3.2</real>
-				<key>y</key>
-				<real>-3.4</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<real>3.4</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
 		<integer>3</integer>
 		<key>num_colors</key>
 		<integer>2</integer>
@@ -4262,11 +4971,11 @@
 				<key>uid</key>
 				<integer>1</integer>
 				<key>x</key>
-				<integer>-3</integer>
+				<real>-2.1</real>
 				<key>y</key>
-				<integer>0</integer>
+				<real>4.1</real>
 				<key>z</key>
-				<integer>-3</integer>
+				<integer>-2</integer>
 				<key>edges</key>
 				<array>
 					<integer>2</integer>
@@ -4280,507 +4989,73 @@
 				<key>uid</key>
 				<integer>2</integer>
 				<key>x</key>
-				<integer>-3</integer>
+				<real>2.1</real>
 				<key>y</key>
-				<integer>0</integer>
+				<real>4.1</real>
 				<key>z</key>
-				<integer>3</integer>
-				<key>edges</key>
-				<array>
-					<integer>3</integer>
-					<integer>4</integer>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<integer>3</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>-3</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<integer>3</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>3</integer>
-				<key>edges</key>
-				<array>
-					<integer>5</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>6</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>6</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>-6</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
-		<integer>1</integer>
-		<key>num_colors</key>
-		<integer>1</integer>
-		<key>name</key>
-		<string>branching</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>-4</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>7</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
 				<integer>2</integer>
-				<key>x</key>
-				<real>-1.8</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>4</integer>
-					<integer>8</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>4</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-					<integer>5</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>1.8</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<integer>4</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>7</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>6</integer>
-				<key>x</key>
-				<real>1.8</real>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>7</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>-4</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>8</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>-1.8</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
-		<integer>1</integer>
-		<key>num_colors</key>
-		<integer>1</integer>
-		<key>name</key>
-		<string>tough</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>6.3</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
 					<integer>3</integer>
-					<integer>9</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>4</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>11</integer>
-					<integer>13</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+					<integer>6</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>3</integer>
-				<key>x</key>
-				<integer>6</integer>
-				<key>y</key>
-				<real>2.4</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-					<integer>5</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<real>4.3</real>
-				<key>y</key>
-				<real>1.4</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>13</integer>
-					<integer>15</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<real>4.6</real>
-				<key>y</key>
-				<real>-6.5</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>6</integer>
-					<integer>7</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>6</integer>
-				<key>x</key>
-				<real>3.1</real>
-				<key>y</key>
-				<real>-4.5</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>15</integer>
-					<integer>19</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>7</integer>
 				<key>x</key>
 				<real>-4.6</real>
 				<key>y</key>
-				<real>-6.5</real>
-				<key>z</key>
 				<integer>0</integer>
+				<key>z</key>
+				<real>-1.7</real>
 				<key>edges</key>
 				<array>
-					<integer>8</integer>
-					<integer>9</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+					<integer>6</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
-				<integer>8</integer>
+				<integer>4</integer>
 				<key>x</key>
-				<real>-3.1</real>
+				<real>4.6</real>
 				<key>y</key>
-				<real>-4.5</real>
-				<key>z</key>
 				<integer>0</integer>
+				<key>z</key>
+				<integer>1</integer>
 				<key>edges</key>
 				<array>
-					<integer>17</integer>
-					<integer>19</integer>
+					<integer>5</integer>
+					<integer>6</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
-				<integer>9</integer>
+				<integer>5</integer>
 				<key>x</key>
-				<integer>-6</integer>
+				<real>-2.1</real>
 				<key>y</key>
-				<real>2.4</real>
+				<real>-4.1</real>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>10</integer>
+					<integer>6</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
-				<integer>10</integer>
+				<integer>6</integer>
 				<key>x</key>
-				<real>-4.3</real>
+				<real>2.1</real>
 				<key>y</key>
-				<real>1.4</real>
+				<real>-4.1</real>
 				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>11</integer>
-					<integer>17</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>11</integer>
-				<key>x</key>
-				<real>-2.2</real>
-				<key>y</key>
-				<real>2.7</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>12</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>12</integer>
-				<key>x</key>
-				<real>-1.1</real>
-				<key>y</key>
-				<real>1.3</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>14</integer>
-					<integer>18</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>13</integer>
-				<key>x</key>
-				<real>2.2</real>
-				<key>y</key>
-				<real>2.7</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>14</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>14</integer>
-				<key>x</key>
-				<real>1.1</real>
-				<key>y</key>
-				<real>1.3</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>16</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>15</integer>
-				<key>x</key>
-				<real>3.7</real>
-				<key>y</key>
-				<real>-1.6</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>16</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>16</integer>
-				<key>x</key>
-				<real>1.9</real>
-				<key>y</key>
-				<real>-1.2</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>17</integer>
-				<key>x</key>
-				<real>-3.7</real>
-				<key>y</key>
-				<real>-1.6</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>18</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>18</integer>
-				<key>x</key>
-				<real>-1.9</real>
-				<key>y</key>
-				<real>-1.2</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>19</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>-4.5</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>20</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>20</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>-2.6</real>
-				<key>z</key>
-				<integer>0</integer>
+				<real>-0.5</real>
 				<key>edges</key>
 				<array/>
 			</dict>
@@ -4978,257 +5253,6 @@
 		<key>graph_type</key>
 		<integer>0</integer>
 		<key>num_colors</key>
-		<integer>1</integer>
-		<key>name</key>
-		<string>Welcome</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
-		<integer>0</integer>
-		<key>num_colors</key>
-		<integer>2</integer>
-		<key>name</key>
-		<string>Practice</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>-2</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<integer>2</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
-		<integer>0</integer>
-		<key>num_colors</key>
-		<integer>3</integer>
-		<key>name</key>
-		<string>Triangle</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>-2</integer>
-				<key>y</key>
-				<real>-1.5</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<integer>2</integer>
-				<key>y</key>
-				<real>-1.5</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>1.5</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>1</integer>
-					<integer>2</integer>
-				</array>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
-		<integer>0</integer>
-		<key>num_colors</key>
-		<integer>2</integer>
-		<key>name</key>
-		<string>Cube</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>2</integer>
-				<key>y</key>
-				<integer>2</integer>
-				<key>z</key>
-				<integer>2</integer>
-				<key>edges</key>
-				<array>
-					<integer>5</integer>
-					<integer>3</integer>
-					<integer>2</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<integer>2</integer>
-				<key>y</key>
-				<integer>2</integer>
-				<key>z</key>
-				<integer>-2</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<integer>2</integer>
-				<key>y</key>
-				<integer>-2</integer>
-				<key>z</key>
-				<integer>2</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<integer>2</integer>
-				<key>y</key>
-				<integer>-2</integer>
-				<key>z</key>
-				<integer>-2</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>8</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<integer>-2</integer>
-				<key>y</key>
-				<integer>2</integer>
-				<key>z</key>
-				<integer>2</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>6</integer>
-				<key>x</key>
-				<integer>-2</integer>
-				<key>y</key>
-				<integer>2</integer>
-				<key>z</key>
-				<integer>-2</integer>
-				<key>edges</key>
-				<array>
-					<integer>5</integer>
-					<integer>8</integer>
-					<integer>2</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>7</integer>
-				<key>x</key>
-				<integer>-2</integer>
-				<key>y</key>
-				<integer>-2</integer>
-				<key>z</key>
-				<integer>2</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-					<integer>3</integer>
-					<integer>5</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>8</integer>
-				<key>x</key>
-				<integer>-2</integer>
-				<key>y</key>
-				<integer>-2</integer>
-				<key>z</key>
-				<integer>-2</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
-		<integer>0</integer>
-		<key>num_colors</key>
 		<integer>3</integer>
 		<key>name</key>
 		<string>Difficult</string>
@@ -5375,264 +5399,6 @@
 				<real>2.25</real>
 				<key>y</key>
 				<integer>-4</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
-		<integer>0</integer>
-		<key>num_colors</key>
-		<integer>3</integer>
-		<key>name</key>
-		<string>complex</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<real>-3.8</real>
-				<key>y</key>
-				<real>2.1</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>7</integer>
-					<integer>10</integer>
-					<integer>2</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<real>-3.7</real>
-				<key>y</key>
-				<real>-1.7</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>10</integer>
-					<integer>3</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<real>-1.2</real>
-				<key>y</key>
-				<real>-4.8</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>11</integer>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<real>2.7</real>
-				<key>y</key>
-				<real>-3.7</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>11</integer>
-					<integer>5</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>5</integer>
-				<key>x</key>
-				<integer>4</integer>
-				<key>y</key>
-				<real>-0.2</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>12</integer>
-					<integer>6</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>6</integer>
-				<key>x</key>
-				<real>2.3</real>
-				<key>y</key>
-				<real>3.2</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>12</integer>
-					<integer>7</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>7</integer>
-				<key>x</key>
-				<real>-1.3</real>
-				<key>y</key>
-				<real>4.1</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>8</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>8</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>1.1</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>9</integer>
-					<integer>12</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>9</integer>
-				<key>x</key>
-				<real>-0.3</real>
-				<key>y</key>
-				<real>-0.7</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>10</integer>
-					<integer>11</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>10</integer>
-				<key>x</key>
-				<real>-2.2</real>
-				<key>y</key>
-				<real>0.3</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>11</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<real>-2.8</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>12</integer>
-				<key>x</key>
-				<real>1.7</real>
-				<key>y</key>
-				<real>-0.4</real>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array/>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>timed</key>
-		<false/>
-		<key>graph_type</key>
-		<integer>0</integer>
-		<key>num_colors</key>
-		<integer>4</integer>
-		<key>name</key>
-		<string>Four</string>
-		<key>is_mirror</key>
-		<false/>
-		<key>nodes</key>
-		<array>
-			<dict>
-				<key>uid</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>4</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>2</integer>
-				<key>x</key>
-				<integer>-4</integer>
-				<key>y</key>
-				<integer>0</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>3</integer>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>3</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>-4</integer>
-				<key>z</key>
-				<integer>0</integer>
-				<key>edges</key>
-				<array>
-					<integer>4</integer>
-				</array>
-			</dict>
-			<dict>
-				<key>uid</key>
-				<integer>4</integer>
-				<key>x</key>
-				<integer>0</integer>
-				<key>y</key>
-				<integer>4</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>

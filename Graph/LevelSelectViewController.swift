@@ -102,7 +102,7 @@ class LevelSelectViewController: UIViewController {
         
         UserDefaultsInteractor.clearLevelSelectPosition()
         UserDefaultsInteractor.clearZoomFactor()
-        //UserDefaultsInteractor.clearLevelStates()
+        UserDefaultsInteractor.clearLevelStates()
         
         setupView()
         setupScene()
@@ -445,7 +445,7 @@ class LevelSelectViewController: UIViewController {
         gridRoot = SCNNode()
         let gridLines = SCNNode()
         let gridNodes = SCNNode()
-        let gridSize: Int = 30
+        let gridSize: Int = 25
         
         for y in -gridSize...gridSize {
             if abs(y) % 2 == 1 {
@@ -544,7 +544,7 @@ class LevelSelectViewController: UIViewController {
         guard let level = level else {
             return .black
         }
-        
+                
         let levelStates = UserDefaultsInteractor.getLevelStates()
 
         guard let levelState: LevelState = LevelState(rawValue: levelStates[level]) else {

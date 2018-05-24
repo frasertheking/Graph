@@ -106,8 +106,14 @@ class Levels: NSObject, NSCopying {
                         continue
                     }
                     
-                    if vertexBin.count > from_pos-1 && vertexBin.count > to_pos-1 {
-                        adjacencyList.add(.undirected, from: vertexBin[from_pos - 1], to: vertexBin[to_pos - 1])
+                    if levelDict["name"] as? String == "LEVEL SELECT" {
+                        if vertexBin.count > from_pos && vertexBin.count > to_pos {
+                            adjacencyList.add(.undirected, from: vertexBin[from_pos], to: vertexBin[to_pos])
+                        }
+                    } else {
+                        if vertexBin.count > from_pos-1 && vertexBin.count > to_pos-1 {
+                            adjacencyList.add(.undirected, from: vertexBin[from_pos-1], to: vertexBin[to_pos-1])
+                        }
                     }
                 }
             }
