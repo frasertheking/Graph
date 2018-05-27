@@ -65,7 +65,7 @@ struct GraphAnimation {
         vertexNodes.addAnimation(scale, forKey: "explode")
         edgeNodes.addAnimation(scale, forKey: "explode")
         
-        GraphAnimation.delayWithSeconds(0.5) {
+        GraphAnimation.delayWithSeconds(1) {
             clean()
         }
     }
@@ -141,7 +141,7 @@ struct GraphAnimation {
     static func dissolveGraph(vertexNodes: SCNNode, lingerNode: SCNNode, clean: @escaping () -> ()) {
         let name: String = (lingerNode.geometry?.name)!
         
-        GraphAnimation.delayWithSeconds(Double.random(min: 1.25, max: 1.5)) {
+        GraphAnimation.delayWithSeconds(Double.random(min: 1.5, max: 1.75)) {
             let moveAction: SCNAction = SCNAction.move(to: SCNVector3(x: lingerNode.position.x, y: lingerNode.position.y, z: -50), duration: 0.45)
             let fadeAction: SCNAction = SCNAction.fadeOpacity(to: 0, duration: 0.4)
             moveAction.timingMode = .easeInEaseOut
@@ -165,7 +165,7 @@ struct GraphAnimation {
             }
         }
         
-        GraphAnimation.delayWithSeconds(2) {
+        GraphAnimation.delayWithSeconds(2.5) {
             clean()
         }        
     }

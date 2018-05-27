@@ -131,9 +131,7 @@ extension UIColor {
         return UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
     }
     
-    public static func setupBackgrounds(view: UIView, skView: SKView) {
-        insertGradient(for: view)
-        
+    public static func setupBackgrounds(view: UIView, skView: SKView) {        
         // Add background particles
         let skScene = SKScene(size: CGSize(width: view.frame.size.width, height: view.frame.size.height))
         skScene.backgroundColor = UIColor.clear

@@ -14,6 +14,7 @@ import Pastel
 import M13Checkbox
 import CountdownLabel
 import ChameleonFramework
+import SwiftGifOrigin
 
 class LevelSelectViewController: UIViewController {
 
@@ -49,6 +50,7 @@ class LevelSelectViewController: UIViewController {
     @IBOutlet var settingsButtonBorderView: UIView!
     @IBOutlet var settingsButtonBorderBackgroundView: UIView!
     @IBOutlet var playButtonBackgroundViewTopLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet var gifImageView: UIImageView!
     var currentlyAtLanding: Bool = true
     var landingEmitter: SCNNode!
     var landingTitle: SCNNode!
@@ -99,6 +101,9 @@ class LevelSelectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        gifImageView.image = UIImage.gif(name: "selection_animated")
+        gifImageView.alpha = 0
         
         UserDefaultsInteractor.clearLevelSelectPosition()
         UserDefaultsInteractor.clearZoomFactor()
@@ -175,7 +180,8 @@ class LevelSelectViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        UIColor.insertModalButtonGradient(for: self.playButtonBackgroundView.contentView)
+        UIColor.insertModalButtonGradient(for: playButtonBackgroundView.contentView)
+        UIColor.insertGradient(for: view)
     }
     
     func setupView() {
@@ -230,8 +236,11 @@ class LevelSelectViewController: UIViewController {
         activeLevel = Levels.createLevel(index: 0)
         
         createObjects()
-        setupGrid()
         
+        gridRoot = SCNNode()
+        gridRoot.setupGrid(gridSize: 25)
+        scnScene.rootNode.addChildNode(gridRoot)
+
         GraphAnimation.emergeGraph(vertexNodes: self.vertexNodes, findNode: self.findNode)
         GraphAnimation.emergeGraph(edgeNodes: self.edgeNodes)
         
@@ -248,9 +257,9 @@ class LevelSelectViewController: UIViewController {
             self.settingsButton.isUserInteractionEnabled = true
             
             GraphAnimation.delayWithSeconds(1, completion: {
+                self.view.isUserInteractionEnabled = true
                 GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             })
-            self.view.isUserInteractionEnabled = true
             for node in self.emitterNodes {
                 if let trail = ParticleGeneration.createTrail(color: UIColor.white, geometry: node.geometry!) {
                     node.removeAllParticleSystems()
@@ -441,47 +450,6 @@ class LevelSelectViewController: UIViewController {
         scnScene.rootNode.addChildNode(edgeNodes)
     }
     
-    func setupGrid() {
-        gridRoot = SCNNode()
-        let gridLines = SCNNode()
-        let gridNodes = SCNNode()
-        let gridSize: Int = 25
-        
-        for y in -gridSize...gridSize {
-            if abs(y) % 2 == 1 {
-                let node = SCNNode()
-                node.opacity = 0.05
-                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(-gridSize), y: Float(y), z: -0.15), to: SCNVector3(x: Float(gridSize), y: Float(y), z: -0.15), radius: 0.01, color: .black))
-            }
-        }
-        
-        for x in -gridSize...gridSize {
-            if abs(x) % 2 == 1 {
-                let node = SCNNode()
-                node.opacity = 0.05
-                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(x), y: Float(-gridSize), z: -0.15), to: SCNVector3(x: Float(x), y: Float(gridSize), z: -0.15), radius: 0.01, color: .black))
-            }
-        }
-        
-        for x in -gridSize...gridSize {
-            for y in -gridSize...gridSize {
-                if abs(x) % 2 == 1 && abs(y) % 2 == 1 {
-                    let node = Shape.getSphereNode()
-                    node.opacity = 0.1
-                    node.position = SCNVector3(x: Float(x), y: Float(y), z: -0.15)
-                    gridNodes.addChildNode(node)
-                }
-            }
-        }
-        
-        gridRoot.addChildNode(gridLines)
-        gridRoot.addChildNode(gridNodes)
-        gridLines.opacity = 0
-        gridNodes.opacity = 0
-        
-        scnScene.rootNode.addChildNode(gridRoot)
-    }
-    
     func getShapeTypeForLevel(level: Int) -> Shape? {
         let levelStates = UserDefaultsInteractor.getLevelStates()
         
@@ -613,16 +581,24 @@ class LevelSelectViewController: UIViewController {
                 
                 vertexNodes.removeAllAnimations()
                 edgeNodes.removeAllAnimations()
-                GraphAnimation.delayWithSeconds(0.4) {
+                GraphAnimation.delayWithSeconds(0.5) {
                     UserDefaultsInteractor.setLevelSelectPosition(pos: [-node.position.x, -node.position.y])
                     UserDefaultsInteractor.setZoomFactor(pos: self.cameraNode.position.z + 5)
                     self.selectedLevel = Int(geoName)!
                     GraphAnimation.dissolveGraph(vertexNodes: self.vertexNodes, lingerNode: node, clean: self.cleanSceneAndSegue)
                     GraphAnimation.dissolveGraph(edgeNodes: self.edgeNodes)
                     GraphAnimation.dissolveGraph(edgeNodes: self.gridRoot)
+                    
                     UIView.animate(withDuration: 0.2, animations: {
+                        self.gifImageView.alpha = 1
                         self.settingsButtonBorderView.alpha = 0
                         self.settingsButtonBackgroundView.alpha = 0
+                    })
+                    
+                    GraphAnimation.delayWithSeconds(1.5, completion: {
+                        UIView.animate(withDuration: 0.2, animations: {
+                            self.gifImageView.alpha = 0
+                        })
                     })
                 }
             }

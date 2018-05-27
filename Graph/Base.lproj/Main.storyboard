@@ -408,6 +408,13 @@
                             <skView contentMode="scaleToFill" sceneName="scene" translatesAutoresizingMaskIntoConstraints="NO" id="Oy5-u8-0UJ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </skView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PYU-9r-Ma7">
+                                <rect key="frame" x="49.666666666666657" y="268.66666666666669" width="275" height="275.00000000000006"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="E5c-cX-1w9"/>
+                                    <constraint firstAttribute="height" constant="275" id="dFZ-Ni-mE6"/>
+                                </constraints>
+                            </imageView>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="scene" translatesAutoresizingMaskIntoConstraints="NO" id="c0p-fo-dYZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </sceneKitView>
@@ -506,6 +513,7 @@
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
                             <constraint firstItem="xcG-ja-ZNA" firstAttribute="height" secondItem="O7U-by-gpw" secondAttribute="height" id="IQQ-ez-SgB"/>
+                            <constraint firstItem="PYU-9r-Ma7" firstAttribute="centerX" secondItem="XBw-OO-R0J" secondAttribute="centerX" id="IbG-Qx-PeT"/>
                             <constraint firstItem="S8K-hz-D9J" firstAttribute="top" secondItem="4Jk-eu-8RL" secondAttribute="top" id="JM0-wx-OLj"/>
                             <constraint firstItem="O7U-by-gpw" firstAttribute="centerX" secondItem="XBw-OO-R0J" secondAttribute="centerX" id="MJq-8X-YuX"/>
                             <constraint firstItem="Oy5-u8-0UJ" firstAttribute="leading" secondItem="ca6-5t-SIY" secondAttribute="leading" id="TkA-3z-ptb"/>
@@ -517,6 +525,7 @@
                             <constraint firstItem="aQf-3V-AUa" firstAttribute="top" secondItem="S8K-hz-D9J" secondAttribute="top" id="gPd-Q5-f7X"/>
                             <constraint firstAttribute="bottom" secondItem="c0p-fo-dYZ" secondAttribute="bottom" id="gTe-oA-SJa"/>
                             <constraint firstItem="S8K-hz-D9J" firstAttribute="height" secondItem="4Jk-eu-8RL" secondAttribute="height" id="m9I-B2-ehG"/>
+                            <constraint firstItem="PYU-9r-Ma7" firstAttribute="centerY" secondItem="XBw-OO-R0J" secondAttribute="centerY" id="my7-cI-MbW"/>
                             <constraint firstItem="c0p-fo-dYZ" firstAttribute="top" secondItem="XBw-OO-R0J" secondAttribute="top" id="qrN-pM-zbc"/>
                             <constraint firstItem="aQf-3V-AUa" firstAttribute="width" secondItem="S8K-hz-D9J" secondAttribute="width" id="ulI-j5-4QP"/>
                             <constraint firstItem="O7U-by-gpw" firstAttribute="centerY" secondItem="XBw-OO-R0J" secondAttribute="centerY" constant="300" id="ywA-y1-KHh"/>
@@ -524,6 +533,7 @@
                         <viewLayoutGuide key="safeArea" id="ca6-5t-SIY"/>
                     </view>
                     <connections>
+                        <outlet property="gifImageView" destination="PYU-9r-Ma7" id="MTY-Bf-lFs"/>
                         <outlet property="playButton" destination="xcG-ja-ZNA" id="bke-bG-seE"/>
                         <outlet property="playButtonBackgroundView" destination="O7U-by-gpw" id="Rhx-F9-zva"/>
                         <outlet property="playButtonBackgroundViewTopLayoutConstraint" destination="ywA-y1-KHh" id="HWg-Nw-itf"/>

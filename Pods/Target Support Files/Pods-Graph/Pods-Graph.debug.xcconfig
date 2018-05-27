@@ -1,9 +1,9 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/ChameleonFramework" "$PODS_CONFIGURATION_BUILD_DIR/CountdownLabel" "$PODS_CONFIGURATION_BUILD_DIR/M13Checkbox" "$PODS_CONFIGURATION_BUILD_DIR/Pastel"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/ChameleonFramework" "$PODS_CONFIGURATION_BUILD_DIR/CountdownLabel" "$PODS_CONFIGURATION_BUILD_DIR/M13Checkbox" "$PODS_CONFIGURATION_BUILD_DIR/Pastel" "$PODS_CONFIGURATION_BUILD_DIR/SwiftGifOrigin"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/ChameleonFramework/ChameleonFramework.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/CountdownLabel/CountdownLabel.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/M13Checkbox/M13Checkbox.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Pastel/Pastel.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "ChameleonFramework" -framework "CountdownLabel" -framework "M13Checkbox" -framework "Pastel"
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/ChameleonFramework/ChameleonFramework.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/CountdownLabel/CountdownLabel.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/M13Checkbox/M13Checkbox.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Pastel/Pastel.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/SwiftGifOrigin/SwiftGifOrigin.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "ChameleonFramework" -framework "CountdownLabel" -framework "M13Checkbox" -framework "Pastel" -framework "SwiftGifOrigin"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_BUILD_DIR = $BUILD_DIR
 PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

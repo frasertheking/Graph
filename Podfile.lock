@@ -4,13 +4,15 @@ PODS:
     - ChameleonFramework/Default
   - CountdownLabel (3.0.0)
   - M13Checkbox (3.2.2)
-  - Pastel (0.3.0)
+  - Pastel (0.4.0)
+  - SwiftGifOrigin (1.6.1)
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - CountdownLabel (~> 3.0)
   - M13Checkbox
   - Pastel
+  - SwiftGifOrigin
 
 EXTERNAL SOURCES:
   ChameleonFramework:
@@ -25,8 +27,9 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   CountdownLabel: 4534a68892b1deb73fda18702dfdc2c8444cec08
   M13Checkbox: a8c2491cfbbca10797925fd0b9154a782bf40d89
-  Pastel: 738740c84f2b15bbcd96ebe99c4e6c2f5dd42262
+  Pastel: 7fa5e26123b3dbe11f7ed255654bf37100b199a5
+  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-PODFILE CHECKSUM: 323c91ff01ba9479fa01053412a3df15be7d91a7
+PODFILE CHECKSUM: d28a465db501aa66288234d6376f8f522e6f3455
 
 COCOAPODS: 1.2.1

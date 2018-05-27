@@ -232,7 +232,7 @@
 				<key>uid</key>
 				<integer>15</integer>
 				<key>x</key>
-				<integer>-6</integer>
+				<integer>-5</integer>
 				<key>y</key>
 				<integer>-9</integer>
 				<key>z</key>
@@ -277,9 +277,9 @@
 				<key>uid</key>
 				<integer>18</integer>
 				<key>x</key>
-				<integer>9</integer>
+				<integer>6</integer>
 				<key>y</key>
-				<integer>-9</integer>
+				<integer>-11</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -437,9 +437,9 @@
 				<key>uid</key>
 				<integer>30</integer>
 				<key>x</key>
-				<integer>-6</integer>
+				<integer>-5</integer>
 				<key>y</key>
-				<integer>-3</integer>
+				<integer>-12</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>

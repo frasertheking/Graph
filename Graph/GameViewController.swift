@@ -52,6 +52,7 @@ class GameViewController: UIViewController {
     var selectedNode: SCNNode!
     var selectedMirrorNode: SCNNode?
     var h: Float = 1
+    var gridRoot: SCNNode!
     
     // DEBUG
     var debug = false
@@ -270,6 +271,11 @@ class GameViewController: UIViewController {
             if graphType != .planar {
                 GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             } else {
+                
+                self.gridRoot = SCNNode()
+                self.gridRoot.setupGrid(gridSize: 7)
+                self.scnScene.rootNode.addChildNode(self.gridRoot)
+                
                 self.selectedColorIndex = -1
                 self.paintColorCollectionView.reloadData()
             }
@@ -302,6 +308,7 @@ class GameViewController: UIViewController {
 
             if graphType == .planar {
                 self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                GraphAnimation.emergeGraph(edgeNodes: self.gridRoot)
             }
         }
     }
@@ -908,6 +915,7 @@ class GameViewController: UIViewController {
             }
         })
         scnScene.rootNode.childNodes[2].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: duration)))
+        scnScene.rootNode.childNodes[3].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: duration)))
     }
     
     @objc func refreshColorsInCollectionView() {
