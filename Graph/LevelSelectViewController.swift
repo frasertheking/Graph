@@ -102,7 +102,6 @@ class LevelSelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        gifImageView.image = UIImage.gif(name: "selection_animated")
         gifImageView.alpha = 0
         
         UserDefaultsInteractor.clearLevelSelectPosition()
@@ -581,7 +580,15 @@ class LevelSelectViewController: UIViewController {
                 
                 vertexNodes.removeAllAnimations()
                 edgeNodes.removeAllAnimations()
+                
                 GraphAnimation.delayWithSeconds(0.5) {
+                    self.gifImageView.image = UIImage.gif(name: "selection_animated")
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.gifImageView.alpha = 1
+                        self.settingsButtonBorderView.alpha = 0
+                        self.settingsButtonBackgroundView.alpha = 0
+                    })
+                    
                     UserDefaultsInteractor.setLevelSelectPosition(pos: [-node.position.x, -node.position.y])
                     UserDefaultsInteractor.setZoomFactor(pos: self.cameraNode.position.z + 5)
                     self.selectedLevel = Int(geoName)!
@@ -589,13 +596,7 @@ class LevelSelectViewController: UIViewController {
                     GraphAnimation.dissolveGraph(edgeNodes: self.edgeNodes)
                     GraphAnimation.dissolveGraph(edgeNodes: self.gridRoot)
                     
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.gifImageView.alpha = 1
-                        self.settingsButtonBorderView.alpha = 0
-                        self.settingsButtonBackgroundView.alpha = 0
-                    })
-                    
-                    GraphAnimation.delayWithSeconds(1.5, completion: {
+                    GraphAnimation.delayWithSeconds(2, completion: {
                         UIView.animate(withDuration: 0.2, animations: {
                             self.gifImageView.alpha = 0
                         })
