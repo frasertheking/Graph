@@ -237,7 +237,7 @@ class LevelSelectViewController: UIViewController {
         createObjects()
         
         gridRoot = SCNNode()
-        gridRoot.setupGrid(gridSize: 25)
+        gridRoot.setupGrid(gridSize: 25, z: -0.15)
         scnScene.rootNode.addChildNode(gridRoot)
 
         GraphAnimation.emergeGraph(vertexNodes: self.vertexNodes, findNode: self.findNode)
@@ -684,11 +684,17 @@ class LevelSelectViewController: UIViewController {
             
             if newX > 25 {
                 newX = 25
-            } else if newY > 25 {
+            }
+            
+            if newY > 25 {
                 newY = 25
-            } else if newX < -25 {
+            }
+            
+            if newX < -25 {
                 newX = -25
-            } else if newY < -25 {
+            }
+            
+            if newY < -25 {
                 newY = -25
             }
             
@@ -746,11 +752,17 @@ class LevelSelectViewController: UIViewController {
                 
                 if newX > 25 {
                     newX = 25
-                } else if newX < -25 {
+                }
+               
+                if newX < -25 {
                     newX = -25
-                } else if newY > 25 {
+                }
+                
+                if newY > 25 {
                     newY = 25
-                } else if newY < -25 {
+                }
+                
+                if newY < -25 {
                     newY = -25
                 }
                 

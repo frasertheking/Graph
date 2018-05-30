@@ -79,6 +79,7 @@ class GameViewController: UIViewController {
     @IBOutlet var backButtonView: UIView!
     @IBOutlet var backButtonBorderView: UIView!
     @IBOutlet var backButtonBorderBackgroundView: UIView!
+    @IBOutlet var exitButton: UIButton!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -91,7 +92,7 @@ class GameViewController: UIViewController {
         static let kScaleShrink: CGFloat = 0.8
         static let kScaleGrow: CGFloat = 1.25
         static let kPanTranslationScaleFactor: CGFloat = 100
-        static let kPlanarMaxMagnitude: Float = 7
+        static let kPlanarMaxMagnitude: Float = 9
         
         // Timing Constants
         static let kVeryShortTimeDelay: Double = 0.1
@@ -254,13 +255,25 @@ class GameViewController: UIViewController {
         setupStraylights()
         createObjects()
         GraphAnimation.chunkInGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
-
+        
+        guard let graphType = self.activeLevel?.graphType else {
+            return
+        }
+        
+        guard let numberOfColors: Int = activeLevel?.numberOfColorsProvided else {
+            return
+        }
+        
+        if graphType == .planar {
+            gridRoot = SCNNode()
+            gridRoot.setupGrid(gridSize: 9, z: -0.75)
+            scnScene.rootNode.addChildNode(gridRoot)
+            GraphAnimation.emergeGraph(edgeNodes: gridRoot)
+        }
+        
         GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
             GraphAnimation.rotateGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
-            guard let graphType = self.activeLevel?.graphType else {
-                return
-            }
-            
+
             guard let timedLevel = self.activeLevel?.timed else {
                 return
             }
@@ -271,11 +284,6 @@ class GameViewController: UIViewController {
             if graphType != .planar {
                 GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
             } else {
-                
-                self.gridRoot = SCNNode()
-                self.gridRoot.setupGrid(gridSize: 7)
-                self.scnScene.rootNode.addChildNode(self.gridRoot)
-                
                 self.selectedColorIndex = -1
                 self.paintColorCollectionView.reloadData()
             }
@@ -294,11 +302,13 @@ class GameViewController: UIViewController {
 
         GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay) {
             GraphAnimation.scaleGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, duration: 0.5, toScale: SCNVector4(x: 2, y: 2, z: 2, w: 0))
-            GraphAnimation.animateInCollectionView(view: self.view, collectionViewBottomConstraint: self.collectionViewBottomConstraint, completion: {
-                UIView.animate(withDuration: GameConstants.kShortTimeDelay, animations: {
-                    self.simBarView.alpha = 1
+            if !(graphType == .planar && numberOfColors == 0) {
+                GraphAnimation.animateInCollectionView(view: self.view, collectionViewBottomConstraint: self.collectionViewBottomConstraint, completion: {
+                    UIView.animate(withDuration: GameConstants.kShortTimeDelay, animations: {
+                        self.simBarView.alpha = 1
+                    })
                 })
-            })
+            }
         }
 
         GraphAnimation.delayWithSeconds(GameConstants.kLongTimeDelay + 0.6) {
@@ -308,8 +318,11 @@ class GameViewController: UIViewController {
 
             if graphType == .planar {
                 self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
-                GraphAnimation.emergeGraph(edgeNodes: self.gridRoot)
             }
+        }
+        
+        GraphAnimation.delayWithSeconds(3) {
+             self.exitButton.isEnabled = true
         }
     }
     
@@ -750,7 +763,6 @@ class GameViewController: UIViewController {
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
         if !levelFailed {
-            
             // Update completed level state
             UserDefaultsInteractor.updateLevelsWithState(position: currentLevel, newState: .completed)
             
@@ -778,6 +790,9 @@ class GameViewController: UIViewController {
                     
                     if graphType != .sim {
                         self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
+                        if graphType == .planar {
+                            GraphAnimation.dissolveGraph(edgeNodes: self.gridRoot)
+                        }
                     } else {
                         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.2, options: .curveEaseInOut, animations: {
                             self.simBarView.alpha = 0
@@ -805,6 +820,10 @@ class GameViewController: UIViewController {
         } else {
             self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
             self.completedViewBottomConstraint.constant = (self.view.frame.size.height / 2) - 235
+            
+            if graphType == .planar {
+                GraphAnimation.dissolveGraph(edgeNodes: gridRoot)
+            }
             
             UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0.5, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
@@ -1158,6 +1177,7 @@ class GameViewController: UIViewController {
 //    }
     
     @IBAction func repeatLevel() {
+        exitButton.isEnabled = false
         currentLevel -= 1
         GraphAnimation.implodeGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: cleanScene)
         self.completedViewBottomConstraint.constant = -450
@@ -1193,7 +1213,10 @@ class GameViewController: UIViewController {
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0))
         
-        GraphAnimation.chunkOutGraph(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes, clean: self.exit)
+        GraphAnimation.chunkOutGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes, clean: exit)
+        if let gridRoot = gridRoot {
+            GraphAnimation.dissolveGraph(edgeNodes: gridRoot)
+        }
         self.collectionViewBottomConstraint.constant = GameConstants.kCollectionViewBottomOffsetShowing
         UIView.animate(withDuration: GameConstants.kShortTimeDelay, delay: 0, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()

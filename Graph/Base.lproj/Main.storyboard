@@ -273,7 +273,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JzG-le-mY3">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JzG-le-mY3">
                                 <rect key="frame" x="18" y="16" width="55" height="55"/>
                                 <connections>
                                     <action selector="exitLevel" destination="EcQ-vt-J7h" eventType="touchUpInside" id="8xy-oM-DSg"/>
@@ -379,6 +379,7 @@
                         <outlet property="completedView" destination="UUX-un-aJT" id="TgG-2n-eTh"/>
                         <outlet property="completedViewBottomConstraint" destination="EFa-0d-cvQ" id="DQa-eW-jzJ"/>
                         <outlet property="countdownLabel" destination="fds-b0-QSW" id="4Ol-rT-qEl"/>
+                        <outlet property="exitButton" destination="JzG-le-mY3" id="NmQ-t1-srH"/>
                         <outlet property="menuButton" destination="LSP-II-jWS" id="yLk-fk-E9U"/>
                         <outlet property="paintColorCollectionView" destination="7q1-cd-kdY" id="MAu-lS-IE3"/>
                         <outlet property="repeatLevelButton" destination="Hgh-Y8-Tgu" id="Q5a-2m-Ng0"/>

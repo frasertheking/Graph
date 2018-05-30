@@ -95,23 +95,31 @@ extension SCNNode {
         return SCNNode(geometry: SCNGeometry(sources: [source], elements: [element]))
     }
     
-    func setupGrid(gridSize: Int) {
+    func setupGrid(gridSize: Int, z: Float) {
         let gridLines = SCNNode()
         let gridNodes = SCNNode()
         
         for y in -gridSize...gridSize {
             if abs(y) % 2 == 1 {
                 let node = SCNNode()
-                node.opacity = 0.05
-                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(-gridSize), y: Float(y), z: -0.15), to: SCNVector3(x: Float(gridSize), y: Float(y), z: -0.15), radius: 0.01, color: .black))
+                if y != -gridSize && y != gridSize {
+                    node.opacity = 0.05
+                } else {
+                    node.opacity = 0.5
+                }
+                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(-gridSize), y: Float(y), z: z), to: SCNVector3(x: Float(gridSize), y: Float(y), z: z), radius: 0.01, color: .black))
             }
         }
         
         for x in -gridSize...gridSize {
             if abs(x) % 2 == 1 {
                 let node = SCNNode()
-                node.opacity = 0.05
-                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(x), y: Float(-gridSize), z: -0.15), to: SCNVector3(x: Float(x), y: Float(gridSize), z: -0.15), radius: 0.01, color: .black))
+                if x != -gridSize && x != gridSize {
+                    node.opacity = 0.05
+                } else {
+                    node.opacity = 0.5
+                }
+                gridLines.addChildNode(node.buildLineInTwoPointsWithRotation(from: SCNVector3(x: Float(x), y: Float(-gridSize), z: z), to: SCNVector3(x: Float(x), y: Float(gridSize), z: z), radius: 0.01, color: .black))
             }
         }
         
@@ -120,7 +128,7 @@ extension SCNNode {
                 if abs(x) % 2 == 1 && abs(y) % 2 == 1 {
                     let node = Shape.getSphereNode()
                     node.opacity = 0.1
-                    node.position = SCNVector3(x: Float(x), y: Float(y), z: -0.15)
+                    node.position = SCNVector3(x: Float(x), y: Float(y), z: z)
                     gridNodes.addChildNode(node)
                 }
             }
