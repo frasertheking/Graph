@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VML-Iw-7qS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VML-Iw-7qS">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -410,10 +410,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </skView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PYU-9r-Ma7">
-                                <rect key="frame" x="49.666666666666657" y="268.66666666666669" width="275" height="275.00000000000006"/>
+                                <rect key="frame" x="50" y="268.66666666666669" width="275" height="275.00000000000006"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="275" id="E5c-cX-1w9"/>
-                                    <constraint firstAttribute="height" constant="275" id="dFZ-Ni-mE6"/>
+                                    <constraint firstAttribute="width" constant="275" id="E5c-cX-1w9">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="350"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="275" id="dFZ-Ni-mE6">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="350"/>
+                                    </constraint>
                                 </constraints>
                             </imageView>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="scene" translatesAutoresizingMaskIntoConstraints="NO" id="c0p-fo-dYZ">

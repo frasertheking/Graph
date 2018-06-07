@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if !vc.showingModalView && shouldRefresh {
                 vc.setupLevelSelect()
                 GraphAnimation.explodeGraph(vertexNodes: vc.vertexNodes, edgeNodes: vc.edgeNodes)
+                vc.resetGradients()
             }
         }
     }

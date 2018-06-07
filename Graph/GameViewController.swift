@@ -232,6 +232,11 @@ class GameViewController: UIViewController {
         simBarView.layer.borderColor = UIColor.customWhite().cgColor
         simBarView.isHidden = true
         
+        menuButton.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+        repeatLevelButton.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
+        menuButton.layer.borderWidth = 3
+        repeatLevelButton.layer.borderWidth = 3
+        
         menuButton.alpha = 0
         repeatLevelButton.alpha = 0
     }
@@ -255,7 +260,7 @@ class GameViewController: UIViewController {
         setupStraylights()
         createObjects()
         GraphAnimation.chunkInGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
-        
+
         guard let graphType = self.activeLevel?.graphType else {
             return
         }

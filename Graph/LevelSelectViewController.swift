@@ -121,8 +121,8 @@ class LevelSelectViewController: UIViewController {
         settingsMask.frame = self.settingsButtonBackgroundView.bounds
         
         maskView2.addSubview(settingsMask)
-        self.settingsButtonBackgroundView.backgroundColor = .clear
-        self.settingsButtonBackgroundView.mask = maskView2
+        settingsButtonBackgroundView.backgroundColor = .clear
+        settingsButtonBackgroundView.mask = maskView2
         
         // BORDER
         settingsButtonBorderView.alpha = 0
@@ -133,8 +133,8 @@ class LevelSelectViewController: UIViewController {
         settingsBorderMask.frame = self.settingsButtonBorderView.bounds
         
         maskView3.addSubview(settingsBorderMask)
-        self.settingsButtonBorderView.backgroundColor = .clear
-        self.settingsButtonBorderView.mask = maskView3
+        settingsButtonBorderView.backgroundColor = .clear
+        settingsButtonBorderView.mask = maskView3
 
         if !currentlyAtLanding {
             setupLevelSelect()
@@ -179,8 +179,7 @@ class LevelSelectViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        UIColor.insertModalButtonGradient(for: playButtonBackgroundView.contentView)
-        UIColor.insertGradient(for: view)
+        resetGradients()
     }
     
     func setupView() {
@@ -319,7 +318,7 @@ class LevelSelectViewController: UIViewController {
 
         GraphAnimation.delayWithSeconds(0.5) {
             self.landingTitle.scale = SCNVector3(x: 2, y: 2, z: 2)
-            rotateAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.75)
+            rotateAction = SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 1)
             rotateAction.timingMode = .easeInEaseOut
             self.landingTitle.runAction(rotateAction)
             
@@ -630,6 +629,11 @@ class LevelSelectViewController: UIViewController {
         }
                 
         return isAvailable
+    }
+    
+    func resetGradients() {
+        UIColor.insertModalButtonGradient(for: playButtonBackgroundView.contentView)
+        UIColor.insertGradient(for: view)
     }
     
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {

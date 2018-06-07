@@ -183,6 +183,12 @@ extension UIColor {
 
         pastelView.startAnimation()
         
+        for subview in view.subviews {
+            if let subview = subview as? PastelView{
+                subview.removeFromSuperview()
+            }
+        }
+        
         view.insertSubview(pastelView, at: 0)
     }
     
