@@ -197,7 +197,7 @@ class LevelSelectViewController: UIViewController {
         scnView.showsStatistics = false
         scnView.allowsCameraControl = false
         scnView.autoenablesDefaultLighting = true
-        scnView.antialiasingMode = .multisampling4X
+        scnView.antialiasingMode = .multisampling2X
         scnView.delegate = self
         scnView.isPlaying = true
         scnView.preferredFramesPerSecond = 60
@@ -225,6 +225,7 @@ class LevelSelectViewController: UIViewController {
     func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
+        cameraNode.camera?.vignettingPower = 0.15
         cameraNode.position = SCNVector3(x: 0, y: 0, z: UserDefaultsInteractor.getZoomFactor())
         scnScene.rootNode.addChildNode(cameraNode)
     }
