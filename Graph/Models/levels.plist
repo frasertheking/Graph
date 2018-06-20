@@ -29,6 +29,7 @@
 					<integer>1</integer>
 					<integer>12</integer>
 					<integer>21</integer>
+					<integer>32</integer>
 				</array>
 			</dict>
 			<dict>
@@ -452,6 +453,18 @@
 				<integer>15</integer>
 				<key>y</key>
 				<integer>-3</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>32</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>3</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -5399,6 +5412,86 @@
 				<real>2.25</real>
 				<key>y</key>
 				<integer>-4</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>0</integer>
+		<key>num_colors</key>
+		<integer>3</integer>
+		<key>name</key>
+		<string>Blending</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>2</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>x</key>
+				<integer>-2</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>x</key>
+				<integer>2</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>-2</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>

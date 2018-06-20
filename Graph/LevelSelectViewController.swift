@@ -894,7 +894,8 @@ class LevelSelectViewController: UIViewController {
     @IBAction func playButtonPressed() {
         skView.isPaused = true
         scnView.removeGestureRecognizer(self.landingPanGestureRecognizer)
-
+        playButton.isEnabled = false
+        
         GraphAnimation.addExplode(to: playButton)
         GraphAnimation.addExplode(to: playButtonBackgroundView)
         landingTitle.removeAllActions()

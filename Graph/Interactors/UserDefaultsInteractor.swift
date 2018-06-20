@@ -90,6 +90,7 @@ struct UserDefaultsInteractor {
         baseLevels[1] = LevelState.base.rawValue
         baseLevels[21] = LevelState.base.rawValue
         baseLevels[12] = LevelState.base.rawValue
+        baseLevels[32] = LevelState.base.rawValue
         
         if isKeyPresentInUserDefaults(key: levelStateKey) {
             guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
@@ -111,6 +112,7 @@ struct UserDefaultsInteractor {
         baseLevels[1] = LevelState.base.rawValue
         baseLevels[21] = LevelState.base.rawValue
         baseLevels[12] = LevelState.base.rawValue
+        baseLevels[32] = LevelState.base.rawValue
         
         if isKeyPresentInUserDefaults(key: levelStateKey) {
             guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
