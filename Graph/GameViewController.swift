@@ -571,6 +571,8 @@ class GameViewController: UIViewController {
                 return
             case .kColor:
                 break
+            case .mix:
+                break
             case .sim:
                 if selectedNode == node {
                     return
@@ -1305,7 +1307,7 @@ extension GameViewController: UICollectionViewDataSource {
         
         cell.checkbox.isHidden = (graphType == .hamiltonian || graphType == .planar || graphType == .sim) ? true : false
         cell.palletImage.isHidden = (graphType == .hamiltonian || graphType == .sim) ? false : true
-        cell.label.isHidden = (graphType == .hamiltonian || graphType == .kColor || graphType == .sim) ? true : false
+        cell.label.isHidden = (graphType == .hamiltonian || graphType == .kColor || graphType == .mix || graphType == .sim) ? true : false
 
         if graphType == .sim {
             if simPlayerNodeCount > indexPath.row {

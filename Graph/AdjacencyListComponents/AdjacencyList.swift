@@ -14,6 +14,7 @@ public enum GraphType: Int {
     case hamiltonian
     case planar
     case sim
+    case mix
 }
 
 public enum axis: Int {
@@ -171,7 +172,7 @@ extension AdjacencyList: Graphable {
                 }
             }
             return false
-        default:
+        case .kColor:
             for (_, value) in (graph.adjacencyDict) {
                 for edge in value {
                     if edge.source.data.color == edge.destination.data.color ||
@@ -181,6 +182,8 @@ extension AdjacencyList: Graphable {
                     }
                 }
             }
+        case .mix:
+            return false
         }
         
         return true

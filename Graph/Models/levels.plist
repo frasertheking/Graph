@@ -5423,11 +5423,11 @@
 		<key>timed</key>
 		<false/>
 		<key>graph_type</key>
-		<integer>0</integer>
+		<integer>4</integer>
 		<key>num_colors</key>
 		<integer>3</integer>
 		<key>name</key>
-		<string>Blending</string>
+		<string>Color Mix 1</string>
 		<key>is_mirror</key>
 		<false/>
 		<key>nodes</key>
