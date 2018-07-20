@@ -948,7 +948,6 @@ class LevelSelectViewController: UIViewController {
             self.settingsButtonBackgroundView.transform = CGAffineTransform.identity
             self.settingsButtonBorderView.transform = CGAffineTransform.identity
         })
-        print("pressed")
     }
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {

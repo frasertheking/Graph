@@ -897,8 +897,10 @@ class GameViewController: UIViewController {
             return
         }
         
-        geometry.materials.first?.diffuse.contents = activeColor
-        geometry.materials.first?.emission.contents = UIColor.defaultVertexColor()
+        if graphType != .mix {
+            geometry.materials.first?.diffuse.contents = activeColor
+            geometry.materials.first?.emission.contents = UIColor.defaultVertexColor()
+        }
         
         if graphType == .hamiltonian && currentStep == "" {
             geometry.materials[1].diffuse.contents = activeColor
@@ -910,8 +912,13 @@ class GameViewController: UIViewController {
             node.addParticleSystem(explosion)
         }
         
+        var trailColor = activeColor
+        if graphType == .mix {
+            trailColor = .glowColor()
+        }
+        
         GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
-            if let trailEmitter = ParticleGeneration.createTrail(color: activeColor, geometry: geometry) {
+            if let trailEmitter = ParticleGeneration.createTrail(color: trailColor, geometry: geometry) {
                 node.removeAllParticleSystems()
                 node.addParticleSystem(trailEmitter)
             }

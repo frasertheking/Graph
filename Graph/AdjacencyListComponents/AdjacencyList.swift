@@ -468,6 +468,8 @@ extension AdjacencyList: Graphable {
                     }
                 }
             }
+        } else if graphType == .mix {
+            // Do not update in this case
         } else {
             for (_, value) in (self.adjacencyDict) {
                 for case let edge as Edge<Node> in value  {
@@ -577,9 +579,7 @@ extension AdjacencyList: Graphable {
         if trueColor == .white {
             return screen
         }
-        
-        print(screen, trueColor)
-        
+                
         if screen == .red && (trueColor == .red || trueColor == .yellow || trueColor == .magenta) {
             return .red
         }
