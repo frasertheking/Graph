@@ -571,5 +571,28 @@ extension AdjacencyList: Graphable {
         
         return true
     }
+    
+    ///// Color Mixing Stuff
+    func getColorForScreen(trueColor: UIColor, screen: UIColor) -> UIColor {
+        if trueColor == .white {
+            return screen
+        }
+        
+        print(screen, trueColor)
+        
+        if screen == .red && (trueColor == .red || trueColor == .yellow || trueColor == .magenta) {
+            return .red
+        }
+        
+        if screen == .green && (trueColor == .green || trueColor == .yellow || trueColor == .cyan) {
+            return .green
+        }
+        
+        if screen == .blue && (trueColor == .blue || trueColor == .cyan || trueColor == .magenta) {
+            return .blue
+        }
+        
+        return .black        
+    }
 
 }

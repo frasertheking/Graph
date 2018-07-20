@@ -27,6 +27,7 @@ class GameViewController: UIViewController {
 
     // GLOBAL VARS
     var paintColor: UIColor = .customRed()
+    var cellColors: [UIColor] = [.red, .green, .blue]
     var activeLevel: Level?
     var currentLevel: Int = 1
     var walkColor: UIColor = .goldColor()
@@ -53,6 +54,7 @@ class GameViewController: UIViewController {
     var selectedMirrorNode: SCNNode?
     var h: Float = 1
     var gridRoot: SCNNode!
+    var screenColor: UIColor = .red
     
     // DEBUG
     var debug = false
@@ -254,7 +256,6 @@ class GameViewController: UIViewController {
         backButtonView.alpha = 1
         backButtonBorderView.alpha = 1
         activeLevel = Levels.createLevel(index: currentLevel)
-        print(activeLevel?.targetColor)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
 
@@ -438,6 +439,10 @@ class GameViewController: UIViewController {
             return
         }
         
+        guard let adjacencyList = activeLevel?.adjacencyList else {
+            return
+        }
+        
         guard let graphType: GraphType = activeLevel?.graphType else {
             return
         }
@@ -449,8 +454,13 @@ class GameViewController: UIViewController {
         edgeArray = []
         
         for (key, value) in adjacencyDict {
+            var nodeColor = key.data.color
+            if graphType == .mix {
+                nodeColor = adjacencyList.getColorForScreen(trueColor: nodeColor, screen: screenColor)
+            }
+            
             // Create nodes
-            Shape.spawnShape(type: .Node, position: key.data.position, color: key.data.color, id: key.data.uid, node: vertexNodes)
+            Shape.spawnShape(type: .Node, position: key.data.position, color: nodeColor, id: key.data.uid, node: vertexNodes)
             
             // Create edges
             for edge in value {
@@ -943,6 +953,21 @@ class GameViewController: UIViewController {
         })
         scnScene.rootNode.childNodes[2].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: duration)))
         scnScene.rootNode.childNodes[3].runAction((SCNAction.rotateBy(x: x, y: y, z: 0, duration: duration)))
+    }
+    
+    func recolorNodesForNewScreen() {
+        guard let adjacencyList = activeLevel?.adjacencyList else {
+            return
+        }
+        
+        guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
+            return
+        }
+        
+        for (key, _) in adjacencyDict {
+            let node = getNodeFromID(id: "\(key.data.uid)")
+            node?.geometry?.materials.first?.diffuse.contents = adjacencyList.getColorForScreen(trueColor: key.data.color, screen: screenColor)
+        }
     }
     
     @objc func refreshColorsInCollectionView() {
@@ -1472,6 +1497,11 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDelegate
             }
         } else if graphType == .sim {
             return
+        } else if graphType == .mix {            
+            screenColor = cellColors[indexPath.row]
+            selectedColorIndex = indexPath.row
+            paintColorCollectionView.reloadData()
+            recolorNodesForNewScreen()
         } else {
             if let color = cell.backgroundColor {
                 paintColor = color
