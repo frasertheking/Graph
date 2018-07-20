@@ -254,6 +254,7 @@ class GameViewController: UIViewController {
         backButtonView.alpha = 1
         backButtonBorderView.alpha = 1
         activeLevel = Levels.createLevel(index: currentLevel)
+        print(activeLevel?.targetColor)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
 

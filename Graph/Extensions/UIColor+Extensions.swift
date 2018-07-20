@@ -279,4 +279,29 @@ extension UIColor {
             alpha: CGFloat(1.0)
         )
     }
+    
+    static func getColorFromStringName(color: String?) -> UIColor {
+        
+        guard let color = color else {
+            return .white
+        }
+        
+        if color == "red" {
+            return .red
+        } else if color == "green" {
+            return .green
+        } else if color == "blue" {
+            return .blue
+        } else if color == "cyan" {
+            return .cyan
+        } else if color == "yellow" {
+            return .yellow
+        } else if color == "magenta" {
+            return .magenta
+        } else if color == "black" {
+            return .black
+        }
+        
+        return .white
+    }
 }

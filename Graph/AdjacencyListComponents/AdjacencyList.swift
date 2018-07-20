@@ -23,7 +23,6 @@ public enum axis: Int {
     case z
 }
 
-
 open class AdjacencyList<T: Hashable> {
     public var adjacencyDict : [Vertex<T>: [Edge<T>]] = [:]
     public init() {}

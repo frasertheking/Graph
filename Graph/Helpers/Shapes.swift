@@ -83,7 +83,7 @@ public enum Shape: Int {
             geometry.materials.first?.diffuse.contents = UIColor.black
             geometry.materials[1].diffuse.contents = UIColor.white
         } else {
-            geometry.materials.first?.diffuse.contents = ShapeConstants.primaryMaterialColor
+            geometry.materials.first?.diffuse.contents = color
             geometry.materials[1].diffuse.contents = ShapeConstants.secondaryMaterialColor
         }
         
