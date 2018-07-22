@@ -19,6 +19,7 @@
 		4344E96920026712003FC234 /* ParticleGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344E96820026712003FC234 /* ParticleGeneration.swift */; };
 		4344E96B200269E0003FC234 /* GraphAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344E96A200269E0003FC234 /* GraphAnimation.swift */; };
 		434A574F1FDB109400FD172B /* levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 434A574E1FDB109400FD172B /* levels.plist */; };
+		4350C46A21051FEA00A833A0 /* UIImageVIew+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4350C46921051FEA00A833A0 /* UIImageVIew+Extensions.swift */; };
 		435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 435BACC91FD7584400DFAF6B /* Trail.scnp */; };
 		436C7B0C2090F9370037342A /* kColor_locked.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B032090F9360037342A /* kColor_locked.dae */; };
 		436C7B0D2090F9370037342A /* planar_locked.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B042090F9360037342A /* planar_locked.dae */; };
@@ -86,6 +87,7 @@
 		4344E96820026712003FC234 /* ParticleGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleGeneration.swift; sourceTree = "<group>"; };
 		4344E96A200269E0003FC234 /* GraphAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAnimation.swift; sourceTree = "<group>"; };
 		434A574E1FDB109400FD172B /* levels.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = levels.plist; sourceTree = "<group>"; };
+		4350C46921051FEA00A833A0 /* UIImageVIew+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageVIew+Extensions.swift"; sourceTree = "<group>"; };
 		435BACC91FD7584400DFAF6B /* Trail.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Trail.scnp; sourceTree = "<group>"; };
 		436C7B032090F9360037342A /* kColor_locked.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = kColor_locked.dae; sourceTree = "<group>"; };
 		436C7B042090F9360037342A /* planar_locked.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_locked.dae; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				43B0E6AF20374CBD00D444B0 /* CALayer+Extensions.swift */,
 				43B0E6B120387F4700D444B0 /* UIView+Extensions.swift */,
 				43B0E6B4203A00A100D444B0 /* SCNGeometry+Extensions.swift */,
+				4350C46921051FEA00A833A0 /* UIImageVIew+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				43860BC91FB7E1DA0076B0CF /* Edges.swift in Sources */,
 				43860BC71FB7E17C0076B0CF /* Vertex.swift in Sources */,
 				43270DB82027E47B00BBF1CF /* SceneKit+Extensions.swift in Sources */,
+				4350C46A21051FEA00A833A0 /* UIImageVIew+Extensions.swift in Sources */,
 				43CA8FF31FB697B600B962D9 /* Shapes.swift in Sources */,
 				43A018F31FC10B28005FF276 /* Node.swift in Sources */,
 				43B0E6B5203A00A100D444B0 /* SCNGeometry+Extensions.swift in Sources */,
