@@ -23,7 +23,6 @@ class GameViewController: UIViewController {
     var edgeArray: [Edge<Node>]!
     var vertexNodes: SCNNode!
     var lightNodes: SCNNode!
-    var colorSelectNodes: SCNNode!
 
     // GLOBAL VARS
     var paintColor: UIColor = .customRed()
@@ -55,6 +54,7 @@ class GameViewController: UIViewController {
     var h: Float = 1
     var gridRoot: SCNNode!
     var screenColor: UIColor = .red
+    var selectedNodeIds: [String] = []
     
     // DEBUG
     var debug = false
@@ -454,9 +454,9 @@ class GameViewController: UIViewController {
         edgeArray = []
         
         for (key, value) in adjacencyDict {
-            var nodeColor = key.data.color
+            var nodeColor: UIColor = .black
             if graphType == .mix {
-                nodeColor = adjacencyList.getColorForScreen(trueColor: nodeColor, screen: screenColor)
+                nodeColor = adjacencyList.getColorForScreen(trueColor: key.data.color, screen: screenColor)
             }
             
             // Create nodes
@@ -562,7 +562,7 @@ class GameViewController: UIViewController {
                         if let mirrorName = self.activeLevel?.adjacencyList?.getMirrorNodeUID(id: node.geometry?.name) {
                             if let mirrorNode = getNodeFromID(id: "\(mirrorName)") {
                                 selectedMirrorNode = mirrorNode
-                                selectNode(node: mirrorNode, graphType: graphType, activeColor: activeColor)
+                                selectNode(node: mirrorNode, graphType: graphType, activeColor: activeColor, selected: true)
                             }
                         }
                     }
@@ -574,7 +574,7 @@ class GameViewController: UIViewController {
                     
                     axisPanGestureRecognizer?.isEnabled = true
                     geometry.materials.first?.diffuse.contents = activeColor
-                    selectNode(node: node, graphType: graphType, activeColor: activeColor)
+                    selectNode(node: node, graphType: graphType, activeColor: activeColor, selected: true)
                 }
                 
                 activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
@@ -600,11 +600,23 @@ class GameViewController: UIViewController {
             }
             
             if !solved {
+                guard let nodeName = node.geometry?.name else {
+                    return
+                }
+                
+                var selected: Bool = false
+                if !selectedNodeIds.contains(nodeName) {
+                    selectedNodeIds.append(nodeName)
+                    selected = true
+                } else {
+                    selectedNodeIds = selectedNodeIds.filter { $0 != nodeName }
+                }
+                
                 if isMirror {
                     selectMirrorNode(node: node, graphType: graphType, activeColor: activeColor)
                 }
                 
-                selectNode(node: node, graphType: graphType, activeColor: activeColor)
+                selectNode(node: node, graphType: graphType, activeColor: activeColor, selected: selected)
             }
             
             if let nameToInt = Int(geoName) {
@@ -874,14 +886,16 @@ class GameViewController: UIViewController {
             }
             
             if geoName == String(describing: mirrorName) {
-                selectNode(node: childNode, graphType: graphType, activeColor: activeColor)
+                selectNode(node: childNode, graphType: graphType, activeColor: activeColor, selected: true)
             }
         }
     }
     
-    func selectNode(node: SCNNode, graphType: GraphType, activeColor: UIColor) {
+    func selectNode(node: SCNNode, graphType: GraphType, activeColor: UIColor, selected: Bool) {
         if let _ = activeLevel?.adjacencyList, let geoName = node.geometry?.name {
-            activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: geoName, color: activeColor)
+            if graphType != .mix {
+                activeLevel?.adjacencyList = activeLevel?.adjacencyList!.updateGraphState(id: geoName, color: activeColor)
+            }
         }
         
         let scaleUpAction = SCNAction.scale(by: GameConstants.kScaleGrow, duration: GameConstants.kVeryShortTimeDelay)
@@ -917,10 +931,12 @@ class GameViewController: UIViewController {
             trailColor = .glowColor()
         }
         
-        GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
-            if let trailEmitter = ParticleGeneration.createTrail(color: trailColor, geometry: geometry) {
-                node.removeAllParticleSystems()
-                node.addParticleSystem(trailEmitter)
+        if graphType != .mix || (graphType == .mix && selected) {
+            GraphAnimation.delayWithSeconds(GameConstants.kShortTimeDelay) {
+                if let trailEmitter = ParticleGeneration.createTrail(color: trailColor, geometry: geometry) {
+                    node.removeAllParticleSystems()
+                    node.addParticleSystem(trailEmitter)
+                }
             }
         }
     }
@@ -1128,6 +1144,7 @@ class GameViewController: UIViewController {
         mirrorArray.removeAll()
         simArray.removeAll()
         simPath.removeAll()
+        selectedNodeIds.removeAll()
         currentStep = ""
         mirrorStep = ""
         firstStep = ""
