@@ -831,6 +831,7 @@ class GameViewController: UIViewController {
                     self.backButtonView.alpha = 0
                     self.backButtonBorderView.alpha = 0
                     self.checkButtonBackgroundView.alpha = 0
+                    self.checkButtonImageView.alpha = 0
                     
                     if graphType != .sim {
                         self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
@@ -1294,6 +1295,7 @@ class GameViewController: UIViewController {
             self.backButtonView.alpha = 0
             self.backButtonBorderView.alpha = 0
             self.checkButtonBackgroundView.alpha = 0
+            self.checkButtonImageView.alpha = 0
             self.straylightViewBack.alpha = 0
             self.straylightViewFront.alpha = 0
         })
