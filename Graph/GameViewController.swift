@@ -83,8 +83,8 @@ class GameViewController: UIViewController {
     @IBOutlet var backButtonBorderBackgroundView: UIView!
     @IBOutlet var exitButton: UIButton!
     @IBOutlet var checkButton: UIButton!
-    @IBOutlet var checkButtonBackgroundImageView: UIImageView!
     @IBOutlet var checkButtonBackgroundView: UIView!
+    @IBOutlet var checkButtonImageView: UIImageView!
     var colorSelectionButton: UIButton!
     
     // CAMERA VARS
@@ -263,8 +263,6 @@ class GameViewController: UIViewController {
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
-        checkButtonBackgroundImageView.setImageColor(color: UIColor.yellow)
-        
         setupStraylights()
         createObjects()
         GraphAnimation.chunkInGraph(vertexNodes: vertexNodes, edgeNodes: edgeNodes)
@@ -283,8 +281,13 @@ class GameViewController: UIViewController {
             scnScene.rootNode.addChildNode(gridRoot)
             GraphAnimation.emergeGraph(edgeNodes: gridRoot)
         } else if graphType == .mix {
-            checkButtonBackgroundImageView.alpha = 1
-            checkButtonBackgroundView.alpha = 0.5
+            checkButtonBackgroundView.backgroundColor = UIColor.customGreen()
+            checkButtonBackgroundView.alpha = 1
+            checkButtonBackgroundView.layer.borderColor = checkButtonBackgroundView.backgroundColor?.darker()?.cgColor
+            checkButtonBackgroundView.layer.borderWidth = 2
+            checkButtonBackgroundView.layer.masksToBounds = true
+            checkButtonImageView.image = checkButtonImageView.image!.withRenderingMode(.alwaysTemplate)
+            checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.darker(by: 25)
             checkButton.isEnabled = true
         }
         
@@ -828,7 +831,6 @@ class GameViewController: UIViewController {
                     self.backButtonView.alpha = 0
                     self.backButtonBorderView.alpha = 0
                     self.checkButtonBackgroundView.alpha = 0
-                    self.checkButtonBackgroundImageView.alpha = 0
                     
                     if graphType != .sim {
                         self.activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: self.mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
@@ -1292,7 +1294,6 @@ class GameViewController: UIViewController {
             self.backButtonView.alpha = 0
             self.backButtonBorderView.alpha = 0
             self.checkButtonBackgroundView.alpha = 0
-            self.checkButtonBackgroundImageView.alpha = 0
             self.straylightViewBack.alpha = 0
             self.straylightViewFront.alpha = 0
         })
