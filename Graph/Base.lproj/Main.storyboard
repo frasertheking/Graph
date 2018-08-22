@@ -333,7 +333,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="venn" translatesAutoresizingMaskIntoConstraints="NO" id="izf-fR-mBk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="node_good" translatesAutoresizingMaskIntoConstraints="NO" id="izf-fR-mBk">
                                 <rect key="frame" x="317" y="28" width="30" height="30"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcL-vt-lLl">
@@ -593,7 +593,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="node_good" width="242" height="236"/>
         <image name="timer" width="100" height="100"/>
-        <image name="venn" width="100" height="100"/>
     </resources>
 </document>

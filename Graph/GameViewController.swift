@@ -275,20 +275,33 @@ class GameViewController: UIViewController {
             return
         }
         
+        var targetColor: UIColor = .red // @Cleanup: Default should be nil?
+        if let color: UIColor = activeLevel?.targetColor {
+            targetColor = color
+        }
+        
         if graphType == .planar {
             gridRoot = SCNNode()
             gridRoot.setupGrid(gridSize: 9, z: -0.75)
             scnScene.rootNode.addChildNode(gridRoot)
             GraphAnimation.emergeGraph(edgeNodes: gridRoot)
         } else if graphType == .mix {
-            checkButtonBackgroundView.backgroundColor = UIColor.customGreen()
+            checkButtonBackgroundView.backgroundColor = targetColor
             checkButtonBackgroundView.alpha = 1
             checkButtonBackgroundView.layer.borderColor = checkButtonBackgroundView.backgroundColor?.darker()?.cgColor
             checkButtonBackgroundView.layer.borderWidth = 2
             checkButtonBackgroundView.layer.masksToBounds = true
             checkButtonImageView.image = checkButtonImageView.image!.withRenderingMode(.alwaysTemplate)
-            checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.darker(by: 25)
+            if targetColor == UIColor.white {
+                checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.lighter(by: 50)
+            } else {
+                checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.darker(by: 50)
+            }
             checkButton.isEnabled = true
+            GraphAnimation.delayWithSeconds(1) {
+                GraphAnimation.addPulse(to: self.checkButtonBackgroundView, duration: 1)
+                GraphAnimation.addPulse(to: self.checkButtonImageView, duration: 1)
+            }
         }
         
         GraphAnimation.delayWithSeconds(GameConstants.kMediumTimeDelay) {
@@ -724,7 +737,9 @@ class GameViewController: UIViewController {
             activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
         }
         
-        checkIfSolved()
+        if graphType != .mix {
+            checkIfSolved()
+        }
     }
     
     func checkIfSolved() {
@@ -736,8 +751,13 @@ class GameViewController: UIViewController {
             return
         }
         
+        var targetColor: UIColor = .red // @Cleanup: Default should be nil? 
+        if let color: UIColor = activeLevel?.targetColor {
+            targetColor = color
+        }
+        
         if let list = activeLevel?.adjacencyList {
-            if list.checkIfSolved(forType: graphType, numberConfig: numberConfig, edgeArray: edgeArray, edgeNodes: edgeNodes) {
+            if list.checkIfSolved(forType: graphType, numberConfig: numberConfig, edgeArray: edgeArray, edgeNodes: edgeNodes, targetColor: targetColor, selected: selectedNodeIds) {
                 endLevel()
             }
         }
@@ -1302,7 +1322,20 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func checkPressed() {
-        print("Check pressed..")
+        checkButtonBackgroundView.layer.removeAllAnimations()
+        checkButtonImageView.layer.removeAllAnimations()
+        GraphAnimation.delayWithSeconds(0.1) {
+            GraphAnimation.addExplode(to: self.checkButtonBackgroundView)
+            GraphAnimation.addExplode(to: self.checkButtonImageView)
+        }
+        
+        checkIfSolved()
+        
+        GraphAnimation.delayWithSeconds(1) {
+            GraphAnimation.addPulse(to: self.checkButtonBackgroundView, duration: 1)
+            GraphAnimation.addPulse(to: self.checkButtonImageView, duration: 1)
+        }
+        
     }
     
     func exit() {

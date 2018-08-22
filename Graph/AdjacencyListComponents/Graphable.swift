@@ -18,7 +18,7 @@ protocol Graphable {
     func edges(from source: Vertex<Element>) -> [Edge<Element>]?
     
     // Helpers
-    func checkIfSolved(forType type: GraphType, numberConfig: Int, edgeArray: [Edge<Node>], edgeNodes: SCNNode) -> Bool
+    func checkIfSolved(forType type: GraphType, numberConfig: Int, edgeArray: [Edge<Node>], edgeNodes: SCNNode, targetColor: UIColor, selected: [String]) -> Bool
     func isLastStep() -> Bool 
     func updateGraphState(id: String?, color: UIColor) -> AdjacencyList<Node>
     func updateCorrectEdges(level: Level?, pathArray: [Int], mirrorArray: [Int], edgeArray: [Edge<Node>], edgeNodes: SCNNode)

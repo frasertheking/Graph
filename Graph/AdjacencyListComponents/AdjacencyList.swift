@@ -83,7 +83,7 @@ extension AdjacencyList: Graphable {
         return adjacencyDict[source]
     }
     
-    func checkIfSolved(forType type: GraphType, numberConfig: Int, edgeArray: [Edge<Node>], edgeNodes: SCNNode) -> Bool {
+    func checkIfSolved(forType type: GraphType, numberConfig: Int, edgeArray: [Edge<Node>], edgeNodes: SCNNode, targetColor: UIColor, selected: [String]) -> Bool {
         let graph: AdjacencyList<Node> = self as! AdjacencyList<Node>
         
         switch type {
@@ -182,7 +182,13 @@ extension AdjacencyList: Graphable {
                 }
             }
         case .mix:
-            return false
+            for (key, _) in (graph.adjacencyDict) {
+                if ((key.data.color == targetColor && !selected.contains("\(key.data.uid)")) ||
+                    (key.data.color != targetColor && selected.contains("\(key.data.uid)"))) {
+                    return false
+                }
+            }
+            return true
         }
         
         return true
