@@ -256,8 +256,6 @@ class GameViewController: UIViewController {
     @objc func setupLevel() {
         scnView.isUserInteractionEnabled = true
         countdownLabel.countdownDelegate = self
-        backButtonView.alpha = 1
-        backButtonBorderView.alpha = 1
         
         activeLevel = Levels.createLevel(index: currentLevel)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
@@ -275,6 +273,19 @@ class GameViewController: UIViewController {
             return
         }
         
+        GraphAnimation.delayWithSeconds(1) {
+            UIView.animate(withDuration: 0.2) {
+                self.backButtonView.alpha = 1
+                self.backButtonBorderView.alpha = 1
+                self.backButtonBorderBackgroundView.alpha = 1
+                
+                if graphType == .mix {
+                    self.checkButtonImageView.alpha = 1
+                    self.checkButtonBackgroundView.alpha = 1
+                }
+            }
+        }
+        
         var targetColor: UIColor = .red // @Cleanup: Default should be nil?
         if let color: UIColor = activeLevel?.targetColor {
             targetColor = color
@@ -287,7 +298,6 @@ class GameViewController: UIViewController {
             GraphAnimation.emergeGraph(edgeNodes: gridRoot)
         } else if graphType == .mix {
             checkButtonBackgroundView.backgroundColor = targetColor
-            checkButtonBackgroundView.alpha = 1
             checkButtonBackgroundView.layer.borderColor = checkButtonBackgroundView.backgroundColor?.darker()?.cgColor
             checkButtonBackgroundView.layer.borderWidth = 2
             checkButtonBackgroundView.layer.masksToBounds = true
