@@ -468,6 +468,20 @@
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
+				<array>
+					<integer>33</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>33</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>6</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
 				<array/>
 			</dict>
 		</array>
@@ -5428,6 +5442,98 @@
 		<integer>3</integer>
 		<key>name</key>
 		<string>Color Mix 1</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>target_color</key>
+		<string>cyan</string>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>color</key>
+				<string>red</string>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>color</key>
+				<string>green</string>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>2</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>color</key>
+				<string>blue</string>
+				<key>x</key>
+				<integer>-2</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>4</integer>
+				<key>color</key>
+				<string>white</string>
+				<key>x</key>
+				<integer>2</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>5</integer>
+				<key>color</key>
+				<string>cyan</string>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>-2</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>4</integer>
+		<key>num_colors</key>
+		<integer>3</integer>
+		<key>name</key>
+		<string>Color Mix 2</string>
 		<key>is_mirror</key>
 		<false/>
 		<key>target_color</key>
