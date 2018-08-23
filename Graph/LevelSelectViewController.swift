@@ -500,6 +500,16 @@ class LevelSelectViewController: UIViewController {
             } else if levelState == .timed {
                 return Shape.kColorTimed
             }
+        } else if levelType == .mix {
+            if levelState == .base {
+                return Shape.Mix
+            } else if levelState == .completed {
+                return Shape.MixComplete
+            } else if levelState == .locked {
+                return Shape.MixLocked
+            } else if levelState == .timed {
+                return Shape.MixTimed
+            }
         } else if levelType == .sim {
             return Shape.Spiral
         }

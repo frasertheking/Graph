@@ -30,6 +30,10 @@ public enum Shape: Int {
     case kColorRandom
     case kColorLocked
     case kColorTimed
+    case Mix
+    case MixComplete
+    case MixLocked
+    case MixTimed
     case Spiral
     case Title
     case Play
@@ -59,6 +63,10 @@ public enum Shape: Int {
                              "kColor_random",
                              "kColor_locked",
                              "kColor_timed",
+                             "mix",
+                             "mix_complete",
+                             "mix_locked",
+                             "mix_timed",
                              "spiral",
                              "title",
                              "play"]
@@ -68,12 +76,12 @@ public enum Shape: Int {
             return
         }
         
-        if type.rawValue == 17 { // SPIRAL
+        if type.rawValue == 21 { // SPIRAL
             geometry.materials.first?.diffuse.contents = UIColor.white
             geometry.materials[1].diffuse.contents = color
-        } else if type.rawValue == 18 { // TITLE
+        } else if type.rawValue == 22 { // TITLE
             geometry.materials.first?.diffuse.contents = color
-        } else if type.rawValue == 19 { // PLAY
+        } else if type.rawValue == 23 { // PLAY
             geometry.materials.first?.diffuse.contents = UIColor.red
             geometry.materials[1].diffuse.contents = color
         } else if type.rawValue > 1  {
