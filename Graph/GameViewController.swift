@@ -302,10 +302,10 @@ class GameViewController: UIViewController {
             checkButtonBackgroundView.layer.borderWidth = 2
             checkButtonBackgroundView.layer.masksToBounds = true
             checkButtonImageView.image = checkButtonImageView.image!.withRenderingMode(.alwaysTemplate)
-            if targetColor == UIColor.white {
-                checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.lighter(by: 50)
+            if targetColor == UIColor.black || targetColor == .cyan || targetColor == .magenta || targetColor == .yellow {
+                checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.darker(by: 75)
             } else {
-                checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.darker(by: 50)
+                checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.lighter(by: 75)
             }
             checkButton.isEnabled = true
             GraphAnimation.delayWithSeconds(1) {
@@ -769,6 +769,9 @@ class GameViewController: UIViewController {
         if let list = activeLevel?.adjacencyList {
             if list.checkIfSolved(forType: graphType, numberConfig: numberConfig, edgeArray: edgeArray, edgeNodes: edgeNodes, targetColor: targetColor, selected: selectedNodeIds) {
                 endLevel()
+            } else if graphType == .mix {
+                GraphAnimation.addShake(to: checkButtonImageView)
+                GraphAnimation.addShake(to: checkButtonBackgroundView)
             }
         }
     }
@@ -1346,6 +1349,10 @@ class GameViewController: UIViewController {
             GraphAnimation.addPulse(to: self.checkButtonImageView, duration: 1)
         }
         
+        selectedNodeIds.removeAll()
+        for node in vertexNodes.childNodes {
+            node.removeAllParticleSystems()
+        }
     }
     
     func exit() {
