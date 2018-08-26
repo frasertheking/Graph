@@ -308,7 +308,7 @@
                                     <constraint firstAttribute="height" constant="90" id="vzw-WZ-0t9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
-                                <state key="normal" title="RETRY">
+                                <state key="normal" title="REPLAY">
                                     <color key="titleColor" red="0.12771652918781728" green="0.12771652918781728" blue="0.12771652918781728" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>

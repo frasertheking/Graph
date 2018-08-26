@@ -470,15 +470,73 @@
 				<key>edges</key>
 				<array>
 					<integer>33</integer>
+					<integer>34</integer>
+					<integer>35</integer>
 				</array>
 			</dict>
 			<dict>
 				<key>uid</key>
 				<integer>33</integer>
 				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>6</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>36</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>34</integer>
+				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
 				<integer>6</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>36</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>35</integer>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>6</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>36</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>36</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>9</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>37</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>37</integer>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>12</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -5445,16 +5503,80 @@
 		<key>is_mirror</key>
 		<false/>
 		<key>target_color</key>
-		<string>cyan</string>
+		<string>green</string>
 		<key>nodes</key>
 		<array>
 			<dict>
 				<key>uid</key>
 				<integer>1</integer>
 				<key>color</key>
-				<string>red</string>
+				<string>green</string>
 				<key>x</key>
 				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>color</key>
+				<string>blue</string>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>color</key>
+				<string>red</string>
+				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>4</integer>
+		<key>num_colors</key>
+		<integer>3</integer>
+		<key>name</key>
+		<string>Color Mix 2</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>target_color</key>
+		<string>blue</string>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>color</key>
+				<string>blue</string>
+				<key>x</key>
+				<integer>-3</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>z</key>
@@ -5475,7 +5597,7 @@
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
@@ -5486,6 +5608,70 @@
 				<integer>3</integer>
 				<key>color</key>
 				<string>blue</string>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>4</integer>
+		<key>num_colors</key>
+		<integer>3</integer>
+		<key>name</key>
+		<string>Color Mix 3</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>target_color</key>
+		<string>black</string>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>color</key>
+				<string>magenta</string>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>color</key>
+				<string>cyan</string>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>2</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>color</key>
+				<string>yellow</string>
 				<key>x</key>
 				<integer>-2</integer>
 				<key>y</key>
@@ -5513,7 +5699,7 @@
 				<key>uid</key>
 				<integer>5</integer>
 				<key>color</key>
-				<string>cyan</string>
+				<string>black</string>
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
@@ -5533,7 +5719,71 @@
 		<key>num_colors</key>
 		<integer>3</integer>
 		<key>name</key>
-		<string>Color Mix 2</string>
+		<string>Color Mix 4</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>target_color</key>
+		<string>white</string>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>color</key>
+				<string>white</string>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>color</key>
+				<string>red</string>
+				<key>x</key>
+				<integer>3</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>color</key>
+				<string>blue</string>
+				<key>x</key>
+				<integer>-3</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>4</integer>
+		<key>num_colors</key>
+		<integer>3</integer>
+		<key>name</key>
+		<string>Color Mix 5</string>
 		<key>is_mirror</key>
 		<false/>
 		<key>target_color</key>
@@ -5605,7 +5855,7 @@
 				<key>uid</key>
 				<integer>5</integer>
 				<key>color</key>
-				<string>black</string>
+				<string>yellow</string>
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
@@ -5614,6 +5864,71 @@
 				<integer>0</integer>
 				<key>edges</key>
 				<array/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>timed</key>
+		<false/>
+		<key>graph_type</key>
+		<integer>4</integer>
+		<key>num_colors</key>
+		<integer>3</integer>
+		<key>name</key>
+		<string>Color Mix 6</string>
+		<key>is_mirror</key>
+		<false/>
+		<key>target_color</key>
+		<string>yellow</string>
+		<key>nodes</key>
+		<array>
+			<dict>
+				<key>uid</key>
+				<integer>1</integer>
+				<key>color</key>
+				<string>yellow</string>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>2</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>2</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>2</integer>
+				<key>color</key>
+				<string>magenta</string>
+				<key>x</key>
+				<integer>2</integer>
+				<key>y</key>
+				<integer>-2</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>3</integer>
+				</array>
+			</dict>
+			<dict>
+				<key>uid</key>
+				<integer>3</integer>
+				<key>color</key>
+				<string>green</string>
+				<key>x</key>
+				<integer>-2</integer>
+				<key>y</key>
+				<integer>-2</integer>
+				<key>z</key>
+				<integer>0</integer>
+				<key>edges</key>
+				<array>
+					<integer>1</integer>
+				</array>
 			</dict>
 		</array>
 	</dict>

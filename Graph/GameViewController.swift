@@ -302,7 +302,7 @@ class GameViewController: UIViewController {
             checkButtonBackgroundView.layer.borderWidth = 2
             checkButtonBackgroundView.layer.masksToBounds = true
             checkButtonImageView.image = checkButtonImageView.image!.withRenderingMode(.alwaysTemplate)
-            if targetColor == UIColor.black || targetColor == .cyan || targetColor == .magenta || targetColor == .yellow {
+            if targetColor == .white || targetColor == .cyan || targetColor == .magenta || targetColor == .yellow {
                 checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.darker(by: 75)
             } else {
                 checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.lighter(by: 75)
