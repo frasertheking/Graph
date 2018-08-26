@@ -258,7 +258,17 @@ class LevelSelectViewController: UIViewController {
             GraphAnimation.delayWithSeconds(1, completion: {
                 self.view.isUserInteractionEnabled = true
                 GraphAnimation.swellGraphObject(vertexNodes: self.vertexNodes, edgeNodes: self.edgeNodes)
+                
+                for node in self.edgeNodes.childNodes {
+                    if node.geometry?.firstMaterial?.diffuse.contents as? UIColor == UIColor.white {
+                        if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.glowColor(), geometry: node.geometry!) {
+                            node.removeAllParticleSystems()
+                            node.addParticleSystem(smokeEmitter)
+                        }
+                    }
+                }
             })
+            
             for node in self.emitterNodes {
                 if let trail = ParticleGeneration.createTrail(color: UIColor.white, geometry: node.geometry!) {
                     node.removeAllParticleSystems()
@@ -437,6 +447,11 @@ class LevelSelectViewController: UIViewController {
                                levelStateSource == LevelState.completed || levelStateDestination == LevelState.completed {
                                 node.geometry?.firstMaterial?.diffuse.contents = UIColor.white
                                 node.geometry?.firstMaterial?.emission.contents = UIColor.goldColor()
+                                
+                                if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.glowColor(), geometry: node.geometry!) {
+                                    node.removeAllParticleSystems()
+                                    node.addParticleSystem(smokeEmitter)
+                                }
                             }
                         }
                     }
