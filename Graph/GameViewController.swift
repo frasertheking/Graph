@@ -304,7 +304,7 @@ class GameViewController: UIViewController {
             checkButtonBackgroundView.layer.borderWidth = 2
             checkButtonBackgroundView.layer.masksToBounds = true
             checkButtonImageView.image = checkButtonImageView.image!.withRenderingMode(.alwaysTemplate)
-            if targetColor == .white || targetColor == .cyan || targetColor == .magenta || targetColor == .yellow {
+            if targetColor == .white || targetColor == .green || targetColor == .cyan || targetColor == .magenta || targetColor == .yellow {
                 checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.darker(by: 75)
             } else {
                 checkButtonImageView.tintColor = checkButtonBackgroundView.backgroundColor?.lighter(by: 75)
@@ -1208,6 +1208,7 @@ class GameViewController: UIViewController {
         timerBackgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         selectedNode = nil
         selectedMirrorNode = nil
+        screenColor = .red
         
         currentLevel += 1
         refreshColorsInCollectionView()
