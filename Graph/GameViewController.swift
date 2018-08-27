@@ -279,7 +279,7 @@ class GameViewController: UIViewController {
                 self.backButtonBorderView.alpha = 1
                 self.backButtonBorderBackgroundView.alpha = 1
                 
-                if graphType == .mix {
+                if graphType == .mix || graphType == .kColor || graphType == .planar {
                     self.checkButtonImageView.alpha = 1
                     self.checkButtonBackgroundView.alpha = 1
                 }
@@ -296,7 +296,9 @@ class GameViewController: UIViewController {
             gridRoot.setupGrid(gridSize: 9, z: -0.75)
             scnScene.rootNode.addChildNode(gridRoot)
             GraphAnimation.emergeGraph(edgeNodes: gridRoot)
-        } else if graphType == .mix {
+        }
+        
+        if graphType == .mix || graphType == .kColor || graphType == .planar {
             checkButtonBackgroundView.backgroundColor = targetColor
             checkButtonBackgroundView.layer.borderColor = checkButtonBackgroundView.backgroundColor?.darker()?.cgColor
             checkButtonBackgroundView.layer.borderWidth = 2
@@ -614,7 +616,7 @@ class GameViewController: UIViewController {
                 }
                 
                 activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
-                checkIfSolved()
+
                 return
             case .kColor:
                 break
@@ -747,7 +749,7 @@ class GameViewController: UIViewController {
             activeLevel?.adjacencyList?.updateCorrectEdges(level: self.activeLevel, pathArray: self.pathArray, mirrorArray: mirrorArray, edgeArray: self.edgeArray, edgeNodes: self.edgeNodes)
         }
         
-        if graphType != .mix {
+        if graphType != .mix && graphType != .kColor && graphType != .planar {
             checkIfSolved()
         }
     }
@@ -769,7 +771,7 @@ class GameViewController: UIViewController {
         if let list = activeLevel?.adjacencyList {
             if list.checkIfSolved(forType: graphType, numberConfig: numberConfig, edgeArray: edgeArray, edgeNodes: edgeNodes, targetColor: targetColor, selected: selectedNodeIds) {
                 endLevel()
-            } else if graphType == .mix {
+            } else if graphType == .mix || graphType == .kColor || graphType == .planar {
                 GraphAnimation.addShake(to: checkButtonImageView)
                 GraphAnimation.addShake(to: checkButtonBackgroundView)
             }
@@ -1087,7 +1089,6 @@ class GameViewController: UIViewController {
             
         } else if gestureRecognize.state == .ended {
             activeLevel?.adjacencyList?.updateCorrectEdges(level: activeLevel, pathArray: pathArray, mirrorArray: self.mirrorArray, edgeArray: edgeArray, edgeNodes: edgeNodes)
-            checkIfSolved()
         }
     }
     

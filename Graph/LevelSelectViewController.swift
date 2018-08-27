@@ -953,8 +953,11 @@ class LevelSelectViewController: UIViewController {
             self.landingEmitter.scale = SCNVector3(x: 4, y: 4, z: 4)
             self.landingEmitter.removeAllAnimations()
             let scaleEmitterAction: SCNAction = SCNAction.scale(to: 1, duration: 1)
+            let moveEmitterAction: SCNAction = SCNAction.move(to: SCNVector3(x: 0, y: 0.35, z: 0), duration: 1)
             scaleEmitterAction.timingMode = .easeInEaseOut
+            moveEmitterAction.timingMode = .easeInEaseOut
             self.landingEmitter.runAction(scaleEmitterAction)
+            self.landingEmitter.runAction(moveEmitterAction)
             
             GraphAnimation.delayWithSeconds(1, completion: {
                 self.setupLevelSelect()
