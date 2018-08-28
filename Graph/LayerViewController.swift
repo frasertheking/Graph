@@ -25,7 +25,6 @@ class LayerViewController: UIViewController {
         collectionView.register(UINib(nibName: "LevelLayerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         collectionView.backgroundColor = UIColor.clear
         collectionView.layer.masksToBounds = false
         
@@ -37,18 +36,16 @@ class LayerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    @IBAction func settingsPressed() {
+        print("settingsPressed")
     }
-    */
+    
+    @IBAction func layerPressed() {
+        performSegue(withIdentifier: "unwindToLevelSelect", sender: self)
+    }
 }
 
-extension LayerViewController: UICollectionViewDataSource {
+extension LayerViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     // MARK: UICollectionViewDataSource
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -56,19 +53,18 @@ extension LayerViewController: UICollectionViewDataSource {
         return 1
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 200, height: 250)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 3
+        return 5
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LevelLayerCollectionViewCell
         cell.backgroundColor = UIColor.red
-        // Configure the cell
     
         return cell
     }
@@ -78,6 +74,7 @@ extension LayerViewController: UICollectionViewDelegate {
 
     // MARK: UICollectionViewDelegate
 
+    
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {

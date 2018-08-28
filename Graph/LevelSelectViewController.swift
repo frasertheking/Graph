@@ -718,6 +718,10 @@ class LevelSelectViewController: UIViewController {
     @objc func cleanSceneAndSegue() {
         GraphAnimation.delayWithSeconds(0.25) {
             self.cleanScene()
+            self.settingsButtonBackgroundView.alpha = 0
+            self.settingsButtonBorderView.alpha = 0
+            self.layerButtonBackgroundView.alpha = 0
+            self.layerButtonBorderView.alpha = 0
             self.performSegue(withIdentifier: "gameSegue", sender: nil)
             self.showingModalView = true
         }
@@ -728,11 +732,6 @@ class LevelSelectViewController: UIViewController {
         edgeNodes.removeFromParentNode()
         gridRoot.removeFromParentNode()
         simPath.removeAll()
-        
-        settingsButtonBackgroundView.alpha = 0
-        settingsButtonBorderView.alpha = 0
-        layerButtonBackgroundView.alpha = 0
-        layerButtonBorderView.alpha = 0
         
         scnView.removeGestureRecognizer(axisPanGestureRecognizer)
         scnView.removeGestureRecognizer(zoomPinchGestureRecognizer)
