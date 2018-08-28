@@ -45,10 +45,14 @@ class LevelSelectViewController: UIViewController {
     // LANDING SCREEN VARS
     @IBOutlet var playButton: UIButton!
     @IBOutlet var settingsButton: UIButton!
+    @IBOutlet var layerButton: UIButton!
     @IBOutlet var playButtonBackgroundView: UIVisualEffectView!
     @IBOutlet var settingsButtonBackgroundView: UIView!
     @IBOutlet var settingsButtonBorderView: UIView!
     @IBOutlet var settingsButtonBorderBackgroundView: UIView!
+    @IBOutlet var layerButtonBackgroundView: UIView!
+    @IBOutlet var layerButtonBorderView: UIView!
+    @IBOutlet var layerButtonBorderBackgroundView: UIView!
     @IBOutlet var playButtonBackgroundViewTopLayoutConstraint: NSLayoutConstraint!
     @IBOutlet var gifImageView: UIImageView!
     var currentlyAtLanding: Bool = true
@@ -112,6 +116,7 @@ class LevelSelectViewController: UIViewController {
         setupScene()
         setupCamera()
         
+        // @Cleanup: FIX THIS REPEATED CODE AH
         settingsButtonBackgroundView.alpha = 0
         settingsButton.isUserInteractionEnabled = false
         let maskView2 = UIView(frame: self.settingsButtonBackgroundView.bounds)
@@ -135,6 +140,31 @@ class LevelSelectViewController: UIViewController {
         maskView3.addSubview(settingsBorderMask)
         settingsButtonBorderView.backgroundColor = .clear
         settingsButtonBorderView.mask = maskView3
+        
+        ////
+        layerButtonBackgroundView.alpha = 0
+        layerButton.isUserInteractionEnabled = false
+        let maskView4 = UIView(frame: self.layerButtonBackgroundView.bounds)
+        maskView4.backgroundColor = .clear
+        
+        let layerMask = UIImageView(image: UIImage(named: "new_layer"))
+        layerMask.frame = self.layerButtonBackgroundView.bounds
+        
+        maskView4.addSubview(layerMask)
+        layerButtonBackgroundView.backgroundColor = .clear
+        layerButtonBackgroundView.mask = maskView4
+        
+        // BORDER
+        layerButtonBorderView.alpha = 0
+        let maskView5 = UIView(frame: self.layerButtonBorderView.bounds)
+        maskView5.backgroundColor = .clear
+        
+        let layerBorderMask = UIImageView(image: UIImage(named: "new_layer_bg"))
+        layerBorderMask.frame = self.layerButtonBorderView.bounds
+        
+        maskView5.addSubview(layerBorderMask)
+        layerButtonBorderView.backgroundColor = .clear
+        layerButtonBorderView.mask = maskView5
 
         if !currentlyAtLanding {
             setupLevelSelect()
@@ -226,6 +256,7 @@ class LevelSelectViewController: UIViewController {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.camera?.vignettingPower = 0.15
+        cameraNode.camera?.zFar = 150
         cameraNode.position = SCNVector3(x: 0, y: 0, z: UserDefaultsInteractor.getZoomFactor())
         scnScene.rootNode.addChildNode(cameraNode)
     }
@@ -246,14 +277,23 @@ class LevelSelectViewController: UIViewController {
         // TODO: move this??
         GraphAnimation.delayWithSeconds(1.5) {
             UIView.animate(withDuration: 1) {
+                // @Cleanup: Duplicate
                 self.settingsButtonBackgroundView.alpha = 1
                 self.settingsButtonBorderView.alpha = 1
                 for view in self.settingsButtonBorderBackgroundView.subviews {
                     view.removeFromSuperview()
                 }
                 UIColor.insertModalButtonGradient(for: self.settingsButtonBorderBackgroundView)
+                
+                self.layerButtonBackgroundView.alpha = 1
+                self.layerButtonBorderView.alpha = 1
+                for view in self.layerButtonBorderBackgroundView.subviews {
+                    view.removeFromSuperview()
+                }
+                UIColor.insertModalButtonGradient(for: self.layerButtonBorderBackgroundView)
             }
             self.settingsButton.isUserInteractionEnabled = true
+            self.layerButton.isUserInteractionEnabled = true
             
             GraphAnimation.delayWithSeconds(1, completion: {
                 self.view.isUserInteractionEnabled = true
@@ -612,6 +652,8 @@ class LevelSelectViewController: UIViewController {
                         self.gifImageView.alpha = 1
                         self.settingsButtonBorderView.alpha = 0
                         self.settingsButtonBackgroundView.alpha = 0
+                        self.layerButtonBorderView.alpha = 0
+                        self.layerButtonBackgroundView.alpha = 0
                     })
                     
                     UserDefaultsInteractor.setLevelSelectPosition(pos: [-node.position.x, -node.position.y])
@@ -689,6 +731,8 @@ class LevelSelectViewController: UIViewController {
         
         settingsButtonBackgroundView.alpha = 0
         settingsButtonBorderView.alpha = 0
+        layerButtonBackgroundView.alpha = 0
+        layerButtonBorderView.alpha = 0
         
         scnView.removeGestureRecognizer(axisPanGestureRecognizer)
         scnView.removeGestureRecognizer(zoomPinchGestureRecognizer)
@@ -958,6 +1002,7 @@ class LevelSelectViewController: UIViewController {
             moveEmitterAction.timingMode = .easeInEaseOut
             self.landingEmitter.runAction(scaleEmitterAction)
             self.landingEmitter.runAction(moveEmitterAction)
+            GraphAnimation.swellNode(node: self.landingEmitter, scaleAmount: 1.075, delta: 0.6)
             
             GraphAnimation.delayWithSeconds(1, completion: {
                 self.setupLevelSelect()
@@ -976,6 +1021,22 @@ class LevelSelectViewController: UIViewController {
             self.settingsButtonBackgroundView.transform = CGAffineTransform.identity
             self.settingsButtonBorderView.transform = CGAffineTransform.identity
         })
+    }
+    
+    @IBAction func layerButtonPressed() {
+        layerButtonBackgroundView.layer.removeAllAnimations()
+        layerButtonBorderView.layer.removeAllAnimations()
+        GraphAnimation.delayWithSeconds(0.1) {
+            GraphAnimation.addExplode(to: self.layerButtonBackgroundView)
+            GraphAnimation.addExplode(to: self.layerButtonBorderView)
+        }
+        
+        let newPosition: SCNVector3 = SCNVector3(x: cameraNode.position.x, y: cameraNode.position.y, z: 150)
+        let moveAction = SCNAction.move(to: newPosition, duration: 2)
+        moveAction.timingMode = .easeOut
+        
+        cameraNode.runAction(moveAction)
+        print("Layer pressed")
     }
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {
