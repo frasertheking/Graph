@@ -51,6 +51,9 @@
 		43860BD51FB8EDCE0076B0CF /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BD41FB8EDCD0076B0CF /* Levels.swift */; };
 		43A018F31FC10B28005FF276 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A018F21FC10B28005FF276 /* Node.swift */; };
 		43A1B90520802BBC00C9A065 /* UserDefaultsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B90420802BBC00C9A065 /* UserDefaultsInteractor.swift */; };
+		43A2E16F2135B5D100DA3069 /* LayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A2E16E2135B5D100DA3069 /* LayerViewController.swift */; };
+		43A2E1712135B8AF00DA3069 /* LevelLayerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43A2E1702135B8AF00DA3069 /* LevelLayerCollectionViewCell.xib */; };
+		43A2E1732135B8C200DA3069 /* LevelLayerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A2E1722135B8C200DA3069 /* LevelLayerCollectionViewCell.swift */; };
 		43A6E29820310662009C072D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A6E29720310662009C072D /* Array+Extensions.swift */; };
 		43A71C56207A870A008D3104 /* LevelSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A71C55207A870A008D3104 /* LevelSelectViewController.swift */; };
 		43A71C5E207A936B008D3104 /* hexagon.dae in Resources */ = {isa = PBXBuildFile; fileRef = 43A71C5D207A936B008D3104 /* hexagon.dae */; };
@@ -123,6 +126,9 @@
 		43860BD41FB8EDCD0076B0CF /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		43A018F21FC10B28005FF276 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		43A1B90420802BBC00C9A065 /* UserDefaultsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsInteractor.swift; sourceTree = "<group>"; };
+		43A2E16E2135B5D100DA3069 /* LayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerViewController.swift; sourceTree = "<group>"; };
+		43A2E1702135B8AF00DA3069 /* LevelLayerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LevelLayerCollectionViewCell.xib; sourceTree = "<group>"; };
+		43A2E1722135B8C200DA3069 /* LevelLayerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerCollectionViewCell.swift; sourceTree = "<group>"; };
 		43A6E29720310662009C072D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		43A71C55207A870A008D3104 /* LevelSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectViewController.swift; sourceTree = "<group>"; };
 		43A71C5D207A936B008D3104 /* hexagon.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hexagon.dae; sourceTree = "<group>"; };
@@ -252,6 +258,8 @@
 			children = (
 				43C581841FE4481B00D344B0 /* ColorButtonCollectionViewCell.xib */,
 				43C581881FE4488300D344B0 /* ColorButtonCollectionViewCell.swift */,
+				43A2E1702135B8AF00DA3069 /* LevelLayerCollectionViewCell.xib */,
+				43A2E1722135B8C200DA3069 /* LevelLayerCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -286,6 +294,7 @@
 				43A1B90320802B9E00C9A065 /* Interactors */,
 				43A71C55207A870A008D3104 /* LevelSelectViewController.swift */,
 				43CA8FDC1FB6919900B962D9 /* GameViewController.swift */,
+				43A2E16E2135B5D100DA3069 /* LayerViewController.swift */,
 				43CA8FDE1FB6919900B962D9 /* Main.storyboard */,
 				43CA8FE31FB6919900B962D9 /* LaunchScreen.storyboard */,
 				43CA8FD81FB6919900B962D9 /* AppDelegate.swift */,
@@ -429,6 +438,7 @@
 				43C581851FE4481B00D344B0 /* ColorButtonCollectionViewCell.xib in Resources */,
 				432617651FED71A70031EA1E /* node.dae in Resources */,
 				434A574F1FDB109400FD172B /* levels.plist in Resources */,
+				43A2E1712135B8AF00DA3069 /* LevelLayerCollectionViewCell.xib in Resources */,
 				43270DA620279CEE00BBF1CF /* Crystal14.png in Resources */,
 				436C7B0C2090F9370037342A /* mix_locked.dae in Resources */,
 				436C7B22209407EF0037342A /* planar_timed.dae in Resources */,
@@ -520,8 +530,10 @@
 				43860BC91FB7E1DA0076B0CF /* Edges.swift in Sources */,
 				43860BC71FB7E17C0076B0CF /* Vertex.swift in Sources */,
 				43270DB82027E47B00BBF1CF /* SceneKit+Extensions.swift in Sources */,
+				43A2E1732135B8C200DA3069 /* LevelLayerCollectionViewCell.swift in Sources */,
 				4350C46A21051FEA00A833A0 /* UIImageVIew+Extensions.swift in Sources */,
 				43CA8FF31FB697B600B962D9 /* Shapes.swift in Sources */,
+				43A2E16F2135B5D100DA3069 /* LayerViewController.swift in Sources */,
 				43A018F31FC10B28005FF276 /* Node.swift in Sources */,
 				43B0E6B5203A00A100D444B0 /* SCNGeometry+Extensions.swift in Sources */,
 				437C90C81FB7B1BF0017A454 /* SCNVector3+Extensions.swift in Sources */,

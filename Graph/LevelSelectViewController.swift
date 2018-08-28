@@ -957,6 +957,10 @@ class LevelSelectViewController: UIViewController {
         if segue.identifier == "gameSegue" {
             let viewController: GameViewController = segue.destination as! GameViewController
             viewController.currentLevel = selectedLevel
+        } else if segue.identifier == "layerSegue" {
+            let viewController: LayerViewController = segue.destination as! LayerViewController
+            //viewController.currentLevel = selectedLevel
+            // @Unused
         }
     }
     
@@ -1002,10 +1006,10 @@ class LevelSelectViewController: UIViewController {
             moveEmitterAction.timingMode = .easeInEaseOut
             self.landingEmitter.runAction(scaleEmitterAction)
             self.landingEmitter.runAction(moveEmitterAction)
-            GraphAnimation.swellNode(node: self.landingEmitter, scaleAmount: 1.075, delta: 0.6)
             
             GraphAnimation.delayWithSeconds(1, completion: {
                 self.setupLevelSelect()
+                GraphAnimation.swellNode(node: self.landingEmitter, scaleAmount: 1.075, delta: 0.6)
                 self.vertexNodes.addChildNode(self.landingEmitter)
                 self.emitterNodes.append(self.landingEmitter.childNodes[0])
                 self.currentlyAtLanding = false
@@ -1032,11 +1036,15 @@ class LevelSelectViewController: UIViewController {
         }
         
         let newPosition: SCNVector3 = SCNVector3(x: cameraNode.position.x, y: cameraNode.position.y, z: 150)
-        let moveAction = SCNAction.move(to: newPosition, duration: 2)
+        let moveAction = SCNAction.move(to: newPosition, duration: 1)
         moveAction.timingMode = .easeOut
         
         cameraNode.runAction(moveAction)
-        print("Layer pressed")
+        
+        GraphAnimation.delayWithSeconds(1.5) {
+            self.cleanScene()
+            self.performSegue(withIdentifier: "layerSegue", sender: nil)
+        }
     }
     
     @IBAction func unwindToLevelSelect(segue: UIStoryboardSegue) {

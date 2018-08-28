@@ -432,7 +432,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFC-0A-SIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="eCN-qh-3bC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="352.80000000000001" y="-54.679802955665025"/>
+            <point key="canvasLocation" x="385" y="-356"/>
         </scene>
         <!--Level Select View Controller-->
         <scene sceneID="5FJ-Xf-36h">
@@ -645,11 +645,59 @@
                         <outlet property="settingsButtonBorderView" destination="4Jk-eu-8RL" id="3YH-tM-3bu"/>
                         <outlet property="skView" destination="Oy5-u8-0UJ" id="ZHZ-cD-v2A"/>
                         <segue destination="EcQ-vt-J7h" kind="presentation" identifier="gameSegue" animates="NO" id="VCh-uC-T95"/>
+                        <segue destination="PBO-on-LlH" kind="presentation" identifier="layerSegue" id="uco-zJ-RTc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kV3-UD-E5I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-412" y="-54.422788605697157"/>
+        </scene>
+        <!--Layer View Controller-->
+        <scene sceneID="Ono-Uh-SFy">
+            <objects>
+                <viewController id="PBO-on-LlH" customClass="LayerViewController" customModule="Graph" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dyg-TL-tPD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rHK-l6-r3u">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="W3W-Ph-2uU">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LayerCell" id="sXI-u1-587" customClass="LevelLayerCollectionViewCell" customModule="Graph" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rHK-l6-r3u" firstAttribute="top" secondItem="Y0m-91-3MR" secondAttribute="top" id="1ef-H3-P2w"/>
+                            <constraint firstItem="Y0m-91-3MR" firstAttribute="bottom" secondItem="rHK-l6-r3u" secondAttribute="bottom" id="Q85-01-N9Y"/>
+                            <constraint firstItem="Y0m-91-3MR" firstAttribute="trailing" secondItem="rHK-l6-r3u" secondAttribute="trailing" id="byO-EI-vax"/>
+                            <constraint firstItem="rHK-l6-r3u" firstAttribute="leading" secondItem="Y0m-91-3MR" secondAttribute="leading" id="wl3-vx-yGp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Y0m-91-3MR"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="rHK-l6-r3u" id="f5Z-Mj-j3e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="muq-Dj-Qxi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="385" y="330"/>
         </scene>
     </scenes>
     <resources>
