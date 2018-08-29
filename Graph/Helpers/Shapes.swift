@@ -124,4 +124,11 @@ public enum Shape: Int {
         sphere.firstMaterial!.diffuse.contents = UIColor.black
         return SCNNode(geometry: sphere)
     }
+    
+    static func getPlaneNode() -> SCNNode {
+        let plane = SCNPlane(width: 50, height: 50)
+        plane.firstMaterial!.diffuse.contents = UIColor.white
+        plane.cornerRadius = 4
+        return SCNNode(geometry: plane)
+    }
 }

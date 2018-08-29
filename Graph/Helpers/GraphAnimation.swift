@@ -181,6 +181,18 @@ struct GraphAnimation {
             }
         }
     }
+    
+    static func fadeOutNode(node: SCNNode, duration: TimeInterval) {
+        let fadeOutAction: SCNAction = SCNAction.fadeIn(duration: duration)
+        fadeOutAction.timingMode = .easeInEaseOut
+        node.runAction(fadeOutAction)
+    }
+    
+    static func fadeInNode(node: SCNNode, duration: TimeInterval) {
+        let fadeInAction: SCNAction = SCNAction.fadeIn(duration: duration)
+        fadeInAction.timingMode = .easeInEaseOut
+        node.runAction(fadeInAction)
+    }
 
     static func dissolveGraph(edgeNodes: SCNNode) {
         for node in edgeNodes.childNodes {

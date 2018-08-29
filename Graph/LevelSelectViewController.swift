@@ -23,6 +23,7 @@ class LevelSelectViewController: UIViewController {
     var scnScene: SCNScene!
     var edgeNodes: SCNNode!
     var gridRoot: SCNNode!
+    var gridPlane: SCNNode!
     var edgeArray: [Edge<Node>]!
     var vertexNodes: SCNNode!
     var lightNodes: SCNNode!
@@ -270,6 +271,12 @@ class LevelSelectViewController: UIViewController {
         gridRoot = SCNNode()
         gridRoot.setupGrid(gridSize: 25, z: -0.15)
         scnScene.rootNode.addChildNode(gridRoot)
+        
+        gridPlane = SCNNode()
+        gridPlane.setupPlane()
+        scnScene.rootNode.addChildNode(gridPlane)
+        scnScene.rootNode.opacity = 1
+        gridPlane.opacity = 0
 
         GraphAnimation.emergeGraph(vertexNodes: self.vertexNodes, findNode: self.findNode)
         GraphAnimation.emergeGraph(edgeNodes: self.edgeNodes)
@@ -731,6 +738,7 @@ class LevelSelectViewController: UIViewController {
         vertexNodes.removeFromParentNode()
         edgeNodes.removeFromParentNode()
         gridRoot.removeFromParentNode()
+        gridPlane.removeFromParentNode()
         simPath.removeAll()
         
         scnView.removeGestureRecognizer(axisPanGestureRecognizer)
@@ -956,10 +964,6 @@ class LevelSelectViewController: UIViewController {
         if segue.identifier == "gameSegue" {
             let viewController: GameViewController = segue.destination as! GameViewController
             viewController.currentLevel = selectedLevel
-        } else if segue.identifier == "layerSegue" {
-            let viewController: LayerViewController = segue.destination as! LayerViewController
-            //viewController.currentLevel = selectedLevel
-            // @Unused
         }
     }
     
@@ -1027,6 +1031,7 @@ class LevelSelectViewController: UIViewController {
     }
     
     @IBAction func layerButtonPressed() {
+        view.isUserInteractionEnabled = false
         layerButtonBackgroundView.layer.removeAllAnimations()
         layerButtonBorderView.layer.removeAllAnimations()
         GraphAnimation.delayWithSeconds(0.1) {
@@ -1034,14 +1039,21 @@ class LevelSelectViewController: UIViewController {
             GraphAnimation.addExplode(to: self.layerButtonBorderView)
         }
         
-        let newPosition: SCNVector3 = SCNVector3(x: cameraNode.position.x, y: cameraNode.position.y, z: 150)
+        gridRoot.isHidden = true
+        GraphAnimation.fadeInNode(node: gridPlane, duration: 1)
+        
+        let newPosition: SCNVector3 = SCNVector3(x: 0, y: 0, z: 150)
         let moveAction = SCNAction.move(to: newPosition, duration: 1)
         moveAction.timingMode = .easeOut
         
         cameraNode.runAction(moveAction)
         
-        GraphAnimation.delayWithSeconds(1.5) {
-            self.cleanScene()
+        GraphAnimation.delayWithSeconds(1) {
+            GraphAnimation.fadeOutNode(node: self.scnScene.rootNode, duration: 1)
+            GraphAnimation.delayWithSeconds(1, completion: {
+                self.cleanScene()
+                self.view.isUserInteractionEnabled = true
+            })
             self.performSegue(withIdentifier: "layerSegue", sender: nil)
         }
     }

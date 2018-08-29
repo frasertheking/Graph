@@ -27,8 +27,13 @@ class LayerViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear
         collectionView.layer.masksToBounds = false
+        collectionView.alpha = 0
         
-        // Do any additional setup after loading the view.
+        GraphAnimation.delayWithSeconds(0.2) {
+            UIView.animate(withDuration: 1) {
+                self.collectionView.alpha = 1
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,7 +46,11 @@ class LayerViewController: UIViewController {
     }
     
     @IBAction func layerPressed() {
-        performSegue(withIdentifier: "unwindToLevelSelect", sender: self)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.collectionView.alpha = 0
+        }) { (finished) in
+            self.performSegue(withIdentifier: "unwindToLevelSelect", sender: self)
+        }
     }
 }
 
@@ -54,7 +63,7 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 250)
+        return CGSize(width: 235, height: 235)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -64,7 +73,7 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LevelLayerCollectionViewCell
-        cell.backgroundColor = UIColor.red
+        cell.backgroundColor = UIColor.white
     
         return cell
     }

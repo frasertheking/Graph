@@ -140,6 +140,10 @@ extension SCNNode {
         gridNodes.opacity = 0
     }
     
+    func setupPlane() {
+        self.addChildNode(Shape.getPlaneNode())
+    }
+    
     func findNodeInChildren(node: SCNNode) -> SCNNode? {
         for child in self.childNodes {
             if child.geometry?.name == node.geometry?.name {
