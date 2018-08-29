@@ -189,7 +189,7 @@ struct GraphAnimation {
     }
     
     static func fadeInNode(node: SCNNode, duration: TimeInterval) {
-        let fadeInAction: SCNAction = SCNAction.fadeIn(duration: duration)
+        let fadeInAction: SCNAction = SCNAction.fadeOpacity(to: 0.8, duration: duration)
         fadeInAction.timingMode = .easeInEaseOut
         node.runAction(fadeInAction)
     }

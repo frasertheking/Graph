@@ -34,4 +34,10 @@ extension UIView {
         self.layer.sublayers = nil
         self.layer.insertSublayer(gradient, at: 0)
     }
+    
+    func removeSubviews() {
+        for subview in self.subviews {
+            subview.removeFromSuperview()
+        }
+    }
 }

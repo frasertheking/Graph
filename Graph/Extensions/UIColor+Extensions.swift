@@ -229,6 +229,26 @@ extension UIColor {
         view.insertSubview(pastelView, at: 0)
     }
     
+    public static func insertPercentageGradient(for view: UIView) {
+        let pastelView = PastelView(frame: view.bounds)
+        
+        pastelView.startPastelPoint = .left
+        pastelView.endPastelPoint = .right
+        pastelView.animationDuration = 3
+        
+        pastelView.setColors([UIColor.hexStringToUIColor(hex: "#f6d600"),
+                              UIColor(red: 255/255, green: 51/255, blue: 51/255, alpha: 1.0),
+                              UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 1.0),
+                              UIColor(red: 51/255, green: 153/255, blue: 255/255, alpha: 1.0),
+                              UIColor(red: 153/255, green: 51/255, blue: 255/255, alpha: 1.0),
+                              UIColor.hexStringToUIColor(hex: "#00537E"),
+                              UIColor.hexStringToUIColor(hex: "#009E00"),
+                              UIColor(red: 255/255, green: 51/255, blue: 153/255, alpha: 1.0)])
+        
+        pastelView.startAnimation()
+        view.insertSubview(pastelView, at: 0)
+    }
+    
     public static func aniColor(from: UIColor, to: UIColor, percentage: CGFloat) -> UIColor {
         let fromComponents = UIColor.rgb(from)
         let toComponents = UIColor.rgb(to)

@@ -10,6 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "LayerCell"
 private let layerNames: [String] = ["ALEPH", "CHIBA", "EULER", "PRIM", "KUANG"]
+private let percentages: [CGFloat] = [0.9, 0.6, 0.75, 0.1, 0.25]
 
 class LayerViewController: UIViewController {
 
@@ -78,6 +79,8 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         UIColor.insertGradient(for: cell.containerView)
         UIColor.setupBackgrounds(view: cell.containerView, skView: cell.skView)
         cell.title.text = layerNames[indexPath.row]
+        cell.setPercentComplete(percentage: percentages[indexPath.row])
+        cell.layoutIfNeeded()
         
         if firstLoad {
             cell.containerView.alpha = 0

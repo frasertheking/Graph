@@ -66,15 +66,41 @@
                             </constraints>
                             <blurEffect style="light"/>
                         </visualEffectView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ek6-aw-FUF">
+                            <rect key="frame" x="0.0" y="279" width="265" height="5"/>
+                            <color key="backgroundColor" red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="5" id="6vC-XF-W68"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OXY-2u-UU1">
+                            <rect key="frame" x="0.0" y="279" width="265" height="5"/>
+                            <color key="backgroundColor" red="0.16078431369999999" green="0.6705882353" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="265" id="hQT-iu-GFT"/>
+                                <constraint firstAttribute="height" constant="5" id="y11-sy-KYG"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="ek6-aw-FUF" secondAttribute="trailing" id="8jd-J5-Dqf"/>
                         <constraint firstAttribute="trailing" secondItem="wvT-aL-G0f" secondAttribute="trailing" id="BKh-Ty-e38"/>
+                        <constraint firstItem="OXY-2u-UU1" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="BwP-Lf-1FK"/>
+                        <constraint firstAttribute="bottom" secondItem="OXY-2u-UU1" secondAttribute="bottom" id="I6k-6T-J7s"/>
+                        <constraint firstItem="ek6-aw-FUF" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="VCP-Tj-PAQ"/>
                         <constraint firstItem="wvT-aL-G0f" firstAttribute="top" secondItem="5A9-4j-fuJ" secondAttribute="top" id="anq-1x-yc4"/>
                         <constraint firstItem="wvT-aL-G0f" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="arQ-iF-Dof"/>
                         <constraint firstAttribute="trailing" secondItem="Y9q-R4-gpe" secondAttribute="trailing" id="faK-iw-cZ1"/>
                         <constraint firstItem="Y9q-R4-gpe" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="ffI-Ga-VuT"/>
                         <constraint firstItem="Y9q-R4-gpe" firstAttribute="top" secondItem="5A9-4j-fuJ" secondAttribute="top" id="lUG-2Y-hpj"/>
+                        <constraint firstAttribute="bottom" secondItem="ek6-aw-FUF" secondAttribute="bottom" id="sZ9-kD-UPb"/>
                         <constraint firstAttribute="bottom" secondItem="Y9q-R4-gpe" secondAttribute="bottom" id="y1T-qE-j3E"/>
                     </constraints>
                 </view>
@@ -95,10 +121,12 @@
                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
             </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="completionView" destination="OXY-2u-UU1" id="HZB-IU-ywT"/>
                 <outlet property="containerView" destination="5A9-4j-fuJ" id="PAo-rs-IdE"/>
                 <outlet property="skView" destination="Y9q-R4-gpe" id="Xg0-a9-x9B"/>
                 <outlet property="title" destination="FiG-Cy-VLW" id="D54-4U-ptj"/>
                 <outlet property="titleView" destination="wvT-aL-G0f" id="viD-bV-Qdf"/>
+                <outlet property="widthConstraint" destination="hQT-iu-GFT" id="Tsy-ve-6bw"/>
             </connections>
             <point key="canvasLocation" x="-83.5" y="-130"/>
         </view>

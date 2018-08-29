@@ -15,6 +15,8 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
     @IBOutlet var containerView: UIView!
     @IBOutlet var skView: SKView!
     @IBOutlet var titleView: UIVisualEffectView!
+    @IBOutlet var completionView: UIView!
+    @IBOutlet var widthConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -37,6 +39,11 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         maskViewCompleted.addSubview(topView)
         
         self.titleView.contentView.mask = maskViewCompleted
-        
+        UIColor.insertPercentageGradient(for: completionView)
+    }
+    
+    func setPercentComplete(percentage: CGFloat) {
+        let width = (self.frame.size.width * percentage)
+        widthConstraint.constant = width
     }
 }
