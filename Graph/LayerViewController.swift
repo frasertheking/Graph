@@ -9,11 +9,12 @@
 import UIKit
 
 private let reuseIdentifier = "LayerCell"
+private let layerNames: [String] = ["ALEPH", "CHIBA", "EULER", "PRIM", "KUANG"]
 
 class LayerViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
-
+    var firstLoad: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,8 +74,22 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LevelLayerCollectionViewCell
-        cell.backgroundColor = UIColor.white
-    
+        cell.backgroundColor = .white
+        UIColor.insertGradient(for: cell.containerView)
+        UIColor.setupBackgrounds(view: cell.containerView, skView: cell.skView)
+        cell.title.text = layerNames[indexPath.row]
+        
+        if firstLoad {
+            cell.containerView.alpha = 0
+            
+            GraphAnimation.delayWithSeconds(1) {
+                UIView.animate(withDuration: 1, animations: {
+                    cell.containerView.alpha = 1
+                })
+            }
+            firstLoad = false
+        }
+        
         return cell
     }
 }
