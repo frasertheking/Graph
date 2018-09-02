@@ -9,7 +9,7 @@
 import UIKit
 
 private let reuseIdentifier = "LayerCell"
-private let layerNames: [String] = ["ALEPH", "CHIBA", "EULER", "PRIM", "KUANG"]
+private let layerNames: [String] = ["ALEPH", "CHIBA", "PRIM", "RIME", "KUANG"]
 private let percentages: [CGFloat] = [0.9, 0.6, 0.75, 0.1, 0.25]
 
 class LayerViewController: UIViewController {

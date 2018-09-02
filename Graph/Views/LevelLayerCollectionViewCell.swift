@@ -17,6 +17,7 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
     @IBOutlet var titleView: UIVisualEffectView!
     @IBOutlet var completionView: UIView!
     @IBOutlet var widthConstraint: NSLayoutConstraint!
+    @IBOutlet var gifImageView: UIImageView!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -40,6 +41,28 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         
         self.titleView.contentView.mask = maskViewCompleted
         UIColor.insertPercentageGradient(for: completionView)
+        
+        let gridGif = UIImage.gif(name: "Aleph")
+        var values = [CGImage]()
+        for image in gridGif!.images! {
+            values.append(image.cgImage!)
+        }
+        
+        let animation = CAKeyframeAnimation(keyPath: "contents")
+        animation.calculationMode = kCAAnimationDiscrete
+        animation.duration = 1.5
+        animation.values = values
+        animation.repeatCount = 1
+        animation.isRemovedOnCompletion = false
+        animation.fillMode = kCAFillModeForwards
+        
+        GraphAnimation.delayWithSeconds(1.5) {
+            self.gifImageView.layer.add(animation, forKey: "animation")
+        }
+        
+        GraphAnimation.delayWithSeconds(3) {
+            GraphAnimation.addPulse(to: self.gifImageView, duration: 2)
+        }
     }
     
     func setPercentComplete(percentage: CGFloat) {

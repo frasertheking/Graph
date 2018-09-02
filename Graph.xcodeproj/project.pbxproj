@@ -15,6 +15,7 @@
 		43270DAC2027A17700BBF1CF /* Crystal14_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 43270DAA2027A17700BBF1CF /* Crystal14_2.png */; };
 		43270DB02027A3F000BBF1CF /* crystal.dae in Resources */ = {isa = PBXBuildFile; fileRef = 43270DAF2027A3F000BBF1CF /* crystal.dae */; };
 		43270DB82027E47B00BBF1CF /* SceneKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43270DB72027E47B00BBF1CF /* SceneKit+Extensions.swift */; };
+		4331C6CF213C895B00FC7512 /* Aleph.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4331C6CE213C895A00FC7512 /* Aleph.gif */; };
 		433512C61FDE26070078DB5F /* Glow.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 433512C51FDE26060078DB5F /* Glow.scnp */; };
 		4344E96920026712003FC234 /* ParticleGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344E96820026712003FC234 /* ParticleGeneration.swift */; };
 		4344E96B200269E0003FC234 /* GraphAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344E96A200269E0003FC234 /* GraphAnimation.swift */; };
@@ -90,6 +91,7 @@
 		43270DAA2027A17700BBF1CF /* Crystal14_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Crystal14_2.png; sourceTree = "<group>"; };
 		43270DAF2027A3F000BBF1CF /* crystal.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = crystal.dae; sourceTree = "<group>"; };
 		43270DB72027E47B00BBF1CF /* SceneKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneKit+Extensions.swift"; sourceTree = "<group>"; };
+		4331C6CE213C895A00FC7512 /* Aleph.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Aleph.gif; sourceTree = "<group>"; };
 		433512C51FDE26060078DB5F /* Glow.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Glow.scnp; sourceTree = "<group>"; };
 		4344E96820026712003FC234 /* ParticleGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleGeneration.swift; sourceTree = "<group>"; };
 		4344E96A200269E0003FC234 /* GraphAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAnimation.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				43CA8FE61FB6919900B962D9 /* Info.plist */,
 				436DD3C520BAFFD700CD2912 /* selection_animated_old.gif */,
 				436DD3C720BED4B400CD2912 /* selection_animated.gif */,
+				4331C6CE213C895A00FC7512 /* Aleph.gif */,
 				43A8BB7F20A91CD200FF4A18 /* Assets.xcassets */,
 				43CA8FF01FB6961C00B962D9 /* Graph.scnassets */,
 			);
@@ -412,6 +415,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4331C6CF213C895B00FC7512 /* Aleph.gif in Resources */,
 				43DD9B4B212E45D9003000C7 /* kColor.dae in Resources */,
 				436DD3C820BED4B400CD2912 /* selection_animated.gif in Resources */,
 				435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */,
