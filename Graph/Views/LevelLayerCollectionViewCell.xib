@@ -92,10 +92,18 @@
                                 <constraint firstAttribute="height" constant="180" id="rFG-aW-S6N"/>
                             </constraints>
                         </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marker" translatesAutoresizingMaskIntoConstraints="NO" id="ito-ae-tW3">
+                            <rect key="frame" x="215" y="250" width="15" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="15" id="8kE-sr-cTt"/>
+                                <constraint firstAttribute="height" constant="20" id="wZA-cR-b2b"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="bmS-Ba-tAb" firstAttribute="centerY" secondItem="5A9-4j-fuJ" secondAttribute="centerY" multiplier="1.125" id="0gh-sQ-IB6"/>
+                        <constraint firstAttribute="bottom" secondItem="ito-ae-tW3" secondAttribute="bottom" constant="5" id="1Ie-R8-RAZ"/>
                         <constraint firstAttribute="trailing" secondItem="ek6-aw-FUF" secondAttribute="trailing" id="8jd-J5-Dqf"/>
                         <constraint firstAttribute="trailing" secondItem="wvT-aL-G0f" secondAttribute="trailing" id="BKh-Ty-e38"/>
                         <constraint firstItem="OXY-2u-UU1" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="BwP-Lf-1FK"/>
@@ -105,6 +113,7 @@
                         <constraint firstItem="wvT-aL-G0f" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="arQ-iF-Dof"/>
                         <constraint firstAttribute="trailing" secondItem="Y9q-R4-gpe" secondAttribute="trailing" id="faK-iw-cZ1"/>
                         <constraint firstItem="Y9q-R4-gpe" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="ffI-Ga-VuT"/>
+                        <constraint firstAttribute="trailing" secondItem="ito-ae-tW3" secondAttribute="trailing" constant="10" id="g3N-Ox-tZw"/>
                         <constraint firstItem="Y9q-R4-gpe" firstAttribute="top" secondItem="5A9-4j-fuJ" secondAttribute="top" id="lUG-2Y-hpj"/>
                         <constraint firstAttribute="bottom" secondItem="ek6-aw-FUF" secondAttribute="bottom" id="sZ9-kD-UPb"/>
                         <constraint firstAttribute="bottom" secondItem="Y9q-R4-gpe" secondAttribute="bottom" id="y1T-qE-j3E"/>
@@ -125,6 +134,9 @@
                 <outlet property="completionView" destination="OXY-2u-UU1" id="HZB-IU-ywT"/>
                 <outlet property="containerView" destination="5A9-4j-fuJ" id="PAo-rs-IdE"/>
                 <outlet property="gifImageView" destination="bmS-Ba-tAb" id="tVn-2H-IRQ"/>
+                <outlet property="markerView" destination="ito-ae-tW3" id="kBb-Fu-eLF"/>
+                <outlet property="markerViewBottomConstraint" destination="1Ie-R8-RAZ" id="qpR-Qk-MiG"/>
+                <outlet property="markerViewTrailingConstraint" destination="g3N-Ox-tZw" id="TVR-CA-TkA"/>
                 <outlet property="skView" destination="Y9q-R4-gpe" id="Xg0-a9-x9B"/>
                 <outlet property="title" destination="FiG-Cy-VLW" id="D54-4U-ptj"/>
                 <outlet property="titleView" destination="wvT-aL-G0f" id="viD-bV-Qdf"/>
@@ -133,4 +145,7 @@
             <point key="canvasLocation" x="-83.5" y="-130"/>
         </view>
     </objects>
+    <resources>
+        <image name="marker" width="100" height="100"/>
+    </resources>
 </document>

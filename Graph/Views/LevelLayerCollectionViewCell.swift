@@ -16,6 +16,9 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
     @IBOutlet var skView: SKView!
     @IBOutlet var titleView: UIVisualEffectView!
     @IBOutlet var completionView: UIView!
+    @IBOutlet var markerView: UIView!
+    @IBOutlet var markerViewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet var markerViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var widthConstraint: NSLayoutConstraint!
     @IBOutlet var gifImageView: UIImageView!
     
@@ -30,13 +33,14 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let maskPath = UIBezierPath(roundedRect: self.bounds,
-                                    byRoundingCorners: [.topLeft, .topRight],
-                                    cornerRadii: CGSize(width: 20.0, height: 20.0))
-        
-        let shape = CAShapeLayer()
-        shape.path = maskPath.cgPath
-        self.layer.mask = shape
+//        let maskPath = UIBezierPath(roundedRect: self.bounds,
+//                                    byRoundingCorners: [.topLeft, .topRight],
+//                                    cornerRadii: CGSize(width: 20.0, height: 20.0))
+//
+//        let shape = CAShapeLayer()
+//        shape.path = maskPath.cgPath
+//        self.contentView.layer.mask = shape
+//        self.contentView.layer.masksToBounds = true
        
         let maskViewCompleted = UIView(frame: self.titleView.bounds)
         maskViewCompleted.backgroundColor = .clear
@@ -70,6 +74,10 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         animation.isRemovedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
         
+        GraphAnimation.delayWithSeconds(0.5) {
+            GraphAnimation.animateFloatView(self.markerView)
+        }
+        
         GraphAnimation.delayWithSeconds(1.5) {
             self.gifImageView.layer.add(animation, forKey: "animation")
         }
@@ -82,10 +90,20 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
             self.gifImageView.layer.add(animation, forKey: "animation")
             GraphAnimation.addPulse(to: self.gifImageView, duration: 2)
         }
+        
+        // DROP SHADOW
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        self.layer.shadowRadius = 12.0
+        self.layer.shadowOpacity = 0.35
+        self.layer.masksToBounds = false
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.contentView.layer.cornerRadius).cgPath
     }
     
     func setPercentComplete(percentage: CGFloat) {
         let width = (self.frame.size.width * percentage)
+        let markerTrailing = (self.frame.size.width - width) - (markerView.frame.size.width / 2)
         widthConstraint.constant = width
+        markerViewTrailingConstraint.constant = markerTrailing
     }
 }

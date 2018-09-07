@@ -99,6 +99,21 @@ struct GraphAnimation {
         emitter.addAnimation(scale, forKey: "explode")
     }
     
+    static func animateFloatView(_ view: UIView?) {
+        guard let view = view else { return }
+        let oldYCoordinate = view.center.y
+        
+        UIView.animate(withDuration: 1, animations: {
+            view.center.y -= 10
+        }, completion: { _ in
+            UIView.animate(withDuration: 1, animations: {
+                view.center.y = oldYCoordinate
+            }, completion: { _ in
+                self.animateFloatView(view)
+            })
+        })
+    }
+    
     static func emergeGraph(vertexNodes: SCNNode, findNode: SCNNode?) {
         var skipNode: SCNNode? = nil
         
