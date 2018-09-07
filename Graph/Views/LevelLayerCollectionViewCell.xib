@@ -86,16 +86,16 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bmS-Ba-tAb">
-                            <rect key="frame" x="39.5" y="78.5" width="160" height="160"/>
+                            <rect key="frame" x="29.5" y="64.5" width="180" height="180"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="160" id="hEa-vx-kgP"/>
-                                <constraint firstAttribute="height" constant="160" id="rFG-aW-S6N"/>
+                                <constraint firstAttribute="width" constant="180" id="hEa-vx-kgP"/>
+                                <constraint firstAttribute="height" constant="180" id="rFG-aW-S6N"/>
                             </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="bmS-Ba-tAb" firstAttribute="centerY" secondItem="5A9-4j-fuJ" secondAttribute="centerY" multiplier="1.15" id="0gh-sQ-IB6"/>
+                        <constraint firstItem="bmS-Ba-tAb" firstAttribute="centerY" secondItem="5A9-4j-fuJ" secondAttribute="centerY" multiplier="1.125" id="0gh-sQ-IB6"/>
                         <constraint firstAttribute="trailing" secondItem="ek6-aw-FUF" secondAttribute="trailing" id="8jd-J5-Dqf"/>
                         <constraint firstAttribute="trailing" secondItem="wvT-aL-G0f" secondAttribute="trailing" id="BKh-Ty-e38"/>
                         <constraint firstItem="OXY-2u-UU1" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="BwP-Lf-1FK"/>

@@ -56,9 +56,15 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
             values.append(image.cgImage!)
         }
         
+        let idleGif = UIImage.gif(name: "Aleph_Idle")
+        var idleValues = [CGImage]()
+        for image in idleGif!.images! {
+            idleValues.append(image.cgImage!)
+        }
+        
         let animation = CAKeyframeAnimation(keyPath: "contents")
         animation.calculationMode = kCAAnimationDiscrete
-        animation.duration = 1.5
+        animation.duration = 1
         animation.values = values
         animation.repeatCount = 1
         animation.isRemovedOnCompletion = false
@@ -68,7 +74,12 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
             self.gifImageView.layer.add(animation, forKey: "animation")
         }
         
-        GraphAnimation.delayWithSeconds(3) {
+        GraphAnimation.delayWithSeconds(2.5) {
+            self.gifImageView.layer.removeAllAnimations()
+            animation.values = idleValues
+            animation.duration = 0.5
+            animation.repeatCount = Float.infinity
+            self.gifImageView.layer.add(animation, forKey: "animation")
             GraphAnimation.addPulse(to: self.gifImageView, duration: 2)
         }
     }
