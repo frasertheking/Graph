@@ -174,7 +174,7 @@ class LevelSelectViewController: UIViewController {
             
             self.playButtonBackgroundView.alpha = 0
             self.playButton.alpha = 0
-            
+
             GraphAnimation.delayWithSeconds(1) {
                 self.setupLanding()
                 

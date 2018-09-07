@@ -42,6 +42,8 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
 //        self.contentView.layer.mask = shape
 //        self.contentView.layer.masksToBounds = true
        
+        self.addDropShadow()
+        
         let maskViewCompleted = UIView(frame: self.titleView.bounds)
         maskViewCompleted.backgroundColor = .clear
         maskViewCompleted.layer.borderColor = UIColor.black.cgColor
@@ -90,14 +92,6 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
             self.gifImageView.layer.add(animation, forKey: "animation")
             GraphAnimation.addPulse(to: self.gifImageView, duration: 2)
         }
-        
-        // DROP SHADOW
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 5.0)
-        self.layer.shadowRadius = 12.0
-        self.layer.shadowOpacity = 0.35
-        self.layer.masksToBounds = false
-        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.contentView.layer.cornerRadius).cgPath
     }
     
     func setPercentComplete(percentage: CGFloat) {

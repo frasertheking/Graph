@@ -40,4 +40,13 @@ extension UIView {
             subview.removeFromSuperview()
         }
     }
+    
+    func addDropShadow() {
+        self.layer.masksToBounds = false
+        self.layer.shadowOffset = CGSize(width: 2, height: 2)
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowRadius = 12
+        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+    }
 }
