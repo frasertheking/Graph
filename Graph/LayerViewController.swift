@@ -9,8 +9,9 @@
 import UIKit
 
 private let reuseIdentifier = "LayerCell"
-private let layerNames: [String] = ["ALEPH", "CHIBA", "PRIM", "RIME", "KUANG"]
+private let layerNames: [String] = ["ALEPH", "CHIBA", "PRIM", "NINSEI", "KUANG"]
 private let percentages: [CGFloat] = [0.9, 0.6, 0.75, 0.1, 0.25]
+private let layerColors: [String] = ["ALEPH", "CHIBA", "PRIM", "NINSEI", "KUANG"]
 
 class LayerViewController: UIViewController {
 
@@ -65,7 +66,7 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 235, height: 235)
+        return CGSize(width: 240, height: 275)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -83,11 +84,11 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.layoutIfNeeded()
         
         if firstLoad {
-            cell.containerView.alpha = 0
+            //cell.containerView.alpha = 0
             
             GraphAnimation.delayWithSeconds(1) {
                 UIView.animate(withDuration: 1, animations: {
-                    cell.containerView.alpha = 1
+                    //cell.containerView.alpha = 1
                 })
             }
             firstLoad = false

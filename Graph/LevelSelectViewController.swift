@@ -257,7 +257,7 @@ class LevelSelectViewController: UIViewController {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.camera?.vignettingPower = 0.15
-        cameraNode.camera?.zFar = 150
+        cameraNode.camera?.zFar = 225
         cameraNode.position = SCNVector3(x: 0, y: 0, z: UserDefaultsInteractor.getZoomFactor())
         scnScene.rootNode.addChildNode(cameraNode)
     }
@@ -1012,7 +1012,9 @@ class LevelSelectViewController: UIViewController {
             
             GraphAnimation.delayWithSeconds(1, completion: {
                 self.setupLevelSelect()
-                GraphAnimation.swellNode(node: self.landingEmitter, scaleAmount: 1.075, delta: 0.6)
+                GraphAnimation.delayWithSeconds(1, completion: {
+                    GraphAnimation.swellNode(node: self.landingEmitter, scaleAmount: 1.075, delta: 0.6)
+                })
                 self.vertexNodes.addChildNode(self.landingEmitter)
                 self.emitterNodes.append(self.landingEmitter.childNodes[0])
                 self.currentlyAtLanding = false
@@ -1040,9 +1042,8 @@ class LevelSelectViewController: UIViewController {
         }
         
         gridRoot.isHidden = true
-        GraphAnimation.fadeInNode(node: gridPlane, duration: 1)
         
-        let newPosition: SCNVector3 = SCNVector3(x: 0, y: 0, z: 150)
+        let newPosition: SCNVector3 = SCNVector3(x: 0, y: 5, z: 200)
         let moveAction = SCNAction.move(to: newPosition, duration: 1)
         moveAction.timingMode = .easeOut
         

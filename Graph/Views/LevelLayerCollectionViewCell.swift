@@ -29,6 +29,14 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        let maskPath = UIBezierPath(roundedRect: self.bounds,
+                                    byRoundingCorners: [.topLeft, .topRight],
+                                    cornerRadii: CGSize(width: 20.0, height: 20.0))
+        
+        let shape = CAShapeLayer()
+        shape.path = maskPath.cgPath
+        self.layer.mask = shape
        
         let maskViewCompleted = UIView(frame: self.titleView.bounds)
         maskViewCompleted.backgroundColor = .clear
