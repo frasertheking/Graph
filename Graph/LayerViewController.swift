@@ -83,17 +83,6 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.setPercentComplete(percentage: percentages[indexPath.row])
         cell.layoutIfNeeded()
         
-        if firstLoad {
-            //cell.containerView.alpha = 0
-            
-            GraphAnimation.delayWithSeconds(1) {
-                UIView.animate(withDuration: 1, animations: {
-                    //cell.containerView.alpha = 1
-                })
-            }
-            firstLoad = false
-        }
-        
         return cell
     }
 }

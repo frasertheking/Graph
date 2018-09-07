@@ -80,11 +80,11 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
             GraphAnimation.animateFloatView(self.markerView)
         }
         
-        GraphAnimation.delayWithSeconds(1.5) {
+        GraphAnimation.delayWithSeconds(0.75) {
             self.gifImageView.layer.add(animation, forKey: "animation")
         }
         
-        GraphAnimation.delayWithSeconds(2.5) {
+        GraphAnimation.delayWithSeconds(1.75) {
             self.gifImageView.layer.removeAllAnimations()
             animation.values = idleValues
             animation.duration = 0.5
