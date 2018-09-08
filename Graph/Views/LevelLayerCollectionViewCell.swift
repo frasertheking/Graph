@@ -56,16 +56,26 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         self.titleView.contentView.mask = maskViewCompleted
         UIColor.insertPercentageGradient(for: completionView)
         
+        GraphAnimation.delayWithSeconds(0.5) {
+            GraphAnimation.animateFloatView(self.markerView)
+        }
+
+    }
+    
+    func setPercentComplete(percentage: CGFloat) {
+        let width = (self.frame.size.width * percentage)
+        let markerTrailing = (self.frame.size.width - width) - (markerView.frame.size.width / 2)
+        widthConstraint.constant = width
+        markerViewTrailingConstraint.constant = markerTrailing
+    }
+    
+    func setAppearAnimation() {
+        self.gifImageView.layer.removeAllAnimations()
+
         let gridGif = UIImage.gif(name: "Aleph")
         var values = [CGImage]()
         for image in gridGif!.images! {
             values.append(image.cgImage!)
-        }
-        
-        let idleGif = UIImage.gif(name: "Aleph_Idle")
-        var idleValues = [CGImage]()
-        for image in idleGif!.images! {
-            idleValues.append(image.cgImage!)
         }
         
         let animation = CAKeyframeAnimation(keyPath: "contents")
@@ -76,28 +86,32 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         animation.isRemovedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
         
-        GraphAnimation.delayWithSeconds(0.5) {
-            GraphAnimation.animateFloatView(self.markerView)
-        }
-        
         GraphAnimation.delayWithSeconds(0.75) {
             self.gifImageView.layer.add(animation, forKey: "animation")
         }
         
         GraphAnimation.delayWithSeconds(1.75) {
-            self.gifImageView.layer.removeAllAnimations()
-            animation.values = idleValues
-            animation.duration = 0.5
-            animation.repeatCount = Float.infinity
-            self.gifImageView.layer.add(animation, forKey: "animation")
-            GraphAnimation.addPulse(to: self.gifImageView, duration: 2)
+            self.setIdleAnimation()
         }
     }
     
-    func setPercentComplete(percentage: CGFloat) {
-        let width = (self.frame.size.width * percentage)
-        let markerTrailing = (self.frame.size.width - width) - (markerView.frame.size.width / 2)
-        widthConstraint.constant = width
-        markerViewTrailingConstraint.constant = markerTrailing
+    func setIdleAnimation() {
+        self.gifImageView.layer.removeAllAnimations()
+
+        let idleGif = UIImage.gif(name: "Aleph_Idle")
+        var idleValues = [CGImage]()
+        for image in idleGif!.images! {
+            idleValues.append(image.cgImage!)
+        }
+        
+        let animation = CAKeyframeAnimation(keyPath: "contents")
+        animation.calculationMode = kCAAnimationDiscrete
+        animation.isRemovedOnCompletion = false
+        animation.fillMode = kCAFillModeForwards
+        animation.values = idleValues
+        animation.duration = 0.5
+        animation.repeatCount = Float.infinity
+        self.gifImageView.layer.add(animation, forKey: "animation")
+        GraphAnimation.addPulse(to: self.gifImageView, duration: 2)
     }
 }

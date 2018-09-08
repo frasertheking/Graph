@@ -662,7 +662,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rHK-l6-r3u">
-                                <rect key="frame" x="0.0" y="281" width="375" height="250"/>
+                                <rect key="frame" x="0.0" y="248.66666666666663" width="375" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="GK3-aR-vpr"/>
@@ -705,12 +705,66 @@
                                     <action selector="layerPressed" destination="PBO-on-LlH" eventType="touchUpInside" id="HTJ-gJ-STx"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nut-XZ-ag0">
+                                <rect key="frame" x="67.666666666666686" y="522.66666666666663" width="240" height="50"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="left" translatesAutoresizingMaskIntoConstraints="NO" id="xrW-sn-AKn">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWg-0a-uSa">
+                                        <rect key="frame" x="-0.6666666666666714" y="-0.66666666666662877" width="100" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.90034589529999998" blue="0.43872793469999999" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Uw1-lX-6ar"/>
+                                            <constraint firstAttribute="height" constant="50" id="cWq-un-Mmt"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="prevPressed" destination="PBO-on-LlH" eventType="touchUpInside" id="s8X-zX-Md5"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right" translatesAutoresizingMaskIntoConstraints="NO" id="S0l-DF-kZe">
+                                        <rect key="frame" x="140" y="0.0" width="100" height="50"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dw2-iZ-GfD">
+                                        <rect key="frame" x="139.33333333333331" y="-0.66666666666662877" width="100" height="50"/>
+                                        <color key="backgroundColor" red="0.95683503150000004" green="0.0" blue="0.37285771969999998" alpha="0.0" colorSpace="deviceRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="7S1-xY-iKM"/>
+                                            <constraint firstAttribute="height" constant="50" id="xIA-Fn-j9u"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="nextPressed" destination="PBO-on-LlH" eventType="touchUpInside" id="bVk-qK-08G"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="S0l-DF-kZe" secondAttribute="trailing" id="0cg-pl-4io"/>
+                                    <constraint firstItem="dw2-iZ-GfD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nut-XZ-ag0" secondAttribute="leading" constant="20" symbolic="YES" id="2jZ-ay-uda"/>
+                                    <constraint firstItem="wWg-0a-uSa" firstAttribute="top" secondItem="nut-XZ-ag0" secondAttribute="top" id="55P-pn-eJS"/>
+                                    <constraint firstItem="xrW-sn-AKn" firstAttribute="leading" secondItem="nut-XZ-ag0" secondAttribute="leading" id="5D1-is-v65"/>
+                                    <constraint firstItem="S0l-DF-kZe" firstAttribute="top" secondItem="nut-XZ-ag0" secondAttribute="top" id="7OZ-No-2K0"/>
+                                    <constraint firstItem="dw2-iZ-GfD" firstAttribute="width" secondItem="S0l-DF-kZe" secondAttribute="width" id="Axb-ak-PT3"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wWg-0a-uSa" secondAttribute="trailing" constant="20" symbolic="YES" id="FBs-NU-f7r"/>
+                                    <constraint firstItem="xrW-sn-AKn" firstAttribute="height" secondItem="wWg-0a-uSa" secondAttribute="height" id="H3I-Ww-SM3"/>
+                                    <constraint firstAttribute="width" constant="240" id="JTT-J3-pa2"/>
+                                    <constraint firstAttribute="trailing" secondItem="dw2-iZ-GfD" secondAttribute="trailing" id="Zxg-1G-cjw"/>
+                                    <constraint firstItem="dw2-iZ-GfD" firstAttribute="top" secondItem="nut-XZ-ag0" secondAttribute="top" id="ed9-wl-hOU"/>
+                                    <constraint firstItem="xrW-sn-AKn" firstAttribute="top" secondItem="nut-XZ-ag0" secondAttribute="top" id="jMN-0n-Hka"/>
+                                    <constraint firstItem="wWg-0a-uSa" firstAttribute="leading" secondItem="nut-XZ-ag0" secondAttribute="leading" id="jv8-Ph-vP3"/>
+                                    <constraint firstAttribute="height" constant="50" id="p9M-VL-OQH"/>
+                                    <constraint firstItem="dw2-iZ-GfD" firstAttribute="height" secondItem="S0l-DF-kZe" secondAttribute="height" id="rma-Ib-tx2"/>
+                                    <constraint firstItem="xrW-sn-AKn" firstAttribute="width" secondItem="wWg-0a-uSa" secondAttribute="width" id="rrT-cv-eTW"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="nut-XZ-ag0" firstAttribute="centerX" secondItem="dyg-TL-tPD" secondAttribute="centerX" id="0QW-Fy-qG6"/>
                             <constraint firstItem="wlB-IV-8bM" firstAttribute="top" secondItem="Y0m-91-3MR" secondAttribute="top" constant="-28" id="1BK-i2-BnU"/>
                             <constraint firstItem="wlB-IV-8bM" firstAttribute="leading" secondItem="Y0m-91-3MR" secondAttribute="leading" constant="18" id="RSK-qp-kUG"/>
-                            <constraint firstItem="rHK-l6-r3u" firstAttribute="centerY" secondItem="dyg-TL-tPD" secondAttribute="centerY" id="aE0-Se-ItQ"/>
+                            <constraint firstItem="rHK-l6-r3u" firstAttribute="centerY" secondItem="dyg-TL-tPD" secondAttribute="centerY" multiplier="0.92" id="aE0-Se-ItQ"/>
+                            <constraint firstItem="nut-XZ-ag0" firstAttribute="top" secondItem="rHK-l6-r3u" secondAttribute="bottom" constant="24" id="bSU-Xb-qDa"/>
                             <constraint firstItem="Y0m-91-3MR" firstAttribute="trailing" secondItem="rHK-l6-r3u" secondAttribute="trailing" id="byO-EI-vax"/>
                             <constraint firstItem="BHb-ma-o4x" firstAttribute="top" secondItem="Y0m-91-3MR" secondAttribute="top" constant="-28" id="fsb-QR-k7K"/>
                             <constraint firstItem="Y0m-91-3MR" firstAttribute="trailing" secondItem="BHb-ma-o4x" secondAttribute="trailing" constant="18" id="t0U-KE-XpJ"/>
@@ -720,6 +774,10 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="rHK-l6-r3u" id="f5Z-Mj-j3e"/>
+                        <outlet property="nextButton" destination="dw2-iZ-GfD" id="cXT-16-rYf"/>
+                        <outlet property="nextImageView" destination="S0l-DF-kZe" id="PbS-6w-ZoP"/>
+                        <outlet property="prevButton" destination="wWg-0a-uSa" id="hnX-HH-fFU"/>
+                        <outlet property="prevImageView" destination="xrW-sn-AKn" id="L3Z-m5-ctj"/>
                         <segue destination="rPV-rC-bqV" kind="unwind" identifier="unwindToLevelSelect" unwindAction="unwindToLevelSelectWithSegue:" id="3NT-fR-Zs5"/>
                     </connections>
                 </viewController>
@@ -729,7 +787,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="left" width="100" height="100"/>
         <image name="node_good" width="242" height="236"/>
+        <image name="right" width="100" height="100"/>
         <image name="timer" width="100" height="100"/>
     </resources>
 </document>

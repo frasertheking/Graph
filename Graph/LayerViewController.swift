@@ -11,39 +11,72 @@ import UIKit
 private let reuseIdentifier = "LayerCell"
 private let layerNames: [String] = ["ALEPH", "CHIBA", "PRIM", "NINSEI", "KUANG"]
 private let percentages: [CGFloat] = [0.9, 0.6, 0.75, 0.1, 0.25]
-private let layerColors: [String] = ["ALEPH", "CHIBA", "PRIM", "NINSEI", "KUANG"]
+private let layerColors: [(UIColor, UIColor)] = [(.red, .blue), (.orange, .green), (.purple, .yellow), (.cyan, .magenta), (.white, .black)]
 
 class LayerViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var nextButton: UIButton!
+    @IBOutlet var prevButton: UIButton!
+    @IBOutlet var nextImageView: UIImageView!
+    @IBOutlet var prevImageView: UIImageView!
     var firstLoad: Bool = true
+    var currentPosition = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Register cell classes
         collectionView.register(UINib(nibName: "LevelLayerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear
         collectionView.layer.masksToBounds = false
         collectionView.alpha = 0
-        
+        collectionView.isScrollEnabled = false
+        collectionView.scrollToItem(at:IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+        nextButton.alpha = 0
+        prevButton.alpha = 0
+        nextImageView.alpha = 0
+        prevImageView.alpha = 0
+
         GraphAnimation.delayWithSeconds(0.2) {
             UIView.animate(withDuration: 1) {
                 self.collectionView.alpha = 1
+                self.nextButton.alpha = 1
+                self.prevButton.alpha = 1
+                self.nextImageView.alpha = 1
+                self.prevImageView.alpha = 1
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func updatePosition() {
+        if let cell = collectionView.cellForItem(at: IndexPath(item: currentPosition, section: 0)) as? LevelLayerCollectionViewCell {
+            cell.setIdleAnimation()
+        }
+        collectionView.scrollToItem(at: IndexPath(item: currentPosition, section: 0), at: .centeredHorizontally, animated: true)
+        nextButton.isUserInteractionEnabled = false
+        prevButton.isUserInteractionEnabled = false
+        GraphAnimation.delayWithSeconds(0.2) {
+            self.nextButton.isUserInteractionEnabled = true
+            self.prevButton.isUserInteractionEnabled = true
+        }
     }
 
+    @IBAction func nextPressed() {
+        if currentPosition < 4 {
+            currentPosition += 1
+            updatePosition()
+        }
+    }
+    
+    @IBAction func prevPressed() {
+        if currentPosition > 0 {
+            currentPosition -= 1
+            updatePosition()
+        }
+    }
+    
     @IBAction func settingsPressed() {
         print("settingsPressed")
     }
@@ -51,6 +84,10 @@ class LayerViewController: UIViewController {
     @IBAction func layerPressed() {
         UIView.animate(withDuration: 0.5, animations: {
             self.collectionView.alpha = 0
+            self.prevButton.alpha = 0
+            self.nextButton.alpha = 0
+            self.nextImageView.alpha = 0
+            self.prevImageView.alpha = 0
         }) { (finished) in
             self.performSegue(withIdentifier: "unwindToLevelSelect", sender: self)
         }
@@ -77,11 +114,17 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LevelLayerCollectionViewCell
         cell.backgroundColor = .white
-        UIColor.insertGradient(for: cell.containerView)
+        UIColor.insertGradient(for: cell.containerView, color1: layerColors[indexPath.row].0, color2: layerColors[indexPath.row].1)
         UIColor.setupBackgrounds(view: cell.containerView, skView: cell.skView)
         cell.title.text = layerNames[indexPath.row]
         cell.setPercentComplete(percentage: percentages[indexPath.row])
-        cell.layoutIfNeeded()
+        cell.layoutIfNeeded()        
+        if firstLoad {
+            cell.setAppearAnimation()
+            firstLoad = false
+        } else {
+            cell.setIdleAnimation()
+        }
         
         return cell
     }
