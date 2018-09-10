@@ -309,7 +309,7 @@ struct GraphAnimation {
         let scale = CABasicAnimation(keyPath: "transform.scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         scale.toValue = NSNumber(value: 1.2)
-        scale.duration = 0.2
+        scale.duration = 0.1
         scale.repeatCount = 0
         scale.autoreverses = true
         scale.timingFunction = easeInOut

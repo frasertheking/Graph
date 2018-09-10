@@ -26,6 +26,7 @@ class LayerViewController: UIViewController {
     @IBOutlet var nextButtonBorderBackgroundView: UIView!
     var firstLoad: Bool = true
     var currentPosition = 0
+    let disabledAlpha: CGFloat = 0.35
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +53,9 @@ class LayerViewController: UIViewController {
                 self.collectionView.alpha = 1
                 self.nextButton.alpha = 1
                 self.prevButton.alpha = 1
-                self.backButtonBackgroundView.alpha = 1
-                self.backButtonBorderBackgroundView.alpha = 1
-                self.backButtonBorderView.alpha = 1
+                self.backButtonBackgroundView.alpha = self.disabledAlpha
+                self.backButtonBorderBackgroundView.alpha = self.disabledAlpha
+                self.backButtonBorderView.alpha = self.disabledAlpha
                 self.nextButtonBorderView.alpha = 1
                 self.nextButtonBackgroundView.alpha = 1
                 self.nextButtonBorderBackgroundView.alpha = 1
@@ -123,18 +124,64 @@ class LayerViewController: UIViewController {
             self.prevButton.isUserInteractionEnabled = true
         }
     }
+    
+    func enableButton(button: UIButton, direction: String) {
+        button.isEnabled = true
+        
+        if direction == "next" {
+            self.backButtonBackgroundView.alpha = 1
+            self.backButtonBorderBackgroundView.alpha = 1
+            self.backButtonBorderView.alpha = 1
+        } else {
+            self.nextButtonBackgroundView.alpha = 1
+            self.nextButtonBorderBackgroundView.alpha = 1
+            self.nextButtonBorderView.alpha = 1
+        }
+    }
+    
+    func disableButton(button: UIButton, direction: String) {
+        button.isEnabled = false
+        
+        if direction == "back" {
+            self.backButtonBackgroundView.alpha = disabledAlpha
+            self.backButtonBorderBackgroundView.alpha = disabledAlpha
+            self.backButtonBorderView.alpha = disabledAlpha
+        } else {
+            self.nextButtonBackgroundView.alpha = disabledAlpha
+            self.nextButtonBorderBackgroundView.alpha = disabledAlpha
+            self.nextButtonBorderView.alpha = disabledAlpha
+        }
+    }
 
     @IBAction func nextPressed() {
         if currentPosition < 4 {
+            GraphAnimation.addExplode(to: self.nextButtonBackgroundView)
+            GraphAnimation.addExplode(to: self.nextButtonBorderView)
             currentPosition += 1
             updatePosition()
+            enableButton(button: prevButton, direction: "back")
+            
+            if currentPosition == 4 {
+                self.disableButton(button: nextButton, direction: "next")
+            } else {
+                self.enableButton(button: nextButton, direction: "next")
+            }
         }
     }
     
     @IBAction func prevPressed() {
         if currentPosition > 0 {
+            GraphAnimation.addExplode(to: self.backButtonBackgroundView)
+            GraphAnimation.addExplode(to: self.backButtonBorderView)
             currentPosition -= 1
             updatePosition()
+            enableButton(button: nextButton, direction: "next")
+            
+            if currentPosition == 0 {
+                self.disableButton(button: prevButton, direction: "back")
+            } else {
+                self.enableButton(button: prevButton, direction: "back")
+            }
         }
     }
     
