@@ -1040,9 +1040,7 @@ class LevelSelectViewController: UIViewController {
             GraphAnimation.addExplode(to: self.layerButtonBackgroundView)
             GraphAnimation.addExplode(to: self.layerButtonBorderView)
         }
-        
-        gridRoot.isHidden = true
-        
+                
         let newPosition: SCNVector3 = SCNVector3(x: 1, y: -5, z: 200)
         let moveAction = SCNAction.move(to: newPosition, duration: 1)
         moveAction.timingMode = .easeOut

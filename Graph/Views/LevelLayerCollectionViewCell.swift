@@ -32,15 +32,6 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-//        let maskPath = UIBezierPath(roundedRect: self.bounds,
-//                                    byRoundingCorners: [.topLeft, .topRight],
-//                                    cornerRadii: CGSize(width: 20.0, height: 20.0))
-//
-//        let shape = CAShapeLayer()
-//        shape.path = maskPath.cgPath
-//        self.contentView.layer.mask = shape
-//        self.contentView.layer.masksToBounds = true
        
         self.addDropShadow()
         
@@ -67,6 +58,12 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         let markerTrailing = (self.frame.size.width - width) - (markerView.frame.size.width / 2)
         widthConstraint.constant = width
         markerViewTrailingConstraint.constant = markerTrailing
+        
+        if percentage < 0.05 {
+            markerView.isHidden = true
+        } else {
+            markerView.isHidden = false
+        }
     }
     
     func setAppearAnimation() {

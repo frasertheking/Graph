@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "LayerCell"
 private let layerNames: [String] = ["ALEPH", "CHIBA", "PRIM", "NINSEI", "KUANG"]
-private let percentages: [CGFloat] = [0.9, 0.6, 0.75, 0.1, 0.25]
+private let percentages: [CGFloat] = [0, 0.6, 0.75, 0.1, 0.25]
 private let layerColors: [(UIColor, UIColor)] = [(.cyan, .magenta), (.orange, .green), (.purple, .yellow), (.blue, .red), (.white, .black)]
 
 class LayerViewController: UIViewController {
