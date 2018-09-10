@@ -121,6 +121,10 @@
                                 <constraint firstAttribute="height" constant="20" id="wZA-cR-b2b"/>
                             </constraints>
                         </imageView>
+                        <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="liG-Lw-1pe">
+                            <rect key="frame" x="0.0" y="44" width="240" height="231"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -129,8 +133,12 @@
                         <constraint firstAttribute="trailing" secondItem="ek6-aw-FUF" secondAttribute="trailing" id="8jd-J5-Dqf"/>
                         <constraint firstAttribute="trailing" secondItem="wvT-aL-G0f" secondAttribute="trailing" id="BKh-Ty-e38"/>
                         <constraint firstItem="OXY-2u-UU1" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="BwP-Lf-1FK"/>
+                        <constraint firstAttribute="trailing" secondItem="liG-Lw-1pe" secondAttribute="trailing" id="EAt-5v-cFx"/>
+                        <constraint firstItem="liG-Lw-1pe" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="FIU-p0-ecn"/>
                         <constraint firstAttribute="bottom" secondItem="OXY-2u-UU1" secondAttribute="bottom" id="I6k-6T-J7s"/>
+                        <constraint firstAttribute="bottom" secondItem="liG-Lw-1pe" secondAttribute="bottom" id="KbY-ln-d9H"/>
                         <constraint firstItem="ek6-aw-FUF" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="VCP-Tj-PAQ"/>
+                        <constraint firstItem="liG-Lw-1pe" firstAttribute="top" secondItem="wvT-aL-G0f" secondAttribute="bottom" id="XIK-7H-MJi"/>
                         <constraint firstItem="wvT-aL-G0f" firstAttribute="top" secondItem="5A9-4j-fuJ" secondAttribute="top" id="anq-1x-yc4"/>
                         <constraint firstItem="wvT-aL-G0f" firstAttribute="leading" secondItem="5A9-4j-fuJ" secondAttribute="leading" id="arQ-iF-Dof"/>
                         <constraint firstAttribute="trailing" secondItem="ibj-0G-haG" secondAttribute="trailing" constant="-10" id="bFc-O5-YMo"/>
@@ -160,6 +168,7 @@
                 <outlet property="gifImageView" destination="bmS-Ba-tAb" id="tVn-2H-IRQ"/>
                 <outlet property="levelStampImageView" destination="Kk7-hg-Qf9" id="M4j-3b-7sf"/>
                 <outlet property="levelStampView" destination="ibj-0G-haG" id="15U-Wp-5ki"/>
+                <outlet property="lockedOverview" destination="liG-Lw-1pe" id="1yF-rt-OVF"/>
                 <outlet property="markerView" destination="ito-ae-tW3" id="kBb-Fu-eLF"/>
                 <outlet property="markerViewBottomConstraint" destination="1Ie-R8-RAZ" id="qpR-Qk-MiG"/>
                 <outlet property="markerViewTrailingConstraint" destination="g3N-Ox-tZw" id="TVR-CA-TkA"/>

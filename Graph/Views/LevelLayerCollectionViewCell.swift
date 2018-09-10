@@ -23,6 +23,7 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
     @IBOutlet var gifImageView: UIImageView!
     @IBOutlet var levelStampView: UIView!
     @IBOutlet var levelStampImageView: UIImageView!
+    @IBOutlet var lockedOverview: UIView!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -51,6 +52,7 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         
         GraphAnimation.delayWithSeconds(0.5) {
             GraphAnimation.animateFloatView(self.markerView)
+            GraphAnimation.addPulse(to: self.levelStampView, duration: 1)
         }
 
     }
@@ -61,6 +63,7 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
             levelStampImageView.setImageColor(color: UIColor.customBlue())
             markerView.isHidden = true
             widthConstraint.constant = 0
+            lockedOverview.isHidden = false
             return
         }
         
@@ -82,6 +85,8 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         } else {
             levelStampView.isHidden = true
         }
+        
+        lockedOverview.isHidden = true
     }
     
     func setAppearAnimation() {
