@@ -11,15 +11,19 @@ import UIKit
 private let reuseIdentifier = "LayerCell"
 private let layerNames: [String] = ["ALEPH", "CHIBA", "PRIM", "NINSEI", "KUANG"]
 private let percentages: [CGFloat] = [0.9, 0.6, 0.75, 0.1, 0.25]
-private let layerColors: [(UIColor, UIColor)] = [(.red, .blue), (.orange, .green), (.purple, .yellow), (.cyan, .magenta), (.white, .black)]
+private let layerColors: [(UIColor, UIColor)] = [(.cyan, .magenta), (.orange, .green), (.purple, .yellow), (.blue, .red), (.white, .black)]
 
 class LayerViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var nextButton: UIButton!
     @IBOutlet var prevButton: UIButton!
-    @IBOutlet var nextImageView: UIImageView!
-    @IBOutlet var prevImageView: UIImageView!
+    @IBOutlet var backButtonBackgroundView: UIView!
+    @IBOutlet var backButtonBorderView: UIView!
+    @IBOutlet var backButtonBorderBackgroundView: UIView!
+    @IBOutlet var nextButtonBackgroundView: UIView!
+    @IBOutlet var nextButtonBorderView: UIView!
+    @IBOutlet var nextButtonBorderBackgroundView: UIView!
     var firstLoad: Bool = true
     var currentPosition = 0
     
@@ -36,18 +40,75 @@ class LayerViewController: UIViewController {
         collectionView.scrollToItem(at:IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
         nextButton.alpha = 0
         prevButton.alpha = 0
-        nextImageView.alpha = 0
-        prevImageView.alpha = 0
+        backButtonBackgroundView.alpha = 0
+        backButtonBorderBackgroundView.alpha = 0
+        backButtonBorderView.alpha = 0
+        nextButtonBorderView.alpha = 0
+        nextButtonBackgroundView.alpha = 0
+        nextButtonBorderBackgroundView.alpha = 0
 
         GraphAnimation.delayWithSeconds(0.2) {
             UIView.animate(withDuration: 1) {
                 self.collectionView.alpha = 1
                 self.nextButton.alpha = 1
                 self.prevButton.alpha = 1
-                self.nextImageView.alpha = 1
-                self.prevImageView.alpha = 1
+                self.backButtonBackgroundView.alpha = 1
+                self.backButtonBorderBackgroundView.alpha = 1
+                self.backButtonBorderView.alpha = 1
+                self.nextButtonBorderView.alpha = 1
+                self.nextButtonBackgroundView.alpha = 1
+                self.nextButtonBorderBackgroundView.alpha = 1
             }
         }
+        
+        // @CLEANUP: REMOVE REPEATED CODE
+        let maskView2 = UIView(frame: self.backButtonBackgroundView.bounds)
+        maskView2.backgroundColor = .clear
+        
+        let backMask = UIImageView(image: UIImage(named: "left_back"))
+        backMask.frame = self.backButtonBackgroundView.bounds
+        
+        maskView2.addSubview(backMask)
+        backButtonBackgroundView.backgroundColor = .clear
+        backButtonBackgroundView.mask = maskView2
+        
+        // BORDER
+        let maskView3 = UIView(frame: self.backButtonBorderView.bounds)
+        maskView3.backgroundColor = .clear
+        
+        let backBorderMask = UIImageView(image: UIImage(named: "left_front"))
+        backBorderMask.frame = self.backButtonBorderView.bounds
+        
+        maskView3.addSubview(backBorderMask)
+        backButtonBorderView.backgroundColor = .clear
+        backButtonBorderView.mask = maskView3
+        
+        let maskView4 = UIView(frame: self.nextButtonBackgroundView.bounds)
+        maskView4.backgroundColor = .clear
+        
+        let nextMask = UIImageView(image: UIImage(named: "right_back"))
+        nextMask.frame = self.nextButtonBackgroundView.bounds
+        
+        maskView4.addSubview(nextMask)
+        nextButtonBackgroundView.backgroundColor = .clear
+        nextButtonBackgroundView.mask = maskView4
+        
+        // BORDER
+        let maskView5 = UIView(frame: self.nextButtonBorderView.bounds)
+        maskView5.backgroundColor = .clear
+        
+        let nextBorderMask = UIImageView(image: UIImage(named: "right_front"))
+        nextBorderMask.frame = self.nextButtonBorderView.bounds
+        
+        maskView5.addSubview(nextBorderMask)
+        nextButtonBorderView.backgroundColor = .clear
+        nextButtonBorderView.mask = maskView5
+        
+        GraphAnimation.delayWithSeconds(0.5) {
+            UIColor.insertModalButtonGradient(for: self.backButtonBorderBackgroundView)
+            UIColor.insertModalButtonGradientReverse(for: self.nextButtonBorderBackgroundView)
+        }
+        
     }
     
     func updatePosition() {
@@ -86,8 +147,12 @@ class LayerViewController: UIViewController {
             self.collectionView.alpha = 0
             self.prevButton.alpha = 0
             self.nextButton.alpha = 0
-            self.nextImageView.alpha = 0
-            self.prevImageView.alpha = 0
+            self.backButtonBackgroundView.alpha = 0
+            self.backButtonBorderBackgroundView.alpha = 0
+            self.backButtonBorderView.alpha = 0
+            self.nextButtonBorderView.alpha = 0
+            self.nextButtonBackgroundView.alpha = 0
+            self.nextButtonBorderBackgroundView.alpha = 0
         }) { (finished) in
             self.performSegue(withIdentifier: "unwindToLevelSelect", sender: self)
         }
