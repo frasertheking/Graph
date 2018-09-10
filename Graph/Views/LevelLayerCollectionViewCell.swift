@@ -21,6 +21,8 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
     @IBOutlet var markerViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var widthConstraint: NSLayoutConstraint!
     @IBOutlet var gifImageView: UIImageView!
+    @IBOutlet var levelStampView: UIView!
+    @IBOutlet var levelStampImageView: UIImageView!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -53,16 +55,32 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
 
     }
     
-    func setPercentComplete(percentage: CGFloat) {
+    func setPercentComplete(percentage: CGFloat, locked: Bool) {
+        if locked {
+            levelStampImageView.image = UIImage(named: "lock")
+            levelStampImageView.setImageColor(color: UIColor.customBlue())
+            markerView.isHidden = true
+            widthConstraint.constant = 0
+            return
+        }
+        
         let width = (self.frame.size.width * percentage)
         let markerTrailing = (self.frame.size.width - width) - (markerView.frame.size.width / 2)
         widthConstraint.constant = width
         markerViewTrailingConstraint.constant = markerTrailing
         
-        if percentage < 0.05 {
+        if percentage < 0.05 || percentage > 0.95 {
             markerView.isHidden = true
         } else {
             markerView.isHidden = false
+        }
+        
+        if percentage == 1 {
+            levelStampView.isHidden = false
+            levelStampImageView.image = UIImage(named: "crown")
+            levelStampImageView.setImageColor(color: UIColor.goldColor())
+        } else {
+            levelStampView.isHidden = true
         }
     }
     

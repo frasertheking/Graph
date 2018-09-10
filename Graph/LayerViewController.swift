@@ -10,8 +10,9 @@ import UIKit
 
 private let reuseIdentifier = "LayerCell"
 private let layerNames: [String] = ["ALEPH", "CHIBA", "PRIM", "NINSEI", "KUANG"]
-private let percentages: [CGFloat] = [0, 0.6, 0.75, 0.1, 0.25]
+private let percentages: [CGFloat] = [1, 0.6, 0.75, 0.1, 0.25]
 private let layerColors: [(UIColor, UIColor)] = [(.cyan, .magenta), (.orange, .green), (.purple, .yellow), (.blue, .red), (.white, .black)]
+private let layerState: [Bool] = [false, false, true, true, true]
 
 class LayerViewController: UIViewController {
 
@@ -47,7 +48,7 @@ class LayerViewController: UIViewController {
         nextButtonBorderView.alpha = 0
         nextButtonBackgroundView.alpha = 0
         nextButtonBorderBackgroundView.alpha = 0
-
+        
         GraphAnimation.delayWithSeconds(0.2) {
             UIView.animate(withDuration: 1) {
                 self.collectionView.alpha = 1
@@ -229,7 +230,7 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         UIColor.insertGradient(for: cell.containerView, color1: layerColors[indexPath.row].0, color2: layerColors[indexPath.row].1)
         UIColor.setupBackgrounds(view: cell.containerView, skView: cell.skView)
         cell.title.text = layerNames[indexPath.row]
-        cell.setPercentComplete(percentage: percentages[indexPath.row])
+        cell.setPercentComplete(percentage: percentages[indexPath.row], locked: layerState[indexPath.row])
         cell.layoutIfNeeded()        
         if firstLoad {
             cell.setAppearAnimation()
