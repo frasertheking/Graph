@@ -305,6 +305,16 @@ struct GraphAnimation {
         to.layer.add(pulseAnimation, forKey: nil)
     }
     
+    static func addCustomPulse(to: UIView, size: Float, duration: TimeInterval) {
+        let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.duration = duration
+        pulseAnimation.toValue = NSNumber(value: size)
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        pulseAnimation.autoreverses = true
+        pulseAnimation.repeatCount = .greatestFiniteMagnitude
+        to.layer.add(pulseAnimation, forKey: nil)
+    }
+    
     static func addExplode(to: UIView) {
         let scale = CABasicAnimation(keyPath: "transform.scale")
         let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)

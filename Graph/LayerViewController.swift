@@ -28,6 +28,7 @@ class LayerViewController: UIViewController {
     var firstLoad: Bool = true
     var currentPosition = 0
     let disabledAlpha: CGFloat = 0.35
+    var selectedLayer: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -239,6 +240,12 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
             cell.setIdleAnimation()
         }
         
+        if selectedLayer == indexPath.row {
+            cell.addDropHighlight()
+        } else {
+            cell.addDropShadow()
+        }
+            
         return cell
     }
 }
@@ -271,9 +278,10 @@ extension LayerViewController: UICollectionViewDelegate {
     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         return false
     }
+     
+     */
 
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected")
     }
-    */
 }

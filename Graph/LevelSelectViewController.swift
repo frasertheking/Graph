@@ -191,9 +191,6 @@ class LevelSelectViewController: UIViewController {
                 maskView.addSubview(labelMask)
                 self.playButtonBackgroundView.contentView.mask = maskView
                 
-                self.playButtonBackgroundView.addParallaxToView(amount: 25)
-                self.playButton.addParallaxToView(amount: 25)
-                
                 GraphAnimation.delayWithSeconds(0.75) {
                     self.playButtonBackgroundViewTopLayoutConstraint.constant = CGFloat(1/Float.pi * Float(self.view.frame.size.height))
                     GraphAnimation.addPulse(to: self.playButtonBackgroundView, duration: 2)
@@ -1041,7 +1038,7 @@ class LevelSelectViewController: UIViewController {
             GraphAnimation.addExplode(to: self.layerButtonBorderView)
         }
                 
-        let newPosition: SCNVector3 = SCNVector3(x: 1, y: -5, z: 200)
+        let newPosition: SCNVector3 = SCNVector3(x: 1, y: -5, z: 170)
         let moveAction = SCNAction.move(to: newPosition, duration: 1)
         moveAction.timingMode = .easeOut
         
