@@ -219,10 +219,9 @@ class LevelSelectViewController: UIViewController {
     
     @objc func setupLevelSelect() {
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: -UserDefaultsInteractor.getLevelSelectPosition().x, y: -UserDefaultsInteractor.getLevelSelectPosition().y, z: UserDefaultsInteractor.getZoomFactor()), duration: 0))
-        activeLevel = Levels.createLevel(index: 0)
         
         activeLayer = Layers.instantiateLayer(index: 0)
-        print(activeLayer?.name)
+        activeLevel = activeLayer?.createLevel(index: 0)
         
         createObjects()
         
@@ -472,7 +471,7 @@ class LevelSelectViewController: UIViewController {
     func getShapeTypeForLevel(level: Int) -> Shape? {
         let levelStates = UserDefaultsInteractor.getLevelStates()
         
-        guard let levelType: GraphType = Levels.sharedInstance.gameLevels[level].graphType else {
+        guard let levelType: GraphType = activeLayer?.gameLevels[level].graphType else {
             return nil
         }
         
@@ -921,6 +920,7 @@ class LevelSelectViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "gameSegue" {
             let viewController: GameViewController = segue.destination as! GameViewController
+            viewController.activeLayer = activeLayer
             viewController.currentLevel = selectedLevel
         }
     }

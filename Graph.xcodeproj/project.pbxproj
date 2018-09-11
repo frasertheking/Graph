@@ -53,7 +53,6 @@
 		43860BCD1FB7E2C60076B0CF /* AdjacencyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BCC1FB7E2C60076B0CF /* AdjacencyList.swift */; };
 		43860BCF1FB8ECA70076B0CF /* SCNNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BCE1FB8ECA70076B0CF /* SCNNode+Extensions.swift */; };
 		43860BD31FB8ED1B0076B0CF /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BD21FB8ED1B0076B0CF /* Level.swift */; };
-		43860BD51FB8EDCE0076B0CF /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43860BD41FB8EDCD0076B0CF /* Levels.swift */; };
 		43A018F31FC10B28005FF276 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A018F21FC10B28005FF276 /* Node.swift */; };
 		43A1B90520802BBC00C9A065 /* UserDefaultsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B90420802BBC00C9A065 /* UserDefaultsInteractor.swift */; };
 		43A2E16F2135B5D100DA3069 /* LayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A2E16E2135B5D100DA3069 /* LayerViewController.swift */; };
@@ -133,7 +132,6 @@
 		43860BCC1FB7E2C60076B0CF /* AdjacencyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacencyList.swift; sourceTree = "<group>"; };
 		43860BCE1FB8ECA70076B0CF /* SCNNode+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+Extensions.swift"; sourceTree = "<group>"; };
 		43860BD21FB8ED1B0076B0CF /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
-		43860BD41FB8EDCD0076B0CF /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		43A018F21FC10B28005FF276 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		43A1B90420802BBC00C9A065 /* UserDefaultsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsInteractor.swift; sourceTree = "<group>"; };
 		43A2E16E2135B5D100DA3069 /* LayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerViewController.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				43860BD21FB8ED1B0076B0CF /* Level.swift */,
-				43860BD41FB8EDCD0076B0CF /* Levels.swift */,
 				433E816E21483CE8007E7A14 /* Layer.swift */,
 				433E8170214840E4007E7A14 /* Layers.swift */,
 				43CA8FF21FB697B600B962D9 /* Shapes.swift */,
@@ -537,7 +534,6 @@
 				43860BCB1FB7E2880076B0CF /* Graphable.swift in Sources */,
 				433E816F21483CE8007E7A14 /* Layer.swift in Sources */,
 				43C581891FE4488300D344B0 /* ColorButtonCollectionViewCell.swift in Sources */,
-				43860BD51FB8EDCE0076B0CF /* Levels.swift in Sources */,
 				4344E96920026712003FC234 /* ParticleGeneration.swift in Sources */,
 				4344E96B200269E0003FC234 /* GraphAnimation.swift in Sources */,
 				43860BD31FB8ED1B0076B0CF /* Level.swift in Sources */,

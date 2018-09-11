@@ -13,7 +13,7 @@
 			<string>#ff00ff</string>
 		</array>
 		<key>level_path</key>
-		<string>layer1.plist</string>
+		<string>layer1</string>
 		<key>completed_percent</key>
 		<real>0.45</real>
 		<key>locked</key>
@@ -34,7 +34,7 @@
 			<string>#00ff00</string>
 		</array>
 		<key>level_path</key>
-		<string>layer2.plist</string>
+		<string>layer1</string>
 		<key>completed_percent</key>
 		<integer>0</integer>
 		<key>locked</key>
@@ -55,7 +55,7 @@
 			<string>#ffff00</string>
 		</array>
 		<key>level_path</key>
-		<string>layer3.plist</string>
+		<string>layer1</string>
 		<key>completed_percent</key>
 		<integer>0</integer>
 		<key>locked</key>
@@ -76,7 +76,7 @@
 			<string>#ff0000</string>
 		</array>
 		<key>level_path</key>
-		<string>layer4.plist</string>
+		<string>layer1</string>
 		<key>completed_percent</key>
 		<integer>0</integer>
 		<key>locked</key>
@@ -97,7 +97,7 @@
 			<string>#1c1c1c</string>
 		</array>
 		<key>level_path</key>
-		<string>layer5.plist</string>
+		<string>layer1</string>
 		<key>completed_percent</key>
 		<integer>0</integer>
 		<key>locked</key>

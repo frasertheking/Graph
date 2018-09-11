@@ -27,6 +27,7 @@ class GameViewController: UIViewController {
     // GLOBAL VARS
     var paintColor: UIColor = .customRed()
     var cellColors: [UIColor] = [.red, .green, .blue]
+    var activeLayer: Layer?
     var activeLevel: Level?
     var currentLevel: Int = 1
     var walkColor: UIColor = .goldColor()
@@ -238,7 +239,7 @@ class GameViewController: UIViewController {
         scnView.isUserInteractionEnabled = true
         countdownLabel.countdownDelegate = self
         
-        activeLevel = Levels.createLevel(index: currentLevel)
+        activeLevel = activeLayer?.createLevel(index: currentLevel)
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: 0, y: 0, z: GameConstants.kCameraZ), duration: 0.5))
         scnView.pointOfView?.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0.5))
         
@@ -825,10 +826,10 @@ class GameViewController: UIViewController {
             // Update completed level state
             UserDefaultsInteractor.updateLevelsWithState(position: currentLevel, newState: .completed)
             
-            if let neighbours = Levels.sharedInstance.gameLevels[0].adjacencyList?.getNeighbours(for: "\(currentLevel)") {
+            if let neighbours = activeLayer?.gameLevels[0].adjacencyList?.getNeighbours(for: "\(currentLevel)") {
                 for neighbour in neighbours {
                     if UserDefaultsInteractor.getLevelState(position: Int(neighbour)!) == LevelState.locked.rawValue {
-                        if !(Levels.createLevel(index: Int(neighbour)!)?.timed)! {
+                        if !(activeLayer?.createLevel(index: Int(neighbour)!)?.timed)! {
                             UserDefaultsInteractor.updateLevelsWithState(position: Int(neighbour)!, newState: .base)
                         } else {
                             UserDefaultsInteractor.updateLevelsWithState(position: Int(neighbour)!, newState: .timed)
