@@ -150,27 +150,8 @@ class GameViewController: UIViewController {
         
         self.completedBackgroundView.contentView.mask = maskViewCompleted
 
-        // Setting up back button
-        let maskView = UIView(frame: self.backButtonView.bounds)
-        maskView.backgroundColor = .clear
-        let backMask = UIImageView(image: UIImage(named: "close"))
-        backMask.frame = self.backButtonView.bounds
-        maskView.addSubview(backMask)
-        self.backButtonView.backgroundColor = .clear
-        self.backButtonView.mask = maskView
-        
-        // BORDER
-        backButtonBorderView.alpha = 0
-        let maskView3 = UIView(frame: backButtonBorderView.bounds)
-        maskView3.backgroundColor = .clear
-        
-        let backButtonBorderMask = UIImageView(image: UIImage(named: "close_border"))
-        backButtonBorderMask.frame = self.backButtonBorderView.bounds
-        
-        maskView3.addSubview(backButtonBorderMask)
-        self.backButtonBorderView.backgroundColor = .clear
-        self.backButtonBorderView.mask = maskView3
-        
+        backButtonView.addCustomMaskToViews(border: backButtonBorderView, borderMaskName: "close_border", backMaskName: "close")
+    
         if debug {
             setupDebug()
         } else {

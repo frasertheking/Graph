@@ -64,48 +64,8 @@ class LayerViewController: UIViewController {
             }
         }
         
-        // @CLEANUP: REMOVE REPEATED CODE
-        let maskView2 = UIView(frame: self.backButtonBackgroundView.bounds)
-        maskView2.backgroundColor = .clear
-        
-        let backMask = UIImageView(image: UIImage(named: "left_back"))
-        backMask.frame = self.backButtonBackgroundView.bounds
-        
-        maskView2.addSubview(backMask)
-        backButtonBackgroundView.backgroundColor = .clear
-        backButtonBackgroundView.mask = maskView2
-        
-        // BORDER
-        let maskView3 = UIView(frame: self.backButtonBorderView.bounds)
-        maskView3.backgroundColor = .clear
-        
-        let backBorderMask = UIImageView(image: UIImage(named: "left_front"))
-        backBorderMask.frame = self.backButtonBorderView.bounds
-        
-        maskView3.addSubview(backBorderMask)
-        backButtonBorderView.backgroundColor = .clear
-        backButtonBorderView.mask = maskView3
-        
-        let maskView4 = UIView(frame: self.nextButtonBackgroundView.bounds)
-        maskView4.backgroundColor = .clear
-        
-        let nextMask = UIImageView(image: UIImage(named: "right_back"))
-        nextMask.frame = self.nextButtonBackgroundView.bounds
-        
-        maskView4.addSubview(nextMask)
-        nextButtonBackgroundView.backgroundColor = .clear
-        nextButtonBackgroundView.mask = maskView4
-        
-        // BORDER
-        let maskView5 = UIView(frame: self.nextButtonBorderView.bounds)
-        maskView5.backgroundColor = .clear
-        
-        let nextBorderMask = UIImageView(image: UIImage(named: "right_front"))
-        nextBorderMask.frame = self.nextButtonBorderView.bounds
-        
-        maskView5.addSubview(nextBorderMask)
-        nextButtonBorderView.backgroundColor = .clear
-        nextButtonBorderView.mask = maskView5
+        backButtonBackgroundView.addCustomMaskToViews(border: backButtonBorderView, borderMaskName: "left_front", backMaskName: "left_back")
+        nextButtonBackgroundView.addCustomMaskToViews(border: nextButtonBorderView, borderMaskName: "right_front", backMaskName: "right_back")
         
         GraphAnimation.delayWithSeconds(0.5) {
             UIColor.insertModalButtonGradient(for: self.backButtonBorderBackgroundView)

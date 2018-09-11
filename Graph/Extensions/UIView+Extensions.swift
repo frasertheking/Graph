@@ -59,4 +59,22 @@ extension UIView {
         self.layer.borderColor = UIColor.black.withAlphaComponent(0.35).cgColor
         self.layer.borderWidth = 2
     }
+    
+    func addCustomMaskToViews(border: UIView, borderMaskName: String, backMaskName: String) {
+        let maskView = UIView(frame: self.bounds)
+        maskView.backgroundColor = .clear
+        let backMask = UIImageView(image: UIImage(named: backMaskName))
+        backMask.frame = self.bounds
+        maskView.addSubview(backMask)
+        self.backgroundColor = .clear
+        self.mask = maskView
+        
+        let borderMask = UIView(frame: border.bounds)
+        borderMask.backgroundColor = .clear
+        let backBorderMask = UIImageView(image: UIImage(named: borderMaskName))
+        backBorderMask.frame = border.bounds        
+        borderMask.addSubview(backBorderMask)
+        border.backgroundColor = .clear
+        border.mask = borderMask
+    }
 }

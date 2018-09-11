@@ -117,56 +117,13 @@ class LevelSelectViewController: UIViewController {
         setupScene()
         setupCamera()
         
-        // @Cleanup: FIX THIS REPEATED CODE AH
         settingsButtonBackgroundView.alpha = 0
-        settingsButton.isUserInteractionEnabled = false
-        let maskView2 = UIView(frame: self.settingsButtonBackgroundView.bounds)
-        maskView2.backgroundColor = .clear
-        
-        let settingsMask = UIImageView(image: UIImage(named: "new_settings"))
-        settingsMask.frame = self.settingsButtonBackgroundView.bounds
-        
-        maskView2.addSubview(settingsMask)
-        settingsButtonBackgroundView.backgroundColor = .clear
-        settingsButtonBackgroundView.mask = maskView2
-        
-        // BORDER
         settingsButtonBorderView.alpha = 0
-        let maskView3 = UIView(frame: self.settingsButtonBorderView.bounds)
-        maskView3.backgroundColor = .clear
-        
-        let settingsBorderMask = UIImageView(image: UIImage(named: "new_settings_bg"))
-        settingsBorderMask.frame = self.settingsButtonBorderView.bounds
-        
-        maskView3.addSubview(settingsBorderMask)
-        settingsButtonBorderView.backgroundColor = .clear
-        settingsButtonBorderView.mask = maskView3
-        
-        ////
         layerButtonBackgroundView.alpha = 0
-        layerButton.isUserInteractionEnabled = false
-        let maskView4 = UIView(frame: self.layerButtonBackgroundView.bounds)
-        maskView4.backgroundColor = .clear
-        
-        let layerMask = UIImageView(image: UIImage(named: "new_layer"))
-        layerMask.frame = self.layerButtonBackgroundView.bounds
-        
-        maskView4.addSubview(layerMask)
-        layerButtonBackgroundView.backgroundColor = .clear
-        layerButtonBackgroundView.mask = maskView4
-        
-        // BORDER
         layerButtonBorderView.alpha = 0
-        let maskView5 = UIView(frame: self.layerButtonBorderView.bounds)
-        maskView5.backgroundColor = .clear
+        settingsButtonBackgroundView.addCustomMaskToViews(border: settingsButtonBorderView, borderMaskName: "new_settings_bg", backMaskName: "new_settings")
+        layerButtonBackgroundView.addCustomMaskToViews(border: layerButtonBorderView, borderMaskName: "new_layer_bg", backMaskName: "new_layer")
         
-        let layerBorderMask = UIImageView(image: UIImage(named: "new_layer_bg"))
-        layerBorderMask.frame = self.layerButtonBorderView.bounds
-        
-        maskView5.addSubview(layerBorderMask)
-        layerButtonBorderView.backgroundColor = .clear
-        layerButtonBorderView.mask = maskView5
-
         if !currentlyAtLanding {
             setupLevelSelect()
             setupInteractions()
