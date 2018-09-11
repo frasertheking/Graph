@@ -33,6 +33,7 @@ class LevelSelectViewController: UIViewController {
 
     // GLOBAL VARS
     var activeLevel: Level?
+    var activeLayer: Layer?
     var currentLevel: Int = 0
     var selectedLevel: Int = 1
     var h: Float = 1
@@ -219,6 +220,9 @@ class LevelSelectViewController: UIViewController {
     @objc func setupLevelSelect() {
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: -UserDefaultsInteractor.getLevelSelectPosition().x, y: -UserDefaultsInteractor.getLevelSelectPosition().y, z: UserDefaultsInteractor.getZoomFactor()), duration: 0))
         activeLevel = Levels.createLevel(index: 0)
+        
+        activeLayer = Layers.instantiateLayer(index: 0)
+        print(activeLayer?.name)
         
         createObjects()
         

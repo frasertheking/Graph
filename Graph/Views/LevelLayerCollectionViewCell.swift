@@ -87,7 +87,7 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
     func setAppearAnimation() {
         self.gifImageView.layer.removeAllAnimations()
 
-        let gridGif = UIImage.gif(name: "Aleph")
+        let gridGif = UIImage.gif(name: "aleph")
         var values = [CGImage]()
         for image in gridGif!.images! {
             values.append(image.cgImage!)
@@ -113,7 +113,7 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
     func setIdleAnimation() {
         self.gifImageView.layer.removeAllAnimations()
 
-        let idleGif = UIImage.gif(name: "Aleph_Idle")
+        let idleGif = UIImage.gif(name: "aleph_Idle")
         var idleValues = [CGImage]()
         for image in idleGif!.images! {
             idleValues.append(image.cgImage!)

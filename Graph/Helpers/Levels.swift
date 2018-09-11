@@ -15,10 +15,10 @@ class Levels: NSObject, NSCopying {
     var gameLevels: [Level] = []
 
     required override init() {
-        var levels: NSArray?
         
+        var levels: NSArray?
         // Read curated levels from plist
-        if let path = Bundle.main.path(forResource: "levels", ofType: "plist") {
+        if let path = Bundle.main.path(forResource: "layer1", ofType: "plist") {
             levels = NSArray(contentsOfFile: path)
         }
         
