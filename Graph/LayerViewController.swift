@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "LayerCell"
 private let layerNames: [String] = ["ALEPH", "CHIBA", "PRIM", "NINSEI", "KUANG"]
-private let percentages: [CGFloat] = [1, 0.6, 0.75, 0.1, 0.25]
+private let percentages: [CGFloat] = [0.44, 0.6, 0.75, 0.1, 0.25]
 private let layerColors: [(UIColor, UIColor)] = [(.cyan, .magenta), (.orange, .green), (.purple, .yellow), (.blue, .red), (.white, .black)]
 private let layerState: [Bool] = [false, false, true, true, true]
 
@@ -228,6 +228,17 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LevelLayerCollectionViewCell
         cell.backgroundColor = .white
+        
+        if selectedLayer == indexPath.row {
+            cell.containerBackgroundView.addBorderHighlight()
+            GraphAnimation.delayWithSeconds(0.5) {
+                GraphAnimation.addCustomPulse(to: cell, size: 1.03, duration: 1)
+            }
+        } else {
+            cell.layer.removeAllAnimations()
+            cell.containerBackgroundView.addBorder()
+        }
+        
         UIColor.insertGradient(for: cell.containerView, color1: layerColors[indexPath.row].0, color2: layerColors[indexPath.row].1)
         UIColor.setupBackgrounds(view: cell.containerView, skView: cell.skView)
         cell.title.text = layerNames[indexPath.row]
@@ -239,12 +250,8 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         } else {
             cell.setIdleAnimation()
         }
-        
-        if selectedLayer == indexPath.row {
-            cell.addDropHighlight()
-        } else {
-            cell.addDropShadow()
-        }
+    
+        cell.addDropShadow()
             
         return cell
     }

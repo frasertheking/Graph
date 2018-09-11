@@ -13,6 +13,7 @@ import SpriteKit
 class LevelLayerCollectionViewCell: UICollectionViewCell {
     @IBOutlet var title: UILabel!
     @IBOutlet var containerView: UIView!
+    @IBOutlet var containerBackgroundView: UIView!
     @IBOutlet var skView: SKView!
     @IBOutlet var titleView: UIVisualEffectView!
     @IBOutlet var completionView: UIView!
@@ -60,27 +61,26 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
             levelStampImageView.setImageColor(color: UIColor.customBlue())
             markerView.isHidden = true
             widthConstraint.constant = 0
-            self.alpha = 0.65
-            return
-        }
-        
-        let width = (self.frame.size.width * percentage)
-        let markerTrailing = (self.frame.size.width - width) - (markerView.frame.size.width / 2)
-        widthConstraint.constant = width
-        markerViewTrailingConstraint.constant = markerTrailing
-        
-        if percentage < 0.05 || percentage > 0.95 {
-            markerView.isHidden = true
-        } else {
-            markerView.isHidden = false
-        }
-        
-        if percentage == 1 {
             levelStampView.isHidden = false
-            levelStampImageView.image = UIImage(named: "crown")
-            levelStampImageView.setImageColor(color: UIColor.goldColor())
         } else {
-            levelStampView.isHidden = true
+            let width = ((self.frame.size.width - 4) * percentage)
+            let markerTrailing = (self.frame.size.width - width) - (markerView.frame.size.width / 2) - 2
+            widthConstraint.constant = width
+            markerViewTrailingConstraint.constant = markerTrailing
+            
+            if percentage < 0.05 || percentage > 0.95 {
+                markerView.isHidden = true
+            } else {
+                markerView.isHidden = false
+            }
+            
+            if percentage == 1 {
+                levelStampView.isHidden = false
+                levelStampImageView.image = UIImage(named: "crown")
+                levelStampImageView.setImageColor(color: UIColor.goldColor())
+            } else {
+                levelStampView.isHidden = true
+            }
         }
     }
     
@@ -127,6 +127,6 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         animation.duration = 0.5
         animation.repeatCount = Float.infinity
         self.gifImageView.layer.add(animation, forKey: "animation")
-        GraphAnimation.addPulse(to: self.gifImageView, duration: 2)
+        //GraphAnimation.addPulse(to: self.gifImageView, duration: 2)
     }
 }

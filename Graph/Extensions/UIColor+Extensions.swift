@@ -280,9 +280,9 @@ extension UIColor {
         pastelView.endPastelPoint = .right
         pastelView.animationDuration = 3
         
-        pastelView.setColors([UIColor.hexStringToUIColor(hex: "#39FF14"),
-                              UIColor.hexStringToUIColor(hex: "#98FB98"),
-                              UIColor.hexStringToUIColor(hex: "#4CBB17")])
+        pastelView.setColors([UIColor.hexStringToUIColor(hex: "#0f0f0f"),
+                              UIColor.hexStringToUIColor(hex: "#343434"),
+                              UIColor.hexStringToUIColor(hex: "#4f4f4f")])
         
         pastelView.startAnimation()
         view.insertSubview(pastelView, at: 0)

@@ -50,12 +50,13 @@ extension UIView {
         self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
     }
     
-    func addDropHighlight() {
-        self.layer.masksToBounds = false
-        self.layer.shadowOffset = CGSize(width: 1, height: 1)
-        self.layer.shadowColor = UIColor.white.cgColor
-        self.layer.shadowOpacity = 0.7
-        self.layer.shadowRadius = 8
-        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+    func addBorderHighlight() {
+        self.layer.borderColor = UIColor.white.withAlphaComponent(0.6).cgColor
+        self.layer.borderWidth = 2
+    }
+    
+    func addBorder() {
+        self.layer.borderColor = UIColor.black.withAlphaComponent(0.35).cgColor
+        self.layer.borderWidth = 2
     }
 }
