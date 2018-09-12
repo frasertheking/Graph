@@ -36,23 +36,11 @@ class Layers: NSObject, NSCopying {
                 continue
             }
             
-            guard let active: Bool = layerDict["active"] as? Bool else {
-                continue
-            }
-            
-            guard let locked: Bool = layerDict["locked"] as? Bool else {
-                continue
-            }
-            
             guard let colors: [String] = layerDict["colors"] as? [String] else {
                 continue
             }
             
             guard let levelPath: String = layerDict["level_path"] as? String else {
-                continue
-            }
-            
-            guard let completePercent: NSNumber = layerDict["completed_percent"] as? NSNumber else {
                 continue
             }
             
@@ -68,7 +56,9 @@ class Layers: NSObject, NSCopying {
                 continue
             }
             
-            gameLayers.append(Layer(name: name, active: active, locked: locked, colors: colors, levelPath: levelPath, completePercent: completePercent, animatedImagePath: animatedImagePath, idleImagePath: idleImagePath, gameLevels: gameLevels))
+            //TODO: Get active, locked and complete_percent from NSUserDefaults
+            
+            gameLayers.append(Layer(name: name, active: false, locked: true, colors: colors, levelPath: levelPath, completePercent: 0, animatedImagePath: animatedImagePath, idleImagePath: idleImagePath, gameLevels: gameLevels))
         }
     }
     
@@ -222,6 +212,14 @@ class Layers: NSObject, NSCopying {
         }
         
         return nil
+    }
+    
+    static func getGameLayers() -> [Layer]? {
+        guard let layers = Layers.sharedInstance.copy() as? Layers else {
+            return nil
+        }
+        
+        return layers.gameLayers
     }
 }
 

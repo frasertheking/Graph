@@ -5,8 +5,6 @@
 	<dict>
 		<key>name</key>
 		<string>Aleph</string>
-		<key>active</key>
-		<true/>
 		<key>colors</key>
 		<array>
 			<string>#00ffff</string>
@@ -14,10 +12,6 @@
 		</array>
 		<key>level_path</key>
 		<string>layer1</string>
-		<key>completed_percent</key>
-		<real>0.45</real>
-		<key>locked</key>
-		<false/>
 		<key>image_anim</key>
 		<string>aleph.gif</string>
 		<key>image_idle</key>
@@ -26,8 +20,6 @@
 	<dict>
 		<key>name</key>
 		<string>CHIBA</string>
-		<key>active</key>
-		<false/>
 		<key>colors</key>
 		<array>
 			<string>#ff7f00</string>
@@ -35,10 +27,6 @@
 		</array>
 		<key>level_path</key>
 		<string>layer1</string>
-		<key>completed_percent</key>
-		<integer>0</integer>
-		<key>locked</key>
-		<false/>
 		<key>image_anim</key>
 		<string>aleph.gif</string>
 		<key>image_idle</key>
@@ -47,8 +35,6 @@
 	<dict>
 		<key>name</key>
 		<string>PRIM</string>
-		<key>active</key>
-		<false/>
 		<key>colors</key>
 		<array>
 			<string>#7f007f</string>
@@ -56,10 +42,6 @@
 		</array>
 		<key>level_path</key>
 		<string>layer1</string>
-		<key>completed_percent</key>
-		<integer>0</integer>
-		<key>locked</key>
-		<true/>
 		<key>image_anim</key>
 		<string>aleph.gif</string>
 		<key>image_idle</key>
@@ -68,8 +50,6 @@
 	<dict>
 		<key>name</key>
 		<string>NINSEI</string>
-		<key>active</key>
-		<false/>
 		<key>colors</key>
 		<array>
 			<string>#0000ff</string>
@@ -77,10 +57,6 @@
 		</array>
 		<key>level_path</key>
 		<string>layer1</string>
-		<key>completed_percent</key>
-		<integer>0</integer>
-		<key>locked</key>
-		<true/>
 		<key>image_anim</key>
 		<string>aleph.gif</string>
 		<key>image_idle</key>
@@ -89,8 +65,6 @@
 	<dict>
 		<key>name</key>
 		<string>KUANG</string>
-		<key>active</key>
-		<false/>
 		<key>colors</key>
 		<array>
 			<string>#e5e5e5</string>
@@ -98,10 +72,6 @@
 		</array>
 		<key>level_path</key>
 		<string>layer1</string>
-		<key>completed_percent</key>
-		<integer>0</integer>
-		<key>locked</key>
-		<true/>
 		<key>image_anim</key>
 		<string>aleph.gif</string>
 		<key>image_idle</key>

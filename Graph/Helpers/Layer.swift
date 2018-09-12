@@ -16,7 +16,7 @@ class Layer: NSObject {
     var locked: Bool!
     var colors: [UIColor]!
     var levelPath: String!
-    var completePercent: Float!
+    var completePercent: CGFloat!
     var animatedImagePath: String!
     var idleImagePath: String!
     var gameLevels: [Level]!
@@ -33,7 +33,7 @@ class Layer: NSObject {
         self.colors = colorList
         
         self.levelPath = levelPath
-        self.completePercent = Float(truncating: completePercent)
+        self.completePercent = CGFloat(truncating: completePercent)
         self.animatedImagePath = animatedImagePath
         self.idleImagePath = idleImagePath
         self.gameLevels = gameLevels

@@ -9,10 +9,6 @@
 import UIKit
 
 private let reuseIdentifier = "LayerCell"
-private let layerNames: [String] = ["ALEPH", "CHIBA", "PRIM", "NINSEI", "KUANG"]
-private let percentages: [CGFloat] = [0.44, 0.6, 0.75, 0.1, 0.25]
-private let layerColors: [(UIColor, UIColor)] = [(.cyan, .magenta), (.orange, .green), (.purple, .yellow), (.blue, .red), (.white, .black)]
-private let layerState: [Bool] = [false, false, true, true, true]
 
 class LayerViewController: UIViewController {
 
@@ -26,9 +22,12 @@ class LayerViewController: UIViewController {
     @IBOutlet var nextButtonBorderView: UIView!
     @IBOutlet var nextButtonBorderBackgroundView: UIView!
     var firstLoad: Bool = true
-    var currentPosition = 0
     let disabledAlpha: CGFloat = 0.35
     var selectedLayer: Int = 0
+    
+    // Hotload Info:
+    var currentPosition = 0 // TODO: NSUserDefaults
+    var layers: [Layer]! = Layers.getGameLayers()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,10 +198,10 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
             cell.containerBackgroundView.addBorder()
         }
         
-        UIColor.insertGradient(for: cell.containerView, color1: layerColors[indexPath.row].0, color2: layerColors[indexPath.row].1)
+        UIColor.insertGradient(for: cell.containerView, color1: layers[indexPath.row].colors[0], color2: layers[indexPath.row].colors[1])
         UIColor.setupBackgrounds(view: cell.containerView, skView: cell.skView)
-        cell.title.text = layerNames[indexPath.row]
-        cell.setPercentComplete(percentage: percentages[indexPath.row], locked: layerState[indexPath.row])
+        cell.title.text = layers[indexPath.row].name
+        cell.setPercentComplete(percentage: layers[indexPath.row].completePercent, locked: layers[indexPath.row].locked)
         cell.layoutIfNeeded()        
         if firstLoad {
             cell.setAppearAnimation()
