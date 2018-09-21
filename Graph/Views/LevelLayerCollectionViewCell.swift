@@ -50,9 +50,7 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         
         GraphAnimation.delayWithSeconds(0.5) {
             GraphAnimation.animateFloatView(self.markerView)
-            GraphAnimation.addCustomPulse(to: self.levelStampView, size: 1.05, duration: 1)
         }
-
     }
     
     func setPercentComplete(percentage: CGFloat, locked: Bool) {

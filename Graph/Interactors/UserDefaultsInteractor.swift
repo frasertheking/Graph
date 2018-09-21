@@ -21,9 +21,10 @@ public enum LevelState: Int {
 struct UserDefaultsInteractor {
     private init() {}
     
-    fileprivate static let levelStateKey: String = "levelStates"
+    fileprivate static let layerStateKeys: [String] = ["layer1", "layer2", "layer3", "layer4", "layer5"]
     fileprivate static let levelSelectPosition: String = "levelPosition"
     fileprivate static let levelZoomFactor: String = "levelZoom"
+    fileprivate static let currentLayer: String = "currentLayer"
 
     // Level select scrolled position
     // The positions array is action as a vector to track the x and y position of the level select graph
@@ -78,11 +79,11 @@ struct UserDefaultsInteractor {
     }
     
     // Level States Interaction
-    fileprivate static func setLevelStates(levels: [Int]) {
-        UserDefaults.standard.set(levels, forKey: levelStateKey)
+    fileprivate static func setLevelStates(levels: [Int], forLayer: Int) {
+        UserDefaults.standard.set(levels, forKey: layerStateKeys[forLayer])
     }
     
-    static func getLevelStates() -> [Int] {
+    static func getLevelStates(forLayer: Int) -> [Int] {
         var baseLevels: [Int] = [Int](repeatElement(LevelState.locked.rawValue, count: 64))
         
         // Setup basic level states
@@ -92,19 +93,19 @@ struct UserDefaultsInteractor {
         baseLevels[12] = LevelState.base.rawValue
         baseLevels[32] = LevelState.base.rawValue
         
-        if isKeyPresentInUserDefaults(key: levelStateKey) {
-            guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
+        if isKeyPresentInUserDefaults(key: layerStateKeys[forLayer]) {
+            guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[forLayer]) as? [Int] else {
                 return baseLevels
             }
             return levelArray
         }
         
         // Initialize default value if key is not yet set (level 0 is complete by default)
-        UserDefaults.standard.set(baseLevels, forKey: levelStateKey)
+        UserDefaults.standard.set(baseLevels, forKey: layerStateKeys[forLayer])
         return baseLevels
     }
     
-    static func getLevelState(position: Int) -> Int {
+    static func getLevelState(position: Int, forLayer: Int) -> Int {
         var baseLevels: [Int] = [Int](repeatElement(LevelState.locked.rawValue, count: 64))
         
         // Setup basic level states
@@ -114,26 +115,66 @@ struct UserDefaultsInteractor {
         baseLevels[12] = LevelState.base.rawValue
         baseLevels[32] = LevelState.base.rawValue
         
-        if isKeyPresentInUserDefaults(key: levelStateKey) {
-            guard let levelArray = UserDefaults.standard.object(forKey: levelStateKey) as? [Int] else {
+        if isKeyPresentInUserDefaults(key: layerStateKeys[forLayer]) {
+            guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[forLayer]) as? [Int] else {
                 return baseLevels[position]
             }
             return levelArray[position]
         }
         
         // Initialize default value if key is not yet set (level 0 is complete by default)
-        UserDefaults.standard.set(baseLevels, forKey: levelStateKey)
+        UserDefaults.standard.set(baseLevels, forKey: layerStateKeys[forLayer])
         return baseLevels[position]
     }
     
-    static func updateLevelsWithState(position: Int, newState: LevelState) {
-        var levels: [Int] = getLevelStates()
-        levels[position] = newState.rawValue
-        setLevelStates(levels: levels)
+    static func getCompletionPercentFromLevelStates(forLayer: Int) -> CGFloat {
+        if isKeyPresentInUserDefaults(key: layerStateKeys[forLayer]) {
+            guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[forLayer]) as? [Int] else {
+                return 0.0
+            }
+                var completeCount: Int = 0
+                for level in levelArray {
+                    if level == 1 {
+                        completeCount += 1
+                    }
+                }
+            return (CGFloat(completeCount) / CGFloat((Layers.getGameLayers()![forLayer].gameLevels.count) - 1))
+        }
+        
+        return 0.0
     }
     
-    static func clearLevelStates() {
-        UserDefaults.standard.set(nil, forKey: levelStateKey)
+    static func updateLevelsWithState(position: Int, newState: LevelState, forLayer: Int) {
+        var levels: [Int] = getLevelStates(forLayer: forLayer)
+        levels[position] = newState.rawValue
+        setLevelStates(levels: levels, forLayer: forLayer)
+    }
+    
+    static func clearLevelStates(forLayer: Int) {
+        UserDefaults.standard.set(nil, forKey: layerStateKeys[forLayer])
+    }
+    
+    static func setCurrentLayer(pos: Int) {
+        UserDefaults.standard.set(pos, forKey: currentLayer)
+    }
+    
+    static func getCurrentLayer() -> Int {
+        let baseLayer: Int = 0
+        
+        if isKeyPresentInUserDefaults(key: currentLayer) {
+            guard let layer = UserDefaults.standard.object(forKey: currentLayer) as? Int else {
+                return baseLayer
+            }
+            return layer
+        }
+        
+        // Initialize default value to 0 0 if key is not yet set
+        UserDefaults.standard.set(0, forKey: currentLayer)
+        return baseLayer
+    }
+    
+    static func clearCurrentLayer() {
+        UserDefaults.standard.set(nil, forKey: currentLayer)
     }
     
     fileprivate static func isKeyPresentInUserDefaults(key: String) -> Bool {

@@ -58,7 +58,7 @@ class Layers: NSObject, NSCopying {
             
             //TODO: Get active, locked and complete_percent from NSUserDefaults
             
-            gameLayers.append(Layer(name: name, active: false, locked: true, colors: colors, levelPath: levelPath, completePercent: 0, animatedImagePath: animatedImagePath, idleImagePath: idleImagePath, gameLevels: gameLevels))
+            gameLayers.append(Layer(name: name, active: false, colors: colors, levelPath: levelPath, animatedImagePath: animatedImagePath, idleImagePath: idleImagePath, gameLevels: gameLevels))
         }
     }
     

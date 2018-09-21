@@ -31,7 +31,7 @@ class LayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collectionView.register(UINib(nibName: "LevelLayerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -201,7 +201,7 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         UIColor.insertGradient(for: cell.containerView, color1: layers[indexPath.row].colors[0], color2: layers[indexPath.row].colors[1])
         UIColor.setupBackgrounds(view: cell.containerView, skView: cell.skView)
         cell.title.text = layers[indexPath.row].name
-        cell.setPercentComplete(percentage: layers[indexPath.row].completePercent, locked: layers[indexPath.row].locked)
+        cell.setPercentComplete(percentage: UserDefaultsInteractor.getCompletionPercentFromLevelStates(forLayer: indexPath.row), locked: false)
         cell.layoutIfNeeded()        
         if firstLoad {
             cell.setAppearAnimation()

@@ -401,7 +401,7 @@ class LevelSelectViewController: UIViewController {
         vertexNodes = SCNNode()
         
         let edgeColor = UIColor.defaultVertexColor()
-        let levelStates = UserDefaultsInteractor.getLevelStates()
+        let levelStates = UserDefaultsInteractor.getLevelStates(forLayer: UserDefaultsInteractor.getCurrentLayer())
 
         guard let adjacencyDict = activeLevel?.adjacencyList?.adjacencyDict else {
             return
@@ -469,7 +469,7 @@ class LevelSelectViewController: UIViewController {
     }
     
     func getShapeTypeForLevel(level: Int) -> Shape? {
-        let levelStates = UserDefaultsInteractor.getLevelStates()
+        let levelStates = UserDefaultsInteractor.getLevelStates(forLayer: UserDefaultsInteractor.getCurrentLayer())
         
         guard let levelType: GraphType = activeLayer?.gameLevels[level].graphType else {
             return nil
@@ -541,7 +541,7 @@ class LevelSelectViewController: UIViewController {
             return .black
         }
                 
-        let levelStates = UserDefaultsInteractor.getLevelStates()
+        let levelStates = UserDefaultsInteractor.getLevelStates(forLayer: UserDefaultsInteractor.getCurrentLayer())
 
         guard let levelState: LevelState = LevelState(rawValue: levelStates[level]) else {
             return .black
@@ -638,7 +638,7 @@ class LevelSelectViewController: UIViewController {
     }
     
     func checkIfAvailable(level: Int) -> Bool {
-        let levelStates = UserDefaultsInteractor.getLevelStates()
+        let levelStates = UserDefaultsInteractor.getLevelStates(forLayer: UserDefaultsInteractor.getCurrentLayer())
         let levelState = levelStates[level]
         
         if levelState == LevelState.locked.rawValue || levelState == LevelState.emitter.rawValue {

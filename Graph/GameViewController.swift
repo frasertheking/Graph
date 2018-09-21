@@ -824,15 +824,15 @@ class GameViewController: UIViewController {
         
         if !levelFailed {
             // Update completed level state
-            UserDefaultsInteractor.updateLevelsWithState(position: currentLevel, newState: .completed)
+            UserDefaultsInteractor.updateLevelsWithState(position: currentLevel, newState: .completed, forLayer: UserDefaultsInteractor.getCurrentLayer())
             
             if let neighbours = activeLayer?.gameLevels[0].adjacencyList?.getNeighbours(for: "\(currentLevel)") {
                 for neighbour in neighbours {
-                    if UserDefaultsInteractor.getLevelState(position: Int(neighbour)!) == LevelState.locked.rawValue {
+                    if UserDefaultsInteractor.getLevelState(position: Int(neighbour)!, forLayer: UserDefaultsInteractor.getCurrentLayer()) == LevelState.locked.rawValue {
                         if !(activeLayer?.createLevel(index: Int(neighbour)!)?.timed)! {
-                            UserDefaultsInteractor.updateLevelsWithState(position: Int(neighbour)!, newState: .base)
+                            UserDefaultsInteractor.updateLevelsWithState(position: Int(neighbour)!, newState: .base, forLayer: UserDefaultsInteractor.getCurrentLayer())
                         } else {
-                            UserDefaultsInteractor.updateLevelsWithState(position: Int(neighbour)!, newState: .timed)
+                            UserDefaultsInteractor.updateLevelsWithState(position: Int(neighbour)!, newState: .timed, forLayer: UserDefaultsInteractor.getCurrentLayer())
                         }
                     }
                 }

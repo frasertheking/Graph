@@ -13,18 +13,15 @@ import SceneKit
 class Layer: NSObject {
     var name: String!
     var active: Bool!
-    var locked: Bool!
     var colors: [UIColor]!
     var levelPath: String!
-    var completePercent: CGFloat!
     var animatedImagePath: String!
     var idleImagePath: String!
     var gameLevels: [Level]!
     
-    init(name: String, active: Bool, locked: Bool, colors: [String], levelPath: String, completePercent: NSNumber, animatedImagePath: String, idleImagePath: String, gameLevels: [Level]) {
+    init(name: String, active: Bool, colors: [String], levelPath: String, animatedImagePath: String, idleImagePath: String, gameLevels: [Level]) {
         self.name = name
         self.active = active
-        self.locked = locked
         
         var colorList: [UIColor] = []
         for color in colors {
@@ -33,7 +30,6 @@ class Layer: NSObject {
         self.colors = colorList
         
         self.levelPath = levelPath
-        self.completePercent = CGFloat(truncating: completePercent)
         self.animatedImagePath = animatedImagePath
         self.idleImagePath = idleImagePath
         self.gameLevels = gameLevels
