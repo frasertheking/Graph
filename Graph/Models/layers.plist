@@ -26,7 +26,7 @@
 			<string>#00ff00</string>
 		</array>
 		<key>level_path</key>
-		<string>layer1</string>
+		<string>layer2</string>
 		<key>image_anim</key>
 		<string>aleph.gif</string>
 		<key>image_idle</key>

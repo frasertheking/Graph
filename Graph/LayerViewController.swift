@@ -23,10 +23,10 @@ class LayerViewController: UIViewController {
     @IBOutlet var nextButtonBorderBackgroundView: UIView!
     var firstLoad: Bool = true
     let disabledAlpha: CGFloat = 0.35
-    var selectedLayer: Int = 0
+    var selectedLayer: Int = UserDefaultsInteractor.getCurrentLayer()
     
     // Hotload Info:
-    var currentPosition = 0 // TODO: NSUserDefaults
+    var currentPosition = UserDefaultsInteractor.getCurrentLayer()
     var layers: [Layer]! = Layers.getGameLayers()
     
     override func viewDidLoad() {
@@ -39,7 +39,8 @@ class LayerViewController: UIViewController {
         collectionView.layer.masksToBounds = false
         collectionView.alpha = 0
         collectionView.isScrollEnabled = false
-        collectionView.scrollToItem(at:IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+        collectionView.scrollToItem(at:IndexPath(item: currentPosition, section: 0), at: .centeredHorizontally, animated: false)
+        
         nextButton.alpha = 0
         prevButton.alpha = 0
         backButtonBackgroundView.alpha = 0
@@ -54,12 +55,12 @@ class LayerViewController: UIViewController {
                 self.collectionView.alpha = 1
                 self.nextButton.alpha = 1
                 self.prevButton.alpha = 1
-                self.backButtonBackgroundView.alpha = self.disabledAlpha
-                self.backButtonBorderBackgroundView.alpha = self.disabledAlpha
-                self.backButtonBorderView.alpha = self.disabledAlpha
-                self.nextButtonBorderView.alpha = 1
-                self.nextButtonBackgroundView.alpha = 1
-                self.nextButtonBorderBackgroundView.alpha = 1
+                self.backButtonBackgroundView.alpha = self.currentPosition == 0 ? self.disabledAlpha : 1
+                self.backButtonBorderBackgroundView.alpha = self.currentPosition == 0 ? self.disabledAlpha : 1
+                self.backButtonBorderView.alpha = self.currentPosition == 0 ? self.disabledAlpha : 1
+                self.nextButtonBorderView.alpha = self.currentPosition == 4 ? self.disabledAlpha : 1
+                self.nextButtonBackgroundView.alpha = self.currentPosition == 4 ? self.disabledAlpha : 1
+                self.nextButtonBorderBackgroundView.alpha = self.currentPosition == 4 ? self.disabledAlpha : 1
             }
         }
         
@@ -151,6 +152,10 @@ class LayerViewController: UIViewController {
     }
     
     @IBAction func layerPressed() {
+        unwind()
+    }
+
+    func unwind() {
         UIView.animate(withDuration: 0.5, animations: {
             self.collectionView.alpha = 0
             self.prevButton.alpha = 0
@@ -203,7 +208,7 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.title.text = layers[indexPath.row].name
         cell.setPercentComplete(percentage: UserDefaultsInteractor.getCompletionPercentFromLevelStates(forLayer: indexPath.row), locked: false)
         cell.layoutIfNeeded()        
-        if firstLoad {
+        if firstLoad && self.currentPosition == indexPath.row {
             cell.setAppearAnimation()
             firstLoad = false
         } else {
@@ -248,6 +253,7 @@ extension LayerViewController: UICollectionViewDelegate {
      */
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("selected")
+        UserDefaultsInteractor.setCurrentLayer(pos: indexPath.row)
+        unwind()
     }
 }
