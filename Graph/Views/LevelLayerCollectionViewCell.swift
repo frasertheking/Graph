@@ -45,6 +45,9 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         topView.frame.size.height = 45
         maskViewCompleted.addSubview(topView)
         
+        levelStampView.layer.borderColor = UIColor.customWhite().cgColor
+        levelStampView.layer.borderWidth = 2
+        
         self.titleView.contentView.mask = maskViewCompleted
         UIColor.insertPercentageGradient(for: completionView)
         
