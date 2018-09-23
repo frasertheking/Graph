@@ -79,11 +79,11 @@ struct UserDefaultsInteractor {
     }
     
     // Level States Interaction
-    fileprivate static func setLevelStates(levels: [Int], forLayer: Int) {
-        UserDefaults.standard.set(levels, forKey: layerStateKeys[forLayer])
+    fileprivate static func setLevelStates(levels: [Int], for layer: Int) {
+        UserDefaults.standard.set(levels, forKey: layerStateKeys[layer])
     }
     
-    static func getLevelStates(forLayer: Int) -> [Int] {
+    static func getLevelStates(for layer: Int) -> [Int] {
         var baseLevels: [Int] = [Int](repeatElement(LevelState.locked.rawValue, count: 64))
         
         // Setup basic level states
@@ -93,19 +93,19 @@ struct UserDefaultsInteractor {
         baseLevels[12] = LevelState.base.rawValue
         baseLevels[32] = LevelState.base.rawValue
         
-        if isKeyPresentInUserDefaults(key: layerStateKeys[forLayer]) {
-            guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[forLayer]) as? [Int] else {
+        if isKeyPresentInUserDefaults(key: layerStateKeys[layer]) {
+            guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[layer]) as? [Int] else {
                 return baseLevels
             }
             return levelArray
         }
         
         // Initialize default value if key is not yet set (level 0 is complete by default)
-        UserDefaults.standard.set(baseLevels, forKey: layerStateKeys[forLayer])
+        UserDefaults.standard.set(baseLevels, forKey: layerStateKeys[layer])
         return baseLevels
     }
     
-    static func getLevelState(position: Int, forLayer: Int) -> Int {
+    static func getLevelState(position: Int, for layer: Int) -> Int {
         var baseLevels: [Int] = [Int](repeatElement(LevelState.locked.rawValue, count: 64))
         
         // Setup basic level states
@@ -115,21 +115,21 @@ struct UserDefaultsInteractor {
         baseLevels[12] = LevelState.base.rawValue
         baseLevels[32] = LevelState.base.rawValue
         
-        if isKeyPresentInUserDefaults(key: layerStateKeys[forLayer]) {
-            guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[forLayer]) as? [Int] else {
+        if isKeyPresentInUserDefaults(key: layerStateKeys[layer]) {
+            guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[layer]) as? [Int] else {
                 return baseLevels[position]
             }
             return levelArray[position]
         }
         
         // Initialize default value if key is not yet set (level 0 is complete by default)
-        UserDefaults.standard.set(baseLevels, forKey: layerStateKeys[forLayer])
+        UserDefaults.standard.set(baseLevels, forKey: layerStateKeys[layer])
         return baseLevels[position]
     }
     
-    static func getCompletionPercentFromLevelStates(forLayer: Int) -> CGFloat {
-        if isKeyPresentInUserDefaults(key: layerStateKeys[forLayer]) {
-            guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[forLayer]) as? [Int] else {
+    static func getCompletionPercentFromLevelStates(for layer: Int) -> CGFloat {
+        if isKeyPresentInUserDefaults(key: layerStateKeys[layer]) {
+            guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[layer]) as? [Int] else {
                 return 0.0
             }
                 var completeCount: Int = 0
@@ -138,20 +138,32 @@ struct UserDefaultsInteractor {
                         completeCount += 1
                     }
                 }
-            return (CGFloat(completeCount) / CGFloat((Layers.getGameLayers()![forLayer].gameLevels.count) - 1))
+            return (CGFloat(completeCount) / CGFloat((Layers.getGameLayers()![layer].gameLevels.count) - 1))
         }
         
         return 0.0
     }
     
-    static func updateLevelsWithState(position: Int, newState: LevelState, forLayer: Int) {
-        var levels: [Int] = getLevelStates(forLayer: forLayer)
-        levels[position] = newState.rawValue
-        setLevelStates(levels: levels, forLayer: forLayer)
+    static func checkIfLayerIsLocked(for layer: Int) -> Bool {
+        if layer == 0 {
+            return false
+        }
+        
+        if getCompletionPercentFromLevelStates(for: (layer-1)) > 0.5 {
+            return false
+        }
+        
+        return true
     }
     
-    static func clearLevelStates(forLayer: Int) {
-        UserDefaults.standard.set(nil, forKey: layerStateKeys[forLayer])
+    static func updateLevelsWithState(position: Int, newState: LevelState, for layer: Int) {
+        var levels: [Int] = getLevelStates(for: layer)
+        levels[position] = newState.rawValue
+        setLevelStates(levels: levels, for: layer)
+    }
+    
+    static func clearLevelStates(for layer: Int) {
+        UserDefaults.standard.set(nil, forKey: layerStateKeys[layer])
     }
     
     static func setCurrentLayer(pos: Int) {

@@ -78,7 +78,7 @@ class LayerViewController: UIViewController {
         if let cell = collectionView.cellForItem(at: IndexPath(item: currentPosition, section: 0)) as? LevelLayerCollectionViewCell {
             cell.setIdleAnimation()
         }
-        collectionView.scrollToItem(at: IndexPath(item: currentPosition, section: 0), at: .centeredHorizontally, animated: true)
+        collectionView.scrollToItem(at: IndexPath(item: currentPosition, section: 0), at: .centeredHorizontally, animated: false)
         nextButton.isUserInteractionEnabled = false
         prevButton.isUserInteractionEnabled = false
         GraphAnimation.delayWithSeconds(0.2) {
@@ -206,7 +206,7 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         UIColor.insertGradient(for: cell.containerView, color1: layers[indexPath.row].colors[0], color2: layers[indexPath.row].colors[1])
         UIColor.setupBackgrounds(view: cell.containerView, skView: cell.skView)
         cell.title.text = layers[indexPath.row].name
-        cell.setPercentComplete(percentage: UserDefaultsInteractor.getCompletionPercentFromLevelStates(forLayer: indexPath.row), locked: false)
+        cell.setPercentComplete(percentage: UserDefaultsInteractor.getCompletionPercentFromLevelStates(for: indexPath.row), locked: UserDefaultsInteractor.checkIfLayerIsLocked(for: indexPath.row))
         cell.layoutIfNeeded()        
         if firstLoad && self.currentPosition == indexPath.row {
             cell.setAppearAnimation()
@@ -253,7 +253,14 @@ extension LayerViewController: UICollectionViewDelegate {
      */
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        UserDefaultsInteractor.setCurrentLayer(pos: indexPath.row)
-        unwind()
+        if !UserDefaultsInteractor.checkIfLayerIsLocked(for: indexPath.row) {
+            if let cell = collectionView.cellForItem(at: indexPath) {
+                GraphAnimation.addExplode(to: cell)
+                GraphAnimation.delayWithSeconds(0.2) {
+                    UserDefaultsInteractor.setCurrentLayer(pos: indexPath.row)
+                    self.unwind()
+                }
+            }
+        }
     }
 }
