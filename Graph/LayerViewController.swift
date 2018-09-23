@@ -76,7 +76,7 @@ class LayerViewController: UIViewController {
     
     func updatePosition() {
         if let cell = collectionView.cellForItem(at: IndexPath(item: currentPosition, section: 0)) as? LevelLayerCollectionViewCell {
-            cell.setIdleAnimation()
+            cell.setIdleAnimation(gifName: getGifName(for: currentPosition))
         }
         collectionView.scrollToItem(at: IndexPath(item: currentPosition, section: 0), at: .centeredHorizontally, animated: false)
         nextButton.isUserInteractionEnabled = false
@@ -113,6 +113,14 @@ class LayerViewController: UIViewController {
             self.nextButtonBorderBackgroundView.alpha = disabledAlpha
             self.nextButtonBorderView.alpha = disabledAlpha
         }
+    }
+    
+    func getGifName(for layer: Int) -> String {
+        if UserDefaultsInteractor.checkIfLayerIsLocked(for: layer) {
+            return "locked"
+        }
+        
+        return "aleph_Idle"
     }
 
     @IBAction func nextPressed() {
@@ -212,7 +220,7 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
             cell.setAppearAnimation()
             firstLoad = false
         } else {
-            cell.setIdleAnimation()
+            cell.setIdleAnimation(gifName: getGifName(for: indexPath.row))
         }
     
         cell.addDropShadow()

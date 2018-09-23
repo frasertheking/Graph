@@ -104,14 +104,14 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         }
         
         GraphAnimation.delayWithSeconds(1.75) {
-            self.setIdleAnimation()
+            self.setIdleAnimation(gifName: "aleph_Idle")
         }
     }
     
-    func setIdleAnimation() {
+    func setIdleAnimation(gifName: String) {
         self.gifImageView.layer.removeAllAnimations()
-
-        let idleGif = UIImage.gif(name: "aleph_Idle")
+        
+        let idleGif = UIImage.gif(name: gifName)
         var idleValues = [CGImage]()
         for image in idleGif!.images! {
             idleValues.append(image.cgImage!)
