@@ -922,6 +922,9 @@ class LevelSelectViewController: UIViewController {
             let viewController: GameViewController = segue.destination as! GameViewController
             viewController.activeLayer = activeLayer
             viewController.currentLevel = selectedLevel
+        } else if segue.identifier == "layerSegue" {
+            let viewController: LayerViewController = segue.destination as! LayerViewController
+            viewController.parentController = self
         }
     }
     
@@ -994,7 +997,7 @@ class LevelSelectViewController: UIViewController {
         view.isUserInteractionEnabled = false
         layerButtonBackgroundView.layer.removeAllAnimations()
         layerButtonBorderView.layer.removeAllAnimations()
-        GraphAnimation.delayWithSeconds(0.1) {
+        GraphAnimation.delayWithSeconds(0.01) {
             GraphAnimation.addExplode(to: self.layerButtonBackgroundView)
             GraphAnimation.addExplode(to: self.layerButtonBorderView)
         }

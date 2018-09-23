@@ -21,6 +21,7 @@ class LayerViewController: UIViewController {
     @IBOutlet var nextButtonBackgroundView: UIView!
     @IBOutlet var nextButtonBorderView: UIView!
     @IBOutlet var nextButtonBorderBackgroundView: UIView!
+    var parentController: LevelSelectViewController!
     var firstLoad: Bool = true
     let disabledAlpha: CGFloat = 0.35
     var selectedLayer: Int = UserDefaultsInteractor.getCurrentLayer()
@@ -160,6 +161,13 @@ class LayerViewController: UIViewController {
     }
     
     @IBAction func layerPressed() {
+        parentController.layerButtonBackgroundView.layer.removeAllAnimations()
+        parentController.layerButtonBorderView.layer.removeAllAnimations()
+        GraphAnimation.delayWithSeconds(0.01) {
+            GraphAnimation.addExplode(to: self.parentController.layerButtonBackgroundView)
+            GraphAnimation.addExplode(to: self.parentController.layerButtonBorderView)
+        }
+        
         unwind()
     }
 
