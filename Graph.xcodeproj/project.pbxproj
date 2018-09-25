@@ -25,9 +25,9 @@
 		4344E96B200269E0003FC234 /* GraphAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344E96A200269E0003FC234 /* GraphAnimation.swift */; };
 		434A574F1FDB109400FD172B /* layer1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 434A574E1FDB109400FD172B /* layer1.plist */; };
 		4350C46A21051FEA00A833A0 /* UIImageVIew+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4350C46921051FEA00A833A0 /* UIImageVIew+Extensions.swift */; };
-		435A212221556056003EF7D8 /* layer2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 435A212121556055003EF7D8 /* layer2.plist */; };
 		435A21262157DFEF003EF7D8 /* locked.gif in Resources */ = {isa = PBXBuildFile; fileRef = 435A21252157DFEF003EF7D8 /* locked.gif */; };
 		435BACCA1FD7584400DFAF6B /* Trail.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 435BACC91FD7584400DFAF6B /* Trail.scnp */; };
+		435BB8FD2159B91A00600225 /* layer2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 435BB8FC2159B91900600225 /* layer2.plist */; };
 		436C7B0C2090F9370037342A /* mix_locked.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B032090F9360037342A /* mix_locked.dae */; };
 		436C7B0D2090F9370037342A /* planar_locked.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B042090F9360037342A /* planar_locked.dae */; };
 		436C7B0E2090F9370037342A /* hamiltonian_locked.dae in Resources */ = {isa = PBXBuildFile; fileRef = 436C7B052090F9370037342A /* hamiltonian_locked.dae */; };
@@ -106,9 +106,9 @@
 		4344E96A200269E0003FC234 /* GraphAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAnimation.swift; sourceTree = "<group>"; };
 		434A574E1FDB109400FD172B /* layer1.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = layer1.plist; sourceTree = "<group>"; };
 		4350C46921051FEA00A833A0 /* UIImageVIew+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageVIew+Extensions.swift"; sourceTree = "<group>"; };
-		435A212121556055003EF7D8 /* layer2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = layer2.plist; sourceTree = "<group>"; };
 		435A21252157DFEF003EF7D8 /* locked.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = locked.gif; sourceTree = "<group>"; };
 		435BACC91FD7584400DFAF6B /* Trail.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Trail.scnp; sourceTree = "<group>"; };
+		435BB8FC2159B91900600225 /* layer2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = layer2.plist; sourceTree = "<group>"; };
 		436C7B032090F9360037342A /* mix_locked.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = mix_locked.dae; sourceTree = "<group>"; };
 		436C7B042090F9360037342A /* planar_locked.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = planar_locked.dae; sourceTree = "<group>"; };
 		436C7B052090F9370037342A /* hamiltonian_locked.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = hamiltonian_locked.dae; sourceTree = "<group>"; };
@@ -250,7 +250,7 @@
 				43D732F7206484E300AA0EFB /* dae */,
 				433E816C2148391C007E7A14 /* layers.plist */,
 				434A574E1FDB109400FD172B /* layer1.plist */,
-				435A212121556055003EF7D8 /* layer2.plist */,
+				435BB8FC2159B91900600225 /* layer2.plist */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -465,10 +465,10 @@
 				436C7B22209407EF0037342A /* planar_timed.dae in Resources */,
 				43270DAC2027A17700BBF1CF /* Crystal14_2.png in Resources */,
 				43CA8FE01FB6919900B962D9 /* Main.storyboard in Resources */,
+				435BB8FD2159B91A00600225 /* layer2.plist in Resources */,
 				435A21262157DFEF003EF7D8 /* locked.gif in Resources */,
 				43DD9B48212E45D9003000C7 /* kColor_timed.dae in Resources */,
 				43DD9B49212E45D9003000C7 /* kColor_locked.dae in Resources */,
-				435A212221556056003EF7D8 /* layer2.plist in Resources */,
 				43C581811FE356AF00D344B0 /* Background.sks in Resources */,
 				43A71C5E207A936B008D3104 /* hexagon.dae in Resources */,
 				436DD3C620BAFFD700CD2912 /* selection_animated_old.gif in Resources */,

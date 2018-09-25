@@ -153,7 +153,7 @@ struct UserDefaultsInteractor {
             return false
         }
         
-        return true
+        return false
     }
     
     static func updateLevelsWithState(position: Int, newState: LevelState, for layer: Int) {

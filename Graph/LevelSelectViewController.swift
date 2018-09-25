@@ -587,6 +587,7 @@ class LevelSelectViewController: UIViewController {
                 }
             }
         } else if geoName != "edge" && geoName != "\(-1)" {
+            print(Int(geoName)!)
             if checkIfAvailable(level: Int(geoName)!) {
                 
                 let scaleUpAction = SCNAction.scale(by: GameConstants.kScaleGrow, duration: GameConstants.kVeryShortTimeDelay)

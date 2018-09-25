@@ -277,6 +277,10 @@ extension LayerViewController: UICollectionViewDelegate {
                     self.unwind()
                 }
             }
+        } else {
+            if let cell = collectionView.cellForItem(at: indexPath) {
+                GraphAnimation.addShake(to: cell)
+            }
         }
     }
 }
