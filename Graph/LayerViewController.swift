@@ -274,6 +274,8 @@ extension LayerViewController: UICollectionViewDelegate {
                 GraphAnimation.addExplode(to: cell)
                 GraphAnimation.delayWithSeconds(0.2) {
                     UserDefaultsInteractor.setCurrentLayer(pos: indexPath.row)
+                    UserDefaultsInteractor.setLevelSelectPosition(pos: [0, 0])
+                    self.parentController.findNode = nil
                     self.unwind()
                 }
             }

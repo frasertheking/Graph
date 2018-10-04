@@ -505,7 +505,6 @@ class GameViewController: UIViewController {
     }
     
     func handleTouchFor(node: SCNNode) {
-        
         guard let geometry = node.geometry else {
             return
         }
@@ -525,7 +524,6 @@ class GameViewController: UIViewController {
         // First check for legal moves - return early if illegal
         if geometry.name != "edge" {
             var activeColor = (graphType == .hamiltonian) ? walkColor : paintColor
-
             switch graphType {
             case .hamiltonian:
                 guard let neighbours = activeLevel?.adjacencyList?.getNeighbours(for: currentStep) else {
