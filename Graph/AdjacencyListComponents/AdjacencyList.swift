@@ -398,20 +398,11 @@ extension AdjacencyList: Graphable {
                             (mirrorArray.count > 0 && edgeNode.destination.data.uid == mirrorArray[i] && edgeNode.source.data.uid == mirrorArray[i+1])) {
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
-                            
-                            guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
-                                continue
-                            }
-                            
-                            if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
-                                edgeNodes.childNodes[pos].removeAllParticleSystems()
-                                edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
-                            }
                         } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) &&
                                   !isPartOfPath(path: mirrorArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) {
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
-                            edgeNodes.childNodes[pos].removeAllParticleSystems()
+                            //edgeNodes.childNodes[pos].removeAllParticleSystems()
                         }
                         pos += 1
                     }
@@ -435,10 +426,6 @@ extension AdjacencyList: Graphable {
                 } else {
                     edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
                     edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
-                    
-                    guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
-                        continue
-                    }
                 }
                 pos += 1
             }
@@ -451,15 +438,6 @@ extension AdjacencyList: Graphable {
                             (edgeNode.destination.data.uid == pathArray[i] && edgeNode.source.data.uid == pathArray[i+1]) {
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.red
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.red
-                            
-                            guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
-                                continue
-                            }
-                            
-                            if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.red, geometry: edgeGeometry) {
-                                edgeNodes.childNodes[pos].removeAllParticleSystems()
-                                edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
-                            }
                         } else if !isPartOfPath(path: pathArray, start: edgeNode.source.data.uid, end: edgeNode.destination.data.uid) &&
                             edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents as! UIColor == UIColor.clear {
                                 edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.clear
@@ -483,15 +461,6 @@ extension AdjacencyList: Graphable {
                             if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
                                 edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.white
                                 edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.glowColor()
-                                
-                                guard let edgeGeometry = edgeNodes.childNodes[pos].geometry else {
-                                    continue
-                                }
-                                
-                                if let smokeEmitter = ParticleGeneration.createSmoke(color: UIColor.glowColor(), geometry: edgeGeometry) {
-                                    edgeNodes.childNodes[pos].removeAllParticleSystems()
-                                    edgeNodes.childNodes[pos].addParticleSystem(smokeEmitter)
-                                }
                             }
                             pos += 1
                         }
@@ -501,7 +470,7 @@ extension AdjacencyList: Graphable {
                             if edgeNode.source == edge.source && edgeNode.destination == edge.destination {
                                 edgeNodes.childNodes[pos].geometry?.firstMaterial?.diffuse.contents = UIColor.defaultVertexColor()
                                 edgeNodes.childNodes[pos].geometry?.firstMaterial?.emission.contents = UIColor.defaultVertexColor()
-                                edgeNodes.childNodes[pos].removeAllParticleSystems()
+                                //edgeNodes.childNodes[pos].removeAllParticleSystems()
                             }
                             pos += 1
                         }
