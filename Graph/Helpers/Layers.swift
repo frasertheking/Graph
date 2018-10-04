@@ -40,6 +40,10 @@ class Layers: NSObject, NSCopying {
                 continue
             }
             
+            guard let baseLevels: [Int] = layerDict["base_levels"] as? [Int] else {
+                continue
+            }
+            
             guard let levelPath: String = layerDict["level_path"] as? String else {
                 continue
             }
@@ -56,9 +60,7 @@ class Layers: NSObject, NSCopying {
                 continue
             }
             
-            //TODO: Get active, locked and complete_percent from NSUserDefaults
-            
-            gameLayers.append(Layer(name: name, active: false, colors: colors, levelPath: levelPath, animatedImagePath: animatedImagePath, idleImagePath: idleImagePath, gameLevels: gameLevels))
+            gameLayers.append(Layer(name: name, active: false, colors: colors, levelPath: levelPath, animatedImagePath: animatedImagePath, idleImagePath: idleImagePath, gameLevels: gameLevels, baseLevels: baseLevels))
         }
     }
     
@@ -202,7 +204,7 @@ class Layers: NSObject, NSCopying {
         return copy
     }
     
-    static func instantiateLayer(index: Int) -> Layer? {
+    static func getLayer(index: Int) -> Layer? {
         guard let layers = Layers.sharedInstance.copy() as? Layers else {
             return nil
         }

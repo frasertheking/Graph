@@ -27,9 +27,9 @@
 				<key>edges</key>
 				<array>
 					<integer>1</integer>
-					<integer>2</integer>
-					<integer>3</integer>
-					<integer>4</integer>
+					<integer>7</integer>
+					<integer>13</integer>
+					<integer>19</integer>
 				</array>
 			</dict>
 			<dict>
@@ -58,6 +58,7 @@
 				<key>edges</key>
 				<array>
 					<integer>3</integer>
+					<integer>4</integer>
 				</array>
 			</dict>
 			<dict>
@@ -71,7 +72,7 @@
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>4</integer>
+					<integer>6</integer>
 				</array>
 			</dict>
 			<dict>
@@ -98,9 +99,7 @@
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array>
-					<integer>6</integer>
-				</array>
+				<array/>
 			</dict>
 			<dict>
 				<key>uid</key>
@@ -112,9 +111,7 @@
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array>
-					<integer>7</integer>
-				</array>
+				<array/>
 			</dict>
 			<dict>
 				<key>uid</key>
@@ -128,6 +125,7 @@
 				<key>edges</key>
 				<array>
 					<integer>8</integer>
+					<integer>9</integer>
 				</array>
 			</dict>
 			<dict>
@@ -141,7 +139,7 @@
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>9</integer>
+					<integer>11</integer>
 				</array>
 			</dict>
 			<dict>
@@ -155,7 +153,7 @@
 				<integer>0</integer>
 				<key>edges</key>
 				<array>
-					<integer>10</integer>
+					<integer>11</integer>
 				</array>
 			</dict>
 			<dict>
@@ -190,15 +188,13 @@
 				<key>uid</key>
 				<integer>12</integer>
 				<key>x</key>
-				<integer>3</integer>
+				<integer>5</integer>
 				<key>y</key>
 				<integer>-9</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array>
-					<integer>13</integer>
-				</array>
+				<array/>
 			</dict>
 			<dict>
 				<key>uid</key>
@@ -240,6 +236,7 @@
 				<key>edges</key>
 				<array>
 					<integer>16</integer>
+					<integer>18</integer>
 				</array>
 			</dict>
 			<dict>
@@ -266,9 +263,7 @@
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array>
-					<integer>18</integer>
-				</array>
+				<array/>
 			</dict>
 			<dict>
 				<key>uid</key>
@@ -276,13 +271,11 @@
 				<key>x</key>
 				<integer>-12</integer>
 				<key>y</key>
-				<integer>3</integer>
+				<integer>0</integer>
 				<key>z</key>
 				<integer>0</integer>
 				<key>edges</key>
-				<array>
-					<integer>19</integer>
-				</array>
+				<array/>
 			</dict>
 			<dict>
 				<key>uid</key>

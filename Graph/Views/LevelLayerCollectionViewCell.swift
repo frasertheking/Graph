@@ -48,9 +48,9 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         levelStampView.layer.borderColor = UIColor.customWhite().cgColor
         levelStampView.layer.borderWidth = 2
         
-        self.titleView.contentView.mask = maskViewCompleted
+        //self.titleView.contentView.mask = maskViewCompleted
         UIColor.insertPercentageGradient(for: completionView)
-        
+
         GraphAnimation.delayWithSeconds(0.5) {
             GraphAnimation.animateFloatView(self.markerView)
         }

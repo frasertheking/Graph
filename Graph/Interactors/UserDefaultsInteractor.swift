@@ -88,10 +88,11 @@ struct UserDefaultsInteractor {
         
         // Setup basic level states
         baseLevels[0] = LevelState.emitter.rawValue
-        baseLevels[1] = LevelState.base.rawValue
-        baseLevels[21] = LevelState.base.rawValue
-        baseLevels[12] = LevelState.base.rawValue
-        baseLevels[32] = LevelState.base.rawValue
+        let layerBaseLevels: [Int] = Layers.sharedInstance.gameLayers[layer].baseLevels
+        
+        for baseLevel in layerBaseLevels {
+            baseLevels[baseLevel] = LevelState.base.rawValue
+        }
         
         if isKeyPresentInUserDefaults(key: layerStateKeys[layer]) {
             guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[layer]) as? [Int] else {
@@ -110,10 +111,11 @@ struct UserDefaultsInteractor {
         
         // Setup basic level states
         baseLevels[0] = LevelState.emitter.rawValue
-        baseLevels[1] = LevelState.base.rawValue
-        baseLevels[21] = LevelState.base.rawValue
-        baseLevels[12] = LevelState.base.rawValue
-        baseLevels[32] = LevelState.base.rawValue
+        let layerBaseLevels: [Int] = Layers.sharedInstance.gameLayers[layer].baseLevels
+
+        for baseLevel in layerBaseLevels {
+            baseLevels[baseLevel] = LevelState.base.rawValue
+        }
         
         if isKeyPresentInUserDefaults(key: layerStateKeys[layer]) {
             guard let levelArray = UserDefaults.standard.object(forKey: layerStateKeys[layer]) as? [Int] else {

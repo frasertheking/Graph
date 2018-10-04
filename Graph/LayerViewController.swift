@@ -79,7 +79,7 @@ class LayerViewController: UIViewController {
         if let cell = collectionView.cellForItem(at: IndexPath(item: currentPosition, section: 0)) as? LevelLayerCollectionViewCell {
             cell.setIdleAnimation(gifName: getGifName(for: currentPosition))
         }
-        collectionView.scrollToItem(at: IndexPath(item: currentPosition, section: 0), at: .centeredHorizontally, animated: false)
+        collectionView.scrollToItem(at: IndexPath(item: currentPosition, section: 0), at: .centeredHorizontally, animated: true)
         nextButton.isUserInteractionEnabled = false
         prevButton.isUserInteractionEnabled = false
         GraphAnimation.delayWithSeconds(0.2) {
@@ -223,7 +223,7 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         UIColor.setupBackgrounds(view: cell.containerView, skView: cell.skView)
         cell.title.text = layers[indexPath.row].name
         cell.setPercentComplete(percentage: UserDefaultsInteractor.getCompletionPercentFromLevelStates(for: indexPath.row), locked: UserDefaultsInteractor.checkIfLayerIsLocked(for: indexPath.row))
-        cell.layoutIfNeeded()        
+        cell.layoutIfNeeded()
         if firstLoad && self.currentPosition == indexPath.row {
             cell.setAppearAnimation()
             firstLoad = false

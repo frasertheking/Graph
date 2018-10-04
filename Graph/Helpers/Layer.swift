@@ -18,8 +18,9 @@ class Layer: NSObject {
     var animatedImagePath: String!
     var idleImagePath: String!
     var gameLevels: [Level]!
+    var baseLevels: [Int]!
     
-    init(name: String, active: Bool, colors: [String], levelPath: String, animatedImagePath: String, idleImagePath: String, gameLevels: [Level]) {
+    init(name: String, active: Bool, colors: [String], levelPath: String, animatedImagePath: String, idleImagePath: String, gameLevels: [Level], baseLevels: [Int]) {
         self.name = name
         self.active = active
         
@@ -33,6 +34,7 @@ class Layer: NSObject {
         self.animatedImagePath = animatedImagePath
         self.idleImagePath = idleImagePath
         self.gameLevels = gameLevels
+        self.baseLevels = baseLevels
     }
     
     func createLevel(index: Int) -> Level? {

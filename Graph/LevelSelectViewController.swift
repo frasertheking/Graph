@@ -112,7 +112,7 @@ class LevelSelectViewController: UIViewController {
         
         UserDefaultsInteractor.clearLevelSelectPosition()
         UserDefaultsInteractor.clearZoomFactor()
-        //UserDefaultsInteractor.clearLevelStates()
+        //UserDefaultsInteractor.clearLevelStates(for: 0)
         
         setupView()
         setupScene()
@@ -220,7 +220,7 @@ class LevelSelectViewController: UIViewController {
     @objc func setupLevelSelect() {
         scnView.pointOfView?.runAction(SCNAction.move(to: SCNVector3(x: -UserDefaultsInteractor.getLevelSelectPosition().x, y: -UserDefaultsInteractor.getLevelSelectPosition().y, z: UserDefaultsInteractor.getZoomFactor()), duration: 0))
         
-        activeLayer = Layers.instantiateLayer(index: UserDefaultsInteractor.getCurrentLayer())
+        activeLayer = Layers.getLayer(index: UserDefaultsInteractor.getCurrentLayer())
         activeLevel = activeLayer?.createLevel(index: 0)
         
         createObjects()
@@ -587,7 +587,6 @@ class LevelSelectViewController: UIViewController {
                 }
             }
         } else if geoName != "edge" && geoName != "\(-1)" {
-            print(Int(geoName)!)
             if checkIfAvailable(level: Int(geoName)!) {
                 
                 let scaleUpAction = SCNAction.scale(by: GameConstants.kScaleGrow, duration: GameConstants.kVeryShortTimeDelay)

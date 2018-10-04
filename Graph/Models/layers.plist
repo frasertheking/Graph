@@ -16,6 +16,13 @@
 		<string>aleph.gif</string>
 		<key>image_idle</key>
 		<string>aleph_idle.gif</string>
+		<key>base_levels</key>
+		<array>
+			<integer>1</integer>
+			<integer>7</integer>
+			<integer>13</integer>
+			<integer>19</integer>
+		</array>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -31,6 +38,13 @@
 		<string>aleph.gif</string>
 		<key>image_idle</key>
 		<string>aleph_idle.gif</string>
+		<key>base_levels</key>
+		<array>
+			<integer>1</integer>
+			<integer>9</integer>
+			<integer>12</integer>
+			<integer>14</integer>
+		</array>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -46,6 +60,13 @@
 		<string>aleph.gif</string>
 		<key>image_idle</key>
 		<string>aleph_idle.gif</string>
+		<key>base_levels</key>
+		<array>
+			<integer>0</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>3</integer>
+		</array>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -61,6 +82,13 @@
 		<string>aleph.gif</string>
 		<key>image_idle</key>
 		<string>aleph_idle.gif</string>
+		<key>base_levels</key>
+		<array>
+			<integer>0</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>3</integer>
+		</array>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -76,6 +104,13 @@
 		<string>aleph.gif</string>
 		<key>image_idle</key>
 		<string>aleph_idle.gif</string>
+		<key>base_levels</key>
+		<array>
+			<integer>0</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>3</integer>
+		</array>
 	</dict>
 </array>
 </plist>
