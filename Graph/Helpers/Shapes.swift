@@ -68,7 +68,7 @@ public enum Shape: Int {
                              "mix_locked",
                              "mix_timed",
                              "spiral",
-                             "title",
+                             "title_uv",
                              "play"]
     
     static func spawnShape(type: Shape, position: SCNVector3, color: UIColor, id: Int, node: SCNNode) {
@@ -80,7 +80,7 @@ public enum Shape: Int {
             geometry.materials.first?.diffuse.contents = UIColor.white
             geometry.materials[1].diffuse.contents = color
         } else if type.rawValue == 22 { // TITLE
-            geometry.materials.first?.diffuse.contents = color
+            //geometry.materials.first?.diffuse.contents = color
         } else if type.rawValue == 23 { // PLAY
             geometry.materials.first?.diffuse.contents = UIColor.red
             geometry.materials[1].diffuse.contents = color

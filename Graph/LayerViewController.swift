@@ -121,7 +121,7 @@ class LayerViewController: UIViewController {
             return "locked"
         }
         
-        return "aleph_Idle"
+        return layers[layer].idleImagePath
     }
 
     @IBAction func nextPressed() {
@@ -225,7 +225,7 @@ extension LayerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.setPercentComplete(percentage: UserDefaultsInteractor.getCompletionPercentFromLevelStates(for: indexPath.row), locked: UserDefaultsInteractor.checkIfLayerIsLocked(for: indexPath.row))
         cell.layoutIfNeeded()
         if firstLoad && self.currentPosition == indexPath.row {
-            cell.setAppearAnimation()
+            cell.setAppearAnimation(imageAppearName: layers[indexPath.row].animatedImagePath, imageIdleName: layers[indexPath.row].idleImagePath)
             firstLoad = false
         } else {
             cell.setIdleAnimation(gifName: getGifName(for: indexPath.row))

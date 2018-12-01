@@ -85,10 +85,10 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setAppearAnimation() {
+    func setAppearAnimation(imageAppearName: String, imageIdleName: String) {
         self.gifImageView.layer.removeAllAnimations()
 
-        let gridGif = UIImage.gif(name: "aleph")
+        let gridGif = UIImage.gif(name: imageAppearName)
         var values = [CGImage]()
         for image in gridGif!.images! {
             values.append(image.cgImage!)
@@ -107,7 +107,7 @@ class LevelLayerCollectionViewCell: UICollectionViewCell {
         }
         
         GraphAnimation.delayWithSeconds(1.75) {
-            self.setIdleAnimation(gifName: "aleph_Idle")
+            self.setIdleAnimation(gifName: imageIdleName)
         }
     }
     

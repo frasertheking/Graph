@@ -13,9 +13,9 @@
 		<key>level_path</key>
 		<string>layer1</string>
 		<key>image_anim</key>
-		<string>aleph.gif</string>
+		<string>aleph</string>
 		<key>image_idle</key>
-		<string>aleph_idle.gif</string>
+		<string>aleph_idle</string>
 		<key>base_levels</key>
 		<array>
 			<integer>1</integer>
@@ -35,9 +35,9 @@
 		<key>level_path</key>
 		<string>layer2</string>
 		<key>image_anim</key>
-		<string>aleph.gif</string>
+		<string>chiba</string>
 		<key>image_idle</key>
-		<string>aleph_idle.gif</string>
+		<string>chiba_idle</string>
 		<key>base_levels</key>
 		<array>
 			<integer>1</integer>
@@ -57,9 +57,9 @@
 		<key>level_path</key>
 		<string>layer1</string>
 		<key>image_anim</key>
-		<string>aleph.gif</string>
+		<string>aleph</string>
 		<key>image_idle</key>
-		<string>aleph_idle.gif</string>
+		<string>aleph_idle</string>
 		<key>base_levels</key>
 		<array>
 			<integer>0</integer>
@@ -79,9 +79,9 @@
 		<key>level_path</key>
 		<string>layer1</string>
 		<key>image_anim</key>
-		<string>aleph.gif</string>
+		<string>aleph</string>
 		<key>image_idle</key>
-		<string>aleph_idle.gif</string>
+		<string>aleph_idle</string>
 		<key>base_levels</key>
 		<array>
 			<integer>0</integer>
@@ -101,9 +101,9 @@
 		<key>level_path</key>
 		<string>layer1</string>
 		<key>image_anim</key>
-		<string>aleph.gif</string>
+		<string>aleph</string>
 		<key>image_idle</key>
-		<string>aleph_idle.gif</string>
+		<string>aleph_idle</string>
 		<key>base_levels</key>
 		<array>
 			<integer>0</integer>
